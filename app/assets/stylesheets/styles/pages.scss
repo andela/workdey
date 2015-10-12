@@ -7,6 +7,103 @@
   z-index: 1;
 }
 
+.dotnavigation {
+  position: fixed;
+  right: 1%;
+  top: 50%;
+  z-index: 3;
+
+  ul {
+      //background-color: #42a49a;
+      //border-radius: 5px;
+      padding: 5px;
+      position: relative;
+      display: inline-block;
+
+    li {
+        border: 2px solid #42a49a;
+        border-radius: 50%;
+        position: relative;
+        display: block;
+        margin: 15px 16px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        margin-bottom: 25px;
+        -webkit-transition: border-color 0.3s ease;
+        transition: border-color 0.3s ease;
+        z-index: 1;
+
+      &:first-child {
+        &:hover {
+           a {
+            transform: rotate(0deg) translateX(10px);
+          }
+        }
+      }
+
+      &:hover {
+        border-color: #42a49a;
+
+        a {
+          top: -22.2px;
+          z-index: 100;
+          visibility: visible;
+          opacity: 1;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          transform: rotate(0deg) translateX(15px);
+        }
+      }
+  
+      a {
+          top: -25px;
+          left: -280%;
+          margin-bottom: 18px;
+          visibility: hidden;
+          padding: 0 10px;
+          width: auto;
+          height: auto;
+          outline: none;
+          border-radius: 0;
+          background-color: #42a49a;
+          color: #fff;
+          text-indent: 0;
+          line-height: 2;
+          opacity: 0;
+          transform: rotate(-90deg);
+          transform-origin: bottom;
+          transition-duration: 0.6s;
+          cursor: pointer;
+          position: absolute;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            margin-left: -10px;
+            width: 0;
+            height: 0;
+            border: solid transparent;
+            border-width: 10px;
+            border-color: transparent;
+            border-top-color: #42a49a;
+            pointer-events: none;
+            top: 99%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+      }
+
+    }
+  }
+}
+
 .main {
   .sidebar {
     background-color: #333;
@@ -116,7 +213,8 @@
 
   .steps {
     color: #666;
-    padding-top: 45px;
+    height: 100vh;
+    padding-top: 95px;
 
     h3 {
       position: relative;
@@ -143,7 +241,7 @@
     }
 
     .items {
-      margin-top: 65px;
+      margin-top: 95px;
     }
   }
 
