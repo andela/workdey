@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard/home'
+
   root "pages#index"
 
   get "pages/about"
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   get "pages/terms"
 
   get "pages/become_a_taskee"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
