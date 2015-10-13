@@ -1,0 +1,25 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+nav .nav-wrapper
+{
+  padding-right: 30px;
+  i
+  {
+    font-size: 1.2rem;
+  }
+}
+
+.user_info
+{
+  background-color: #fff;
+  min-height: 30em;
+  margin: 3em;
+  width: 56em;
+  padding:2em 6em;
+  -webkit-border-radius: 3em;
+  -moz-border-radius: 3em;
+  -ms-border-radius: 3em;
+  border-radius: 1.5em;
+}
