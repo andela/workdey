@@ -12,3 +12,10 @@
   animation: bouncy 1.5s infinite linear;
   transition-duration: 0.6s;
 }
+
+@mixin round-edges($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
