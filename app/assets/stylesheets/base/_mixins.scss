@@ -1,0 +1,28 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+@keyframes bouncy {
+  0% { transform: translateY(-30px) }
+  20% { transform: translateY(-15px) }
+  40% { transform: translateY(-10px) }
+  60% { transform: translateY(0) }
+  80% { transform: translateY(-10px) }
+  90% { transform: translateY(-15px) }
+  100% { transform: translateY(-30px) }
+}
+
+%scroll-notification {
+  animation: bouncy 1.5s infinite linear;
+  transition-duration: 0.6s;
+}
+=======
+@mixin round-edges($radius)
+{
+=======
+@mixin round-edges($radius) {
+>>>>>>> 67c6e4e... Modified gemfile with rails version
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+>>>>>>> dce306b... Added dashboard and styles.

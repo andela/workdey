@@ -1,0 +1,10 @@
+<div class="mail-wrapper">
+  <h1>Confirm your workdey account</h1>
+
+  <p>
+    Hi <%= "#{@user.firstname} #{@user.lastname}" %> <br class="line">
+    You recently registered on workdey, to confirm your account, please click on the link below
+  </p>
+
+  <%= link_to "Confirm my account", confirm_url(@user.confirm_token, email: @user.email), class: "btn", target: "_blank" %>
+</div>

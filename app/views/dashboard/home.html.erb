@@ -1,0 +1,46 @@
+<% if current_user.confirmed %>
+
+<% if flash[:mail].present?  %>
+  <div class="flash-mail">
+    <i class="material-icons close-flash">close</i>
+    <p><%= flash[:mail] %></p>
+  </div>
+<% end %>
+
+<section class="main container center-align">
+  <div class="row">
+
+  <section class="col s12">
+    <div class="user_info card">
+      <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
+    </div>
+  </section>
+  </div>
+</section>
+
+<% else %>
+
+<% if flash[:mail].present?  %>
+  <div class="flash-mail">
+    <i class="material-icons close-flash">close</i>
+    <p><%= flash[:mail] %></p>
+  </div>
+<% end %>
+
+<section class="confirm-mail-first container">
+  <div class="row">
+    <div class="col s12">
+      <div class="user_info card">
+        <h5>Confirm your email address</h5>
+        <p>
+          To continue, please click on the link sent to 
+          <strong><%= current_user.email %></strong>
+          This will help to validate your account.
+        </p>
+        <%= link_to "Resend Confirmation Link", resend_mail_path, method: :post %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% end %>

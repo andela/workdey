@@ -1,0 +1,239 @@
+.dotnavigation {
+  position: fixed;
+  right: -1%;
+  top: 50%;
+  z-index: 999;
+
+  ul {
+      padding: 5px;
+      position: relative;
+      display: inline-block;
+
+    li {
+        background-color: transparent;
+        border: 2px solid $primary-color;
+        border-radius: 50%;
+        position: relative;
+        display: block;
+        margin: 15px 16px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        margin-bottom: 25px;
+        -webkit-transition: border-color 0.6s ease;
+        transition: all 0.6s ease;
+        z-index: 1;
+
+        &.active {
+          &::after {
+            height: 100%;
+          }
+
+          a {
+            left: -480%;
+          }
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 0;
+          width: 100%;
+          background-color: $primary-color;
+          box-shadow: 0 0 1px $primary-color;
+          transition: height 0.6s ease;
+        }
+
+        &:hover {
+          &::after {
+            height: 100%;
+          }
+
+          a {
+            left: -480%;
+          }
+        }
+
+      a {
+          top: -9px;
+          left: 580%;
+          margin-bottom: 18px;
+          padding: 0 10px;
+          width: auto;
+          height: auto;
+          outline: none;
+          border-radius: 0;
+          color: $primary-color;
+          font-weight: bold;
+          text-indent: 0;
+          line-height: 2;
+          transition-duration: 0.6s;
+          cursor: pointer;
+          position: absolute;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+    }
+  }
+}
+
+.main {
+  .main-section {
+    background-image: linear-gradient(rgba(0,0,0,.3) 50%, rgba(0,0,0,.3) 50%), image-url("bg-1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: #333;
+    height: 100vh;
+    color: #fff;
+    margin-top: -15px;
+    padding-top: 25px;
+    position: relative;
+
+    h1 {
+      padding-top: 45px;
+      padding-bottom: 15px;
+      font-size: $xx-large;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: $default-size;
+      font-weight: 600;
+    }
+
+    form {
+      margin-top: 35px;
+
+      input {
+        border: 2px solid #fff;
+        border-radius: 8px;
+        color: #fff;
+        text-indent: em(32px);
+
+        &:focus {
+          border-bottom: 2px solid #fff;
+          box-shadow: none;
+        }
+      }
+
+      button {
+        background-color: $primary-color;
+        margin-top: em(20px);
+        padding: em(10px);
+        padding-left: em(20px);
+        padding-right: em(20px);
+        height: auto;
+      }
+    }
+
+    .scroll-wrap {
+      position: relative;
+      top: 60px;
+
+      .scroll-item {
+        @extend %scroll-notification;
+        color: #fff;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .steps {
+    padding-top: em(95px);
+    padding-bottom: em(20px);
+    position: relative;
+
+    h3 {
+      position: relative;
+      padding-bottom: em(10px);
+
+      &::before {
+        content: "";
+        border-bottom: 2px solid $primary-color;
+        position: absolute;
+        bottom: -15px;
+        width: 37%;
+        height: 50px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -30px;
+        right: 49%;
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border: 2px solid $primary-color;
+        border-radius: 100%;
+      }
+    }
+
+    .items {
+      margin-top: 95px;
+
+      .material-icons {
+        background-color: $primary-color;
+        color: #fff;
+        padding: 10px;
+        position: relative;
+        transition-duration: 0.6s;
+
+        &:hover {
+          transform: translateY(-10px);
+          transition-duration: 0.6s;
+        }
+      }
+    }
+  }
+
+  .why-use {
+    padding: em(35px);
+
+    h3 {
+      position: relative;
+      padding-bottom: em(10px);
+
+      &::before {
+        content: "";
+        border-bottom: 2px solid $primary-color;
+        position: absolute;
+        bottom: -15px;
+        left: 35%;
+        width: 30%;
+        height: 50px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -30px;
+        right: 49%;
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border: 2px solid $primary-color;
+        border-radius: 100%;
+      }
+    }
+
+    .items {
+      margin-top: 95px;
+
+      .material-icons {
+        color: $primary-color;
+      }
+    }
+  }
+
+}
