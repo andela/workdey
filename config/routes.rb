@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'dashboard/home'
+  get "dashboard/home"
 
   root "pages#index"
 

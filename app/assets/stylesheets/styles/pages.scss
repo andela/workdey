@@ -101,8 +101,7 @@
 
     .page-links {
       padding: 15px;
-      padding-left: 50px;
-      padding-right: 45px;
+
       li {
         margin-bottom: 45px;
         margin-top: 45px;
@@ -110,6 +109,7 @@
 
       a {
         color: #fff;
+        width: 100%;
       }
     }
 
@@ -117,7 +117,7 @@
       padding: 15px;
       padding-left: 50px;
       position: relative;
-      top: 195px;
+      top: 165px;
       li {
         display: inline-block;
         padding-right: 10px;
@@ -132,7 +132,7 @@
       display: flex;
       justify-content: space-around;
       position: relative;
-      top: 195px;
+      top: 165px;
 
       a {
         color: #fff;
@@ -184,10 +184,24 @@
     form {
       margin-top: 25px;
     }
+
+    .scroll-wrap {
+      position: relative;
+      top: 80px;
+
+      .scroll-item {
+        @extend %scroll-notification;
+        color: #fff;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
   }
 
   .steps {
-    //background-color: #fff;
     color: #fff;
     height: 100vh;
     padding-top: 95px;
@@ -244,25 +258,25 @@
 
       .material-icons {
         background-color: #42a49a;
+        color: #fff;
         padding: 10px;
         position: relative;
+        transition-duration: 0.6s;
 
-        &::before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-color: #fff;
-          transform: rotate(8deg);
+        &:hover {
+          transform: translateY(-10px);
+          transition-duration: 0.6s;
         }
       }
     }
   }
 
   .why-use {
+    background-color: #fff;
     color: #666;
     height: 100vh;
     padding-top: 95px;
+    margin-bottom: 200px;
 
     h3 {
       position: relative;
@@ -306,11 +320,15 @@
 }
 
 .page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   background-color: #333;
   box-shadow: 0 0 3px #444;
   color: #fff;
-  margin-top: 65px;
+  //margin-top: 65px;
   margin-bottom: 0;
+  z-index: -1;
 
   .footer-links {
     ul {
