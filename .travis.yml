@@ -7,8 +7,6 @@ deploy:
   provider: heroku
   api_key: 
     secure: nW0qBsJU33Hb8rzw9U3zmCwQ570QlzolKeMScQZMjRILtwWrWg6yX/tiKYHAuANjq8WP5Q0O3wnGXdONI2u6PJ3WCxYSRdZkILVnYThGXXyGr8sxqk8yq6MV11QIaAMhQggoc7jwa55gbFJpCE7Csz8OKLXpJQLlH4G5RFEeLeQruTTTyg/inW9hkhEnwF4jZHEsM+EaXFWa6L1yQl52WT2v7UB0zGyRCtou0vSdRAurdr1YsvrUVv5y2Q66w0uIOSWb0X9Q919L50dZk4ngTvQsa7AvwlL/ziUHE5ohBs/JSTPLdpuN0A0TmoIi74CZgSYSDbM7Ld8RV+hZ423RQPqc2HsFdwLi0Zd8O/mYDgZBoCb/k+TWho87BVqr9SOEZtrSMbxC1Nla7lfBVcVGX3VA/mli5wDLBZYd+DXxtSa5D6fs9EBkuK4x7pAE6U5ZDqediPuOhUY1nHBP2NGynLV3CLEywxhPOJRRjtMtecmDwRnSuxcekKzg0EMwFZs205eoM4B+W8Q37Xuzf97pH3ecTrVG44q6LavWe8DMf+xL1w9Z/LaphQpE9TSq0OOelTF32hITW+qvHdkHdljqiSg1yUeDgSbqpq/XNwcQ7gpkrhs816zVlD02t/dCJxCmNTnVdCAvMHFheFVBEqR8SpG/9quzeXJowh3Cwcp3iLs=
-      master: workdey
-      development: workdey-dev
   app:
     master: workdey
     development: workdey-dev
