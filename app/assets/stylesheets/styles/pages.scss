@@ -1,0 +1,349 @@
+// Place all the styles related to the Pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.nav-wrapper {
+  background-color: #333;
+  z-index: 1;
+}
+
+.dotnavigation {
+  position: fixed;
+  right: -1%;
+  top: 50%;
+  z-index: 999;
+
+  ul {
+      padding: 5px;
+      position: relative;
+      display: inline-block;
+
+    li {
+        background-color: transparent;
+        border: 2px solid #42a49a;
+        border-radius: 50%;
+        position: relative;
+        display: block;
+        margin: 15px 16px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        margin-bottom: 25px;
+        -webkit-transition: border-color 0.6s ease;
+        transition: all 0.6s ease;
+        z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 0;
+        width: 100%;
+        background-color: #42a49a;
+        box-shadow: 0 0 1px #42a49a;
+        transition: height 0.6s ease;
+      }
+
+      &:hover {
+        &::after {
+          height: 100%;
+        }
+
+        a {
+          left: -480%;
+        }
+      }
+  
+      a {
+          top: -9px;
+          left: 580%;
+          margin-bottom: 18px;
+          padding: 0 10px;
+          width: auto;
+          height: auto;
+          outline: none;
+          border-radius: 0;
+          color: #42a49a;
+          font-weight: bold;
+          text-indent: 0;
+          line-height: 2;
+          transition-duration: 0.6s;
+          cursor: pointer;
+          position: absolute;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+    }
+  }
+}
+
+.main {
+  .sidebar {
+    background-color: #333;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    z-index: 999;
+
+    p {
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      transition-duration: 0.6s;
+    }
+
+    .page-links {
+      padding: 15px;
+
+      li {
+        margin-bottom: 45px;
+        margin-top: 45px;
+      }
+
+      a {
+        color: #fff;
+        width: 100%;
+      }
+    }
+
+    .info-links {
+      padding: 15px;
+      padding-left: 50px;
+      position: relative;
+      top: 165px;
+      li {
+        display: inline-block;
+        padding-right: 10px;
+      }
+
+      a {
+        color: #fff;
+      }
+    }
+
+    .social-media-links {
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+      top: 165px;
+
+      a {
+        color: #fff;
+      }
+
+    }
+
+  }
+
+  .main-section {
+    background-image: linear-gradient(rgba(0,0,0,.5) 50%, rgba(0,0,0,.5) 50%), image-url("bg-1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    color: #fff;
+    margin-top: -15px;
+    padding-top: 65px;
+    position: relative;
+  
+    &::before, &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: #333;
+      position: absolute;
+      top: 10px;
+      z-index: -1;
+    }
+
+    &::before {
+      left: -30px;
+      transform: rotate(-4deg);
+    }
+
+    &::after {
+      right: -30px;
+      transform: rotate(4deg);
+    }
+
+    h1 {
+      padding-top: 45px;
+      padding-bottom: 45px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    form {
+      margin-top: 25px;
+    }
+
+    .scroll-wrap {
+      position: relative;
+      top: 80px;
+
+      .scroll-item {
+        @extend %scroll-notification;
+        color: #fff;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .steps {
+    color: #fff;
+    height: 100vh;
+    padding-top: 95px;
+    position: relative;
+    z-index: 99;
+
+    &::before, &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: #333;
+      border-radius: 5px;
+      position: absolute;
+      top: 10px;
+      z-index: -1;
+    }
+
+    &::before {
+      left: -30px;
+      transform: rotate(-4deg);
+    }
+
+    &::after {
+      right: -30px;
+      transform: rotate(4deg);
+    }
+
+    h3 {
+      position: relative;
+
+      &::before {
+        content: "";
+        border-bottom: 2px solid #fff;
+        position: absolute;
+        bottom: -15px;
+        width: 65%;
+        height: 50px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -30px;
+        right: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: #42a49a;
+        border-radius: 100%;
+      }
+    }
+
+    .items {
+      margin-top: 95px;
+
+      .material-icons {
+        background-color: #42a49a;
+        color: #fff;
+        padding: 10px;
+        position: relative;
+        transition-duration: 0.6s;
+
+        &:hover {
+          transform: translateY(-10px);
+          transition-duration: 0.6s;
+        }
+      }
+    }
+  }
+
+  .why-use {
+    background-color: #fff;
+    color: #666;
+    height: 100vh;
+    padding-top: 95px;
+    margin-bottom: 200px;
+
+    h3 {
+      position: relative;
+
+      &::before {
+        content: "";
+        border-bottom: 2px solid #666;
+        position: absolute;
+        bottom: -15px;
+        left: 15%;
+        width: 65%;
+        height: 50px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -30px;
+        right: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: #666;
+        border-radius: 100%;
+      }
+    }
+
+    .items {
+      margin-top: 95px;
+
+      .more {
+        padding-top: 35px;
+        padding-bottom: 35px;
+
+        .btn {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  box-shadow: 0 0 3px #444;
+  color: #fff;
+  //margin-top: 65px;
+  margin-bottom: 0;
+  z-index: -1;
+
+  .footer-links {
+    ul {
+      li {
+        display: inline-block;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+    }
+    a {
+      color: #fff;
+    }
+  }
+
+  .copyright {
+    background-color: #444;
+  }
+}
