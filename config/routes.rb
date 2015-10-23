@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  root "pages#index"
+
   get "/signup" => "users#new"
 
-  get "users/create"
+  get "/temp" => "users#temp"
 
-  get "dashboard/home"
-
-  root "pages#index"
+  get "/dashboard" => "dashboard#home"
 
   get "pages/about"
 
@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
   get "pages/become_a_taskee"
 
+  resources :users
 
 end
