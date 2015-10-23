@@ -1,0 +1,69 @@
+<section class="main row">
+  <div class="col s6 offset-s4">
+
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a href="#signup" class="active">Sign Up</a></li>
+          <li class="tab col s3"><a href="#login">Login</a></li>
+        </ul>
+      </div>
+
+      <div id="signup" class="col s12">
+        <div class="row">
+          <%= form_for @user, html: {class: "col s12"} do |f| %>
+            <%= render "layouts/error_msg" %>
+            <div class="row">
+              <div class="input-field col s6">
+                <%= f.text_field :firstname, required: true %>
+                <%= f.label :firstname, "First Name" %>
+              </div>
+
+              <div class="input-field col s6">
+                <%= f.text_field :lastname, required: true %>
+                <%= f.label :lastname, "Last Name" %>
+              </div>
+
+              <div class="input-field col s12">
+                <%= f.email_field :email, required: true %>
+                <%= f.label :email, "Email Address" %>
+              </div>
+
+              <div class="input-field col s12">
+                <%= f.password_field :password, required: true %>
+                <%= f.label :password, "Password" %>
+              </div>
+
+              <%= f.button raw("Create my account <i class='material-icons right'>send</i>"), class: "btn waves-effect waves-light" %>
+
+            </div>
+          <% end %>
+        </div>     
+      </div>
+              
+      <div id="login" class="col s12" action="#">
+        <form class="col s12">
+          <div class="row">
+              
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+          </div>
+              
+          <button class="btn waves-effect waves-light" type="submit" name="action"> Login
+            <i class="material-icons right">send</i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
