@@ -39,6 +39,7 @@ GEM
     addressable (2.3.8)
     arel (6.0.3)
     backports (3.6.6)
+    bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -218,6 +219,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   byebug
   jbuilder (~> 2.0)
   jquery-rails
