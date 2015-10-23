@@ -1,2 +1,24 @@
-<h1>Users#create</h1>
-<p>Find me in app/views/users/create.html.erb</p>
+<section class="main row">
+  <div class="col l6 offset-l4 s12">
+<div id="login" class="col s12 ">
+<% flash.each do | name, msg | -%>
+      <%= content_tag :h6, msg, class: [name, "col offset-l1"] %>
+    <% end -%>
+  <%= form_tag("/login", method: "post", class: "col s12" ) do %>
+    <%= content_tag :div, '', {class: "row"} %>
+      <%= content_tag :div, '', { class: "input-field col s12" } %>
+      <%= label_tag :email, "Email" %>
+      <%= text_field_tag :email, nil, { class: "validate", type: "email" } %>
+
+
+    <%= content_tag :div, '', { class: "row" } %>
+      <%= content_tag :div, '', { class: "input-field col s12" } %>
+      <%= label_tag :password, "Password" %>
+      <%= text_field_tag :password, nil, { class: "validate", type: "password" } %>
+
+      <%= submit_tag( "Login", {class: "btn"}) %>
+  <% end %>
+
+</div>
+</div>
+</section>

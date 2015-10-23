@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get "/signup" => "users#new"
 
-  get "users/create"
+  match "/login", to: "users#create", via: [:post, :get]
 
-  get "dashboard/home"
+  get "dashboard" => "dashboard#home"
 
   root "pages#index"
 
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "pages/terms"
 
   get "pages/become_a_taskee"
+
+  get "/logout" => "users#destroy"
 
 
 end
