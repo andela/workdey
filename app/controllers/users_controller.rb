@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
-private
+  private
 
   def login_params
     params.permit(:email, :password, :utf8, :authenticity_token, :commit)
