@@ -3,4 +3,4 @@ rvm:
   - 2.1.5
 cache: bundler
 
-before_install: "bin/rake db:migrate RAILS_ENV=test"
+before_install: "bundle exec rake db:migrate"
