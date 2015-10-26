@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    session.clear()
+    session.clear
     redirect_to root_url
   end
 
