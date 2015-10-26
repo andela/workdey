@@ -8,12 +8,12 @@ class User < ActiveRecord::Base
 
   validates :firstname, presence: true, length: { in: 2..50 }, format: { with: ALLOWED }
   validates :lastname, presence: true, length: { in: 2..50 }, format: { with: ALLOWED }
-  validates :email, 
-            presence: true, 
-            length: { maximum: 255 }, 
-            uniqueness: { case_sensitive: false }, 
+  validates :email,
+            presence: true,
+            length: { maximum: 255 },
+            uniqueness: { case_sensitive: false },
             format: { with: VALID_EMAIL }
-            
+
   validates :password, presence: true, length: { minimum: 8 }
 
   def self.authenticate_user(login_params)
