@@ -7,4 +7,5 @@ before_install:
   - gem update --system
   - gem --version
   - bundle install
+  - bundle exec rake db:migrate RAILS_ENV=test
   - bundle exec rake
