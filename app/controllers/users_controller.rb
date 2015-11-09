@@ -35,9 +35,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :email, :password)
-<<<<<<< HEAD
->>>>>>> 5eefcb8... Add user signup ability
-=======
->>>>>>> af0c6a6... Update user model with validations
   end
 end
