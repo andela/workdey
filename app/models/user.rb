@@ -28,6 +28,6 @@ class User < ActiveRecord::Base
 
   def self.authenticate_user(login_params)
     find_by(email: login_params[:email])
-            .try(:authenticate, login_params[:password])
+    .try(:authenticate, login_params[:password])
   end
 end
