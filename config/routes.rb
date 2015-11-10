@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "role" => "dashboard#set_role"
   get "dashboard" => "dashboard#home"
 
+
   get "account_activations/:id/edit" =>
   "account_activations#confirm_email", as: :confirm
 

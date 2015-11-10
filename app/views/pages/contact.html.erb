@@ -1,2 +1,18 @@
-<h1>Pages#contact</h1>
-<p>Find me in app/views/pages/contact.html.erb</p>
+<section class="col m9 s12 offset-m1">
+<div class="row">
+<ul class= "col m8 offset-m2" >
+  <%= render partial: "partials/flash" %>
+  <%= form_tag(contact_path, method: :post) do %>
+<li><strong><%= label_tag "name" %></strong><%= text_tags("name", "", "ikem", "validate", true) %></li>
+<li><strong><%= label_tag "email" %></strong><%= email_tags("email", "", "ikem@workdey.com", "validate", true)  %></li>
+<li><strong><%= label_tag "subject" %></strong><%= text_tags("subject", "", "Give your message a subject", "validate", true) %></li>
+<li><strong><%= label_tag "message" %></strong>
+  <%= text_area_tag "message", nil, { placeholder: "Put your message here", class: "validate", required: true } %>
+</li>
+<li>
+<button class="btn waves-effect" type="submit">SEND</button>
+</li>
+<% end %>
+</ul>
+</div>
+</section>
