@@ -8,6 +8,15 @@ class PagesController < ApplicationController
   end
 
   def contact
+    if params[:message] != "" && !params[:message].nil?
+      info = JSON.generate(name: params[:name],
+                           email: params[:email],
+                           subject: params[:subject],
+                           message: params[:message]
+                          )
+      PostmanWorker.new.perform(info, 2)
+      flash[:notice] = "Thanks for contacting us! We appreciate it."
+    end
   end
 
   def terms
