@@ -1,10 +1,11 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take precedence
+  # over those in config/application.rb.
 
-  # The test environment is used exclusively to run your application's
+  # The test environment is used exclusively to run your application"s
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
-  # and recreated between test runs. Don't rely on the data there!
+  # and recreated between test runs. Don"t rely on the data there!
   config.cache_classes = true
 
   # Do not eager load code on boot. This avoids loading your whole application
@@ -14,7 +15,7 @@ Rails.application.configure do
 
   # Configure static file server for tests with Cache-Control for performance.
   config.serve_static_files   = true
-  config.static_cache_control = 'public, max-age=3600'
+  config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -30,6 +31,8 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
+  host = "http://localhost:3000"
+  config.action_mailer.default_url_options = { host: host }
 
   # Randomize the order test cases are executed.
   config.active_support.test_order = :random

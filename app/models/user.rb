@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :skillsets
+  has_many :tasks, through: :skillsets
   before_save { self.email = email.downcase }
+  before_create :generate_confirm_token, unless: :oauth_user?
 
   ALLOWED = /\A[a-zA-Z]+\z/
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\.]+[\w+]\.[a-z]+\z/i
@@ -26,8 +29,30 @@ class User < ActiveRecord::Base
             presence: true,
             length: { minimum: 8 }
 
-  def self.authenticate_user(login_params)
-    find_by(email: login_params[:email])
-    .try(:authenticate, login_params[:password])
+  def self.first_or_create_from_oauth(auth)
+    where(email: auth.info.email).first_or_create do |u|
+      u.provider = auth.provider
+      u.oauth_id = auth.uid
+      u.firstname = auth.info.name.split(" ").first
+      u.lastname = auth.info.name.split(" ").last
+      u.email = auth.info.email
+      u.password = SecureRandom.urlsafe_base64
+      u.confirmed = true
+    end
+  end
+
+  def self.confirm_user(token)
+    user = find_by_confirm_token(token)
+    user ? user.update_attribute(:confirmed, true) : false
+  end
+
+  private
+
+  def generate_confirm_token
+    self.confirm_token = SecureRandom.uuid
+  end
+
+  def oauth_user?
+    !oauth_id.nil?
   end
 end
