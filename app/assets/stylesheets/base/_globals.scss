@@ -1,12 +1,32 @@
 body {
-  font-family: "Source sans Pro", sans-serif;
+  color: #666;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: $open-sans;
   font-weight: 400;
   overflow-x: hidden;
-  background-color: #eee;
+}
+main, .main {
+  flex: 1 0 auto;
+  transition-duration: 0.6s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $source-sans;
+  font-weight: 200;
 }
 
 h1 {
-  font-size: 3.58rem;
+  font-size: $xx-large;
+}
+
+h2 {
+  font-size: $x-large;
+}
+
+h3 {
+  font-size: $large;
 }
 
 // Sidebar
@@ -42,26 +62,11 @@ h1 {
       }
     }
 
-    .info-links {
-      padding: 15px;
-      padding-left: 50px;
-      position: relative;
-      top: 165px;
-      li {
-        display: inline-block;
-        padding-right: 10px;
-      }
-
-      a {
-        color: #fff;
-      }
-    }
-
     .social-media-links {
       display: flex;
       justify-content: space-around;
       position: relative;
-      top: 165px;
+      top: 200px;
 
       a {
         color: #fff;
@@ -69,4 +74,12 @@ h1 {
 
     }
 
+  }
+
+  .btn {
+    background-color: transparentize($primary-color, .1);
+
+    &:hover {
+      background-color: $primary-color;
+    }
   }

@@ -1,0 +1,18 @@
+.hidden {
+  transition-duration: 0.6s;
+  opacity: 0;
+}
+
+.error-explanation {
+  color: darken($primary-color, 10%);
+  padding: em(15px);
+
+  .material-icons {
+    display: inline-block;
+    margin-left: em(5px);
+  }
+
+  .error-count {
+    text-align: center;
+  }
+}

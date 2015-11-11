@@ -8,11 +8,13 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <%= render "layouts/header" %>
-  <%= render "layouts/sidebar" %>
+<body class="<%= "#{params[:controller]}-#{params[:action]}"%>">
+  <%= render "partials/header" %>
+  <% render "partials/sidebar" %>
 
   <%= yield %>
+
+  <%= render "partials/footer" %>
 
 <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
