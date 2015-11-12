@@ -59,21 +59,15 @@
           just sign up with: 
         </p>
         <p>
-          <a href="#" class="btn btn-fb">
-            <i class="fa fa-facebook-square"></i> Facebook
-          </a>
+          <%= link_to raw("<i class='fa fa-facebook-square'></i> Facebook"), "/auth/facebook", class: "btn btn-fb" %>
         </p>
 
         <p>
-          <a href="#" class="btn btn-twt">
-            <i class="fa fa-twitter-square"></i> Twitter
-          </a>
+           <%= link_to raw("<i class='fa fa-twitter-square'></i> Twitter"), "/auth/twitter", class: "btn btn-twt" %>
         </p>
 
         <p>
-          <a href="#" class="btn btn-goog">
-            <i class="fa fa-google-plus-square"></i> Google
-          </a>
+           <%= link_to raw("<i class='fa fa-google-plus-square'></i> Google"), "/auth/google_oauth2", class: "btn btn-goog" %>
         </p>
       </div>
     </div>

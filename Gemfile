@@ -28,6 +28,10 @@ gem "sdoc", "~> 0.4.0", group: :doc
 # Use ActiveModel has_secure_password
 gem "bcrypt", "~> 3.1.7"
 gem "omniauth-facebook"
+gem "omniauth-twitter"
+gem "omniauth-google-oauth2"
+gem "figaro"
+gem "pry"
 
 # Use Unicorn as the app server
 # gem "unicorn"

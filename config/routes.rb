@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get "/signup" => "users#new"
 
+  get "/auth/:provider/callback" => "sessions#create"
+
   get "/dashboard" => "dashboard#home"
 
   get "pages/about"
