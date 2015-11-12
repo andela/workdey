@@ -16,6 +16,10 @@
 !/log/.keep
 /tmp
 
+
 # Ignore application configuration
 /config/application.yml
+
 dump.rdb
+UI_tabernacle.txt
+index.html
