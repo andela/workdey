@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20151118101033) do
     t.string   "state"
     t.string   "city"
     t.string   "street_address"
-    t.string   "image_url"
     t.string   "oauth_id"
     t.string   "confirm_token"
     t.boolean  "confirmed",       default: false
+    t.string   "image_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

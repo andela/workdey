@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :guest_only, only: [:index]
+  # before_action :guest_only, only: [:index]
 
   def index
   end
@@ -23,5 +23,21 @@ class PagesController < ApplicationController
   end
 
   def become_a_taskee
+  end
+
+  def search
+    @taskees = get_taskees_by_search
+    @taskees = nil if @taskees == []
+    render "search_result"
+  end
+
+  protected
+
+  def get_taskees_by_search
+    return User.get_taskees_by_task_name(params[:searcher]) unless current_user
+    user_email = current_user.email
+    all_taskees = Task.get_taskees(params[:searcher], user_email)
+    return all_taskees.first.concat(all_taskees[1]) unless all_taskees.nil?
+    []
   end
 end

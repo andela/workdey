@@ -1,0 +1,18 @@
+<section class="col m9 s12 offset-m3">
+  <div class="row">
+    <% if @taskees.nil? %>
+      <div class="col m8 offset-m2 s6">
+        <p>Oooops! We could not find any result matching your query. You can modify it or use one of our suggested keywords and search again.</p>
+      </div>
+    <% else %>
+      <% @taskees.each do | taskee | %>
+        <div class="taskee_card col m3 offset-m1 s6 left">
+          <p><%= image_tag "boy.jpg", { class: "responsive-img circle" }%></p>
+          <p><%= taskee.firstname.concat(taskee.lastname).titleize %></p>
+          <p><%= taskee.street_address + "," %></p>
+          <p><%= (taskee.city + ", " + "#{taskee.state}" + ".").titleize %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>
