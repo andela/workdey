@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :skillsets
+  has_many :tasks, through: :skillsets
   before_save { self.email = email.downcase }
 
   ALLOWED = /\A[a-zA-Z]+\z/
