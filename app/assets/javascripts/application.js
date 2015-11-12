@@ -16,3 +16,6 @@
 //= require materialize-sprockets
 //= require smooth-scroll.min.js
 //= require_tree .
+
+
+google.load("search", "1");
