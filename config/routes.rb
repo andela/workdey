@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get "pages/terms"
 
+  post "search/taskees" => "pages#search", as: "search"
+
   get "pages/become_a_taskee"
 
   resources :users

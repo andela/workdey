@@ -15,13 +15,19 @@
       <p class="tagline center-align">
         Assign tasks you don't want to do to people willing to do it.
       </p>
-      <form class="row">
+      <%= form_tag search_path, method: "post", class: "row"  do %>
         <div class="input-field col s7 offset-s2">
           <i class="material-icons prefix">search</i>
-          <input type="text" placeholder="House painting">
+          <input name= "searcher"  type="text" placeholder="House painting">
         </div>
-      </form>
-
+      <% end %>
+      <% if !@taskees.nil? %>
+        <% @taskees.each do | taskee | %>
+        <div>
+           <%= taskee.firstname %>
+        </div>
+        <% end %>
+      <% end %>
       <div class="scroll-wrap center-align">
         <a href="#step" data-scroll>
           <i class="material-icons medium scroll-item">play_for_work</i>

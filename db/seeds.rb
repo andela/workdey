@@ -2,17 +2,17 @@ class SeedData
 
   def users_list
     [
+      { firstname: "Olaide", lastname: "Ojewale", email:"olaide.ojewale@andela.com", latitude: "", longitude: "", password:"1234567890" },
       { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" }
+      { firstname: "Temitope", lastname: "Amodu", email:"temitope.amodu@andela.com", latitude: "", longitude: "", password:"1234567890" },
+      { firstname: "Ruth", lastname: "Chukwumam", email:"ruth.chukwumam@andela.com", latitude: "", longitude: "", password:"1234567890" },
+      { firstname: "Chinedu", lastname: "Dan", email:"chinedu.dan@andela.com", latitude: "", longitude: "", password:"1234567890" }
     ]
   end
 
   def tasks_list
     [
-      { name: "Capentary" },
+      { name: "Capentry" },
       { name: "Plate Washing" },
       { name: "Laundry" },
       { name: "Ironing" },
