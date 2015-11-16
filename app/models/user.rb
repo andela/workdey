@@ -28,8 +28,14 @@ class User < ActiveRecord::Base
             presence: true,
             length: { minimum: 8 }
 
-  def self.authenticate_user(login_params)
-    find_by(email: login_params[:email])
-    .try(:authenticate, login_params[:password])
+  def self.first_or_create_from_oauth(auth)
+    where(email: auth.info.email).first_or_create do |u|
+      u.provider = auth.provider
+      u.oauth_id = auth.uid
+      u.firstname = auth.info.name.split(" ").first
+      u.lastname = auth.info.name.split(" ").last
+      u.email = auth.info.email
+      u.password = SecureRandom.urlsafe_base64
+    end
   end
 end

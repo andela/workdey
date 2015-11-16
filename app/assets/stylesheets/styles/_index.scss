@@ -1,25 +1,3 @@
-.nav-wrapper {
-  background-color: $primary-color;
-  height: 90px;
-
-  .brand-logo {
-    font-family: $logo-font;
-    font-size: $small;
-  }
-
-  ul {
-    li {
-      font-weight: 600;
-      margin-right: em(18px);
-      margin-left: em(18px);
-
-      &:hover {
-        background-color: transparent;
-      }
-    }
-  }
-}
-
 .dotnavigation {
   position: fixed;
   right: -1%;
@@ -248,37 +226,4 @@
     }
   }
 
-}
-
-.page-footer {
-  width: 100%;
-  background-color: #525252;
-  box-shadow: 0 0 3px #444;
-  color: #fff;
-
-  &.row {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .row {
-    margin-bottom: 0;
-  }
-
-  .footer-links {
-    ul {
-      li {
-        display: inline-block;
-        padding-right: 15px;
-        padding-left: 15px;
-      }
-    }
-    a {
-      color: #fff;
-    }
-  }
-
-  .copyright {
-    background-color: #444;
-  }
 }

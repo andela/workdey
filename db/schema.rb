@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112121847) do
+ActiveRecord::Schema.define(version: 20151113045643) do
 
   create_table "skillsets", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20151112121847) do
     t.string   "longitude"
     t.string   "user_type"
     t.string   "provider"
+    t.string   "oauth_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

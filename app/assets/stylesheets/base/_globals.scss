@@ -76,10 +76,94 @@ h3 {
 
   }
 
-  .btn {
-    background-color: transparentize($primary-color, .1);
+.btn {
+  background-color: transparentize($primary-color, .1);
 
-    &:hover {
-      background-color: $primary-color;
+  &:hover {
+    background-color: $primary-color;
+  }
+}
+
+// Header & Navbar
+
+.pages-index {
+  .nav-wrapper {
+    height: 90px;
+  }
+}
+
+.nav-wrapper {
+  background-color: $primary-color;
+  height: 78px;
+
+  .brand-logo {
+    font-family: $logo-font;
+    font-size: $small;
+  }
+
+  ul {
+    li {
+      font-weight: 600;
+      margin-right: em(18px);
+      margin-left: em(18px);
+
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
+}
+
+// Site Footer
+
+.page-footer {
+  width: 100%;
+  background-color: #525252;
+  box-shadow: 0 0 3px #444;
+  color: #fff;
+
+  &.row {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  .social-media-links {
+
+    li {
+      display: inline-block;
+      margin-right: em(15px);
+      margin-left: em(15px);
+
+      a {
+        color: #fff;
+        transition-duration: 0.6s;
+
+        &:hover {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  .footer-links {
+    ul {
+      li {
+        display: inline-block;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+    }
+    
+    a {
+      color: #fff;
+    }
+  }
+
+  .copyright {
+    background-color: #444;
+  }
+}
