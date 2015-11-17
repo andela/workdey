@@ -15,6 +15,8 @@ gem "coffee-rails", "~> 4.1.0"
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 
+gem "geokit-rails"
+
 # Materialize
 gem "materialize-sass"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

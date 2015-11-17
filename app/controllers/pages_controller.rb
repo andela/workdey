@@ -17,7 +17,9 @@ class PagesController < ApplicationController
   def search
     keyword = params[:searcher]
     @taskees = Task.get_task_doers(keyword)
-    render :index
+    # user_address = User.get_user_address #user_email
+    # geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode user_address
+    render "search_result"
   end
 
 end

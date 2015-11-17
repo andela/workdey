@@ -32,4 +32,9 @@ class User < ActiveRecord::Base
     find_by(email: login_params[:email])
     .try(:authenticate, login_params[:password])
   end
+
+  def self.get_user_address(user_email)
+    where("email = ?", user_email).pluck(:address)
+  end
+
 end
