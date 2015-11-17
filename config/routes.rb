@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   get "auth/:provider/callback" => "sessions#create"
   get "auth/failure" => "sessions#destroy"
 
+  get "role" => "dashboard#choose_role"
   get "dashboard" => "dashboard#home"
 
   get "pages/about"
-  get "pages/contact"
+  match "pages/contact" => "pages#contact", as: :contact, via: [:post, :get]
   get "pages/terms"
   get "pages/become_a_taskee"
 

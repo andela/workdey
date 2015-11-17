@@ -10,9 +10,8 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body class="<%= "#{params[:controller]}-#{params[:action]}"%>">
-  <%= render "partials/header" %>
-  <% render "partials/sidebar" %>
-
+  <%= render "partials/header" unless current_page?(role_path) %>
+  
   <%= yield %>
 
   <%= render "partials/footer" %>

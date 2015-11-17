@@ -24,27 +24,37 @@
         transition: all 0.6s ease;
         z-index: 1;
 
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 0;
-        width: 100%;
-        background-color: $primary-color;
-        box-shadow: 0 0 1px $primary-color;
-        transition: height 0.6s ease;
-      }
+        &.active {
+          &::after {
+            height: 100%;
+          }
 
-      &:hover {
+          a {
+            left: -480%;
+          }
+        }
+
         &::after {
-          height: 100%;
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 0;
+          width: 100%;
+          background-color: $primary-color;
+          box-shadow: 0 0 1px $primary-color;
+          transition: height 0.6s ease;
         }
 
-        a {
-          left: -480%;
+        &:hover {
+          &::after {
+            height: 100%;
+          }
+
+          a {
+            left: -480%;
+          }
         }
-      }
 
       a {
           top: -9px;

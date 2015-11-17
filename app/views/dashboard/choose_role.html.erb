@@ -1,0 +1,16 @@
+<header class="center-align">
+  <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
+</header>
+
+<main class="center-align">
+  <section class="intro container">
+    <header>
+      <h1>
+        Hi, <%= "#{current_user.firstname} #{current_user.lastname}" %>
+      </h1>
+      <p>
+        Just a few quick things to get your account all set up
+      </p>
+    </header>
+  </section>
+</main>
