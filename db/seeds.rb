@@ -1,21 +1,21 @@
 class SeedData
   def users_list
     [
+      { firstname: "Chinedu", lastname: "Daniel",
+        email: "chinedu.daniel@andela.com", latitude: "",
+        longitude: "", password: "1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel",
+        email: "chinedu.daniel@andela.com", latitude: "",
+        longitude: "", password: "1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel",
+        email: "chinedu.daniel@andela.com", latitude: "",
+        longitude: "", password: "1234567890" },
       { firstname: "Chinedu", lastname: "Daniel", 
-        email: "chinedu.daniel@andela.com", latitude: "", 
-        longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", 
-        email: "chinedu.daniel@andela.com", latitude: "", 
-        longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", 
-        email: "chinedu.daniel@andela.com", latitude: "", 
-        longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", 
-        email: "chinedu.daniel@andela.com", latitude: "", 
-        longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", 
-        email: "chinedu.daniel@andela.com", latitude: "", 
-        longitude: "", password:"1234567890" }
+        email: "chinedu.daniel@andela.com", latitude: "",
+        longitude: "", password: "1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel",
+        email: "chinedu.daniel@andela.com", latitude: "",
+        longitude: "", password: "1234567890" }
     ]
   end
 
