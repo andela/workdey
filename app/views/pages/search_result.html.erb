@@ -1,13 +1,14 @@
 <div class="row">
-  <section class="col m9 s12 offset-m3">
-    <div id="locator"></div>
-    <%= button_tag "Show Taskers Nearby", { class: "nearby", id: "nearby", onclick: "geoFindMe()" } %>
+<section class="col m9 s12 offset-m3">
     <% if @taskees.nil? %>
       <p>Oooops! We could not find any result matching your query. You can modify your it or use one of our suggested keywords and search again.</p>
     <% else %>
       <% @taskees.each do | taskee | %>
-        <div>
-           <%= taskee.firstname %>
+        <div class="taskee_card col m3 offset-m1 s6 left">
+          <p><%= image_tag "boy.jpg", { class: "responsive-img circle" }%></p>
+          <p><%= taskee.firstname.concat(taskee.lastname).titleize %></p>
+          <p><%= taskee.street_address + "," %></p>
+          <p><%= (taskee.city + ", " + "#{taskee.state}" + ".").titleize %></p>
         </div>
       <% end %>
     <% end %>

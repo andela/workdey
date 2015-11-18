@@ -15,10 +15,9 @@ class PagesController < ApplicationController
   end
 
   def search
-    keyword = params[:searcher]
-    @taskees = Task.get_task_doers(keyword)
-    # user_address = User.get_user_address #user_email
-    # geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode user_address
+    user_email = "olaide.ojewale@andela.com"
+    all_taskees = Task.get_taksees(params[:searcher], user_email)
+    @taskees = all_taskees.first.concat(all_taskees[1]) unless all_taskees.nil?
     render "search_result"
   end
 

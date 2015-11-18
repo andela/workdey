@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def self.get_user_address(user_email)
-    where("email = ?", user_email).pluck(:address)
+    where("email = ?", user_email).pluck(:city, :street_address)
   end
 
 end
