@@ -49,9 +49,9 @@ class SeedData
     User.destroy_all
     Task.destroy_all
     Skillset.destroy_all
-    users_list.each {| user | User.create(user)}
-    tasks_list.each {| task | Task.create(task)}
-    skillsets.each {| skill | Skillset.create(skill)}
+    users_list.each { | user | User.create(user) }
+    tasks_list.each { | task | Task.create(task) }
+    skillsets.each { | skill | Skillset.create(skill) }
   end
 
 end
