@@ -1,12 +1,21 @@
 class SeedData
-
   def users_list
     [
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", email:"chinedu.daniel@andela.com", latitude: "", longitude: "", password:"1234567890" }
+      { firstname: "Chinedu", lastname: "Daniel", 
+        email: "chinedu.daniel@andela.com", latitude: "", 
+        longitude: "", password:"1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel", 
+        email: "chinedu.daniel@andela.com", latitude: "", 
+        longitude: "", password:"1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel", 
+        email: "chinedu.daniel@andela.com", latitude: "", 
+        longitude: "", password:"1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel", 
+        email: "chinedu.daniel@andela.com", latitude: "", 
+        longitude: "", password:"1234567890" },
+      { firstname: "Chinedu", lastname: "Daniel", 
+        email: "chinedu.daniel@andela.com", latitude: "", 
+        longitude: "", password:"1234567890" }
     ]
   end
 
@@ -40,9 +49,9 @@ class SeedData
     User.destroy_all
     Task.destroy_all
     Skillset.destroy_all
-    users_list.each { | user | User.create(user) }
-    tasks_list.each { | task | Task.create(task) }
-    skillsets.each { | skill | Skillset.create(skill) }
+    users_list.each {| user | User.create(user)}
+    tasks_list.each {| task | Task.create(task)}
+    skillsets.each {| skill | Skillset.create(skill)}
   end
 
 end
