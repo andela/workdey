@@ -1,0 +1,5 @@
+Confirm your workdey account
+
+Hi <%= "#{@user.firstname} #{@user.lastname}" %>, You recently registered on workdey, to confirm your account, please click on the link below
+
+<%= confirm_url(@user.confirm_token, email: @user.email) %>
