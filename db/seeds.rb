@@ -10,7 +10,7 @@ class SeedData
       { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", latitude: "",
         longitude: "", password: "1234567890" },
-      { firstname: "Chinedu", lastname: "Daniel", 
+      { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", latitude: "",
         longitude: "", password: "1234567890" },
       { firstname: "Chinedu", lastname: "Daniel",
@@ -57,4 +57,3 @@ end
 
 workdey_data = SeedData.new
 workdey_data.create_all
-
