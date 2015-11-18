@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
+  before_filter :guest_only, only: [:index]
+
   def index
-    redirect_to dashboard_path if logged_in?
   end
 
   def about

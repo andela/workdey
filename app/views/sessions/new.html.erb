@@ -12,6 +12,14 @@
       <div class="auth login card" class="col s12">
         <div class="row">
           <%= form_for :session, url: signin_path, html: {class: "col s12"} do |f| %>
+            <% if flash[:invalid].present? %>
+              <div class="flash-invalid">
+                <p>
+                  <i class="material-icons alert-danger ">report_problem</i>
+                  <%= flash[:invalid] %>
+                </p>
+              </div>
+            <% end %>
             <div class="row">
               <div class="input-field col s12">
                 <%= f.email_field :email, required: true, placeholder: "Email Address" %>

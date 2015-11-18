@@ -1,6 +1,8 @@
 .hidden {
   transition-duration: 0.6s;
+  transform: scale(0);
   opacity: 0;
+  position: absolute !important;
 }
 
 .error-explanation {
@@ -15,4 +17,42 @@
   .error-count {
     text-align: center;
   }
+}
+
+[class^="flash-"] {
+ position: relative;
+ transition-duration: 0.6s;
+
+ .close-flash {
+  cursor: pointer;
+  position: absolute;
+  top: 25%;
+  right: 1%;
+ } 
+}
+
+.flash-invalid {
+  color: $primary-color;
+
+  p {
+    text-align: left;
+    text-indent: em(50px);
+    position: relative;
+
+    .alert-danger {
+      font-size: em(19px);
+      position: absolute;
+      left: -7%;
+      top: 5%;
+    }
+  }
+}
+
+.flash-mail {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  background-color: antiquewhite;
+  margin-top: 20px;
+  box-shadow: 0 3px 0px tomato;
 }

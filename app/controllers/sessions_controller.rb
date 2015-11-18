@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
+  before_filter :guest_only, only: [:new]
+
   def new
-    redirect_to dashboard_path if logged_in?
   end
 
   def create
@@ -9,14 +10,15 @@ class SessionsController < ApplicationController
       user = User.find_by_email(params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])
         log_in(user)
-        redirect_to role_path and return
+        redirect_to dashboard_path
       else
+        flash.now[:invalid] = "Invalid credentials"
         render :new
       end
     rescue NoMethodError
       user = User.first_or_create_from_oauth(auth)
       log_in(user)
-      redirect_to role_path and return
+      redirect_to dashboard_path
     end
   end
 

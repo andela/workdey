@@ -13,4 +13,12 @@
       </p>
     </header>
   </section>
+
+  <section>
+    <header>
+      <h2>How would you like to use this platform?</h2>
+    </header>
+    <%= link_to "I need help with tasks", role_path(role: "tasker"), method: :post, class: "btn" %>
+    <%= link_to "I want to carry out tasks", role_path(role: "taskee"), method: :post, class: "btn" %>
+  </section>
 </main>

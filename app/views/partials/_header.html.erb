@@ -1,10 +1,29 @@
-<header>
+<% if logged_in? %>
+  <header>
+    <nav class="nav-wrapper">
+      <div class="container">
+        <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
+        <ul class="right">
+          <% if current_user.confirmed %>
+            <li>
+              <%= link_to "NOTIFICATIONS", "#", class: "waves-effect waves-light" %>
+            </li>
+          <% end %>
+          <li>
+            <%= link_to "SIGN OUT", signout_path, method: :delete, class: "waves-effect waves-light" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+</header>
+<% else %>
+  <header>
     <nav class="nav-wrapper">
       <div class="container">
         <%= link_to "Workdey", root_path, class: "brand-logo" %>
         <ul class="right">
           <li>
-            <%= link_to "FAQ", "#", class: "waves-effect waves-light" %>
+            <%= link_to "BECOME A TASKEE", "#", class: "waves-effect waves-light" %>
           </li>
           <li>
             <%= link_to "SIGN IN", signin_path, class: "waves-effect waves-light" %>
@@ -12,5 +31,6 @@
         </ul>
       </div>
     </nav>
-</header>
+  </header>
+<% end %>
 
