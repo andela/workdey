@@ -8,7 +8,6 @@ class DashboardController < ApplicationController
   end
 
   def choose_role
-    #require "pry"; binding.pry
     redirect_to dashboard_path unless current_user.user_type.nil?
   end
 end
