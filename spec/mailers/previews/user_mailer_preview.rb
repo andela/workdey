@@ -5,5 +5,4 @@ class UserMailerPreview < ActionMailer::Preview
     user = User.find(1)
     UserMailer.account_activation(user)
   end
-
 end
