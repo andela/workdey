@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_filter :login_required
+  before_action :login_required
 
   def home
     if logged_in? && current_user.user_type.nil?

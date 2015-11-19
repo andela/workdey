@@ -1,3 +1,5 @@
+javascript:
+  enabled: false
 scss:
   enabled: false
 ruby:

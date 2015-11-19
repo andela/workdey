@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def self.confirm_user(token)
-    user = self.find_by_confirm_token(token)
+    user = find_by_confirm_token(token)
     user ? user.update_attribute(:confirmed, true) : false
   end
 
@@ -53,6 +53,6 @@ class User < ActiveRecord::Base
   end
 
   def oauth_user?
-    !self.oauth_id.nil?
+    !oauth_id.nil?
   end
 end

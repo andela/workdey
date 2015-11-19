@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :guest_only, only: [:index]
+  before_action :guest_only, only: [:index]
 
   def index
   end

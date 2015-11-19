@@ -8,7 +8,8 @@ class AccountActivationsController < ApplicationController
 
   def resend_activation_mail
     UserMailer.account_activation(current_user).deliver_now
-    flash[:mail] = "Confirmation mail has been sent to your account, please check your mail"
+    flash[:mail] = "Confirmation mail has been sent to your account, " \
+                   "please check your mail"
     redirect_to dashboard_path
   end
 

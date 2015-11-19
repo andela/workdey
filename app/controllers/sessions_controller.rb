@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :guest_only, only: [:new]
+  before_action :guest_only, only: [:new]
 
   def new
   end
