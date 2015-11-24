@@ -1,12 +1,3 @@
-// Place all the styles related to the Pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-.nav-wrapper {
-  background-color: #333;
-  z-index: 1;
-}
-
 .dotnavigation {
   position: fixed;
   right: -1%;
@@ -20,7 +11,7 @@
 
     li {
         background-color: transparent;
-        border: 2px solid #42a49a;
+        border: 2px solid $primary-color;
         border-radius: 50%;
         position: relative;
         display: block;
@@ -33,27 +24,37 @@
         transition: all 0.6s ease;
         z-index: 1;
 
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 0;
-        width: 100%;
-        background-color: #42a49a;
-        box-shadow: 0 0 1px #42a49a;
-        transition: height 0.6s ease;
-      }
+        &.active {
+          &::after {
+            height: 100%;
+          }
 
-      &:hover {
+          a {
+            left: -480%;
+          }
+        }
+
         &::after {
-          height: 100%;
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 0;
+          width: 100%;
+          background-color: $primary-color;
+          box-shadow: 0 0 1px $primary-color;
+          transition: height 0.6s ease;
         }
 
-        a {
-          left: -480%;
+        &:hover {
+          &::after {
+            height: 100%;
+          }
+
+          a {
+            left: -480%;
+          }
         }
-      }
 
       a {
           top: -9px;
@@ -64,7 +65,7 @@
           height: auto;
           outline: none;
           border-radius: 0;
-          color: #42a49a;
+          color: $primary-color;
           font-weight: bold;
           text-indent: 0;
           line-height: 2;
@@ -83,51 +84,57 @@
 
 .main {
   .main-section {
-    background-image: linear-gradient(rgba(0,0,0,.5) 50%, rgba(0,0,0,.5) 50%), image-url("bg-1.jpg");
+    background-image: linear-gradient(rgba(0,0,0,.3) 50%, rgba(0,0,0,.3) 50%), image-url("bg-1.jpg");
     background-size: cover;
     background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: #333;
     height: 100vh;
     color: #fff;
     margin-top: -15px;
-    padding-top: 65px;
+    padding-top: 25px;
     position: relative;
-
-    &::before, &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
-      background-color: #333;
-      position: absolute;
-      top: 10px;
-      z-index: -1;
-    }
-
-    &::before {
-      left: -30px;
-      transform: rotate(-4deg);
-    }
-
-    &::after {
-      right: -30px;
-      transform: rotate(4deg);
-    }
 
     h1 {
       padding-top: 45px;
-      padding-bottom: 45px;
+      padding-bottom: 15px;
+      font-size: $xx-large;
+      font-weight: 400;
     }
 
     p {
-      font-size: 20px;
+      font-size: $default-size;
+      font-weight: 600;
     }
 
     form {
-      margin-top: 25px;
+      margin-top: 35px;
+
+      input {
+        border: 2px solid #fff;
+        border-radius: 8px;
+        color: #fff;
+        text-indent: em(32px);
+
+        &:focus {
+          border-bottom: 2px solid #fff;
+          box-shadow: none;
+        }
+      }
+
+      button {
+        background-color: $primary-color;
+        margin-top: em(20px);
+        padding: em(10px);
+        padding-left: em(20px);
+        padding-right: em(20px);
+        height: auto;
+      }
     }
 
     .scroll-wrap {
       position: relative;
-      top: 80px;
+      top: 60px;
 
       .scroll-item {
         @extend %scroll-notification;
@@ -142,42 +149,20 @@
   }
 
   .steps {
-    color: #fff;
-    height: 100vh;
-    padding-top: 95px;
+    padding-top: em(95px);
+    padding-bottom: em(20px);
     position: relative;
-    z-index: 99;
-
-    &::before, &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
-      background-color: #333;
-      border-radius: 5px;
-      position: absolute;
-      top: 10px;
-      z-index: -1;
-    }
-
-    &::before {
-      left: -30px;
-      transform: rotate(-4deg);
-    }
-
-    &::after {
-      right: -30px;
-      transform: rotate(4deg);
-    }
 
     h3 {
       position: relative;
+      padding-bottom: em(10px);
 
       &::before {
         content: "";
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid $primary-color;
         position: absolute;
         bottom: -15px;
-        width: 65%;
+        width: 37%;
         height: 50px;
       }
 
@@ -185,10 +170,11 @@
         content: "";
         position: absolute;
         bottom: -30px;
-        right: 50%;
+        right: 49%;
         width: 30px;
         height: 30px;
-        background-color: #42a49a;
+        background-color: #fff;
+        border: 2px solid $primary-color;
         border-radius: 100%;
       }
     }
@@ -197,7 +183,7 @@
       margin-top: 95px;
 
       .material-icons {
-        background-color: #42a49a;
+        background-color: $primary-color;
         color: #fff;
         padding: 10px;
         position: relative;
@@ -212,22 +198,19 @@
   }
 
   .why-use {
-    background-color: #fff;
-    color: #666;
-    height: 100vh;
-    padding-top: 95px;
-    margin-bottom: 200px;
+    padding: em(35px);
 
     h3 {
       position: relative;
+      padding-bottom: em(10px);
 
       &::before {
         content: "";
-        border-bottom: 2px solid #666;
+        border-bottom: 2px solid $primary-color;
         position: absolute;
         bottom: -15px;
-        left: 15%;
-        width: 65%;
+        left: 35%;
+        width: 30%;
         height: 50px;
       }
 
@@ -235,10 +218,11 @@
         content: "";
         position: absolute;
         bottom: -30px;
-        right: 50%;
+        right: 49%;
         width: 30px;
         height: 30px;
-        background-color: #666;
+        background-color: #fff;
+        border: 2px solid $primary-color;
         border-radius: 100%;
       }
     }
@@ -246,44 +230,10 @@
     .items {
       margin-top: 95px;
 
-      .more {
-        padding-top: 35px;
-        padding-bottom: 35px;
-
-        .btn {
-          margin-bottom: 20px;
-        }
+      .material-icons {
+        color: $primary-color;
       }
     }
   }
 
-}
-
-.page-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #333;
-  box-shadow: 0 0 3px #444;
-  color: #fff;
-  //margin-top: 65px;
-  margin-bottom: 0;
-  z-index: -1;
-
-  .footer-links {
-    ul {
-      li {
-        display: inline-block;
-        padding-right: 15px;
-        padding-left: 15px;
-      }
-    }
-    a {
-      color: #fff;
-    }
-  }
-
-  .copyright {
-    background-color: #444;
-  }
 }

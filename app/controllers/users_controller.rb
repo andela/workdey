@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :guest_only, only: [:new]
+
   def new
     @user = User.new
   end
@@ -6,32 +8,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in(@user)
+      UserMailer.account_activation(@user).deliver_now
       redirect_to dashboard_path
     else
       render "new"
     end
   end
 
-  def login
-    user = User.authenticate_user(login_params)
-    if user
-      session[:loggedin] = true
-      redirect_to dashboard_path
-    else
-      flash[:notice] = "Incorrect login credentials"
-    end
-  end
-
-  def destroy
-    session.clear
-    redirect_to root_url
-  end
-
   private
-
-  def login_params
-    params.permit(:email, :password, :utf8, :authenticity_token, :commit)
-  end
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :email, :password)

@@ -1,5 +1,17 @@
 class DashboardController < ApplicationController
+  before_action :login_required
+
   def home
-    redirect_to root_url unless session[:loggedin]
+    if logged_in? && current_user.user_type.nil?
+      redirect_to role_path
+    end
+  end
+
+  def choose_role
+  end
+
+  def set_role
+    current_user.update_attribute(:user_type, params[:role])
+    redirect_to dashboard_path
   end
 end

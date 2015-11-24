@@ -1,0 +1,136 @@
+.auth {
+  margin-top: em(30px);
+  padding-top: em(20px);
+  padding-bottom: em(20px);
+  position: relative;
+  overflow: visible;
+
+  &::after {
+    content: "";
+    border-right: 1px solid #ccc;
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    right: -12%;
+    top: 0;
+  }
+
+  &.login {
+
+    form {
+
+      .input-field {
+
+        &:nth-of-type(1), &:nth-of-type(2) {
+          .material-icons {
+            top: 18%;
+            left: 4%;
+          }
+        }
+      }
+    }
+
+  }
+
+  form {
+
+    .input-field {
+      position: relative;
+
+      .material-icons {
+        color: darken(#ccc, 10%);
+        position: absolute;
+      }
+
+      &:nth-of-type(1) {
+        .material-icons {
+          top: 18%;
+          left: 8%;
+        }
+      }
+
+      &:nth-of-type(2) {
+        .material-icons {
+          top: 18%;
+          left: 8%;
+        }
+      }
+
+      &:nth-of-type(3) {
+        .material-icons {
+          top: 18%;
+          left: 4%;
+        }
+      }
+
+      &:nth-of-type(4) {
+        .material-icons {
+          top: 18%;
+          left: 4%;
+        }
+      }
+    }
+
+    input {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-indent: em(40px);
+
+      &:focus:not([readonly]) {
+        border-bottom: 1px solid $primary-color;
+        box-shadow: 0 1px 0 0 $primary-color;
+      }
+    }
+
+    .btn {
+      background-color: transparent;
+      border: 1px solid #ccc;
+      color: darken(#ccc, 50%);
+      box-shadow: none;
+      margin-top: em(15px);
+    }
+
+    .login-path {
+      a {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.oauth {
+  margin-top: em(29px);
+  padding: em(180px);
+  padding-top: em(20px);
+  padding-bottom: em(20px);
+
+  .card {
+
+    .be-cool {
+      padding-bottom: em(20px);
+      white-space: pre-line;
+    }
+
+    .btn {
+      margin-bottom: em(15px);
+
+      .fa {
+        border-right: 1px solid #fff;
+        padding-right: em(10px);
+      }
+
+      &.btn-fb {
+        padding-right: em(12px);
+        background-color: #47639e;
+      }
+
+      &.btn-twt {
+        background-color: #55acee;
+      }
+
+      &.btn-goog {
+        background-color: #eb4436;
+      }
+    }
+  }
+}

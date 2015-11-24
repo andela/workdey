@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024080643) do
+ActiveRecord::Schema.define(version: 20151117111353) do
+
+  create_table "skillsets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.string   "rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
@@ -21,8 +35,15 @@ ActiveRecord::Schema.define(version: 20151024080643) do
     t.date     "birthday"
     t.string   "phone"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "latitude"
+    t.string   "longitude"
+    t.string   "user_type"
+    t.string   "provider"
+    t.string   "oauth_id"
+    t.string   "confirm_token"
+    t.boolean  "confirmed",       default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
