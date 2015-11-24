@@ -15,6 +15,7 @@ gem "uglifier", ">= 1.3.0"
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 
+gem "sidekiq"
 # Materialize
 gem "materialize-sass", "0.97.1"
 gem "bourbon"
@@ -52,6 +53,7 @@ group :development do
   gem "web-console", "~> 2.0"
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
+
 end
 
 group :production do
