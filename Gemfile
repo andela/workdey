@@ -8,13 +8,14 @@ gem "sass-rails", "~> 5.0"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 # Use CoffeeScript for .coffee assets and views
-#gem "coffee-rails", "~> 4.1.0"
+# gem "coffee-rails", "~> 4.1.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem "therubyracer", platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 
+gem "sidekiq"
 # Materialize
 gem "materialize-sass", "0.97.1"
 gem "bourbon"
@@ -33,6 +34,7 @@ gem "omniauth-twitter"
 gem "omniauth-google-oauth2"
 gem "figaro"
 gem "pry"
+gem "rubocop", require: false
 
 # Use Unicorn as the app server
 # gem "unicorn"
@@ -41,7 +43,6 @@ gem "pry"
 # gem "capistrano-rails", group: :development
 
 group :development, :test do
-  # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "byebug"
   gem "travis"
   gem "rspec-rails"
