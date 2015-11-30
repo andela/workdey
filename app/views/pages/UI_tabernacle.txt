@@ -1,0 +1,15 @@
+UI
+Colors
+  bhands.net
+  dribble.net
+  awwwards.com
+LAYOUT first
+  mobile first if responsive
+
+
+Colors for matflight
+#84B5BA
+#DCDCDC
+#042858
+#384E77
+#4A9BB6
