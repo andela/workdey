@@ -2,18 +2,8 @@ class Task < ActiveRecord::Base
   has_many :skillsets
   has_many :users, through: :skillsets
 
-  def self.all_taskees(keyword, user_email = nil)
-    query_string = "%#{keyword.capitalize}%"
-    taskee = where("name LIKE ?", query_string)
-    if user_email.nil?
-      taskee.first.users
-    else
-      taskee.first.users.where("email != ?", user_email) if !taskee.first.nil?
-    end
-  end
-
-  def self.get_taksees(keyword, user_email)
-    taskees = self.all_taskees(keyword, user_email)
+  def self.get_taskees(keyword, user_email)
+    taskees = User.get_taskees_by_task_name(keyword, user_email)
     self.current_user_city_street user_email
     unless taskees.nil?
       taskees_nearby = self.get_taskees_nearby(taskees, @user_street, @user_city)
