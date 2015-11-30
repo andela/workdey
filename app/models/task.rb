@@ -2,10 +2,14 @@ class Task < ActiveRecord::Base
   has_many :skillsets
   has_many :users, through: :skillsets
 
-  def self.all_taskees(keyword, user_email)
+  def self.all_taskees(keyword, user_email = nil)
     query_string = "%#{keyword.capitalize}%"
     taskee = where("name LIKE ?", query_string)
-    taskee.first.users.where("email != ?", user_email) if !taskee.first.nil?
+    if user_email.nil?
+      taskee.first.users
+    else
+      taskee.first.users.where("email != ?", user_email) if !taskee.first.nil?
+    end
   end
 
   def self.get_taksees(keyword, user_email)

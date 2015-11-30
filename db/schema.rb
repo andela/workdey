@@ -35,25 +35,17 @@ ActiveRecord::Schema.define(version: 20151118101033) do
     t.date     "birthday"
     t.string   "phone"
     t.string   "password_digest"
-<<<<<<< HEAD
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-=======
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
->>>>>>> master
     t.string   "user_type"
     t.string   "provider"
     t.string   "state"
     t.string   "city"
     t.string   "street_address"
     t.string   "image_url"
-<<<<<<< HEAD
-=======
     t.string   "oauth_id"
     t.string   "confirm_token"
     t.boolean  "confirmed",       default: false
->>>>>>> master
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
