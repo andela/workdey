@@ -15,15 +15,14 @@
       <p class="tagline center-align">
         Assign tasks you don't want to do to people willing to do it.
       </p>
-      <form class="row center-align">
-        <div class="col s6 offset-s3">
-          <input type="text" placeholder="What do you need help with?" required>
+      <%= form_tag search_path, method: "post", class: "row center-align"  do %>
+         <div class="col s6 offset-s3">
+          <input name= "searcher"  type="text" "What do you need help with?" required>
           <button class="btn waves-effect" type="submit">
             <i class="material-icons left">search</i>Search
           </button>
         </div>
-      </form>
-
+      <% end %>
       <div class="scroll-wrap center-align">
         <a href="#step" data-scroll>
           <i class="material-icons medium scroll-item">play_for_work</i>
