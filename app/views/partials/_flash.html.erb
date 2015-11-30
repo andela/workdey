@@ -1,0 +1,6 @@
+<% flash.each do | name, msg | %>
+  <div class = "row">
+    <%= content_tag :h5, msg, class: [name, "col offset-l2 flasher"] %>
+  </div>
+  <% flash.clear %>
+<% end %>

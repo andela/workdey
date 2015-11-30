@@ -33,5 +33,4 @@ class Task < ActiveRecord::Base
     @user_city = "%#{user_addy.first.first}%"
     @user_street = "%#{user_addy[0][1]}%"
   end
-
 end

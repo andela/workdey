@@ -1,96 +1,46 @@
-<header>
-  <nav>
-    <div class="nav-wrapper">
-      <ul class="right">
-        <li>
-          <a class="waves-effect waves-light" href="#">
-            <i class="fa fa-exclamation-circle right"></i> NOTIFICATION
-          </a>
-        </li>
-        <li>
-          <a class="waves-effect waves-light" href="#">
-            <i class="fa fa-user"></i>
-          </a>
-        </li>
-         <li>
-          <a class="waves-effect waves-light" href="#">
-            <i class="fa fa-cogs"></i>
-          </a>
-        </li>
-        <li>
-          <a class="waves-effect waves-light" href="/logout">
-            <i class="fa fa-sign-out"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+<% if current_user.confirmed %>
 
-<section class="main">
+<% if flash[:mail].present?  %>
+  <div class="flash-mail">
+    <i class="material-icons close-flash">close</i>
+    <p><%= flash[:mail] %></p>
+  </div>
+<% end %>
+
+<section class="main container center-align">
   <div class="row">
-    <aside class="sidebar">
-      <p>
-        <i class="fa fa-skyatlas"></i> WORKDEY
-      </p>
 
-      <ul class="page-links">
-        <li>
-          <a href="#">
-            <i class="material-icons right tiny">home</i>HOME
-          </a>
-        </li>
-       <li>
-          <a href="#">
-            <i class="material-icons right tiny">description</i>CREATE A TASK
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-tasks right"></i>TASKLOG
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-history right"></i>HISTORY
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="material-icons right tiny">grade</i>UPGRADE
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-comment right"></i>FEEDBACK
-          </a>
-        </li>
-      </ul>
-
-      <ul class="info-links">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Terms &amp; Conditions</a></li>
-      </ul>
-
-      <ul class="social-media-links">
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-      </ul>
-    </aside>
-
-    <section class="col m9 s12 offset-m3">
-    <div class="user_info">
-      <h3>WELCOME TIPSY</h3>
-      <span>Sept. 29, 2015- 314, HM, Sabo Yaba.</span>
-      <h3>QUICK USER INFO</h3>
-      <ul>
-        <ol><strong>Membership Type:</strong> <span>Gold Member</span></ol>
-        <ol><strong>Registration Date:</strong> <span>09/09/09</span></ol>
-        <ol><strong>Verification Status:</strong> <span>Verified</span></ol>
-      </ul>
+  <section class="col s12">
+    <div class="user_info card">
+      <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
     </div>
   </section>
   </div>
 </section>
+
+<% else %>
+
+<% if flash[:mail].present?  %>
+  <div class="flash-mail">
+    <i class="material-icons close-flash">close</i>
+    <p><%= flash[:mail] %></p>
+  </div>
+<% end %>
+
+<section class="confirm-mail-first container">
+  <div class="row">
+    <div class="col s12">
+      <div class="user_info card">
+        <h5>Confirm your email address</h5>
+        <p>
+          To continue, please click on the link sent to 
+          <strong><%= current_user.email %></strong>
+          This will help to validate your account.
+        </p>
+        <%= link_to "Resend Confirmation Link", resend_mail_path, method: :post %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% end %>

@@ -1,0 +1,25 @@
+// Web Font Urls
+
+$material-icons: "https://fonts.googleapis.com/icon?family=Material+Icons";
+$font-stack-url: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,300,600|Open+Sans:400,300,600,700,800|Pacifico";
+
+@import url($material-icons);
+@import url($font-stack-url);
+
+// Typography
+
+$source-sans: "Source Sans Pro", "Helvetica", "Arial", sans-serif;
+$open-sans: "Open Sans", "Calibri", sans-serif;
+$logo-font: "Pacifico", cursive;
+
+$xx-large: modular-scale(5);
+$x-large: modular-scale(4);
+$large: modular-scale(3);
+$medium: modular-scale(2);
+$small: modular-scale(1);
+$default-size: em(16px);
+
+// Colors
+
+$primary-color: #eb4D5c;
+//#3599ab -- secondary-color??? #B8E986 #66b26f;(pri-col)

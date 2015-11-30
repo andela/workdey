@@ -44,7 +44,6 @@ class SeedData
     tasks_list.each { | task | Task.create(task) }
     skillsets.each { | skill | Skillset.create(skill) }
   end
-
 end
 
 workdey_data = SeedData.new

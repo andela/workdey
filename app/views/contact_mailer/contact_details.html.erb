@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi admin,</h1>
+    <p>
+      Workdey has a mail from <strong><%= @name.capitalize %></strong>. Please find the content below:
+    </p>
+    <p>
+      <h3>Sender's mail address:</h3>
+    </p>
+    <p>
+      <strong><%= @sender %></strong>.
+    </p>
+    <p>
+      <h3>Message:</h3>
+    </p>
+    <p>
+      <%= @message %>
+    </p>
+    <p>Cheers!</p>
+  </body>
+</html>

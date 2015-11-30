@@ -9,12 +9,13 @@
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
-<body>
-  <%= render "layouts/header" %>
-  <%= render "layouts/sidebar" %>
-
+<body class="<%= "#{params[:controller]}-#{params[:action]}"%>">
+  <%= render "partials/header" unless current_page?(role_path) %>
+  
   <%= yield %>
 
-<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= render "partials/footer" %>
+
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
 </html>

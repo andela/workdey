@@ -1,6 +1,10 @@
-@import "materialize.scss";
+@import "bourbon";
+@import "materialize";
+@import "base/config";
+@import "base/mixins";
+@import "base/helpers";
 @import "base/globals";
-@import "styles/pages";
+@import "styles/index";
 @import "styles/dashboard";
 @import "styles/search_result";
-@import "base/mixins";
+@import "styles/users";

@@ -1,0 +1,180 @@
+body {
+  color: #666;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: $open-sans;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+main, .main {
+  flex: 1 0 auto;
+  transition-duration: 0.6s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $source-sans;
+  font-weight: 200;
+}
+
+h1 {
+  font-size: $xx-large;
+}
+
+h2 {
+  font-size: $x-large;
+}
+
+h3 {
+  font-size: $large;
+}
+
+strong {
+  font-weight: 700;
+}
+
+// Sidebar
+
+.sidebar {
+    background-color: #333;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    z-index: 999;
+
+    p {
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      transition-duration: 0.6s;
+    }
+
+    .page-links {
+      padding: 15px;
+
+      li {
+        margin-bottom: 45px;
+        margin-top: 45px;
+      }
+
+      a {
+        color: #fff;
+        width: 100%;
+      }
+    }
+
+    .social-media-links {
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+      top: 200px;
+
+      a {
+        color: #fff;
+      }
+
+    }
+
+  }
+
+.btn {
+  background-color: transparentize($primary-color, .1);
+
+  &:hover {
+    background-color: $primary-color;
+  }
+}
+
+// Header & Navbar
+
+.pages-index {
+  .nav-wrapper {
+    height: 90px;
+  }
+}
+
+.nav-wrapper {
+  background-color: $primary-color;
+  height: 78px;
+
+  .brand-logo {
+    font-family: $logo-font;
+    font-size: $small;
+  }
+
+  ul {
+    li {
+      font-weight: 600;
+      margin-right: em(18px);
+      margin-left: em(18px);
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+// Site Footer
+
+.page-footer {
+  width: 100%;
+  background-color: #525252;
+  box-shadow: 0 0 3px #444;
+  color: #fff;
+
+  &.row {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  .social-media-links {
+
+    li {
+      display: inline-block;
+      margin-right: em(15px);
+      margin-left: em(15px);
+
+      a {
+        color: #fff;
+        transition-duration: 0.6s;
+
+        &:hover {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  .footer-links {
+    ul {
+      li {
+        display: inline-block;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+    }
+
+    a {
+      color: #fff;
+    }
+  }
+
+  .copyright {
+    background-color: #444;
+  }
+
+}
+
+
+//  Text area
+textarea {
+  min-height: 10em;
+}
