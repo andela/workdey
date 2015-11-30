@@ -19,9 +19,12 @@ Rails.application.routes.draw do
   post "account_activations" =>
   "account_activations#resend_activation_mail", as: :resend_mail
 
+  post "search/taskees" => "pages#search", as: "search"
+
   get "pages/about"
   match "pages/contact" => "pages#contact", as: :contact, via: [:post, :get]
   get "pages/terms"
+
   get "pages/become_a_taskee"
 
   resources :users, only: [:create]

@@ -55,4 +55,16 @@ class User < ActiveRecord::Base
   def oauth_user?
     !oauth_id.nil?
   end
+
+  def self.get_user_address(user_email)
+    where("email = ?", user_email).pluck(:city, :street_address)
+  end
+
+  def self.get_taskees_by_task_name(keyword, user_email = nil)
+    query_string = "%#{keyword.capitalize}%"
+    taskees = User.joins("JOIN skillsets ON skillsets.user_id = users.id").joins("JOIN tasks ON skillsets.task_id = tasks.id").where("tasks.name LIKE ?", query_string)
+    return taskees if user_email.nil?
+    taskees.where("email != ?", user_email)
+  end
+
 end
