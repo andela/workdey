@@ -1,0 +1,99 @@
+.dashboard-quiz {
+   header {
+    margin-top: em(5px);
+    margin-bottom: em(35px);
+  }
+
+  .quiz-section {
+    transition-duration: 0.6s;
+  }
+
+  .brand-logo {
+    color: $primary-color;
+    font-family: $logo-font;
+    font-size: $small;
+  }
+
+  .progress {
+    background-color: lighten($primary-color, 30%);
+    width: 60%;
+    margin: 0 auto;
+    height: 10px;
+    opacity: 0;
+    transition-duration: 0.6s;
+
+    .determinate {
+      background-color: $primary-color;
+    }
+  }
+
+  .quiz-info {
+    transition-duration: 0.6s;
+
+    .start-quiz {
+      margin-top: em(20px);
+    }
+  }
+
+  .quiz-app {
+    transition-duration: 0.6s;
+    margin-top: em(25px);
+
+    .question {
+      padding-bottom: em(10px);
+    }
+
+    .options {
+      text-align: left;
+      width: 80%;
+      margin: 0 auto;
+
+      .btn {
+        margin-right: em(5px);
+        margin-left: em(5px);
+      }
+    }
+
+    .btn.next {
+      transition-duration: 0.6s;
+      opacity: 0;
+    }
+  }
+
+  .answer-explanation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40%;
+    padding-top: em(140px);
+    padding-left: em(20px);
+    text-align: center;
+    transition-duration: 0.6s;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .taskee-guidelines {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 480px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: em(72px);
+    z-index: -1;
+    opacity: 0;
+    transition-duration: 0.6s;
+
+    .guidelines {
+      list-style-type: disc;
+
+      li {
+        margin-top: em(15px);
+        margin-bottom: em(15px);
+        list-style-type: disc;
+      }
+    }
+  }
+}

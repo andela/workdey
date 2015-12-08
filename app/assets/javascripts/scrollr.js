@@ -22,18 +22,22 @@
   // Todo: Refactor the code below
 
   $(window).on("scroll", function () {
-    if ($(this).scrollTop() <= homeSection.offset().top) {
-      scrollItems.eq(0).addClass("active");
-      scrollItems.eq(1).removeClass("active");
-      scrollItems.eq(2).removeClass("active");
-    } else if ($(this).scrollTop() <= stepSection.offset().top) {
-      scrollItems.eq(1).addClass("active");
-      scrollItems.eq(0).removeClass("active");
-      scrollItems.eq(2).removeClass("active");
-    } else if ($(this).scrollTop() <= whySection.offset().top) {
-      scrollItems.eq(2).addClass("active");
-      scrollItems.eq(0).removeClass("active");
-      scrollItems.eq(1).removeClass("active");
+    try {
+      if ($(this).scrollTop() <= homeSection.offset().top) {
+        scrollItems.eq(0).addClass("active");
+        scrollItems.eq(1).removeClass("active");
+        scrollItems.eq(2).removeClass("active");
+      } else if ($(this).scrollTop() <= stepSection.offset().top) {
+        scrollItems.eq(1).addClass("active");
+        scrollItems.eq(0).removeClass("active");
+        scrollItems.eq(2).removeClass("active");
+      } else if ($(this).scrollTop() <= whySection.offset().top) {
+        scrollItems.eq(2).addClass("active");
+        scrollItems.eq(0).removeClass("active");
+        scrollItems.eq(1).removeClass("active");
+      }
+    } catch(ex) {
+      return false;
     }
   });
 

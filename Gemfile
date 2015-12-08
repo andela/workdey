@@ -44,7 +44,6 @@ gem "rubocop", require: false
 # gem "capistrano-rails", group: :development
 
 group :development, :test do
-  # gem "byebug"
   gem "travis"
   gem "rspec-rails"
   gem "capybara"

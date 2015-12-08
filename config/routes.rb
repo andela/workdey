@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get "role" => "dashboard#choose_role"
   post "role" => "dashboard#set_role"
+  get "quiz" => "dashboard#quiz"
+  post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
 
   get "account_activations/:id/edit" =>

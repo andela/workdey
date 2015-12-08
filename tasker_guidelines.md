@@ -1,6 +1,6 @@
 # Guidelines for taskers
 
-To ensure that you have the possible best that workdey has to offer, please ensure that you follow adhere to the following:
+To ensure that you have the possible best that workdey has to offer, please ensure that you adhere to the following:
 
 * Always be detailed in the description of a task. This will help the taskees determine if they are the right fit for the task.
 * Include pictures if it helps give a more accurate description of the task.
