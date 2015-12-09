@@ -19,6 +19,15 @@
   }
 }
 
+button.btn[disabled] {
+  cursor: not-allowed;
+}
+
+[type="radio"]:checked + label:after {
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+
 [class^="flash-"] {
  position: relative;
  transition-duration: 0.6s;

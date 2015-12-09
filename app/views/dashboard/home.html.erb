@@ -7,16 +7,17 @@
   </div>
 <% end %>
 
-<section class="main container center-align">
-  <div class="row">
-
-  <section class="col s12">
-    <div class="user_info card">
-      <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
+<main>
+  <section class="main container center-align">
+    <div class="row">
+      <section class="col s12">
+        <div class="user_info card">
+          <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
+        </div>
+      </section>
     </div>
   </section>
-  </div>
-</section>
+</main>
 
 <% else %>
 
@@ -27,7 +28,8 @@
   </div>
 <% end %>
 
-<section class="confirm-mail-first container">
+<main>
+  <section class="confirm-mail-first container">
   <div class="row">
     <div class="col s12">
       <div class="user_info card">
@@ -42,5 +44,6 @@
     </div>
   </div>
 </section>
+</main>
 
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118101033) do
+ActiveRecord::Schema.define(version: 20151207153837) do
 
   create_table "skillsets", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,12 +39,13 @@ ActiveRecord::Schema.define(version: 20151118101033) do
     t.datetime "updated_at",                      null: false
     t.string   "user_type"
     t.string   "provider"
-    t.string   "state"
-    t.string   "city"
-    t.string   "street_address"
     t.string   "oauth_id"
     t.string   "confirm_token"
     t.boolean  "confirmed",       default: false
+    t.boolean  "has_taken_quiz",  default: false
+    t.string   "state"
+    t.string   "city"
+    t.string   "street_address"
     t.string   "image_url"
   end
 

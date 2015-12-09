@@ -83,7 +83,7 @@ strong {
 .btn {
   background-color: transparentize($primary-color, .1);
 
-  &:hover {
+  &:hover, &:active, &:focus {
     background-color: $primary-color;
   }
 }
