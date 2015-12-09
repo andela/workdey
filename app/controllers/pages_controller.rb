@@ -27,6 +27,7 @@ class PagesController < ApplicationController
 
   def search
     @taskees = get_taskees_by_search
+    @taskees = nil if @taskees == []
     render "search_result"
   end
 
