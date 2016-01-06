@@ -182,6 +182,9 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
+    puma (2.15.3)
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
@@ -340,6 +343,8 @@ DEPENDENCIES
   omniauth-twitter
   pg (= 0.17.1)
   pry
+  pry-rails
+  puma
   rails (= 4.2.4)
   rails_12factor (= 0.0.2)
   rspec-rails
@@ -356,4 +361,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
