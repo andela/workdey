@@ -11,6 +11,10 @@
           <p><%= taskee.firstname.concat(taskee.lastname).titleize %></p>
           <p><%= taskee.street_address + "," %></p>
           <p><%= (taskee.city + ", " + "#{taskee.state}" + ".").titleize %></p>
+          <p>
+            <%= link_to "View", user_profile_path(taskee_id: taskee.id),
+                        class: "btn waves-effect" %>
+          </p>
         </div>
       <% end %>
     <% end %>

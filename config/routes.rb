@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "quiz" => "dashboard#quiz"
   post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
+  match "dashboard/profile" => "dashboard#user_profile", as: :profile, via: [:post, :get]
+  get "user/profile" => "dashboard#profile_view", as: :user_profile
 
   get "account_activations/:id/edit" =>
   "account_activations#confirm_email", as: :confirm
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   "account_activations#resend_activation_mail", as: :resend_mail
 
   get "pages/about"
-  match "pages/contact" => "pages#contact", as: :contact, via: [:post, :get]
+  match "contact" => "pages#contact", as: :contact, via: [:post, :get]
   get "pages/terms"
 
   post "search/taskees" => "pages#search", as: "search"
