@@ -16,3 +16,19 @@ nav .nav-wrapper {
   -ms-border-radius: 3em;
   border-radius: 1.5em;
 }
+
+.user-profile {
+  input[type=text]:disabled, input[name=email]:disabled{
+    color: #000 !important;
+  }
+}
+
+.view_profile {
+  img {
+    width: 15em;
+    height: 15em;
+  }
+  li {
+    font-size: 1.8em;
+  }
+}
