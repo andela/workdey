@@ -45,9 +45,31 @@ class DashboardController < ApplicationController
     end
   end
 
+  def user_profile
+    @current_user = current_user
+    @profiler = UserProfile.new
+    unless profile_params.empty?
+      info = @profiler.user_info_hash(profile_params, current_user)
+      @current_user.update_columns(info)
+      flash[:notice] = "Your profile has been successfully updated!"
+    end
+  rescue
+    flash[:error] = "There was a problem updating your profile.
+                    Please try again."
+  end
+
   private
 
   def quiz_params
     params.permit(:aced)
+  end
+
+  def profile_view
+    @user = User.find(profile_params[:taskee_id])
+  end
+
+  def profile_params
+    params.permit(:user_pix, :phone, :street_address, :city, :state, :gender,
+                  :taskee_id, date: [:day, :month, :year])
   end
 end

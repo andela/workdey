@@ -1,33 +1,69 @@
-<section class="col m9 s12 offset-m1">
-  <div class="row">
-    <ul class= "col m8 offset-m2" >
-      <h2>User Profile Settings</h2>
-      <%= render partial: "partials/flash" %>
-      <%= form_tag(profile_path, method: [:post, :get]) do %>
-        <li><strong><%= label_tag "first name" %></strong><%= text_tags("firstname", "", "ikem", "validate", true) %></li>
-        <li><strong><%= label_tag "last name" %></strong><%= text_tags("lastname", "", "okonkwo", "validate", true) %></li>
-        <li><strong><%= label_tag "email" %></strong><%= email_tags("email", "", "ikem@workdey.com", "validate", true)  %></li>
-        <li><%= select_tag "gender", options_for_select(["Gender", "Male", "Female", "Others"], "Gender") %>
-        </li>
-        <li>
-          <%= select_day(nil, prompt: "Day")%>
-        </li>
-        <li>
-          <%= select_month(nil, prompt: "Month")%>
-        </li>
-        <li>
-          <%= select_year(nil, prompt: "Year", start_year: 1960, end_year: 1997)%>
-        </li>
-        <li><strong><%= label_tag "phone number" %></strong><%= text_tags("subject", "", "Enter your phone number here", "validate", true) %></li>
-        <li><%= select_tag "City", options_for_select(["City", "Lagos"], "City") %>
-        </li>
-        <li><strong><%= label_tag "message" %></strong>
-          <%= text_area_tag "message", nil, { placeholder: "Enter your message here", class: "validate", required: true } %>
-        </li>
-        <li>
-        <button class="btn waves-effect" type="submit">SEND</button>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</section>
+<main>
+  <section class="col m9 s12 offset-m1">
+    <div class="row">
+      <ul class= "col m10 offset-m1" >
+        <h2>User Profile Settings</h2>
+        <%= render partial: "partials/flash" %>
+        <%= form_tag(profile_path, { method: [:post, :get], :multipart => true, class: "user-profile" }) do %>
+          <div class= "row">
+            <div class= "col m10">
+              <strong><%= label_tag "Profile Picture" %></strong>
+              <li class= "file-field input-field">
+                <div class="btn pix-choice">
+                  <span>Choose Picture</span>
+                  <input type="file" name= "user_pix">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class= "col m5">
+            <li><strong><%= label_tag "first name" %></strong><%= text_tags("firstname", @current_user.firstname, "", "validate", true, true) %></li>
+            <li><strong><%= label_tag "email" %></strong><%= email_tags("email", @current_user.email, "", "validate", true, true)  %></li>
+            <li><strong><%= label_tag "phone number" %></strong><%= text_tags("phone", @current_user.phone, "Enter your phone number here", "validate", true) %></li>
+            <li><strong><%= label_tag "Street Address" %></strong><%= text_tags("street_address", @current_user.street_address, "55, Moleye st.", "validate", true) %></li>
+            <li class= "left">
+              <button class="btn waves-effect" type="submit">UPDATE PROFILE</button>
+            </li>
+
+          </div>
+
+          <div class= "col m5">
+            <li><strong><%= label_tag "last name" %></strong><%= text_tags("lastname", @current_user.lastname, "", "validate", true, true) %></li>
+            <li><%= select_tag "gender", options_for_select(["Gender", "Male",  "Female", "Others"], "Gender") %>
+            </li>
+            <li>
+              <fieldset><legend>Birthday</legend>
+                <div class= "row">
+                  <li class= "col m4 left">
+                    <%= select_day(nil, prompt: "Day")%>
+                  </li>
+                  <li class= "col m4 left">
+                    <%= select_month(nil, prompt: "Month")%>
+                  </li>
+                  <li class= "col m4 left">
+                    <%= select_year(nil, prompt: "Year", start_year: 1960,
+                                    end_year: 1997)%>
+                  </li>
+                </div>
+              </fieldset>
+            </li>
+            <li>
+              <div class= "row">
+                <li class= "col m6 left"><%= select_tag "city", options_for_select(["City", "Yaba"], "City") %>
+                </li>
+                <li class= "col m6 left"><%= select_tag "state", options_for_select(["State", "Lagos"], "State") %>
+                </li>
+              </div>
+            </li>
+
+          </div>
+
+
+        <% end %>
+      </ul>
+    </div>
+  </section>
+</main>
