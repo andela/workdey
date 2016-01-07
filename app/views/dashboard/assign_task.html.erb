@@ -1,0 +1,27 @@
+<main>
+  <div class="row">
+    <h2 class= "col m6 offset-m4">Assign Task</h2>
+      <ul class= "col m8 offset-m2" >
+        <%= form_tag "" do%>
+        <% id = params["id"].nil? ? nil : params["id"] %>
+        <li><%= label_tag "Taskee ID:" %><%= text_field_tag "taskee_id", "#{id}" %></li>
+        <li><%= label_tag "Amount:" %><%= text_field_tag "amount" %></li>
+        <li><%= label_tag "I Want This Task To Be Done On:" %></li>
+        <div class= "row">
+          <li class= "col m4 left">
+            <%= select_day(Date.today)%>
+          </li>
+          <li class= "col m4 left">
+            <%= select_month(Date.today)%>
+          </li>
+          <li class= "col m4 left">
+            <%= text_field_tag "year", Time.now.year, disabled: true %>
+          </li>
+        </div>
+        <li><%= label_tag "Description:" %></li>
+        <li><%= text_area_tag "description" %></li>
+        <li><button class="btn waves-effect" type="submit">NOTIFY TASKEE</button></li>
+        <% end %>
+    </ul>
+  </div>
+</main>

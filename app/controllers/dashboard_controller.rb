@@ -58,14 +58,17 @@ class DashboardController < ApplicationController
                     Please try again."
   end
 
+  def profile_view
+    @user = User.find(profile_params[:taskee_id])
+  end
+
+  def assign_task
+  end
+
   private
 
   def quiz_params
     params.permit(:aced)
-  end
-
-  def profile_view
-    @user = User.find(profile_params[:taskee_id])
   end
 
   def profile_params
