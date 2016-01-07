@@ -33,9 +33,6 @@ gem "bcrypt", "~> 3.1.7"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
 gem "omniauth-google-oauth2"
-gem "figaro"
-gem "pry"
-gem "rubocop", require: false
 
 # Use Unicorn as the app server
 # gem "unicorn"
@@ -49,6 +46,8 @@ group :development, :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "database_cleaner"
+  gem "pry"
+  gem "pry-rails"
 end
 
 group :development do
@@ -56,11 +55,14 @@ group :development do
   gem "web-console", "~> 2.0"
   # Use sqlite3 as the database for Active Record
   gem "sqlite3"
+  gem "rubocop", require: false
+  gem "figaro"
 end
 
 group :production do
   gem "pg",             "0.17.1"
   gem "rails_12factor", "0.0.2"
+  gem "puma"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
