@@ -7,7 +7,7 @@
     <% else %>
       <% @taskees.each do | taskee | %>
         <div class="taskee_card col m3 offset-m1 s6 left">
-          <p><%= image_tag "boy.jpg", { class: "responsive-img circle" }%></p>
+          <p><%= image_tag taskee.image_url, { class: "responsive-img circle" }%></p>
           <p><%= taskee.firstname.concat(taskee.lastname).titleize %></p>
           <p><%= taskee.street_address + "," %></p>
           <p><%= (taskee.city + ", " + "#{taskee.state}" + ".").titleize %></p>
