@@ -4,7 +4,6 @@ class Task < ActiveRecord::Base
 
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_task_name(keyword, user_email)
-      require "pry"; binding.pry
     current_user_city_street user_email
     return taskees if taskees.nil?
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
