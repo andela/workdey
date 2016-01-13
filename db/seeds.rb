@@ -19,13 +19,20 @@ class SeedData
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq", confirmed: true
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        confirmed: true
       },
       { firstname: "Chinedu", lastname: "Dan",
         email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
         city: "VI", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq"
-      }
+      },
+      { firstname: "Chinedu", lastname: "Daniel",
+        email: "chinedu@disgui.se", street_address: "34, Adeyemo Alakija",
+        city: "VI", state: "Lagos", password: "qazwsxedc",
+        user_type: "tasker", confirm_token: "112ewqee2123wqwqw12wq",
+        confirmed: true
+     }
     ]
   end
 
@@ -42,16 +49,16 @@ class SeedData
 
   def skillsets
     [
-      { user_id: 1, task_id: 1, rate: 2000 },
-      { user_id: 1, task_id: 4, rate: 1700 },
-      { user_id: 2, task_id: 5, rate: 2000 },
-      { user_id: 3, task_id: 6, rate: 800 },
-      { user_id: 4, task_id: 5, rate: 1500 },
-      { user_id: 5, task_id: 3, rate: 1000 },
-      { user_id: 3, task_id: 1, rate: 2500 },
-      { user_id: 2, task_id: 4, rate: 2000 },
-      { user_id: 5, task_id: 2, rate: 1100 },
-      { user_id: 1, task_id: 1, rate: 1200 }
+      { user_id: 1, task_id: 1 },
+      { user_id: 1, task_id: 4 },
+      { user_id: 2, task_id: 5 },
+      { user_id: 3, task_id: 6 },
+      { user_id: 4, task_id: 5 },
+      { user_id: 5, task_id: 3 },
+      { user_id: 3, task_id: 1 },
+      { user_id: 2, task_id: 4 },
+      { user_id: 5, task_id: 2 },
+      { user_id: 1, task_id: 1 }
     ]
   end
 

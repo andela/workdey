@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  before_action :guest_only, only: [:index]
+  before_action :guest_only, only: :index
+  before_action :show_notification_count, only: :search
 
   def index
   end

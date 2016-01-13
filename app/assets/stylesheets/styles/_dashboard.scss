@@ -35,7 +35,7 @@ nav .nav-wrapper {
 
 // Dashboard index
 
-[class^="dashboard-"], .pages-search, .taskmanagement-new {
+[class^="dashboard-"], .pages-search, .taskmanagements-new, [class^="notifications-"] {
   .nav-wrapper {
     .dropdown {
       @include display(flex);
@@ -63,8 +63,8 @@ nav .nav-wrapper {
 
       .notification-badge {
         position: absolute;
-        top: -20px;
-        left: -38px;
+        top: -15px;
+        left: -10px;
 
         span {
           border: 1px solid #fff;
@@ -96,4 +96,54 @@ nav .nav-wrapper {
         border-radius: 100%;
       }
     }
+
+    // Notifications
+
+    .notifications {
+      transition-duration: 0.6s;
+    }
+
+    .feed {
+      border-bottom: 1px solid #ccc;
+      padding: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f6f7f8;
+      transition-duration: 0.6s;
+
+      &.viewed {
+        background-color: transparent;
+        transition-duration: 0.6s;
+      }
+
+      &:last-child {
+        border: 0;
+      }
+
+      img {
+        width: em(30px);
+        height: em(30px);
+        border-radius: 100%;
+      }
+
+      .btn {
+        height: em(25px);
+        line-height: em(25px);
+      }
+    }
+
+    .full_notification_message {
+      padding: em(55px);
+
+      .actions {
+        @include display(flex);
+        @include justify-content(space-around);
+
+        .btn > .material-icons {
+          pointer-events: none;
+        }
+      }
+    }
+
 }

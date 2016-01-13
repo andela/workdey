@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
   before_action :login_required
+  before_action :show_notification_count,
+                only: [:home, :user_profile, :profile_view]
 
   def home
     case
@@ -36,7 +38,7 @@ class DashboardController < ApplicationController
   end
 
   def quiz
-    redirect_to dashboard_path and return if current_user.has_taken_quiz
+    redirect_to(dashboard_path) && return if current_user.has_taken_quiz
     if quiz_params[:aced]
       current_user.update_attribute(:has_taken_quiz, true)
       redirect_to dashboard_path

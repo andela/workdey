@@ -50,13 +50,11 @@ class User < ActiveRecord::Base
     user ? user.update_attribute(:confirmed, true) : false
   end
 
-  private
-
   def generate_confirm_token
     self.confirm_token = SecureRandom.uuid
   end
 
-  def oauth_user?
+  private def oauth_user?
     !oauth_id.nil?
   end
 
@@ -65,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def self.get_taskees_by_task_name(keyword, user_email = nil)
-    query_string = "#{keyword.capitalize}"
+    query_string = keyword.capitalize.to_s
     taskees = User.joins("JOIN skillsets ON skillsets.user_id = users.id").
               joins("JOIN tasks ON skillsets.task_id = tasks.id").
               where("tasks.name LIKE ?", query_string)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112130841) do
+ActiveRecord::Schema.define(version: 20160115184424) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,11 +34,15 @@ ActiveRecord::Schema.define(version: 20160112130841) do
     t.integer  "tasker_id"
     t.integer  "taskee_id"
     t.string   "task_desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "amount"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string   "status",          default: "inactive"
+    t.boolean  "taskee_notified", default: false
+    t.boolean  "viewed",          default: false
+    t.boolean  "tasker_notified", default: false
   end
 
   create_table "tasks", force: :cascade do |t|
