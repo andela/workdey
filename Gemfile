@@ -14,7 +14,7 @@ gem "uglifier", ">= 1.3.0"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
-gem "cloudinary"
+gem "cloudinary", "1.1.0"
 
 gem "sidekiq"
 # Materialize
@@ -32,7 +32,7 @@ gem "omniauth-oauth2", "~> 1.3.1"
 gem "bcrypt", "~> 3.1.7"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
-gem "omniauth-google-oauth2"
+gem "omniauth-google-oauth2", "0.2.10"
 
 # Use Unicorn as the app server
 # gem "unicorn"
@@ -41,7 +41,7 @@ gem "omniauth-google-oauth2"
 # gem "capistrano-rails", group: :development
 
 group :development, :test do
-  gem "travis"
+  gem "travis", "1.8.0"
   gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"
