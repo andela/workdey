@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  # before_action :guest_only, only: [:index]
+  before_action :guest_only, only: [:index]
 
   def index
   end
@@ -28,6 +28,7 @@ class PagesController < ApplicationController
   def search
     @taskees = get_taskees_by_search
     @taskees = nil if @taskees == []
+    session[:searcher] = params[:searcher] unless @taskees.nil?
     render "search_result"
   end
 

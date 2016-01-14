@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
   match "dashboard/profile" => "dashboard#user_profile", as: :profile, via: [:post, :get]
+  get "dashboard/assign" => "taskmanagement#new", as: :assign_task
+  post "dashboard/assign" => "taskmanagement#create", as: :create_task
   get "user/profile" => "dashboard#profile_view", as: :user_profile
 
   get "account_activations/:id/edit" =>

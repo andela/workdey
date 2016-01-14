@@ -36,7 +36,7 @@ class DashboardController < ApplicationController
   end
 
   def quiz
-    redirect_to dashboard_path && return if current_user.has_taken_quiz
+    redirect_to dashboard_path and return if current_user.has_taken_quiz
     if quiz_params[:aced]
       current_user.update_attribute(:has_taken_quiz, true)
       redirect_to dashboard_path
@@ -58,14 +58,15 @@ class DashboardController < ApplicationController
                     Please try again."
   end
 
+  def profile_view
+    profile_param = deobfuscate params.except(:controller, :action)
+    @user = User.find(profile_param["taskee_id"])
+  end
+
   private
 
   def quiz_params
     params.permit(:aced)
-  end
-
-  def profile_view
-    @user = User.find(profile_params[:taskee_id])
   end
 
   def profile_params

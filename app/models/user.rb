@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   has_many :skillsets
+  has_many :reviews
   has_many :tasks, through: :skillsets
+  has_many :taskees, class_name: "TaskManagement", foreign_key: :taskee_id
+  has_many :taskers, class_name: "TaskManagement", foreign_key: :tasker_id
+
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
 
@@ -61,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def self.get_taskees_by_task_name(keyword, user_email = nil)
-    query_string = "%#{keyword.capitalize}%"
+    query_string = "#{keyword.capitalize}"
     taskees = User.joins("JOIN skillsets ON skillsets.user_id = users.id").
               joins("JOIN tasks ON skillsets.task_id = tasks.id").
               where("tasks.name LIKE ?", query_string)

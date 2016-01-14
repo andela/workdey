@@ -12,7 +12,7 @@
       <div class="auth signup card" class="col s12">
         <div class="row">
           <%= form_for @user, html: {class: "col s12"} do |f| %>
-            <%= render "partials/error_msg" %>
+            <%= render "partials/error_msg", object: @user %>
             <div class="row">
               <div class="input-field col s6">
                 <%= f.text_field :firstname, required: true, placeholder: "First Name" %>
@@ -39,7 +39,7 @@
               </div>
 
               <div class="col s12 login-path">
-                <p>Already have an account? 
+                <p>Already have an account?
                   <%= link_to "Log in", signin_path %>
                 </p>
               </div>
@@ -54,7 +54,7 @@
     <div class="card">
       <div class="card-content">
         <p class="be-cool">
-          Sign up with: 
+          Sign up with:
         </p>
         <p>
           <%= link_to raw("<i class='fa fa-facebook-square'></i> Facebook"), "/auth/facebook", class: "btn btn-fb" %>
