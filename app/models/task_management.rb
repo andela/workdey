@@ -3,7 +3,7 @@ class TaskManagement < ActiveRecord::Base
    belongs_to :taskers, class_name: "User"
    has_one :task, foreign_key: :id
 
-   after_save :test_foo
+   #after_save :test_foo
 
    validates :amount,
               numericality: { greater_than_or_equal_to: 2000 },
@@ -17,7 +17,7 @@ class TaskManagement < ActiveRecord::Base
               :task_desc,
               presence: true
 
-    def test_foo
-      require "pry"; binding.pry
-    end
+    # def test_foo
+    #   require "pry"; binding.pry
+    # end
 end
