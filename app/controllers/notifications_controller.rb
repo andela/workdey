@@ -22,6 +22,13 @@ class NotificationsController < ApplicationController
     }
   end
 
+  def update
+    record = TaskManagement.find params[:id]
+    if record.update_attribute(:status, params[:status])
+      render json: { message: "success" }
+    end
+  end
+
   private
 
   def notifiable

@@ -99,6 +99,10 @@ nav .nav-wrapper {
 
     // Notifications
 
+    .notifications {
+      transition-duration: 0.6s;
+    }
+
     .feed {
       border-bottom: 1px solid #ccc;
       padding: 5px;
@@ -106,9 +110,11 @@ nav .nav-wrapper {
       justify-content: space-between;
       align-items: center;
       background-color: #f6f7f8;
+      transition-duration: 0.6s;
 
       &.viewed {
         background-color: transparent;
+        transition-duration: 0.6s;
       }
 
       &:last-child {
@@ -133,6 +139,10 @@ nav .nav-wrapper {
       .actions {
         @include display(flex);
         @include justify-content(space-around);
+
+        .btn > .material-icons {
+          pointer-events: none;
+        }
       }
     }
 
