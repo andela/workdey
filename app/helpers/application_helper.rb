@@ -31,14 +31,14 @@ module ApplicationHelper
     end
   end
 
-  def notification_dropdown_content
-    # <ul id="tasks" class="dropdown-content">
-    #   <li>
-    #    <a href="#">Hello bae</a>
-    #   </li>
-    # </ul>
+  # def notification_dropdown_content
+  #   # <ul id="tasks" class="dropdown-content">
+  #   #   <li>
+  #   #    <a href="#">Hello bae</a>
+  #   #   </li>
+  #   # </ul>
 
-    all_tasks = tasks.where(viewed: false)
-    require "pry"; binding.pry
-  end
+  #   all_tasks = tasks.where(viewed: false)
+  #   require "pry"; binding.pry
+  # end
 end

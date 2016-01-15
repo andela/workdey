@@ -12,9 +12,9 @@
         </a>
 
         <ul class="right dashboard-navlinks">
-          <%= show_notification_count %>
+          <!-- %= show_notification_count % -->
 
-          <li class="notification-dropdown dropdown" data-activates="tasks">
+          <li class="notification-dropdown" data-activates="tasks">
             <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Notifications">
               <i class="material-icons">notifications_active</i>
             </a>
@@ -29,9 +29,8 @@
           <% end %>
         </ul>
 
-        <ul id="tasks" class="dropdown-content">
-          <%= notification_dropdown_content %>
-        </ul>
+        <!-- <ul id="tasks" class="dropdown-content">
+        </ul> -->
 
         <ul id="options" class="dropdown-content">
           <% if current_user.confirmed %>

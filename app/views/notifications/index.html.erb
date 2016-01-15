@@ -1,0 +1,20 @@
+<main>
+  <section class="notifications container">
+    <div class="row">
+      <div class="col s12">
+        <h3>Notifications</h3>
+      </div>
+
+      <div class="notification-feed col s6">
+        <% @notifiable.each do |object| %>
+          <%= show_notifications(object) %>
+        <% end %>
+      </div>
+
+      <div class="full_notification_message col s6 center-align card-panel">
+        <p>Click on the view button to get more information about a task</p>
+        <i class="material-icons">directions_bike</i>
+      </div>
+    </div>
+  </section>
+</main>

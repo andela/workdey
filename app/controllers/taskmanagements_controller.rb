@@ -1,4 +1,4 @@
-class TaskmanagementController < ApplicationController
+class TaskmanagementsController < ApplicationController
   def new
     redirect_to dashboard_path and return if params.except(:controller, :action).empty?
     @taskee_id = deobfuscate(params.except(:controller, :action))["id"]
