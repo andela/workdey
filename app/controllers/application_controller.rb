@@ -41,4 +41,13 @@ class ApplicationController < ActionController::Base
 
     {@decoded_key =>  @decoded_value}
   end
+
+  def show_notification_count
+    if current_user.user_type == "taskee"
+      @notifiable = TaskManagement.where(taskee_id: current_user.id).where(taskee_notified: false)
+    else
+      @notifiable = TaskManagement.where(tasker_id: current_user.id).where(tasker_notified: false)
+                    .where("status != ?", "inactive")
+    end
+  end
 end

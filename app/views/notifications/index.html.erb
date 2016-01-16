@@ -5,9 +5,9 @@
         <h3>Notifications</h3>
       </div>
 
-      <% if @notifiable.present?  %>
+      <% if @notifications.present?  %>
       <div class="notification-feed col s6">
-        <% @notifiable.each do |object| %>
+        <% @notifications.each do |object| %>
           <%= show_notifications(object) %>
         <% end %>
       </div>

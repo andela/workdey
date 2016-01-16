@@ -1,4 +1,6 @@
 class NotificationsController < ApplicationController
+  before_action :show_notification_count, only: :index
+
   def index
     if current_user.user_type == "taskee" then taskee_notifications end
     if current_user.user_type == "tasker" then tasker_notifications end
@@ -31,25 +33,30 @@ class NotificationsController < ApplicationController
 
   private
 
-  def notifiable
-    @notifiable ||= TaskManagement.where(taskee_id: current_user.id, status: "inactive")
+  def notifications_for_taskee
+    @notifications ||= TaskManagement.where(taskee_id: current_user.id, status: "inactive")
                     .order(viewed: :asc, created_at: :desc)
                     .select(:id, :task_id, :tasker_id, :viewed)
   end
 
+  def notifications_for_tasker
+  end
+
   def taskee_notifications
     all_notifications_seen_for(current_user)
-    notifiable
+    notifications_for_taskee
   end
 
   def tasker_notifications
-
+    all_notifications_seen_for(current_user)
+    notifications_for_tasker
   end
 
   def all_notifications_seen_for(user)
     query = user.user_type == "tasker" ? "tasker_id" : "taskee_id"
+    attribute = user.user_type == "tasker" ? "tasker_notified" : "taskee_notified"
     TaskManagement.where(query => user.id).each do |obj|
-      obj.update_attribute(:notified, true) unless obj.notified
+      obj.update_attribute(attribute, true) unless obj[attribute]
     end
   end
 

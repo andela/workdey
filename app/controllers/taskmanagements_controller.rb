@@ -1,4 +1,6 @@
 class TaskmanagementsController < ApplicationController
+  before_action :show_notification_count, only: :new
+
   def new
     redirect_to dashboard_path and return if params.except(:controller, :action).empty?
     @taskee_id = deobfuscate(params.except(:controller, :action))["id"]

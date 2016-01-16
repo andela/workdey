@@ -12,12 +12,12 @@
         </a>
 
         <ul class="right dashboard-navlinks">
-          <!-- %= show_notification_count % -->
+          <% if @notifiable.count > 0 %>
+            <%= content_tag :li, content_tag(:span, @notifiable.count), class: "notification-badge"  %>
+          <% end %>
 
           <li class="notification-dropdown" data-activates="tasks">
-            <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Notifications">
-              <i class="material-icons">notifications_active</i>
-            </a>
+            <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
           </li>
 
           <li>
@@ -26,9 +26,6 @@
             </a>
           </li>
         </ul>
-
-        <!-- <ul id="tasks" class="dropdown-content">
-        </ul> -->
 
         <ul id="options" class="dropdown-content">
           <% if current_user.confirmed %>
