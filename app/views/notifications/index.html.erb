@@ -5,7 +5,7 @@
         <h3>Notifications</h3>
       </div>
 
-      <% if @notifications.present?  %>
+      <% if @notifications.present? && current_user.user_type == "taskee"  %>
       <div class="notification-feed col s6">
         <% @notifications.each do |object| %>
           <%= show_notifications(object) %>
@@ -16,15 +16,22 @@
         <p>Click on the view button to get more information about a task</p>
         <i class="material-icons">directions_bike</i>
       </div>
+
+      <% elsif @notifications.present? && current_user.user_type == "tasker" %>
+        <div class="notification-feed col s8">
+          <div class="feed">
+            <p>Hello</p>
+          </div>
+        </div>
       <% else  %>
         <div class="col s6 full_notification_message center-align card-panel">
           <p>No new notifications available</p>
-          <i class="material-icons">highlight_off</i>
-          <i class="material-icons">highlight_off</i>
-          <i class="material-icons">highlight_off</i>
-          <i class="material-icons">highlight_off</i>
+          <% 4.times do %>
+            <i class="material-icons">highlight_off</i>
+          <% end %>
         </div>
       <% end  %>
+
     </div>
   </section>
 </main>

@@ -15,11 +15,14 @@ gem "uglifier", ">= 1.3.0"
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 gem "cloudinary", "1.1.0"
+gem "websocket-rails"
+gem "faye-websocket", "0.10.0"
 
 gem "sidekiq"
 # Materialize
 gem "materialize-sass", "0.97.1"
 gem "bourbon"
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

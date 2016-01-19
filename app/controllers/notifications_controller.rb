@@ -27,6 +27,8 @@ class NotificationsController < ApplicationController
   def update
     record = TaskManagement.find params[:id]
     if record.update_attribute(:status, params[:status])
+      record.update_attribute(:tasker_notified, false)
+      notify_tasker(record.tasker_id)
       render json: { message: "success" }
     end
   end
@@ -34,12 +36,11 @@ class NotificationsController < ApplicationController
   private
 
   def notifications_for_taskee
-    @notifications ||= TaskManagement.where(taskee_id: current_user.id, status: "inactive")
-                    .order(viewed: :asc, created_at: :desc)
-                    .select(:id, :task_id, :tasker_id, :viewed)
+    @notifications ||= TaskManagement.all_notifications_for("taskee", current_user.id)
   end
 
   def notifications_for_tasker
+    @notifications ||= TaskManagement.all_notifications_for("tasker", current_user.id)
   end
 
   def taskee_notifications
@@ -54,44 +55,35 @@ class NotificationsController < ApplicationController
 
   def all_notifications_seen_for(user)
     query = user.user_type == "tasker" ? "tasker_id" : "taskee_id"
-    attribute = user.user_type == "tasker" ? "tasker_notified" : "taskee_notified"
-    TaskManagement.where(query => user.id).each do |obj|
-      obj.update_attribute(attribute, true) unless obj[attribute]
-    end
+    attribute =
+      user.user_type == "tasker" ? "tasker_notified" : "taskee_notified"
+    TaskManagement.where(query => user.id).
+      where(attribute => false).update_all(attribute => true)
   end
 
   def pad_date(date_str)
-    pad_with = ""
-    date_num = date_str.split(" ").find { |v| v.match /[0-9]/ }[-1].to_i
+    date_num = date_str.split(" ").detect { |v| v.match(/[0-9]/) }[-1].to_i
+    date_str << pad_with(date_num)
+  end
 
-    case
-    when date_num == 1
-      pad_with = "st"
-    when date_num == 2
-      pad_with = "nd"
-    when date_num == 3
-      pad_with = "rd"
-    else
-      pad = "th"
-    end
-
-    date_str << pad
+  def pad_with(date_num)
+    return "st" if date_num == 1
+    return "nd" if date_num == 2
+    return "rd" if date_num == 3
+    "th"
   end
 
   def format_for_view(start_time, end_time)
     start_time = (start_time + 3600).strftime("%l%P").strip
     end_time = (end_time + 3600).strftime("%l%P").strip
-    time_range = "(#{start_time} - #{end_time})"
+    time_range = "#{start_time} - #{end_time}"
+    "#{day_period(time_range)} (#{time_range})"
+  end
 
-    case
-    when time_range.gsub(/[\(\)]/, "") == "8am - 8pm"
-      "Anytime " << time_range
-    when time_range.gsub(/[\(\)]/, "") == "8am - 12pm"
-      "Morning " << time_range
-    when time_range.gsub(/[\(\)]/, "") == "12pm - 4pm"
-      "Afternoon " << time_range
-    when time_range.gsub(/[\(\)]/, "") == "4pm - 8pm"
-      "Evening " << time_range
-    end
+  def day_period(time_range)
+    return "Anytime" if time_range == "8am - 8pm"
+    return "Morning" if time_range == "8am - 12pm"
+    return "Afternoon" if time_range == "12pm - 4pm"
+    "Evening" if time_range == "4pm - 8pm"
   end
 end

@@ -1,4 +1,51 @@
 (function () {
+  function sendDbReq(obj, urlParam, btnId) {
+    var displayContext = $(".full_notification_message"),
+        notificationFeed = $(".notification-feed"),
+        actionElem = $(".feed .btn[data-id=" + btnId + "]").closest(".feed"),
+        swalTitle = obj.status === "active" ? "Task accepted" : "Task rejected",
+        swalText =
+          obj.status === "active" ?
+            "You can view all your assigned tasks from the manage tasks page" :
+            "The tasker will be notified of your choice",
+        swalType = obj.status === "active" ? "success" : "error",
+        swalBtnColor = "#eb4d5c",
+        userAction;
+
+    userAction = $.ajax({
+      url: ("/dashboard/notifications/" + urlParam),
+      method: "PUT",
+      data: { status: obj.status }
+    });
+
+    userAction.done(function () {
+      swal({
+        title: swalTitle,
+        text: swalText,
+        type: swalType,
+        confirmButtonColor: swalBtnColor
+      });
+
+      displayContext.empty().append("<p>Click on the view button to get more information about a task</p>")
+        .append("<i class='material-icons'>directions_bike</i>");
+
+      actionElem.css("opacity", 0);
+
+      window.setTimeout(function () {
+        actionElem.remove();
+      }, 1000);
+
+      if (notificationFeed.children().length === 1) {
+          notificationFeed.remove();
+          displayContext.empty().append("<p>No new notifications available</p>")
+          .append("<i class='material-icons'>highlight_off</i>")
+          .append("<i class='material-icons'>highlight_off</i>")
+          .append("<i class='material-icons'>highlight_off</i>")
+          .append("<i class='material-icons'>highlight_off</i>");
+      }
+    });
+  }
+
   $(".notification-feed").on("click", ".btn", function () {
     var requestId = $(this).data("id"),
         title = $(this).prev(".title").text().trim()
@@ -35,65 +82,9 @@
             userAction;
 
         if (elem.data("accept")) {
-          userAction = $.ajax({
-            url: ("/dashboard/notifications/" + elem.data("accept")),
-            method: "PUT",
-            data: { status: "active" }
-          }).done(function () {
-            swal({
-              title: "Task accepted",
-              text: "You can view all your assigned tasks from the manage tasks page",
-              type: "success",
-              confirmButtonColor: "#eb4d5c"
-            });
-
-            displayContext.empty().append("<p>Click on the view button to get more information about a task</p>")
-              .append("<i class='material-icons'>directions_bike</i>");
-
-            $(".feed .btn[data-id=" + elem.data("accept") + "]").closest(".feed").css("opacity", 0);
-
-            window.setTimeout(function () {
-              $(".feed .btn[data-id=" + elem.data("accept") + "]").closest(".feed").remove();
-            }, 1000);
-
-            if (notificationFeed.children().length === 1) {
-              displayContext.empty().append("<p>No new notifications available</p>")
-              .append("<i class='material-icons'>highlight_off</i>")
-              .append("<i class='material-icons'>highlight_off</i>")
-              .append("<i class='material-icons'>highlight_off</i>")
-              .append("<i class='material-icons'>highlight_off</i>");
-            }
-          });
+          sendDbReq({status: "active"}, requestId, elem.data("accept"));
         } else {
-          userAction = $.ajax({
-            url: ("/dashboard/notifications/" + elem.data("reject")),
-            method: "PUT",
-            data: { status: "rejected" }
-          }).done(function () {
-            swal({
-              title: "Task rejected",
-              text: "The tasker will be notified of your choice",
-              type: "error",
-              confirmButtonColor: "#eb4d5c"
-            });
-
-            displayContext.empty().append("<p>Click on the view button to get more information about a task</p>")
-              .append("<i class='material-icons'>directions_bike</i>");
-
-            $(".feed .btn[data-id=" + elem.data("reject") + "]").closest(".feed").css("opacity", 0);
-
-            window.setTimeout(function () {
-              $(".feed .btn[data-id=" + elem.data("reject") + "]").closest(".feed").remove();
-            }, 1000);
-
-            if (notificationFeed.children().length === 1) {
-              displayContext.empty().append("<p>No new notifications available</p>")
-              .append("<i class='material-icons'>highlight_off</i>")
-              .append("<i class='material-icons'>highlight_off</i>")
-              .append("<i class='material-icons'>highlight_off</i>")
-              .append("<i class='material-icons'>highlight_off</i>");
-            }
-          });
+          sendDbReq({status: "rejected"}, requestId, elem.data("reject"));
         }
       });
     });

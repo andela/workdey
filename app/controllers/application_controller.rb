@@ -18,36 +18,49 @@ class ApplicationController < ActionController::Base
     require "base64"
 
     hash.each do |k, v|
-        @encoded_key = Base64.encode64(k.to_s)
-        @encoded_value = Base64.encode64(v.to_s)
+      @encoded_key = Base64.encode64(k.to_s)
+      @encoded_value = Base64.encode64(v.to_s)
     end
 
-    @encoded_key.gsub!("\n", "")
-    @encoded_value.gsub!("\n", "")
+    @encoded_key.delete!("\n")
+    @encoded_value.delete!("\n")
 
-    {@encoded_key =>  @encoded_value}
+    { @encoded_key => @encoded_value }
   end
 
   def deobfuscate(hash)
     require "base64"
 
     hash.each do |k, v|
-        @decoded_key = Base64.decode64(k.to_s)
-        @decoded_value = Base64.decode64(v.to_s)
+      @decoded_key = Base64.decode64(k.to_s)
+      @decoded_value = Base64.decode64(v.to_s)
     end
 
-    @decoded_key.gsub!("\n", "")
-    @decoded_value.gsub!("\n", "")
+    @decoded_key.delete!("\n")
+    @decoded_value.delete!("\n")
 
-    {@decoded_key =>  @decoded_value}
+    { @decoded_key => @decoded_value }
   end
 
   def show_notification_count
-    if current_user.user_type == "taskee"
-      @notifiable = TaskManagement.where(taskee_id: current_user.id).where(taskee_notified: false)
-    else
-      @notifiable = TaskManagement.where(tasker_id: current_user.id).where(tasker_notified: false)
-                    .where("status != ?", "inactive")
+    if current_user
+      if current_user.user_type == "taskee"
+        @count = TaskManagement.notifications_for("taskee", current_user.id).
+                 count
+      else
+        @count = TaskManagement.notifications_for("tasker", current_user.id).
+                 count
+      end
     end
+  end
+
+  def notify_taskee(id)
+    data = TaskManagement.notifications_for("taskee", id).count
+    WebsocketRails.users[id].send_message :new_task, data
+  end
+
+  def notify_tasker(id)
+    data = TaskManagement.notifications_for("tasker", id).count
+    WebsocketRails.users[id].send_message :new_task, data
   end
 end

@@ -2,7 +2,10 @@ class TaskmanagementsController < ApplicationController
   before_action :show_notification_count, only: :new
 
   def new
-    redirect_to dashboard_path and return if params.except(:controller, :action).empty?
+    if params.except(:controller, :action).empty?
+      redirect_to(dashboard_path) && return
+    end
+
     @taskee_id = deobfuscate(params.except(:controller, :action))["id"]
     @taskee = User.find @taskee_id if @taskee_id
     @task = TaskManagement.new
@@ -20,6 +23,7 @@ class TaskmanagementsController < ApplicationController
 
     if @task.save
       session.delete(:searcher)
+      notify_taskee(@task.taskee_id)
       redirect_to dashboard_path
     else
       flash[:errors] = @task.errors.full_messages
@@ -35,8 +39,8 @@ class TaskmanagementsController < ApplicationController
   private
 
   def task_details
-    params.require(:task_management)
-          .permit(:task_name, :tasker_id, :taskee_id, :amount, :task_desc)
+    params.require(:task_management).
+      permit(:task_name, :tasker_id, :taskee_id, :amount, :task_desc)
   end
 
   def task_date
@@ -48,11 +52,11 @@ class TaskmanagementsController < ApplicationController
   end
 
   def get_time(time_period)
-    current_year = Time.now.year
+    current_year = Time.now.getlocal.year
     month = task_date[:month].to_i
     day = task_date[:day].to_i
 
-    return nil if day < Time.now.day
+    return nil if day < Time.now.getlocal.day
 
     if time_period == :start
       time = parse range(task_time[:task]).first
