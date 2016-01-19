@@ -7,6 +7,8 @@
           <% if current_user.confirmed %>
             <li>
               <%= link_to "NOTIFICATIONS", "#", class: "waves-effect waves-light" %>
+              <%= link_to "UPDATE PROFILE", profile_path, class: "waves-effect waves-light" %>
+              <%= link_to "VIEW PROFILE", user_profile_path, class: "waves-effect waves-light" %>
             </li>
           <% end %>
           <li>

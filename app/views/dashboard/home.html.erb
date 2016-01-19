@@ -13,6 +13,7 @@
       <section class="col s12">
         <div class="user_info card">
           <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
+          <%= render "partials/search_for_taskee" %>
         </div>
       </section>
     </div>
@@ -35,7 +36,7 @@
       <div class="user_info card">
         <h5>Confirm your email address</h5>
         <p>
-          To continue, please click on the link sent to 
+          To continue, please click on the link sent to
           <strong><%= current_user.email %></strong>
           This will help to validate your account.
         </p>
