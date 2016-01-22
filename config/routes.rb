@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
   match "dashboard/profile" => "dashboard#user_profile", as: :profile, via: [:post, :get]
+<<<<<<< HEAD
   match "dashboard/assign" => "dashboard#assign_task", as: :assign_task, via: [:post, :get]
+=======
+>>>>>>> 7bf8900... Implement the profile settings page on dashboard
   get "user/profile" => "dashboard#profile_view", as: :user_profile
 
   get "account_activations/:id/edit" =>
