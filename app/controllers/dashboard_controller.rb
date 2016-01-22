@@ -58,7 +58,6 @@ class DashboardController < ApplicationController
                     Please try again."
   end
 
-<<<<<<< HEAD
   def profile_view
     @user = User.find(profile_params[:taskee_id])
   end
@@ -66,21 +65,12 @@ class DashboardController < ApplicationController
   def assign_task
   end
 
-=======
->>>>>>> 7bf8900... Implement the profile settings page on dashboard
   private
 
   def quiz_params
     params.permit(:aced)
   end
 
-<<<<<<< HEAD
-=======
-  def profile_view
-    @user = User.find(profile_params[:taskee_id])
-  end
-
->>>>>>> 7bf8900... Implement the profile settings page on dashboard
   def profile_params
     params.permit(:user_pix, :phone, :street_address, :city, :state, :gender,
                   :taskee_id, date: [:day, :month, :year])

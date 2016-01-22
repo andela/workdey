@@ -24,12 +24,8 @@ class SeedData
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
-<<<<<<< HEAD
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, image_url: cloudinary_img_url
-=======
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq", confirmed: true
->>>>>>> 7bf8900... Implement the profile settings page on dashboard
       },
       { firstname: "Chinedu", lastname: "Dan",
         email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
