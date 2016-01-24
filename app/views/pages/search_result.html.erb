@@ -1,3 +1,4 @@
+<main>
 <section class="col m9 s12 offset-m3">
   <div class="row">
     <% if @taskees.nil? %>
@@ -7,16 +8,22 @@
     <% else %>
       <% @taskees.each do | taskee | %>
         <div class="taskee_card col m3 offset-m1 s6 left">
-          <p><%= image_tag taskee.image_url, { class: "responsive-img circle" }%></p>
+          <p><%= cl_image_tag taskee.image_url, { class: "responsive-img circle" }%></p>
           <p><%= taskee.firstname.concat(taskee.lastname).titleize %></p>
           <p><%= taskee.street_address + "," %></p>
           <p><%= (taskee.city + ", " + "#{taskee.state}" + ".").titleize %></p>
           <p>
-            <%= link_to "View", user_profile_path(taskee_id: taskee.id),
-                        class: "btn waves-effect" %>
+            <% unless current_user %>
+              <% session[:searched_taskee_id] = taskee.id %>
+              <%= link_to "View", signin_path(flash[:invalid] = "Login to continue"), class: "btn waves-effect searched-taskee" %>
+            <% else %>
+              <%= link_to "View", user_profile_path(taskee_id: taskee.id),
+                          class: "btn waves-effect searched-taskee" %>
+            <% end %>
           </p>
         </div>
       <% end %>
     <% end %>
   </div>
 </section>
+</main>

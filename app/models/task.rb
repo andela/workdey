@@ -5,10 +5,10 @@ class Task < ActiveRecord::Base
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_task_name(keyword, user_email)
     current_user_city_street user_email
-    return taskees if taskees.nil?
+    return nil if taskees.nil? || taskees.empty?
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
     other_taskees = taskees - taskees_nearby
-    [taskees_nearby, other_taskees]
+    [taskees_nearby, other_taskees].flatten
   end
 
   def self.get_taskees_nearby(taskees, user_street, user_city)

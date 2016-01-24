@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   match "contact" => "pages#contact", as: :contact, via: [:post, :get]
   get "pages/terms"
 
-  post "search/taskees" => "pages#search", as: "search"
+  match "search/taskees" => "pages#search", as: "search", via: [:post, :get]
 
   get "pages/become_a_taskee"
 
