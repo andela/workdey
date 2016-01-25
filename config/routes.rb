@@ -15,11 +15,13 @@ Rails.application.routes.draw do
   post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
   match "dashboard/profile" => "dashboard#user_profile", as: :profile, via: [:post, :get]
+
   get "dashboard/assign" => "taskmanagements#new", as: :assign_task
   post "dashboard/assign" => "taskmanagements#create", as: :create_task
   get "dashboard/notifications" => "notifications#index", as: :notifications
   post "dashboard/notifications/:id" => "notifications#show"
   put "dashboard/notifications/:id" => "notifications#update"
+
   get "user/profile" => "dashboard#profile_view", as: :user_profile
 
   get "account_activations/:id/edit" =>
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
   match "contact" => "pages#contact", as: :contact, via: [:post, :get]
   get "pages/terms"
 
-  post "search/taskees" => "pages#search", as: "search"
+  match "search/taskees" => "pages#search", as: "search", via: [:post, :get]
 
   get "pages/become_a_taskee"
 

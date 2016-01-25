@@ -1,16 +1,19 @@
+
 <main>
-  <section class="col m9 s12 offset-m1">
-    <div class="row view_profile">
-      <ul class= "col m8 offset-m2" >
-        <h2 class= "col m6 offset-m4">User Profile</h2>
-        <%= cl_image_tag(@user.image_url, { class: "responsive-img circle left" }) %>
-        <div class="col m7 offset-m1">
-          <li><%= @user.firstname.capitalize + " " + @user.lastname.capitalize %></li>
-          <li><%= @user.street_address %></li>
-          <li><%= @user.city %></li>
-          <li><%= @user.state %></li>
-        </div>
-      </ul>
-    </div>
-  </section>
+  <div class="row view_profile">
+    <h2 class= "col m6 offset-m4">User Profile</h2>
+    <ul class= "col m8 offset-m2" >
+      <%= cl_image_tag(@user.image_url, { class: "responsive-img circle left" }) %>
+      <div class="col m7 offset-m1">
+        <li><%= @user.firstname.capitalize + " " + @user.lastname.capitalize %></li>
+        <li><%= @user.street_address %></li>
+        <li><%= @user.city %></li>
+        <li><%= @user.state %></li>
+        <% unless current_user.user_type == "taskee" %>
+          <% id = "WKDY#{@user.id}"%>
+          <%= link_to "ASSIGN TASK", assign_task_path(id: "#{id}"), class: "btn waves-effect" %>
+        <% end %>
+      </div>
+    </ul>
+  </div>
 </main>
