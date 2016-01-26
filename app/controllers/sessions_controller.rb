@@ -8,22 +8,36 @@ class SessionsController < ApplicationController
     auth = env["omniauth.auth"]
     begin
       user = User.find_by_email(params[:session][:email].downcase)
-      if user && user.authenticate(params[:session][:password])
-        log_in(user)
-        redirect_to dashboard_path
-      else
-        flash.now[:invalid] = "Invalid credentials"
-        render :new
-      end
+      login_with_form(user)
     rescue NoMethodError
       user = User.first_or_create_from_oauth(auth)
       log_in(user)
-      redirect_to dashboard_path
+      user_logged_in_view
     end
   end
 
   def destroy
     log_out
     redirect_to root_path
+  end
+
+  private def user_logged_in_view
+    if session[:searched_taskee_id]
+      redirect_to user_profile_path(
+        obfuscate(taskee_id: session[:searched_taskee_id])
+      )
+    else
+      redirect_to dashboard_path
+    end
+  end
+
+  private def login_with_form(user)
+    if user && user.authenticate(params[:session][:password])
+      log_in(user)
+      user_logged_in_view
+    else
+      flash.now[:invalid] = "Invalid credentials"
+      render :new
+    end
   end
 end

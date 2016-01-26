@@ -36,12 +36,11 @@
       }, 1000);
 
       if (notificationFeed.children().length === 1) {
-          notificationFeed.remove();
-          displayContext.empty().append("<p>No new notifications available</p>")
-          .append("<i class='material-icons'>highlight_off</i>")
-          .append("<i class='material-icons'>highlight_off</i>")
-          .append("<i class='material-icons'>highlight_off</i>")
-          .append("<i class='material-icons'>highlight_off</i>");
+            displayContext.empty().append("<p>No new notifications available</p>")
+            .append("<i class='material-icons'>highlight_off</i>")
+            .append("<i class='material-icons'>highlight_off</i>")
+            .append("<i class='material-icons'>highlight_off</i>")
+            .append("<i class='material-icons'>highlight_off</i>");
       }
     });
   }

@@ -27,19 +27,18 @@ class PagesController < ApplicationController
   end
 
   def search
-    @taskees = get_taskees_by_search
-    @taskees = nil if @taskees == []
-    session[:searcher] = params[:searcher] unless @taskees.nil?
+    if params[:searcher] || session[:searcher]
+      session[:searcher] = params[:searcher] if params[:searcher]
+      @taskees = get_taskees_by_search(session[:searcher])
+    end
     render "search_result"
   end
 
   protected
 
-  def get_taskees_by_search
-    return User.get_taskees_by_task_name(params[:searcher]) unless current_user
+  def get_taskees_by_search(keyword)
+    return User.get_taskees_by_task_name(keyword) unless current_user
     user_email = current_user.email
-    all_taskees = Task.get_taskees(params[:searcher], user_email)
-    return all_taskees.first.concat(all_taskees[1]) unless all_taskees.nil?
-    []
+    Task.get_taskees(keyword, user_email)
   end
 end

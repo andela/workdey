@@ -2,8 +2,7 @@ class NotificationsController < ApplicationController
   before_action :show_notification_count, only: :index
 
   def index
-    if current_user.user_type == "taskee" then taskee_notifications end
-    if current_user.user_type == "tasker" then tasker_notifications end
+    show_notifications(current_user.user_type)
   end
 
   def show
@@ -35,30 +34,18 @@ class NotificationsController < ApplicationController
 
   private
 
-  def notifications_for_taskee
-    @notifications ||= TaskManagement.all_notifications_for("taskee", current_user.id)
-  end
-
-  def notifications_for_tasker
-    @notifications ||= TaskManagement.all_notifications_for("tasker", current_user.id)
-  end
-
-  def taskee_notifications
+  def show_notifications(user_type)
     all_notifications_seen_for(current_user)
-    notifications_for_taskee
+    notifications_for(user_type)
   end
 
-  def tasker_notifications
-    all_notifications_seen_for(current_user)
-    notifications_for_tasker
+  def notifications_for(user_type)
+    @notifications ||= TaskManagement.
+                       all_notifications_for(user_type, current_user.id)
   end
 
   def all_notifications_seen_for(user)
-    query = user.user_type == "tasker" ? "tasker_id" : "taskee_id"
-    attribute =
-      user.user_type == "tasker" ? "tasker_notified" : "taskee_notified"
-    TaskManagement.where(query => user.id).
-      where(attribute => false).update_all(attribute => true)
+    TaskManagement.update_all_notifications_as_seen(user)
   end
 
   def pad_date(date_str)

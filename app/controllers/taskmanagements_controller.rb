@@ -7,31 +7,22 @@ class TaskmanagementsController < ApplicationController
     end
 
     @taskee_id = deobfuscate(params.except(:controller, :action))["id"]
-    @taskee = User.find @taskee_id if @taskee_id
+    @taskee = User.find(@taskee_id) if @taskee_id
     @task = TaskManagement.new
   end
 
   def create
-    @task = TaskManagement.new
+    @task = TaskManagement.new(task_details.except(:task_name))
     @task.task_id = Task.find_by(name: task_details[:task_name].capitalize).id
-    @task.tasker_id = task_details[:tasker_id].to_i
-    @task.taskee_id = task_details[:taskee_id].to_i
-    @task.amount = task_details[:amount].to_i
-    @task.task_desc = task_details[:task_desc]
     @task.start_time = get_time(:start)
     @task.end_time = get_time(:end)
 
     if @task.save
       session.delete(:searcher)
-      notify_taskee(@task.taskee_id)
+      flash.clear
       redirect_to dashboard_path
     else
-      flash[:errors] = @task.errors.full_messages
-      flash[:amount] = task_details[:amount]
-      flash[:task_desc] = task_details[:task_desc]
-      flash[:month] = task_date[:month]
-      flash[:day] = task_date[:day]
-      flash[:time] = task_time[:task]
+      retain_form_values
       redirect_to assign_task_path(obfuscate(id: @task.taskee_id))
     end
   end
@@ -75,5 +66,14 @@ class TaskmanagementsController < ApplicationController
 
   def parse(str_time)
     DateTime.parse(str_time).strftime("%H").to_i
+  end
+
+  def retain_form_values
+    flash[:errors] = @task.errors.full_messages
+    flash[:amount] = task_details[:amount]
+    flash[:task_desc] = task_details[:task_desc]
+    flash[:month] = task_date[:month]
+    flash[:day] = task_date[:day]
+    flash[:time] = task_time[:task]
   end
 end
