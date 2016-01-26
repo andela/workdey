@@ -49,13 +49,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def notify_taskee(id)
-    data = TaskManagement.notifications_for("taskee", id).count
-    WebsocketRails.users[id].send_message :new_task, data
-  end
-
-  def notify_tasker(id)
-    data = TaskManagement.notifications_for("tasker", id).count
+  def notify(user_type, id)
+    data = TaskManagement.notifications_count(user_type, id)
     WebsocketRails.users[id].send_message :new_task, data
   end
 end

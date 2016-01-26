@@ -17,7 +17,7 @@ module NotificationsHelper
     @task ||= Task.find(object.task_id)
   end
 
-   def generate_html(css_class_name, tasker_image, tasker_name, task_name, task)
+  def generate_html(css_class_name, tasker_image, tasker_name, task_name, task)
     raw "<div class='#{css_class_name}'>
       #{cl_image_tag tasker_image}
       <p class='title'> <strong>#{task_name} task</strong>
