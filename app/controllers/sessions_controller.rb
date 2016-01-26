@@ -23,7 +23,9 @@ class SessionsController < ApplicationController
 
   private def user_logged_in_view
     if session[:searched_taskee_id]
-      redirect_to user_profile_path(taskee_id: session[:searched_taskee_id])
+      redirect_to user_profile_path(
+        obfuscate(taskee_id: session[:searched_taskee_id])
+      )
     else
       redirect_to dashboard_path
     end

@@ -44,13 +44,8 @@ class ApplicationController < ActionController::Base
 
   def show_notification_count
     if current_user
-      if current_user.user_type == "taskee"
-        @count = TaskManagement.notifications_for("taskee", current_user.id).
-                 count
-      else
-        @count = TaskManagement.notifications_for("tasker", current_user.id).
-                 count
-      end
+      @count = TaskManagement.
+               notifications_count(current_user.user_type, current_user.id)
     end
   end
 end

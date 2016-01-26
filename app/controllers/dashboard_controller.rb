@@ -61,7 +61,8 @@ class DashboardController < ApplicationController
   end
 
   def profile_view
-    @user = User.find(profile_params[:taskee_id])
+    param = deobfuscate(params.except(:controller, :action))["taskee_id"]
+    @user = User.find(param)
   end
 
   private
