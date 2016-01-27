@@ -16,9 +16,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_notification_settings
+    if notifications_params[:notifications_enabled] == "on"
+      current_user.update_attribute(:enable_notifications, true)
+    else
+      current_user.update_attribute(:enable_notifications, false)
+    end
+    redirect_to "/dashboard"
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :email, :password)
+  end
+  def notifications_params
+    params.permit(:notifications_enabled)
   end
 end

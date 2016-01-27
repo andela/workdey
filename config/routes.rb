@@ -38,5 +38,7 @@ Rails.application.routes.draw do
 
   get "pages/become_a_taskee"
 
+  post "user/settings" => "users#update_notification_settings"
+
   resources :users, only: [:create]
 end
