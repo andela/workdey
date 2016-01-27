@@ -1,0 +1,12 @@
+<div class="mail-wrapper">
+  <h1>Your Workdey Notification</h1>
+  <p>
+  <%= "Hi #{@user.firstname}, " %><br/>
+    You have one available notification on workdey
+    check it out below:<br/>
+  </p>
+  <p>
+   <%= " You have a received a new #{@task_category.name} task from #{@tasker.firstname} #{@tasker.lastname} " %>
+  </p><br/>
+  <p><a href="https://workdey-staging.herokuapp.com"> log in </a>to your workdey account to address this notification</p>
+</div>
