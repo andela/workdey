@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:firstname, :lastname, :email, :password)
   end
+  
   def notifications_params
     params.permit(:notifications_enabled)
   end

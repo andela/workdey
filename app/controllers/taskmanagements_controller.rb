@@ -28,12 +28,16 @@ class TaskmanagementsController < ApplicationController
   end
 
   def send_email_notifications(task)
-    require "pry", binding.pry
     notif_taskee = User.find_by_id(task.taskee_id)
     notif_tasker = User.find_by_id(task.tasker_id)
     task_category = Task.find_by_id(task.task_id)
     @notif = current_user.enable_notifications
-    NotificationMailer.send_notifications(current_user, task, task_category, notif_tasker, notif_taskee).deliver_now if @notif == true
+    NotificationMailer.send_notifications(current_user, 
+                        task, 
+                        task_category, 
+                        notif_tasker, 
+                        notif_taskee
+                      ).deliver_now if @notif == true
   end
   
   private
