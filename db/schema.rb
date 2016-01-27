@@ -59,18 +59,19 @@ ActiveRecord::Schema.define(version: 20160115184424) do
     t.date     "birthday"
     t.string   "phone"
     t.string   "password_digest"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "user_type"
     t.string   "provider"
+    t.string   "oauth_id"
+    t.string   "confirm_token"
+    t.boolean  "confirmed",            default: false
     t.string   "state"
     t.string   "city"
     t.string   "street_address"
     t.string   "image_url"
-    t.string   "oauth_id"
-    t.string   "confirm_token"
-    t.boolean  "confirmed",       default: false
-    t.boolean  "has_taken_quiz",  default: false
+    t.boolean  "has_taken_quiz",       default: false
+    t.boolean  "enable_notifications", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
