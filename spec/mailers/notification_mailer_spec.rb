@@ -5,18 +5,20 @@ RSpec.describe NotificationMailer, type: :mailer do
     workdey_data.create_all
   end
   describe "send_notifications" do
-    let(:user) { User.first  }
+    let(:user) { User.first }
     let(:task) { Task.last }
-    let(:task_category) { Task.first }
-    let(:notification_taskee) { User.first }
-    let(:notification_tasker) { User.last }
-    let(:mail) { NotificationMailer.send_notifications(user, 
-								    									task, 
-								    									task_category, 
-								    									notification_taskee, 
-								    									notification_tasker
-								    								) }
-
+    let(:category) { Task.first }
+    let(:taskee) { User.first }
+    let(:tasker) { User.last }
+    let(:nofify) { send_notifications(user, task, category, taskee, tasker) }
+    let(:mail) { NotificationMailer.send_notifications(
+      user,
+      task,
+      category,
+      taskee,
+      tasker
+    )
+    }
     it "renders the headers" do
       expect(mail.subject).to eq("You have notifications on Workdey")
       expect(mail.to).to eq(["olaide.ojewale@andela.com"])
