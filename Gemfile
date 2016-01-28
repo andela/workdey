@@ -14,6 +14,7 @@ gem "uglifier", ">= 1.3.0"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
+gem "jquery-turbolinks"
 gem "cloudinary", "1.1.0"
 
 gem "websocket-rails"
