@@ -20,6 +20,7 @@ class TaskmanagementsController < ApplicationController
     if @task.save
       session.delete(:searcher)
       flash.clear
+      notify("taskee", @task.taskee_id)
       redirect_to dashboard_path
     else
       retain_form_values

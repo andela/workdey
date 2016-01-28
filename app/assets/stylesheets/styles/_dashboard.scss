@@ -103,6 +103,11 @@ nav .nav-wrapper {
       transition-duration: 0.6s;
     }
 
+    .notification-feed {
+      height: em(325px);
+      overflow: hidden;
+    }
+
     .feed {
       border-bottom: 1px solid #ccc;
       padding: 5px;

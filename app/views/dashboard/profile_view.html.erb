@@ -1,4 +1,3 @@
-
 <main>
   <div class="row view_profile">
     <h2 class= "col m6 offset-m4">User Profile</h2>
@@ -10,7 +9,8 @@
         <li><%= @user.city %></li>
         <li><%= @user.state %></li>
         <% unless current_user.user_type == "taskee" %>
-          <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)), class: "btn waves-effect" %>
+          <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)),
+          class: "btn waves-effect" %>
         <% end %>
       </div>
     </ul>

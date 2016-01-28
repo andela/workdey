@@ -27,7 +27,7 @@ class NotificationsController < ApplicationController
     record = TaskManagement.find params[:id]
     if record.update_attribute(:status, params[:status])
       record.update_attribute(:tasker_notified, false)
-      notify_tasker(record.tasker_id)
+      notify("tasker", record.tasker_id)
       render json: { message: "success" }
     end
   end
