@@ -49,6 +49,7 @@ group :development, :test do
   gem "travis", "1.8.0"
   gem "rspec-rails"
   gem "capybara"
+  gem "poltergeist"
   gem "selenium-webdriver"
   gem "database_cleaner"
   gem "pry"
