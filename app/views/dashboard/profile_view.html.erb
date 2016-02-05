@@ -8,6 +8,12 @@
         <li><%= @user.street_address %></li>
         <li><%= @user.city %></li>
         <li><%= @user.state %></li>
+        <% unless @statistics.nil? %>
+          <%= "Has #{@statistics.first} Completed Tasks and #{@statistics.last} Scheduled Tasks" %>
+        <%else%>
+          <li><%= "Has No Tasks" %></li>
+        <% end %>
+        
         <% unless current_user.user_type == "taskee" %>
           <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)),
           class: "btn waves-effect" %>
