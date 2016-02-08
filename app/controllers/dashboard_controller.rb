@@ -62,7 +62,6 @@ class DashboardController < ApplicationController
   end
 
   def profile_view
-<<<<<<< HEAD
     @user = User.find(profile_params[:taskee_id])
   end
 
