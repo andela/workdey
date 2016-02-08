@@ -14,12 +14,17 @@ gem "uglifier", ">= 1.3.0"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
-gem "cloudinary"
+gem "jquery-turbolinks"
+gem "cloudinary", "1.1.0"
+
+gem "websocket-rails"
+gem "faye-websocket", "0.10.0"
 
 gem "sidekiq"
 # Materialize
 gem "materialize-sass", "0.97.1"
 gem "bourbon"
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "turbolinks"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -32,7 +37,7 @@ gem "omniauth-oauth2", "~> 1.3.1"
 gem "bcrypt", "~> 3.1.7"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
-gem "omniauth-google-oauth2"
+gem "omniauth-google-oauth2", "0.2.10"
 
 # Use Unicorn as the app server
 # gem "unicorn"
@@ -41,7 +46,7 @@ gem "omniauth-google-oauth2"
 # gem "capistrano-rails", group: :development
 
 group :development, :test do
-  gem "travis"
+  gem "travis", "1.8.0"
   gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"

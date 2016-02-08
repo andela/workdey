@@ -1,7 +1,8 @@
 class SeedData
   def users_list
     cloudinary_img_url =
-      "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/rxxvqznd6ayvqlmxoon2.png"
+      "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/"\
+      "rxxvqznd6ayvqlmxoon2.png"
     [
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",

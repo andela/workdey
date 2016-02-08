@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require smooth-scroll.min.js
+//= require websocket_rails/main
 //= require_tree .
+
