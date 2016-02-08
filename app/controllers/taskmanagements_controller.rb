@@ -42,10 +42,6 @@ class TaskmanagementsController < ApplicationController
     ).deliver_now if @notif == true
   end
 
-  def get_statistics(user_type)
-    @statistics = TaskManagement.statistics_count(user_type, current_user.id)
-  end
-
   private
 
   def task_details
