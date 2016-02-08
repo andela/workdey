@@ -14,7 +14,22 @@
         <div class="user_info card">
           <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
           <%= render "partials/search_for_taskee" %>
+            <div class="col 12">
+              <div class="col l6">
+              <% if  @current_user.longitude == nil %>
+                <%= button_to "Tag My Location", @current_user, remote: true class: "tag-location" %>
+                <% else %>
+                 <%= button_to "Update Location", @current_user, remote: true class: "tag-location" %>
+                 <% end %>
+                <!-- <button onclick="getLocation()" class="btn"> Tag my location </button> -->
+              </div>
+               <div class="col l6">
+
+                <p id="demo"></p>
+                </div>
+                </div>
         </div>
+
       </section>
     </div>
   </section>

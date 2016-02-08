@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
   before_action :login_required
 
   def home
+    @current_user = current_user
     case
     when current_user.user_type.nil?
       redirect_to role_path
@@ -60,6 +61,16 @@ class DashboardController < ApplicationController
 
   def profile_view
     @user = User.find(profile_params[:taskee_id])
+  end
+
+
+  def update_location
+    @current_user = current_user
+    @current_user.update_columns(longitude: params[:longitude], latitude: params[:latitude])
+    respond_to do |format|
+      format.html { :notice => 'Your location has been updated' }
+      format.json
+    end
   end
 
   def assign_task

@@ -34,12 +34,14 @@
                 <i class="material-icons">lock</i>
               </div>
 
+
               <div class="col s12">
-                <%= f.button raw("Create my account <i class='material-icons right'>send</i>"), class: "btn waves-effect" %>
+
+                <%= f.button raw("Create my account <i class='material-icons right'>send</i>"), class: "submit btn waves-effect" %>
               </div>
 
               <div class="col s12 login-path">
-                <p>Already have an account? 
+                <p>Already have an account?
                   <%= link_to "Log in", signin_path %>
                 </p>
               </div>
@@ -54,7 +56,7 @@
     <div class="card">
       <div class="card-content">
         <p class="be-cool">
-          Sign up with: 
+          Sign up with:
         </p>
         <p>
           <%= link_to raw("<i class='fa fa-facebook-square'></i> Facebook"), "/auth/facebook", class: "btn btn-fb" %>
