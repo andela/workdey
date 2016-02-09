@@ -1,11 +1,9 @@
 require "rails_helper"
-
 RSpec.feature "SearchByTasks", type: :feature do
   let(:email) { "olaide.ojewale@andela.com" }
   let(:password) { "1234567890" }
 
   before do
-    Capybara.default_driver = :selenium
     workdey_data = Seed.new
     workdey_data.create_all
   end

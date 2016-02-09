@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.feature "ProfileSettings", type: :feature do
   before do
-    Capybara.default_driver = :selenium
     workdey_data = Seed.new
     workdey_data.create_all
   end
