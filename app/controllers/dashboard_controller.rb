@@ -70,7 +70,7 @@ class DashboardController < ApplicationController
     @current_user = current_user
     @current_user.update_columns(longitude: params[:longitude], latitude: params[:latitude])
     respond_to do |format|
-      format.html { :notice => 'Your location has been updated' }
+      format.html# { :notice => 'Your location has been updated' }
       format.json
     end
   end

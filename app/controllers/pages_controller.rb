@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :guest_only, only: :index
-  before_action :show_notification_count, only: :search
+  before_action :show_notification_count, scope: [:search, :search_with_map]
 
   def index
   end
@@ -27,7 +27,7 @@ class PagesController < ApplicationController
   end
 
   def search_with_map
-
+    @current_user = current_user
   end
 
   def search
