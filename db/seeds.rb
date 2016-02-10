@@ -8,31 +8,37 @@ class SeedData
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url
+        image_url: cloudinary_img_url, longitude: 6.529151 , latitude: 3.380369
       },
       { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url
+        image_url: cloudinary_img_url, longitude: 6.527051 , latitude: 3.384360
       },
       { firstname: "Temitope", lastname: "Amodu",
         email: "temitope.amodu@andela.com", street_address: "2 Funso Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url
+        image_url: cloudinary_img_url, longitude: 6.519051 , latitude: 3.379369
       },
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true, image_url: cloudinary_img_url
+        confirmed: true, image_url: cloudinary_img_url, longitude: 6.529051 , latitude: 3.381369
       },
       { firstname: "Chinedu", lastname: "Dan",
         email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
         city: "VI", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url
+        image_url: cloudinary_img_url, longitude: 6.521759 , latitude: 3.380378
+      },
+      { firstname: "User", lastname: "Test",
+        email: "user.test@mailnesia.com", street_address: "67, Adeyemo Alakija",
+        city: "VI", state: "Lagos", password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url, longitude: 6.521359 , latitude: 3.380278
       }
     ]
   end
