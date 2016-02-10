@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115184424) do
+ActiveRecord::Schema.define(version: 20160126112320) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -71,8 +74,10 @@ ActiveRecord::Schema.define(version: 20160115184424) do
     t.string   "street_address"
     t.string   "image_url"
     t.boolean  "has_taken_quiz",  default: false
+    t.float    "longitude"
+    t.float    "latitude"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
