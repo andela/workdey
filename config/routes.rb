@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   get "account_activations/:id/edit" =>
   "account_activations#confirm_email", as: :confirm
 
+  post "/dashboard/update_location" =>
+  "dashboard#update_location", as: :location_update
+
+  get "pages/map_search" =>
+    "pages#search_with_map", as: :map_search
+
   post "account_activations" =>
   "account_activations#resend_activation_mail", as: :resend_mail
 

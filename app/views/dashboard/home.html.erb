@@ -13,6 +13,20 @@
       <section class="col s12">
         <div class="user_info">
           <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
+          <%= render "partials/search_for_taskee" %>
+            <div class="col 12">
+              <div class="col l6">
+              <% if  @current_user.longitude == nil %>
+                <%= button_to "Tag My Location", @current_user, remote: true class: "tag-location" %>
+                <% else %>
+                 <%= button_to "Update Location", @current_user, remote: true class: "tag-location" %>
+                 <% end %>
+                <!-- <button onclick="getLocation()" class="btn"> Tag my location </button> -->
+              </div>
+               <div class="col l6">
+                <p id="demo"></p>
+                </div>
+                </div>
             <h5>enable mail notifications</h5>
             <%= form_tag user_settings_path do %>
                   <div class="switch" style="padding: 2em;">
@@ -33,6 +47,7 @@
 
           <%= render "partials/search_for_taskee" if current_user.user_type == "tasker" %>
         </div>
+
       </section>
     </div>
   </section>

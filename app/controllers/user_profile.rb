@@ -43,4 +43,8 @@ class UserProfile < ApplicationController
     info_hash[:image_url] = pix_name unless pix_name.nil?
     info_hash
   end
+
+  def get_user_location(current_user, location_params)
+
+  end
 end

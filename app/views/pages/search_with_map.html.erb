@@ -1,0 +1,149 @@
+  <body>
+  <main>
+    <section class="main container center-align">
+      <div class="row">
+        <section class="col s12">
+          <div class="user_info card" style="padding-left: 20px;">
+            <p id="demo"></p>
+            <div style='width: 800px;'>
+              <div id="map" style='width: 800px; height: 400px;'></div>
+            </div>
+          </div>
+        </section>
+        <button id="marker" class="btn" onclick="addMarkers()">Add Markers</button>
+        <button id="marker" class="btn" onclick="removeMarkers()">Remove </button>
+      </div>
+    </section>
+  </main>
+  </body>
+
+
+  <script type="text/javascript">
+    function getMap() {
+      console.log("this method is called")
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(initMap);
+      } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+  };
+
+  var position;
+  var map;
+  var marker;
+  var infowindow;
+  var contentString;
+  function initMap(current_position) {
+    position = {lat: current_position.coords.latitude, lng: current_position.coords.longitude};
+      console.log(position)
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: position.lat, lng: position.lng},
+      zoom: 12
+    });
+
+
+      contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h3 id="firstHeading" class="firstHeading">Your Position</h3>'+
+        '<div id="bodyContent">'+
+        '<p><b>You</b>, are a tasker searching for someone to help you carry out tasks '+
+        'but instead of you to go use the search by like everyone else, '+
+        'You decide to explore and check out our map section. '+
+        'We appreciate the good gesture and we hope to serve you better. '+
+        'Kindly use the feedback section to give us appropriate information about '+
+        'any of the issues you face and we will gladly appreciate it  '+
+        '</p>'+
+        '</div>'+
+        '</div>';
+
+    infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    marker = new google.maps.Marker({
+    position: position,
+    map: map,
+    title: 'Your current Location! '
+    });
+
+
+
+
+      marker.addListener('click', function() {
+      infowindow.open(map, marker);
+  });
+
+
+  }
+
+
+
+
+
+  // marker.addListener('click', function() {
+  //   infowindow.open(map, marker);
+  // });
+
+  markers = []
+  function addMarkers() {
+    i = 9
+    var going = {lat: 6.5083701, lng: 3.3842473}
+    console.log("button clicked")
+    while (i > 0) {
+      console.log(i)
+      var lat = position.lat + (i * 0.1);
+      var lng = position.lng + (i * 0.1);
+      var newMarker = new google.maps.Marker({
+        position: {lat: lat, lng: lng},
+        map: map,
+        title: 'i' + i
+        });
+      // newMarker.setMap(map)
+      markers.push(newMarker)
+      i -= 1;
+    }
+  }
+
+  function removeMarkers() {
+    for (i = 0; i < markers.length; i++ ) {
+      marker = markers[i]
+      marker.setMap(null)
+    }
+    markers = []
+  }
+
+
+
+  //     function showPosition(position) {
+  //         handler = Gmaps.build('Google');
+  //         handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  //           markers = handler.addMarkers([
+  //             {
+  //               "lat": position.coords.latitude ,
+  //               "lng": position.coords.longitude,
+  //               "picture": {
+  //                 "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+  //                 "width":  32,
+  //                 "height": 32
+  //               },
+  //               "infowindow": "hello!"
+  //             }
+  //           ]);
+  //           handler.bounds.extendWith(markers);
+  //           handler.fitMapToBounds();
+  //         });
+  //      console.log ('this map has loaded')
+  //     };
+
+
+
+
+
+
+
+  </script>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiKS5l5Gh-4OeQS7HFY5-ps60Iz5YB-0s&callback=getMap">
+  </script>
