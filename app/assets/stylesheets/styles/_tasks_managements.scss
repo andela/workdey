@@ -1,0 +1,15 @@
+.group input[type=radio] {
+  cursor: pointer;
+  z-index: -1;
+  pointer-events: none;
+  visibility: hidden;
+}
+.group {
+  display: inline-block;
+  margin: 0 0.75em;
+}
+.fa {
+  cursor: pointer;
+  color: #eb4D5c;
+  font-size: 1.5em;
+} 

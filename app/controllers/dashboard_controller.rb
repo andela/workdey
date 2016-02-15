@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :login_required
   before_action :show_notification_count,
-                only: [:home, :user_profile, :profile_view]
+                only: [:home, :user_profile, :profile_view, :choose_role, :quiz]
 
   def home
     case
