@@ -1,5 +1,3 @@
-<% if current_user.confirmed %>
-
 <% if flash[:mail].present?  %>
   <div class="flash-mail">
     <i class="material-icons close-flash">close</i>
@@ -7,13 +5,33 @@
   </div>
 <% end %>
 
+<% if current_user.confirmed %>
+
 <main>
   <section class="main container center-align">
     <div class="row">
       <section class="col s12">
-        <div class="user_info card">
+        <div class="user_info">
           <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
-          <%= render "partials/search_for_taskee" %>
+            <h5>enable mail notifications</h5>
+            <%= form_tag user_settings_path do %>
+                  <div class="switch" style="padding: 2em;">
+                <label>
+                  Off
+                  <% if current_user.enable_notifications %>
+                  <%= check_box_tag "notifications_enabled", "on", true %>
+                  <% else %>
+                  <%= check_box_tag "notifications_enabled", "off", false %>
+                  <% end %>
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+            <button id='notification' class="waves-effect waves-light btn"> save </button>
+          </div>
+            <% end %>
+
+          <%= render "partials/search_for_taskee" if current_user.user_type == "tasker" %>
         </div>
       </section>
     </div>
@@ -21,13 +39,6 @@
 </main>
 
 <% else %>
-
-<% if flash[:mail].present?  %>
-  <div class="flash-mail">
-    <i class="material-icons close-flash">close</i>
-    <p><%= flash[:mail] %></p>
-  </div>
-<% end %>
 
 <main>
   <section class="confirm-mail-first container">

@@ -31,5 +31,6 @@ module Workdey
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'] == "true" ? true : false
+    config.middleware.delete Rack::Lock
   end
 end
