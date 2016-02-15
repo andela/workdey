@@ -21,6 +21,7 @@
               </div>
             <% end %>
             <div class="row">
+                <% session[:searched_taskee_id] = taskee.id %>
               <div class="input-field col s12">
                 <%= f.email_field :email, required: true, placeholder: "Email Address" %>
                 <i class="material-icons">mail</i>
@@ -36,7 +37,7 @@
               </div>
 
               <div class="col s12 login-path">
-                <p>Don't have an account? 
+                <p>Don't have an account?
                   <%= link_to "Sign up", signup_path %>
                 </p>
               </div>
@@ -51,7 +52,7 @@
     <div class="card">
       <div class="card-content">
         <p class="be-cool">
-          Sign in with: 
+          Sign in with:
         </p>
         <p>
           <%= link_to raw("<i class='fa fa-facebook-square'></i> Facebook"), "/auth/facebook", class: "btn btn-fb" %>
