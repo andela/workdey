@@ -69,7 +69,19 @@ class User < ActiveRecord::Base
               where("tasks.name LIKE ?", query_string).
               where("email != ?", user_email)
     return nil if taskees.nil? || taskees.empty?
-    return taskees if user_email.nil?
-    taskees.where("email != ?", user_email)
+    taskees
+  end
+
+  private_class_method
+  def self.users
+    User.arel_table
+  end
+
+  def self.skillsets
+    Skillset.arel_table
+  end
+
+  def self.tasks
+    Task.arel_table
   end
 end
