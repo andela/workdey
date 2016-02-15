@@ -28,7 +28,6 @@ class Task < ActiveRecord::Base
     @user_street = "%#{user_addy[0][1]}%"
   end
 
-
   private_class_method
   def self.users
     User.arel_table

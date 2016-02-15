@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   has_many :skillsets
   has_many :reviews
+  has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks, through: :skillsets
-  has_many :taskees, class_name: "TaskManagement", foreign_key: :taskee_id
-  has_many :taskers, class_name: "TaskManagement", foreign_key: :tasker_id
+  has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
+  has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -49,6 +50,24 @@ class User < ActiveRecord::Base
     user = find_by_confirm_token(token)
     user ? user.update_attribute(:confirmed, true) : false
   end
+
+  def average_rating(user_id)
+    average = Review.connection.execute("SELECT (SUM(rating) / COUNT(rating))
+                              AS average
+                              FROM reviews
+                              WHERE user_id = #{user_id}").first["average"]
+    average.nil? ? 0 : average
+  end
+
+  def has_no_reviews
+    reviews.map(&:review).all? { |comment| comment == "" }
+  end
+
+  def review_comments
+    reviews.where("review != ?", "")
+  end
+
+  private
 
   def generate_confirm_token
     self.confirm_token = SecureRandom.uuid
