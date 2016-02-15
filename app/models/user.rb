@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   has_many :skillsets
   has_many :reviews
+  has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks, through: :skillsets
-  has_many :taskees, class_name: "TaskManagement", foreign_key: :taskee_id
-  has_many :taskers, class_name: "TaskManagement", foreign_key: :tasker_id
+  has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
+  has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -50,12 +51,20 @@ class User < ActiveRecord::Base
     user ? user.update_attribute(:confirmed, true) : false
   end
 
-  def generate_confirm_token
-    self.confirm_token = SecureRandom.uuid
+  def average_rating(user_id)
+    average = Review.connection.execute("SELECT (SUM(rating) / COUNT(rating))
+                              AS average
+                              FROM reviews
+                              WHERE user_id = #{user_id}").first["average"]
+    average.nil? ? 0 : average
   end
 
-  private def oauth_user?
-    !oauth_id.nil?
+  def has_no_reviews?
+    reviews.map(&:review).all? { |comment| comment == "" }
+  end
+
+  def review_comments
+    reviews.where("review != ?", "")
   end
 
   def self.get_user_address(user_email)
@@ -66,9 +75,32 @@ class User < ActiveRecord::Base
     query_string = keyword.to_s.capitalize
     taskees = User.joins("JOIN skillsets ON skillsets.user_id = users.id").
               joins("JOIN tasks ON skillsets.task_id = tasks.id").
-              where("tasks.name LIKE ?", query_string)
+              where("tasks.name LIKE ?", query_string).
+              where("email != ?", user_email)
     return nil if taskees.nil? || taskees.empty?
-    return taskees if user_email.nil?
-    taskees.where("email != ?", user_email)
+    taskees
+  end
+
+  private_class_method
+  def self.users
+    User.arel_table
+  end
+
+  def self.skillsets
+    Skillset.arel_table
+  end
+
+  def self.tasks
+    Task.arel_table
+  end
+
+  private
+
+  def generate_confirm_token
+    self.confirm_token = SecureRandom.uuid
+  end
+
+  def oauth_user?
+    !oauth_id.nil?
   end
 end
