@@ -63,6 +63,7 @@ class DashboardController < ApplicationController
   def profile_view
     param = deobfuscate(params.except(:controller, :action))["taskee_id"]
     @user = User.find(param)
+    @statistics = TaskManagement.statistics_count("taskee", @user.id)
   end
 
   private

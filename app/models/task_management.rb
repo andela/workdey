@@ -41,4 +41,14 @@ class TaskManagement < ActiveRecord::Base
     where(query => user.id).where(attribute => false).
       update_all(attribute => true)
   end
+
+  def self.statistics_count(user_type, id)
+    completed_tasks = where("#{user_type}_id = ?", id).
+                      where(status: "done").count
+    scheduled_tasks = where("#{user_type}_id = ?", id).
+                      where(status: "active").count
+    if completed_tasks != 0 && scheduled_tasks != 0
+      [completed_tasks, scheduled_tasks]
+    end
+  end
 end
