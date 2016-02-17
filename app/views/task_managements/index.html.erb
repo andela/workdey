@@ -1,0 +1,38 @@
+<main>
+  <section class="col m9 s12 offset-m1">
+    <div class="row">
+      <ul class= "col m10 offset-m1" >
+        <h2>My Tasks</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>Serial No</td>
+              <td>Taskee Name</td>
+              <td>Task Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% serial_no = 1 %>
+            <% @tasks.each do |task| %>
+              <tr>
+                <td><%= serial_no %></td>
+                <% user = User.find(task.taskee_id) %>
+                <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
+                <td><%= desc = task.task_desc %></td>
+                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
+                <td>
+                  <% if task.status.downcase == "done" %>
+                    <span>Completed</span>
+                  <% else %>
+                    <%= link_to "Review", review_task_path(details) %>
+                  <% end %>
+                </td>
+              </tr>
+              <% serial_no += 1 %>
+            <% end %>
+          </tbody>
+        </table>
+      </ul>
+    </div>
+  </section>
+</main>
