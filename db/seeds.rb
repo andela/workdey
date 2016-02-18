@@ -8,25 +8,26 @@ class SeedData
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        confirmed: true, has_taken_quiz: true,
         image_url: cloudinary_img_url
       },
       { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "tasker", confirmed: true, confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url
       },
       { firstname: "Temitope", lastname: "Amodu",
         email: "temitope.amodu@andela.com", street_address: "2 Funso Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "tasker", confirmed: true, confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url
       },
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true, image_url: cloudinary_img_url
+        confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url
       },
       { firstname: "Chinedu", lastname: "Dan",
         email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
