@@ -11,10 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 
 ActiveRecord::Schema.define(version: 20160126112320) do
+=======
+ActiveRecord::Schema.define(version: 20160222120205) do
+>>>>>>> eefd1b1... Home Dashboard View [finished #111961103]
 
-# These are extensions that must be enabled in order to support this database
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "reviews", force: :cascade do |t|
@@ -77,8 +81,16 @@ ActiveRecord::Schema.define(version: 20160126112320) do
     t.boolean  "has_taken_quiz",  default: false
     t.float    "longitude"
     t.float    "latitude"
+<<<<<<< HEAD
+=======
+    t.boolean  "enable_notifications", default: true
+>>>>>>> eefd1b1... Home Dashboard View [finished #111961103]
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> eefd1b1... Home Dashboard View [finished #111961103]
