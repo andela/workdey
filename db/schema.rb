@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160126112320) do
+=======
+ActiveRecord::Schema.define(version: 20160222120205) do
+>>>>>>> b96d3aa... Home Dashboard View [finished #111961103]
+=======
+ActiveRecord::Schema.define(version: 20160222120205) do
+>>>>>>> f896e0f... added sidebar for dashbaard
+=======
+ActiveRecord::Schema.define(version: 20160222120205) do
+>>>>>>> 7ecb59c... fix ci build
 
-# These are extensions that must be enabled in order to support this database
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "reviews", force: :cascade do |t|
@@ -63,22 +74,42 @@ ActiveRecord::Schema.define(version: 20160126112320) do
     t.date     "birthday"
     t.string   "phone"
     t.string   "password_digest"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "user_type"
     t.string   "provider"
     t.string   "oauth_id"
     t.string   "confirm_token"
-    t.boolean  "confirmed",       default: false
+    t.boolean  "confirmed",            default: false
     t.string   "state"
     t.string   "city"
     t.string   "street_address"
     t.string   "image_url"
-    t.boolean  "has_taken_quiz",  default: false
+    t.boolean  "has_taken_quiz",       default: false
     t.float    "longitude"
     t.float    "latitude"
+    t.boolean  "enable_notifications", default: true
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> f896e0f... added sidebar for dashbaard
   end
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+
+>>>>>>> b96d3aa... Home Dashboard View [finished #111961103]
+=======
+    add_index "users", ["email"], name: "index_users_on_email", unique: true
+=======
+>>>>>>> 40ec865... fix ci build
+  end
+>>>>>>> c1f64e0... fix ci build
+=======
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+>>>>>>> 7ecb59c... fix ci build
 end
