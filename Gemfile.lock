@@ -189,6 +189,10 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+<<<<<<< HEAD
+=======
+    puma (3.1.0)
+>>>>>>> 68ccb66... Home Dashboard View [finished #111961103]
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
@@ -274,8 +278,11 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+<<<<<<< HEAD
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+=======
+>>>>>>> 68ccb66... Home Dashboard View [finished #111961103]
     sidekiq (4.1.1)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
