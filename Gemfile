@@ -11,7 +11,7 @@ gem "uglifier", ">= 1.3.0"
 # gem "coffee-rails", "~> 4.1.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem "therubyracer", platforms: :ruby
-
+gem "pg", "0.17.1"
 # Use jquery as the JavaScript library
 gem "jquery-rails"
 gem "jquery-turbolinks"
@@ -48,6 +48,7 @@ gem "omniauth-google-oauth2", "0.2.10"
 group :development, :test do
   gem "travis", "1.8.0"
   gem "rspec-rails"
+  # gem "pg",             "0.17.1"
   gem "capybara"
   gem "selenium-webdriver"
   gem "database_cleaner"
@@ -59,7 +60,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console", "~> 2.0"
   # Use sqlite3 as the database for Active Record
-  gem "sqlite3"
+  # gem "pg",             "0.17.1"
   gem "rubocop", require: false
   gem "figaro"
 end
