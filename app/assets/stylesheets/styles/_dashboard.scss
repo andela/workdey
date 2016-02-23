@@ -33,7 +33,45 @@ nav .nav-wrapper {
   }
 }
 
+
+
 // Dashboard index
+.sidebar-dash {
+  position: absolute;
+  height: 90%;
+  width: 200px;
+  float: left;
+  background-color: #767373;
+  color: white !important;
+
+  ul{
+    text-decoration: none;
+    padding-top: 40px;
+
+    li {
+      text-decoration: none;
+      color: white !important;
+    }
+    a {
+      color: white;
+    }
+    hr{
+      border-style: solid;
+      border-width: thin;
+      width: 170px;
+      color: #9E9E9E !important;
+    }
+  }
+
+  .side-nav-button {
+      padding: 20px 10px 20px 40px;
+    }
+    .side-nav-button:hover{
+      background-color: #9D9B9B !important;
+      color: #ECECEC;
+    }
+  }
+
 
 [class^="dashboard-"], .pages-search, .taskmanagements-new, [class^="notifications-"] {
   .nav-wrapper {
