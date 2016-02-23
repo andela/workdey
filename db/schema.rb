@@ -11,12 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20160126112320) do
 
 # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "reviewer_id"
@@ -74,18 +72,8 @@ ActiveRecord::Schema.define(version: 20160126112320) do
     t.string   "city"
     t.string   "street_address"
     t.string   "image_url"
-<<<<<<< 113a5b58e61fbaf91e425c434c8d22fb4238686e
-    t.boolean  "has_taken_quiz",  default: false
-    t.float    "longitude"
-    t.float    "latitude"
-=======
     t.boolean  "has_taken_quiz",       default: false
     t.float    "longitude"
     t.float    "latitude"
     t.boolean  "enable_notifications", default: true
->>>>>>> added sidebar for dashbaard
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-
 end
