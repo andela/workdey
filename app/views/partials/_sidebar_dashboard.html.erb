@@ -1,6 +1,6 @@
 <div class="sidebar-dash">
   <ul>
-    <%= nav_link 'Home', dashboard_path %>
+    <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Task Management</li>"), dashboard_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), dashboard_path %><hr>
