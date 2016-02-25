@@ -4,7 +4,8 @@
     <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Task Management</li>"), dashboard_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), dashboard_path %><hr>
+<% if current_user.user_type == "tasker"%>
     <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), dashboard_path %><hr>
-    <li></li>
+<% end %>
   </ul>
 </div>
