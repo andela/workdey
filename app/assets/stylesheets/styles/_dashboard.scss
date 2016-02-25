@@ -38,7 +38,7 @@ nav .nav-wrapper {
 // Dashboard index
 .sidebar-dash {
   position: absolute;
-  height: 90%;
+  height: 110%;
   width: 200px;
   float: left;
   background-color: #767373;
@@ -70,6 +70,12 @@ nav .nav-wrapper {
       background-color: #9D9B9B !important;
       color: #ECECEC;
     }
+  }
+
+  .selected {
+    padding: 20px 10px 20px 40px;
+    background-color:#FFFFFF;
+    color: grey !important;
   }
 
 
