@@ -1,8 +1,6 @@
 # workdey
 
-[![Code Climate](https://codeclimate.com/github/andela/workdey/badges/gpa.svg)](https://codeclimate.com/github/andela/workdey)
-
-[![Circle CI](https://circleci.com/gh/andela/workdey.svg?style=svg)](https://circleci.com/gh/andela/workdey)
+[![Code Climate](https://codeclimate.com/github/andela/workdey/badges/gpa.svg)](https://codeclimate.com/github/andela/workdey) [![Circle CI](https://circleci.com/gh/andela/workdey.svg?style=svg)](https://circleci.com/gh/andela/workdey) [![Coverage Status](https://coveralls.io/repos/github/andela/workdey/badge.svg?branch=master)](https://coveralls.io/github/andela/workdey?branch=master)
 
 
 Workdey helps people find simple tasks that they can do and earn cash.
