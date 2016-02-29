@@ -1,5 +1,10 @@
 # workdey
 
+[![Code Climate](https://codeclimate.com/github/andela/workdey/badges/gpa.svg)](https://codeclimate.com/github/andela/workdey)
+
+[![Circle CI](https://circleci.com/gh/andela/workdey.svg?style=svg)](https://circleci.com/gh/andela/workdey)
+
+
 Workdey helps people find simple tasks that they can do and earn cash.
 
 [Live application](http://workdey.herokuapp.com)
