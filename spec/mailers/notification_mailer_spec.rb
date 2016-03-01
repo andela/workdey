@@ -11,14 +11,15 @@ RSpec.describe NotificationMailer, type: :mailer do
     let(:taskee) { User.first }
     let(:tasker) { User.last }
     let(:nofify) { send_notifications(user, task, category, taskee, tasker) }
-    let(:mail) { NotificationMailer.send_notifications(
-      user,
-      task,
-      category,
-      taskee,
-      tasker
-    )
-    }
+    let(:mail) do
+      NotificationMailer.send_notifications(
+        user,
+        task,
+        category,
+        taskee,
+        tasker
+      )
+    end
     it "renders the headers" do
       expect(mail.subject).to eq("You have notifications on Workdey")
       expect(mail.to).to eq(["olaide.ojewale@andela.com"])
