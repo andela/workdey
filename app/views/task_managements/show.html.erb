@@ -9,7 +9,7 @@
         <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", params[:task], disabled: true ) %></li>
         <%= form_tag completed_path do %>
         <li><strong><%= label_tag "Add a comment about the taskee or their job:" %></strong></li>
-          <input type="hidden" name= "task_id" value=4 "<%= params[:num] %>" >
+          <input type="hidden" name= "task_id" value= "<%= params[:num] %>" >
           <input type="hidden" name= "user_id" value= "<%= params[:user_id] %>" >
         <li><%= text_area_tag "comment" %></li>
         <li><strong><%= label_tag "Rate taskee" %></strong>

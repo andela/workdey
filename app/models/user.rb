@@ -59,22 +59,12 @@ class User < ActiveRecord::Base
     average.nil? ? 0 : average
   end
 
-  def has_no_reviews
+  def has_no_reviews?
     reviews.map(&:review).all? { |comment| comment == "" }
   end
 
   def review_comments
     reviews.where("review != ?", "")
-  end
-
-  private
-
-  def generate_confirm_token
-    self.confirm_token = SecureRandom.uuid
-  end
-
-  private def oauth_user?
-    !oauth_id.nil?
   end
 
   def self.get_user_address(user_email)
@@ -102,5 +92,15 @@ class User < ActiveRecord::Base
 
   def self.tasks
     Task.arel_table
+  end
+
+  private
+
+  def generate_confirm_token
+    self.confirm_token = SecureRandom.uuid
+  end
+
+  def oauth_user?
+    !oauth_id.nil?
   end
 end

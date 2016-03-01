@@ -1,11 +1,11 @@
 class TaskManagementsController < ApplicationController
-  before_action :show_notification_count, only: [:show]
+  before_action :show_notification_count,
+                only: [:index, :show, :review_and_rate]
   def index
     @tasks = current_user.tasks_created
   end
 
   def show
-
   end
 
   def update

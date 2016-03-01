@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <% unless @user.has_no_reviews %>
+    <% unless @user.has_no_reviews? %>
       <div class="row user-reviews">
         <h4 class= "col m9 offset-m2"> See what people are saying about <%= firstname %></h4>
         <div class="col m9 offset-m2">
