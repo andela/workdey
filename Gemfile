@@ -20,6 +20,7 @@ gem "cloudinary", "1.1.0"
 gem "websocket-rails"
 gem "faye-websocket", "0.10.0"
 
+gem 'coveralls', require: false
 gem "sidekiq"
 # Materialize
 gem "materialize-sass", "0.97.1"
