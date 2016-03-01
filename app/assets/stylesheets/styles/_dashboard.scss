@@ -24,12 +24,26 @@ nav .nav-wrapper {
 }
 
 .view_profile {
+  h3 {
+    padding-left: 1.2em !important;
+  }
   img {
     width: 15em;
     height: 15em;
   }
-  li {
-    font-size: 1.8em;
+  span {  
+    font-size: 1.1em;
+    padding-right: 0.2em;
+ }
+  h3, span {
+    font-weight: bold;
+ }
+}
+
+.user-reviews {
+  margin-top: 5em;
+    h4 {
+    font-weight: 400;
   }
 }
 
