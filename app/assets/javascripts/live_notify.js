@@ -1,7 +1,7 @@
 (function () {
-  var dispatcher = new WebSocketRails(hostname());
+  var dispatcher = new WebSocketRails(host_name());
 
-  function hostName() {
+  function host_name() {
     if (location.port.length === 0) {
       return location.hostname + "/websocket";
     } else {
