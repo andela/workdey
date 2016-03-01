@@ -76,7 +76,5 @@ ActiveRecord::Schema.define(version: 20160126112320) do
     t.float    "longitude"
     t.float    "latitude"
     t.boolean  "enable_notifications", default: true
-
-    add_index "users", ["email"], name: "index_users_on_email", unique: true
   end
 end
