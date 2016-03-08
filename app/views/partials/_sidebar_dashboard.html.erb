@@ -1,0 +1,29 @@
+<div class="sidebar-dash">
+  <ul>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Task Management</li>"), dashboard_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), dashboard_path %><hr>
+<% if current_user.user_type == "tasker"%>
+<<<<<<< HEAD
+    <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), dashboard_path %><hr>
+<% end %>
+=======
+    <%= nav_link 'Home', dashboard_path %>
+=======
+    <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %><hr>
+>>>>>>> b62ddaa... fix home button error
+    <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Task Management</li>"), dashboard_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), dashboard_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), dashboard_path %><hr>
+    <li></li>
+>>>>>>> cdb23db... abstracted sidebar to partial
+=======
+    <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), dashboard_path %><hr>
+<% end %>
+>>>>>>> 2564eac... add map search flag for tasker
+  </ul>
+</div>
