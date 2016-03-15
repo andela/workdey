@@ -23,6 +23,7 @@
 *.DS_Store
 /coverage/*
 
+
 "*.json"
 dump.rdb
 UI_tabernacle.txt
