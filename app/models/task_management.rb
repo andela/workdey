@@ -1,7 +1,7 @@
 class TaskManagement < ActiveRecord::Base
-  belongs_to :taskees, class_name: "User"
-  belongs_to :taskers, class_name: "User"
-  has_one :task, foreign_key: :id
+  belongs_to :taskee, class_name: "User"
+  belongs_to :tasker, class_name: "User"
+  has_one :task, foreign_key: :id # needs to be refactored
 
   validates :amount,
             numericality: { greater_than_or_equal_to: 2000 },
