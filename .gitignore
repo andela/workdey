@@ -6,7 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
-
+.coveralls.yml
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -22,7 +22,6 @@
 #Ignore os specific files
 *.DS_Store
 /coverage/
-
 dump.rdb
 UI_tabernacle.txt
 index.html
