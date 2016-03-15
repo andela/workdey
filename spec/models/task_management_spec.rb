@@ -35,4 +35,45 @@ RSpec.describe TaskManagement, type: :model do
       expect(task_management.save).to be false
     end
   end
+
+  describe ".validate_tasker_id" do
+    it "must have a tasker-id" do
+      task_management.tasker_id = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_taskee_id" do
+    it "must have a taskee id" do
+      task_management.taskee_id = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_start_time" do
+    it "must have a start time" do
+      task_management.start_time = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_end_time" do
+    it "should have an end time" do
+      task_management.end_time = nil
+      expect(task_management.save).to be false
+    end
+    pending "has to be a valid end time" do
+      task_management.end_time = Time.now - 200
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_task_desc" do
+    it "must have a task description" do
+      task_management.task_desc = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+
 end
