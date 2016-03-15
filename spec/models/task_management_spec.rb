@@ -103,5 +103,4 @@ RSpec.describe TaskManagement, type: :model do
       expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).to be true
     end
   end
-
 end
