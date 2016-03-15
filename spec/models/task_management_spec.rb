@@ -35,4 +35,66 @@ RSpec.describe TaskManagement, type: :model do
       expect(task_management.save).to be false
     end
   end
+
+  describe ".validate_tasker_id" do
+    it "must have a tasker-id" do
+      task_management.tasker_id = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_taskee_id" do
+    it "must have a taskee id" do
+      task_management.taskee_id = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_start_time" do
+    it "must have a start time" do
+      task_management.start_time = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_end_time" do
+    it "should have an end time" do
+      task_management.end_time = nil
+      expect(task_management.save).to be false
+    end
+    it "has to be a valid end time" do
+      task_management.end_time = Time.now - 2.hours
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".validate_task_desc" do
+    it "must have a task description" do
+      task_management.task_desc = nil
+      expect(task_management.save).to be false
+    end
+  end
+
+  describe ".notifications_count" do
+    context "should return the proper count" do
+      before(:each) { task_management.save }
+      it { expect(TaskManagement.notifications_count("taskee", 1)).to eql 1 }
+      it { expect(TaskManagement.notifications_count("tasker", 1)).to eql 0 }
+    end
+  end
+
+  describe ".all_notifications_for" do
+    context "should return necessary notifications" do
+      before(:each) { task_management.save }
+      it { expect(TaskManagement.all_notifications_for("taskee", 1).
+        first).to eql task_management }
+      it { expect(TaskManagement.all_notifications_for("tasker", 1)).
+        to be_empty }
+    end
+  end
+
+  describe ".update_all_notifications_as_seen" do
+
+  end
+
 end
