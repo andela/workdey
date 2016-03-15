@@ -1,18 +1,35 @@
 <main>
-  <div class="row view_profile">
-    <h2 class= "col m6 offset-m4">User Profile</h2>
-    <ul class= "col m8 offset-m2" >
-      <%= cl_image_tag(@user.image_url, { class: "responsive-img circle left" }) %>
-      <div class="col m7 offset-m1">
-        <li><%= @user.firstname.capitalize + " " + @user.lastname.capitalize %></li>
-        <li><%= @user.street_address %></li>
-        <li><%= @user.city %></li>
-        <li><%= @user.state %></li>
-        <% unless current_user.user_type == "taskee" %>
-          <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)),
-          class: "btn waves-effect" %>
-        <% end %>
+    <div class="row view_profile">
+      <h3 class= "col m6 offset-m5"><%= "#{ firstname = @user.firstname.capitalize }'s" %> Profile</h3>
+      <div class= "col m10 offset-m2" >
+        <div class="col left m3">
+          <%= cl_image_tag(@user.image_url, { class: "responsive-img circle" }) %>
+        </div>
+        <div class="col m7 offset-m1">
+          <p><span> Full Name: </span><%= firstname + " " + @user.lastname.capitalize %></p>
+          <p><span> Street Address: </span><%= @user.street_address %></p>
+          <p><span> City: </span><%= @user.city %></p>
+          <p><span> State: </span><%= @user.state %></p>
+          <p>
+            <span> Average Rating: </span> <%= @user.average_rating(@user.id) %>
+          </p>
+          <% unless current_user.user_type == "taskee" %>
+            <% id = "WKDY#{@user.id}"%>
+            <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)), class: "btn waves-effect" %>
+          <% end %>
+        </div>
       </div>
-    </ul>
-  </div>
+    </div>
+    <% unless @user.has_no_reviews? %>
+      <div class="row user-reviews">
+        <h4 class= "col m9 offset-m2"> See what people are saying about <%= firstname %></h4>
+        <div class="col m9 offset-m2">
+          <% @user.review_comments.each do |comment| %>
+            <p><%= comment.review %></p>
+            <% reviewer_info(comment) %>
+            <p>- <%= "#{ @reviewer_name } on #{ @comment_date }" %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 </main>
