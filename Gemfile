@@ -20,7 +20,7 @@ gem "cloudinary", "1.1.0"
 gem "websocket-rails"
 gem "faye-websocket", "0.10.0"
 
-gem 'coveralls', require: false
+gem "coveralls", require: false
 gem "sidekiq"
 # Materialize
 gem "materialize-sass", "0.97.1"
@@ -49,7 +49,6 @@ gem "omniauth-google-oauth2", "0.2.10"
 group :development, :test do
   gem "travis", "1.8.0"
   gem "rspec-rails"
-  # gem "pg",             "0.17.1"
   gem "capybara"
   gem "selenium-webdriver"
   gem "database_cleaner"
@@ -61,15 +60,17 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console", "~> 2.0"
   # Use sqlite3 as the database for Active Record
-  # gem "pg",             "0.17.1"
   gem "rubocop", require: false
   gem "figaro"
 end
 
 group :production do
-  gem "pg",             "0.17.1"
   gem "rails_12factor", "0.0.2"
   gem "puma"
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 3.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
