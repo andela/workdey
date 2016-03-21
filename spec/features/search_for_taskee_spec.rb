@@ -1,5 +1,4 @@
 require "rails_helper"
-require "em-rspec"
 
 RSpec.feature "SearchByTasks", type: :feature do
   let(:email) { "olaide.ojewale@andela.com" }

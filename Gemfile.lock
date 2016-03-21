@@ -83,8 +83,6 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
-    em-rspec (0.1.1)
-      eventmachine (>= 0.12.10)
     em-synchrony (1.0.4)
       eventmachine (>= 1.0.7)
     erubis (2.7.0)
@@ -355,7 +353,6 @@ DEPENDENCIES
   cloudinary (= 1.1.0)
   coveralls
   database_cleaner
-  em-rspec
   eventmachine
   faye-websocket (= 0.10.0)
   figaro
