@@ -24,7 +24,6 @@ gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "websocket-rails"
 
-
 group :development, :test do
   gem "travis", "1.8.0"
   gem "rspec-rails"
@@ -41,10 +40,6 @@ group :development do
   gem "rubocop", require: false
   gem "figaro"
 end
-
-# group :test do
-#   gem 'em-rspec'
-# end
 
 group :production do
   gem "rails_12factor", "0.0.2"

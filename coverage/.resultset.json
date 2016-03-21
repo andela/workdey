@@ -56,6 +56,7 @@
         1,
         1,
         1,
+        1,
         null,
         null,
         null,
@@ -629,6 +630,32 @@
         1,
         null
       ],
+      "/Users/andela/workdey/spec/em_helper.rb": [
+        1,
+        1,
+        null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        8,
+        8,
+        8,
+        16,
+        8,
+        8,
+        null,
+        8,
+        null,
+        null,
+        null
+      ],
       "/Users/andela/workdey/spec/support/seed.rb": [
         1,
         1,
@@ -695,7 +722,6 @@
         null
       ],
       "/Users/andela/workdey/spec/features/search_for_taskee_spec.rb": [
-        1,
         1,
         null,
         1,
@@ -1348,6 +1374,6 @@
         null
       ]
     },
-    "timestamp": 1458128197
+    "timestamp": 1458568753
   }
 }
