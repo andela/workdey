@@ -94,7 +94,14 @@ RSpec.describe TaskManagement, type: :model do
   end
 
   describe ".update_all_notifications_as_seen" do
-
+    it "can update all taskers" do
+      user = create(:user, user_type: 'tasker')
+      task_management.tasker = user
+      task_management.save
+      expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).to be false
+      TaskManagement.update_all_notifications_as_seen(user)
+      expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).to be true
+    end
   end
 
 end
