@@ -15,29 +15,17 @@ gem "omniauth-facebook"
 gem "omniauth-twitter"
 gem "omniauth-google-oauth2", "0.2.10"
 gem "pg", "0.17.1"
-
 gem "rails", "4.2.4"
-
 gem "sass-rails", "~> 5.0"
 gem "sidekiq"
 gem "turbolinks"
-
 gem "uglifier", ">= 1.3.0"
-
-
 gem "websocket-rails"
-
-
-
 gem "sdoc", "~> 0.4.0", group: :doc
-gem 'em-rspec', require: false
-
-
 
 group :development, :test do
   gem "travis", "1.8.0"
   gem "rspec-rails"
-
   gem "capybara"
   gem "selenium-webdriver"
   gem "database_cleaner"
@@ -47,16 +35,10 @@ group :development, :test do
 end
 
 group :development do
-
   gem "web-console", "~> 2.0"
-
   gem "rubocop", require: false
   gem "figaro"
 end
-
-# group :test do
-#   gem 'em-rspec'
-# end
 
 group :production do
   gem "pg",             "0.17.1"
