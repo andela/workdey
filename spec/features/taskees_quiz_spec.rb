@@ -19,12 +19,7 @@ feature "SignUp" do
   end
 
   def answer_quiz
-<<<<<<< HEAD
     right_answers_arr = [2, 2, 3, 2, 1, 2, 3, 2, 2, 4, 2]
-=======
-    right_answers_arr = [2,2,3,2,1,2,3,2,2,4,2]
->>>>>>> 2f57469... feature (tests) Add taskee quiz tests
-
     right_answers_arr.each do |ans|
       find(:xpath, "//label[@for='radio #{ans}']").click
       click_button "Submit"
@@ -35,18 +30,9 @@ feature "SignUp" do
   def sign_in
     visit signin_path
     within("div > form") do
-<<<<<<< HEAD
       fill_in "session_email", with: email
       fill_in "session_password", with: password
-=======
-      fill_in "session_email", :with => email
-      fill_in "session_password", :with => password
->>>>>>> 2f57469... feature (tests) Add taskee quiz tests
     end
     click_button "Sign in"
   end
 end
-<<<<<<< HEAD
-=======
-
->>>>>>> 2f57469... feature (tests) Add taskee quiz tests
