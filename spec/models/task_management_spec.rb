@@ -86,22 +86,27 @@ RSpec.describe TaskManagement, type: :model do
   describe ".all_notifications_for" do
     context "should return necessary notifications" do
       before(:each) { task_management.save }
-      it { expect(TaskManagement.all_notifications_for("taskee", 1).
-        first).to eql task_management }
-      it { expect(TaskManagement.all_notifications_for("tasker", 1)).
-        to be_empty }
+      it do
+        expect(TaskManagement.all_notifications_for("taskee", 1).
+        first).to eql task_management
+      end
+      it do
+        expect(TaskManagement.all_notifications_for("tasker", 1)).
+          to be_empty
+      end
     end
   end
 
   describe ".update_all_notifications_as_seen" do
     it "can update all taskers" do
-      user = create(:user, user_type: 'tasker')
+      user = create(:user, user_type: "tasker")
       task_management.tasker = user
       task_management.save
-      expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).to be false
+      expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).
+        to be false
       TaskManagement.update_all_notifications_as_seen(user)
-      expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).to be true
+      expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).
+        to be true
     end
   end
-
 end

@@ -42,12 +42,12 @@ class TaskManagement < ActiveRecord::Base
   end
 
   def end_time_must_be_later_than_start_time
-    unless start_time && end_time
-      errors[:time] = "Task time cannot be nil"
-    else
+    if start_time && end_time
       unless end_time > start_time && end_time > Time.now
-        errors[:endtime] = 'End_time cannot be in the past'
+        errors[:endtime] = "End_time cannot be in the past"
       end
+    else
+      errors[:time] = "Task time cannot be nil"
     end
   end
 end
