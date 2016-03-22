@@ -12,10 +12,10 @@
         </a>
 
         <ul class="right dashboard-navlinks">
-          <% if @count > 0 %>
+          <% if @count && @count > 0 %>
             <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
-          
+
           <li class="notification-dropdown" data-activates="tasks">
             <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
           </li>
