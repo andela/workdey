@@ -19,7 +19,7 @@ feature "SignUp" do
   end
 
   def answer_quiz
-    right_answers_arr = [2,2,3,2,1,2,3,2,2,4,2]
+    right_answers_arr = [2, 2, 3, 2, 1, 2, 3, 2, 2, 4, 2]
 
     right_answers_arr.each do |ans|
       find(:xpath, "//label[@for='radio #{ans}']").click
@@ -31,10 +31,9 @@ feature "SignUp" do
   def sign_in
     visit signin_path
     within("div > form") do
-      fill_in "session_email", :with => email
-      fill_in "session_password", :with => password
+      fill_in "session_email", with: email
+      fill_in "session_password", with: password
     end
     click_button "Sign in"
   end
 end
-
