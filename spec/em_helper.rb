@@ -1,10 +1,11 @@
 begin
-  require 'fiber'
+  require "fiber"
 rescue LoadError
-  raise LoadError.new "em-rspec requires the Fiber class. (Available in core Ruby 1.9)"
+  raise LoadError.new "em-rspec requires the Fiber class. ("\
+  "Available in core Ruby 1.9)"
 end
 
-require 'eventmachine'
+require "eventmachine"
 
 RSpec::Core::Example.class_eval do
   alias ignorant_run run
@@ -12,13 +13,15 @@ RSpec::Core::Example.class_eval do
   def run(example_group_instance, reporter)
     Fiber.new do
       EM.run do
-    df = EM::DefaultDeferrable.new
-    result = nil
-    df.callback { |x| EM.stop_event_loop; Fiber.yield result }
-    result = ignorant_run example_group_instance, reporter
-    df.succeed
+        df = EM::DefaultDeferrable.new
+        result = nil
+        df.callback do |_x|
+          EM.stop_event_loop
+          Fiber.yield result
+        end
+        result = ignorant_run example_group_instance, reporter
+        df.succeed
       end
     end.resume
   end
-
 end

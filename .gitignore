@@ -6,19 +6,20 @@
 
 # Ignore bundler config.
 /.bundle
-
+.coveralls.yml
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
-
+*.json
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
-
+*.json.lock
 # Ignore application configuration
 /config/application.yml
-
+/coverage/*
+"*.json"
 dump.rdb
 UI_tabernacle.txt
 index.html
