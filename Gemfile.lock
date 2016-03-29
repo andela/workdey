@@ -83,6 +83,8 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
+    em-rspec (0.1.1)
+      eventmachine (>= 0.12.10)
     em-synchrony (1.0.4)
       eventmachine (>= 1.0.7)
     erubis (2.7.0)
@@ -359,7 +361,9 @@ DEPENDENCIES
   cloudinary (= 1.1.0)
   coveralls
   database_cleaner
+  em-rspec
   eventmachine
+  factory_girl_rails
   faye-websocket (= 0.10.0)
   figaro
   jbuilder (~> 2.0)
@@ -373,6 +377,7 @@ DEPENDENCIES
   pg (= 0.17.1)
   pry
   pry-rails
+  puma
   rails (= 4.2.4)
   rails_12factor (= 0.0.2)
   rspec-rails
