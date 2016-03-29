@@ -6,7 +6,6 @@ rescue LoadError
 end
 
 require "eventmachine"
-
 RSpec::Core::Example.class_eval do
   alias ignorant_run run
 
