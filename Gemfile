@@ -4,6 +4,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "bourbon"
 gem "cloudinary", "1.1.0"
 gem 'coveralls', require: false
+gem 'em-rspec', require: false
 gem "eventmachine"
 gem "faye-websocket", "0.10.0"
 gem "jquery-rails"
@@ -17,11 +18,11 @@ gem "omniauth-google-oauth2", "0.2.10"
 gem "pg", "0.17.1"
 gem "rails", "4.2.4"
 gem "sass-rails", "~> 5.0"
+gem "sdoc", "~> 0.4.0", group: :doc
 gem "sidekiq"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "websocket-rails"
-gem "sdoc", "~> 0.4.0", group: :doc
 
 group :development, :test do
   gem "travis", "1.8.0"
@@ -41,9 +42,12 @@ group :development do
 end
 
 group :production do
-  gem "pg",             "0.17.1"
   gem "rails_12factor", "0.0.2"
-  gem "puma"
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 3.1"
+  gem "factory_girl_rails"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
