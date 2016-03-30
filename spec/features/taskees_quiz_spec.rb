@@ -20,7 +20,6 @@ feature "SignUp" do
 
   def answer_quiz
     right_answers_arr = [2, 2, 3, 2, 1, 2, 3, 2, 2, 4, 2]
-
     right_answers_arr.each do |ans|
       find(:xpath, "//label[@for='radio #{ans}']").click
       click_button "Submit"

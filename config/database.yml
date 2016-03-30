@@ -35,6 +35,8 @@ test:
   encoding: unicode
   database: workdey_test
   pool: 5
+  host: localhost
+  port: 5432
 
 # production:
 #   <<: *default
