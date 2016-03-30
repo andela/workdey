@@ -1,11 +1,12 @@
 begin
   require "fiber"
 rescue LoadError
-  raise LoadError.new "em-rspec requires the Fiber class."\
-    " (Available in core Ruby 1.9)"
+  raise LoadError.new "em-rspec requires the Fiber class. "\
+  "(Available in core Ruby 1.9)"
 end
 
 require "eventmachine"
+
 RSpec::Core::Example.class_eval do
   alias ignorant_run run
 

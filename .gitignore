@@ -21,9 +21,12 @@
 
 #Ignore os specific files
 *.DS_Store
-/coverage/*
+
+/coverage/
 "*.json"
+/coverage/*
 dump.rdb
 UI_tabernacle.txt
 index.html
 .idea/
+coverage/
