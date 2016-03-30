@@ -12,18 +12,19 @@ RSpec.describe Task, type: :model do
   let(:taskees) { Task.first.users }
 
   describe ".current_user_city_street" do
-    let(:user_email) { user.email }
-    it "should return user address" do
-      expect(Task.current_user_city_street(user_email)).to be_a String
-      expect(Task.current_user_city_street(user_email)).
-        to eq("%#{user_street}%")
+    context "should set the user address given the right user email" do
+      let(:user_email) { user.email }
+      it do
+        expect(Task.current_user_city_street(user_email)).
+          to eq "%#{user_street}%"
+      end
     end
   end
 
   describe ".get_taskees_nearby" do
-    it "should return an array" do
-      expect(Task.get_taskees_nearby(taskees, user_street, user_city)).
-        to be_an ActiveRecord::AssociationRelation
+    it "should return two taskees that match the exact city and street " do
+      expect(Task.get_taskees_nearby(taskees, user_street, user_city).count).
+        to eq 2
     end
   end
 
@@ -32,7 +33,7 @@ RSpec.describe Task, type: :model do
       it { expect(Task.get_taskees("Marketting", user_email)).to eq nil }
     end
     context "returns an array of taskees nearby with the correct Keyword" do
-      it { expect(Task.get_taskees("Cleaning", user_email)).to be_an Array }
+      it { expect(Task.get_taskees("Cleaning", user_email).count).to eq 2 }
     end
   end
 end
