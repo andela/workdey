@@ -23,7 +23,9 @@
 *.DS_Store
 /coverage/
 
+/coverage/*
 dump.rdb
 UI_tabernacle.txt
 index.html
 .idea/
+coverage/
