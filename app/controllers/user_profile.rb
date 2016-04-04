@@ -32,7 +32,7 @@ class UserProfile < ApplicationController
       year = data[:year]
       if day && month && year
         birthday = day + "-" + month + "-" + year
-        return birthday.to_date if birthday.match(/[\d-]{8,10}/)
+        return birthday.to_date if birthday =~ /[\d-]{8,10}/
       end
     end
   end
@@ -40,7 +40,7 @@ class UserProfile < ApplicationController
   def user_info_hash(profile_params, current_user)
     info_hash = user_info(profile_params, current_user)
     pix_name = save_profile_pix(profile_params[:user_pix])
-    info_hash.merge!(image_url: pix_name) unless pix_name.nil?
+    info_hash[:image_url] = pix_name unless pix_name.nil?
     info_hash
   end
 

@@ -12,7 +12,7 @@
       <div class="auth signup card" class="col s12">
         <div class="row">
           <%= form_for @user, html: {class: "col s12"} do |f| %>
-            <%= render "partials/error_msg" %>
+            <%= render "partials/error_msg", object: @user %>
             <div class="row">
               <div class="input-field col s6">
                 <%= f.text_field :firstname, required: true, placeholder: "First Name" %>

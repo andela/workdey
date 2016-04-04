@@ -1,0 +1,102 @@
+<main>
+  <div class="row">
+    <h3 class="center-align">Assign Task</h3>
+      <div class= "col s8 offset-s2" >
+       <% if flash[:errors].present? %>
+          <div>
+            <% flash[:errors].each do |msg| %>
+              <p>* <%= msg %></p>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= form_for @task, url: create_task_path, html: { class: "assign-form" } do |f| %>
+          <%= f.hidden_field :task_name, value: session[:searcher] %>
+          <%= f.hidden_field :tasker_id, value: current_user.id %>
+          <%= f.hidden_field :taskee_id, value: @taskee_id %>
+
+          <div class="row">
+            <div class="col s8">
+              <div class="group">
+                <%= f.label :task_name, "Task Name:" %>
+                <%= f.text_field :task_name, value: session[:searcher], disabled: true %>
+              </div>
+
+              <div class="group">
+                <%= f.label :amount, "Amount:" %>
+                <% if flash[:amount].present? %>
+                  <%= f.text_field :amount, value: flash[:amount], required: true %>
+                <% else %>
+                  <%= f.text_field :amount, pattern: "[0-9]+", required: true %>
+                <% end %>
+              </div>
+
+              <div class="group row">
+                <div class="col s12">
+                  <%= f.label "I want this task to be done on:" %>
+                </div>
+                <div class="col s6">
+                  <% if flash[:month].present? %>
+                    <%= select_month flash[:month].to_i %>
+                  <% else %>
+                    <%= select_month Date.today %>
+                  <% end %>
+                </div>
+
+                <div class="col s6">
+                  <% if flash[:day].present? %>
+                    <%= select_day flash[:day].to_i %>
+                  <% else %>
+                    <%= select_day Date.today %>
+                  <% end %>
+                </div>
+
+                <div class="col s12">
+                  <%= select :time_range, "task" do %>
+                    <% if flash[:time].present? %>
+                      <option <%= "selected" if flash[:time] == "Anytime 8am - 8pm" %>>
+                        Anytime 8am - 8pm
+                      </option>
+                      <option <%= "selected" if flash[:time] == "Morning 8am - 12pm" %>>
+                        Morning 8am - 12pm
+                      </option>
+                      <option <%= "selected" if flash[:time] == "Afternoon 12pm - 4pm" %>>
+                        Afternoon 12pm - 4pm
+                      </option>
+                      <option <%= "selected" if flash[:time] == "Evening 4pm - 8pm" %>>
+                        Evening 4pm - 8pm
+                      </option>
+                    <% else %>
+                      <option>Anytime 8am - 8pm</option>
+                      <option>Morning 8am - 12pm</option>
+                      <option>Afternoon 12pm - 4pm</option>
+                      <option>Evening 4pm - 8pm</option>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="group">
+                <%= f.label :task_desc, "Give a little bit more info about this task:" %>
+                <% if flash[:task_desc].present? %>
+                  <%= f.text_area :task_desc, value: flash[:task_desc], required: true %>
+                <% else %>
+                  <%= f.text_area :task_desc, placeholder: "EXAMPLE: I have 3 bedrooms and they really need deep cleaning.", required: true %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="col s4">
+              <div class="card-panel center-align">
+                <%= cl_image_tag @taskee.image_url %>
+                <p class="center-align">
+                  <%= "#{@taskee.firstname} #{@taskee.lastname}" %>
+                </p>
+                <%= f.button "Notify Taskee", class: "btn" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</main>

@@ -1,7 +1,7 @@
 function geoFindMe() {
   var output = document.getElementById("locator");
 
-  if (!navigator.geolocation){
+  if (!navigator.geolocation) {
     output.innerHTML = "<p>Your browser does not allow us to get your location</p>";
     return;
   }
@@ -11,11 +11,11 @@ function geoFindMe() {
     var longitude = position.coords.longitude;
 
     output.innerHTML = '<p>Your latitude is ' + latitude + '° <br>Your longitude is ' + longitude + '°</p>';
-  };
+  }
 
   function error() {
     output.innerHTML = "Unable to retrieve your location";
-  };
+  }
 
   output.innerHTML = "<p>Locating…</p>";
 
