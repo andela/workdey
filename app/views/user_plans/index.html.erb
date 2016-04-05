@@ -1,1 +1,67 @@
-Plans
+<main>
+  <%= render "partials/sidebar_dashboard" %>
+  <section class="main container center-align pricing-plans">
+    <div class="row">
+      <section class="col s12">
+        <div class="row">
+          <% if current_user.user_type == "taskee" %>
+          <% elsif current_user.user_type == "tasker" %>
+            <div class="col m4">
+              <div class="card">
+                <div class="card-image purple waves-effect">
+                  <div class="card-title">Novice</div>
+                  <div class="price"><sup>$</sup>10<sub>/yr</sub></div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Assign 10 tasks</li>
+                    <li class="collection-item">Find taskees by reputation</li>
+                    <li class="collection-item">3 task types</li>
+                    <li class="collection-item">Rate taskees</li>
+                  </ul>
+                  <button class="waves-effect waves-light btn">Select Plan</button>
+                </div>
+              </div>
+            </div>
+            <div class="col m4">
+              <div class="card">
+                  <div class="card-image cyan waves-effect">
+                    <div class="card-title">Medial</div>
+                    <div class="price"><sup>$</sup>10<sub>/yr</sub></div>
+                  </div>
+                  <div class="card-content">
+                    <ul class="collection">
+                      <li class="collection-item">Assign 50 tasks</li>
+                      <li class="collection-item">Find taskees by reputation</li>
+                      <li class="collection-item">All task types</li>
+                      <li class="collection-item">Rate taskees</li>
+                    </ul>
+                    <button class="waves-effect waves-light btn">Select Plan</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col m4">
+                <div class="card">
+                    <div class="card-image green waves-effect">
+                      <div class="card-title">Maestro</div>
+                      <div class="price"><sup>$</sup>10<sub>/yr</sub></div>
+                    </div>
+                    <div class="card-content">
+                      <ul class="collection">
+                        <li class="collection-item">Assign Unlimited tasks</li>
+                        <li class="collection-item">Find taskees by reputation</li>
+                        <li class="collection-item">All task types</li>
+                        <li class="collection-item">Rate taskees</li>
+                      </ul>
+                      <button class="waves-effect waves-light btn">Select Plan</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
