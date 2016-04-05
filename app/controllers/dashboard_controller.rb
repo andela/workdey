@@ -67,16 +67,24 @@ class DashboardController < ApplicationController
 
   def update_location
     @current_user = current_user
-    @current_user.update_columns(longitude: params[:longitude], latitude: params[:latitude])
-    respond_to do |format|
-      format.html { :notice => 'Your location has been updated' }
-      format.json
+    loc = {
+      longitude: location_params[:longitude],
+      latitude: location_params[:latitude]
+    }
+    if @current_user.update_columns(loc)
+      render :json => { :status => 'success'  }.to_json
+    else
+      render :json => { :status => 'fail'  }.to_json
     end
+  end
+
+  def search_with_map
+    @current_user = current_user
+    @users = User.all
   end
 
   def assign_task
     param = deobfuscate(params.except(:controller, :action))["taskee_id"]
-    @user = User.find(param)
   end
 
   private
@@ -88,5 +96,9 @@ class DashboardController < ApplicationController
   def profile_params
     params.permit(:user_pix, :phone, :street_address, :city, :state, :gender,
                   :taskee_id, date: [:day, :month, :year])
+  end
+
+  def location_params
+    params.permit(:longitude, :latitude)
   end
 end

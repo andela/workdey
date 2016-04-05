@@ -26,10 +26,6 @@ class PagesController < ApplicationController
   def become_a_taskee
   end
 
-  def search_with_map
-
-  end
-
   def search
     if params[:searcher] || session[:searcher]
       session[:searcher] = params[:searcher] if params[:searcher]
