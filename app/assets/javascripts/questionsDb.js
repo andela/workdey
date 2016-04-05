@@ -201,7 +201,9 @@
     }
   ];
 
- var dbRef = new Firebase("https://torrid-inferno-5507.firebaseio.com/");
+  if (typeof Firebase !== "undefined") {
+    var dbRef = new Firebase("https://torrid-inferno-5507.firebaseio.com/");
 
- dbRef.set(allQuestions);
+    dbRef.set(allQuestions);
+  };
 }());

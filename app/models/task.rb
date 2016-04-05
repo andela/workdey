@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   has_many :skillsets
   has_many :users, through: :skillsets
+  belongs_to :task_management
 
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_task_name(keyword, user_email)
@@ -25,5 +26,10 @@ class Task < ActiveRecord::Base
     user_addy = User.get_user_address user_email
     @user_city = "%#{user_addy.first.first}%"
     @user_street = "%#{user_addy[0][1]}%"
+  end
+
+  private_class_method
+  def self.users
+    User.arel_table
   end
 end

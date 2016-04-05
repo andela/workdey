@@ -1,35 +1,37 @@
 <% if current_user.confirmed %>
-
-<% if flash[:mail].present?  %>
-  <div class="flash-mail">
-    <i class="material-icons close-flash">close</i>
-    <p><%= flash[:mail] %></p>
-  </div>
-<% end %>
-
+  <% if flash.present?  %>
+    <% flash.each do | name | %>
+      <div class="flash-mail">
+        <i class="material-icons close-flash">close</i>
+        <p><%= name.last %></p>
+      </div>
+    <% end %>
+  <% end %>
 <main>
+<%= render "partials/sidebar_dashboard" %>
   <section class="main container center-align">
     <div class="row">
       <section class="col s12">
-        <div class="user_info card">
+        <div class="user_info">
           <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
-          <%= render "partials/search_for_taskee" %>
-            <div class="col 12">
-              <div class="col l6">
-              <% if  @current_user.longitude == nil %>
-                <%= button_to "Tag My Location", @current_user, remote: true class: "tag-location" %>
-                <% else %>
-                 <%= button_to "Update Location", @current_user, remote: true class: "tag-location" %>
-                 <% end %>
-                <!-- <button onclick="getLocation()" class="btn"> Tag my location </button> -->
+          <%= render "partials/search_for_taskee" if current_user.user_type == "tasker" %>
+            <h5>enable mail notifications</h5>
+            <%= form_tag user_settings_path do %>
+              <div class="switch" style="padding: 2em;">
+                <label>
+                  Off
+                  <%  if current_user.enable_notifications %>
+                    <%= check_box_tag "notifications_enabled", "on", true %>
+                  <% else %>
+                    <%= check_box_tag "notifications_enabled", "off", false %>
+                  <% end %>
+                  <span class="lever"></span>
+                  On
+                </label>
               </div>
-               <div class="col l6">
-
-                <p id="demo"></p>
-                </div>
-                </div>
+            <button id='notification' class="waves-effect waves-light btn"> save </button>
         </div>
-
+        <% end %>
       </section>
     </div>
   </section>
@@ -37,29 +39,22 @@
 
 <% else %>
 
-<% if flash[:mail].present?  %>
-  <div class="flash-mail">
-    <i class="material-icons close-flash">close</i>
-    <p><%= flash[:mail] %></p>
-  </div>
-<% end %>
-
-<main>
-  <section class="confirm-mail-first container">
-  <div class="row">
-    <div class="col s12">
-      <div class="user_info card">
-        <h5>Confirm your email address</h5>
-        <p>
-          To continue, please click on the link sent to
-          <strong><%= current_user.email %></strong>
-          This will help to validate your account.
-        </p>
-        <%= link_to "Resend Confirmation Link", resend_mail_path, method: :post %>
+  <main>
+    <section class="confirm-mail-first container">
+    <div class="row">
+      <div class="col s12">
+        <div class="user_info card">
+          <h5>Confirm your email address</h5>
+          <p>
+            To continue, please click on the link sent to
+            <strong><%= current_user.email %></strong>
+            This will help to validate your account.
+          </p>
+          <%= link_to "Resend Confirmation Link", resend_mail_path, method: :post %>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
+  </main>
 
 <% end %>

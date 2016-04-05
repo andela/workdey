@@ -1,8 +1,9 @@
 class DashboardController < ApplicationController
   before_action :login_required
+  before_action :show_notification_count,
+                only: [:home, :user_profile, :profile_view, :choose_role, :quiz]
 
   def home
-    @current_user = current_user
     case
     when current_user.user_type.nil?
       redirect_to role_path
@@ -37,7 +38,7 @@ class DashboardController < ApplicationController
   end
 
   def quiz
-    redirect_to dashboard_path && return if current_user.has_taken_quiz
+    redirect_to(dashboard_path) && return if current_user.has_taken_quiz
     if quiz_params[:aced]
       current_user.update_attribute(:has_taken_quiz, true)
       redirect_to dashboard_path
@@ -60,20 +61,8 @@ class DashboardController < ApplicationController
   end
 
   def profile_view
-    @user = User.find(profile_params[:taskee_id])
-  end
-
-
-  def update_location
-    @current_user = current_user
-    @current_user.update_columns(longitude: params[:longitude], latitude: params[:latitude])
-    respond_to do |format|
-      format.html { :notice => 'Your location has been updated' }
-      format.json
-    end
-  end
-
-  def assign_task
+    param = deobfuscate(params.except(:controller, :action))["taskee_id"]
+    @user = User.find(param)
   end
 
   private
