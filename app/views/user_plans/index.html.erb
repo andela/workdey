@@ -4,13 +4,63 @@
     <div class="row">
       <section class="col s12">
         <div class="row">
+        <h2 class="header">User Plans</h2>
           <% if current_user.user_type == "taskee" %>
-          <% elsif current_user.user_type == "tasker" %>
             <div class="col m4">
-              <div class="card">
+              <div class="card <%= "z-depth-4" if current_user.novice? %>">
                 <div class="card-image purple waves-effect">
                   <div class="card-title">Novice</div>
-                  <div class="price"><sup>$</sup>10<sub>/yr</sub></div>
+                  <div class="price">Free</div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Receive 10 tasks</li>
+                    <li class="collection-item">3 task types</li>
+                    <li class="collection-item">Earn Reputation</li>
+                  </ul>
+                  <button class="waves-effect waves-light btn">Default Plan</button>
+                </div>
+              </div>
+            </div>
+            <div class="col m4">
+              <div class="card">
+                  <div class="card-image cyan waves-effect">
+                    <div class="card-title">Medial</div>
+                    <div class="price"><sup>$</sup>20<sub>/yr</sub></div>
+                  </div>
+                  <div class="card-content">
+                    <ul class="collection">
+                      <li class="collection-item">Receive 50 tasks</li>
+                      <li class="collection-item">All task types</li>
+                      <li class="collection-item">Earn Reputation</li>
+                    </ul>
+                    <button class="waves-effect waves-light btn">Select Plan</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col m4">
+                <div class="card">
+                    <div class="card-image green waves-effect">
+                      <div class="card-title">Maestro</div>
+                      <div class="price"><sup>$</sup>30<sub>/yr</sub></div>
+                    </div>
+                    <div class="card-content">
+                      <ul class="collection">
+                        <li class="collection-item">Receive Unlimited tasks</li>
+                        <li class="collection-item">All task types</li>
+                        <li class="collection-item">Earn Reputation</li>
+                      </ul>
+                      <button class="waves-effect waves-light btn">Select Plan</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          <% elsif current_user.user_type == "tasker" %>
+            <div class="col m4">
+              <div class="card <%= "z-depth-4" if current_user %>">
+                <div class="card-image purple waves-effect">
+                  <div class="card-title">Novice</div>
+                  <div class="price">Free</div>
                 </div>
                 <div class="card-content">
                   <ul class="collection">
@@ -19,7 +69,7 @@
                     <li class="collection-item">3 task types</li>
                     <li class="collection-item">Rate taskees</li>
                   </ul>
-                  <button class="waves-effect waves-light btn">Select Plan</button>
+                  <button class="waves-effect waves-light btn">Default Plan</button>
                 </div>
               </div>
             </div>
@@ -27,7 +77,7 @@
               <div class="card">
                   <div class="card-image cyan waves-effect">
                     <div class="card-title">Medial</div>
-                    <div class="price"><sup>$</sup>10<sub>/yr</sub></div>
+                    <div class="price"><sup>$</sup>20<sub>/yr</sub></div>
                   </div>
                   <div class="card-content">
                     <ul class="collection">
@@ -44,7 +94,7 @@
                 <div class="card">
                     <div class="card-image green waves-effect">
                       <div class="card-title">Maestro</div>
-                      <div class="price"><sup>$</sup>10<sub>/yr</sub></div>
+                      <div class="price"><sup>$</sup>30<sub>/yr</sub></div>
                     </div>
                     <div class="card-content">
                       <ul class="collection">
