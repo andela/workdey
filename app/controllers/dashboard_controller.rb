@@ -4,7 +4,6 @@ class DashboardController < ApplicationController
                 only: [:home, :user_profile, :profile_view, :choose_role, :quiz]
 
   def home
-    @current_user = current_user
     case
     when current_user.user_type.nil?
       redirect_to role_path
