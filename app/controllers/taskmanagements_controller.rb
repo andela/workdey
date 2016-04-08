@@ -49,7 +49,7 @@ class TaskmanagementsController < ApplicationController
     tasker_plan_status = User.check_plan_and_status(task_details[:tasker_id])
     tasker_expiry_date = tasker_plan_status[1]
     tasker_plan = tasker_plan_status[0]
-    if tasker_expiry_date > Time.now
+    if tasker_plan == "novice" || tasker_expiry_date > Time.now
       check_number_of_tasks_created(task_details[:tasker_id], tasker_plan)
     else
       redirect_to dashboard_path, notice: "Your subscription has expired. "\
