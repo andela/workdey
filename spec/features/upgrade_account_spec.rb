@@ -18,7 +18,7 @@ feature "Account type" do
     end
 
     scenario "User has option to upgrade account" do
-      expect(page).to have_selector("a", text: "Upgrade")
+      expect(page).to have_selector("a > li", text: "Account Upgrade")
     end
 
     scenario "User can click on upgrade button and be redirected to user plans page" do
@@ -40,9 +40,12 @@ feature "Account type" do
     end
 
     scenario "User has option to upgrade account" do
+      expect(page).to have_selector("a > li", text: "Account Upgrade")
     end
 
     scenario "User can click on upgrade button and be redirected to user plans page" do
+      click_link "Account Upgrade"
+      expect(page).to have_current_path("/user_plans")
     end
 
     scenario "User can upgrade to a medial account" do
