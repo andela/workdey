@@ -80,11 +80,9 @@ class User < ActiveRecord::Base
     return taskees if user_email.nil?
     taskees.where("email != ?", user_email)
   end
-  plan = User.check_plan(task_details[:tasker_id])
-  status = User.has_subscribed?(task_details[:tasker_id])
 
   def self.check_plan_and_status(user_id)
-    where(id: user_id).pluck(:plan, :expiry_date)
+    where(id: user_id).pluck(:user_plan, :expiry_date)
   end
 
 

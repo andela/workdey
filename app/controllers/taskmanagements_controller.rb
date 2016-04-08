@@ -45,34 +45,32 @@ class TaskmanagementsController < ApplicationController
 
   private
 
-  def check_plan(task_details[:tasker_id])
+  def check_plan
     tasker_plan_status = User.check_plan_and_status(task_details[:tasker_id])
     tasker_expiry_date = tasker_plan_status[1]
     tasker_plan = tasker_plan_status[0]
     if tasker_expiry_date > Time.now
-      task_created = User.find(task_details[:tasker_id]).task_created.count
-      if task_created == no_of_tasks(tasker_plan)
-        redirect_to user_plans_path, notice: "You have maxed out you current subscription, subscribe to your current plan or choose a different plan!!"
-      end
+      check_number_of_tasks_created(task_details[:tasker_id], tasker_plan)
     else
-      redirect_to dashboard_path, notice: "Your subscription has expired. subscribe and try again"
+      redirect_to dashboard_path, notice: "Your subscription has expired. "\
+      "subscribe and try again"
+    end
+  end
+
+  def check_number_of_tasks_created(tasker_id, tasker_plan)
+    task_created = User.find(tasker_id).task_created.count
+    if task_created == no_of_tasks(tasker_plan)
+      redirect_to user_plans_path, notice: "You have maxed out you current "\
+      "subscription,subscribe to your current plan or choose a different plan!!"
     end
   end
 
   def no_of_tasks(tasker_plan)
     case tasker_plan
-    when "novice" then no_of_permitted_task[:novice]
-    when "medial" then no_of_permitted_task[:medial]
-    else no_of_permitted_task[:maestro]
+    when "novice" then 10
+    when "medial" then 50
+    else Float::INFINITY
     end
-  end
-
-  def no_of_permitted_task
-    {
-      novice: 10,
-      medial: 50,
-      maestro: Float::INFINITY
-    }
   end
 
   def task_details
