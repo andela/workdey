@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   post "user/settings" => "users#update_notification_settings"
 
   get "user_plans" => "user_plans#index"
+  post "/charge" => "user_plans#create"
 
   resources :users, only: [:create]
 end

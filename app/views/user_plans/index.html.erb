@@ -35,6 +35,7 @@
                       <li class="collection-item">Earn Reputation</li>
                     </ul>
                     <button class="waves-effect waves-light btn">Select Plan</button>
+
                   </div>
                 </div>
               </div>
@@ -86,7 +87,17 @@
                       <li class="collection-item">All task types</li>
                       <li class="collection-item">Rate taskees</li>
                     </ul>
-                    <button class="waves-effect waves-light btn">Select Plan</button>
+                    <!-- <button class="waves-effect waves-light btn">Select Plan</button> -->
+                    <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                      <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                      data-name="Workdey inc."
+                      data-amount="2000"
+                      data-locale="auto">
+                      </script>
+                      <%= hidden_field_tag :plan, "novice" %>
+                    <% end %>
                   </div>
                 </div>
               </div>
