@@ -46,7 +46,7 @@ class TaskmanagementsController < ApplicationController
   private
 
   def check_plan
-    tasker_plan_status = User.check_plan_and_status(task_details[:tasker_id])
+    tasker_plan_status = UserPlan.check_plan_and_status(task_details[:tasker_id])
     tasker_expiry_date = tasker_plan_status[1]
     tasker_plan = tasker_plan_status[0]
     if tasker_plan == "novice" || tasker_expiry_date > Time.now
@@ -58,7 +58,7 @@ class TaskmanagementsController < ApplicationController
   end
 
   def check_number_of_tasks_created(tasker_id, tasker_plan)
-    task_created = User.find(tasker_id).task_created.count
+    task_created = UserPlan.find(tasker_id).tasks_counter.count
     if task_created == no_of_tasks(tasker_plan)
       redirect_to user_plans_path, notice: "You have maxed out you current "\
       "subscription,subscribe to your current plan or choose a different plan!!"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408140207) do
+ActiveRecord::Schema.define(version: 20160411125434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20160408140207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_plans", force: :cascade do |t|
+    t.string   "plan"
+    t.date     "active_until"
+    t.integer  "user_id"
+    t.integer  "tasks_counter", default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -75,8 +84,6 @@ ActiveRecord::Schema.define(version: 20160408140207) do
     t.string   "image_url"
     t.boolean  "has_taken_quiz",       default: false
     t.boolean  "enable_notifications", default: true
-    t.string   "user_plan"
-    t.date     "expiry_date"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

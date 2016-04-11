@@ -81,11 +81,6 @@ class User < ActiveRecord::Base
     taskees.where("email != ?", user_email)
   end
 
-  def self.check_plan_and_status(user_id)
-    where(id: user_id).pluck(:user_plan, :expiry_date)
-  end
-
-
   private_class_method
   def self.users
     User.arel_table
