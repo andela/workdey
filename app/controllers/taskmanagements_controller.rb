@@ -1,5 +1,4 @@
 class TaskmanagementsController < ApplicationController
-  before_action :check_plan, only: :create
   before_action :show_notification_count, only: :new
 
   def new
@@ -44,34 +43,6 @@ class TaskmanagementsController < ApplicationController
   end
 
   private
-
-  def check_plan
-    tasker_plan_status = UserPlan.check_plan_and_status(task_details[:tasker_id])
-    tasker_expiry_date = tasker_plan_status[1]
-    tasker_plan = tasker_plan_status[0]
-    if tasker_plan == "novice" || tasker_expiry_date > Time.now
-      check_number_of_tasks_created(task_details[:tasker_id], tasker_plan)
-    else
-      redirect_to dashboard_path, notice: "Your subscription has expired. "\
-      "subscribe and try again"
-    end
-  end
-
-  def check_number_of_tasks_created(tasker_id, tasker_plan)
-    task_created = UserPlan.find(tasker_id).tasks_counter.count
-    if task_created == no_of_tasks(tasker_plan)
-      redirect_to user_plans_path, notice: "You have maxed out you current "\
-      "subscription,subscribe to your current plan or choose a different plan!!"
-    end
-  end
-
-  def no_of_tasks(tasker_plan)
-    case tasker_plan
-    when "novice" then 10
-    when "medial" then 50
-    else Float::INFINITY
-    end
-  end
 
   def task_details
     params.require(:task_management).

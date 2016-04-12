@@ -18,12 +18,12 @@
                     <li class="collection-item">3 task types</li>
                     <li class="collection-item">Earn Reputation</li>
                   </ul>
-                  <button class="waves-effect waves-light btn">Default Plan</button>
+                  <h5><span class="red-text">Default Plan</span></h5>
                 </div>
               </div>
             </div>
             <div class="col m4">
-              <div class="card">
+              <div class="card <%= "z-depth-4" if current_user.medial? %>">
                   <div class="card-image cyan waves-effect">
                     <div class="card-title">Medial</div>
                     <div class="price"><sup>$</sup>20<sub>/yr</sub></div>
@@ -34,13 +34,22 @@
                       <li class="collection-item">All task types</li>
                       <li class="collection-item">Earn Reputation</li>
                     </ul>
-                    <button class="waves-effect waves-light btn">Select Plan</button>
+                    <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                      <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                      data-name="Workdey inc."
+                      data-amount="2000"
+                      data-locale="auto">
+                      </script>
+                      <%= hidden_field_tag :plan, "medial" %>
+                    <% end %>
 
                   </div>
                 </div>
               </div>
               <div class="col m4">
-                <div class="card">
+                <div class="card <%= "z-depth-4" if current_user.maestro? %>">
                     <div class="card-image green waves-effect">
                       <div class="card-title">Maestro</div>
                       <div class="price"><sup>$</sup>30<sub>/yr</sub></div>
@@ -51,14 +60,23 @@
                         <li class="collection-item">All task types</li>
                         <li class="collection-item">Earn Reputation</li>
                       </ul>
-                      <button class="waves-effect waves-light btn">Select Plan</button>
+                      <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                      <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                      data-name="Workdey inc."
+                      data-amount="3000"
+                      data-locale="auto">
+                      </script>
+                      <%= hidden_field_tag :plan, "maestro" %>
+                    <% end %>
                     </div>
                   </div>
               </div>
             </div>
           <% elsif current_user.user_type == "tasker" %>
             <div class="col m4">
-              <div class="card <%= "z-depth-4" if current_user %>">
+              <div class="card  <%= "z-depth-4" if current_user.novice? %>" >
                 <div class="card-image purple waves-effect">
                   <div class="card-title">Novice</div>
                   <div class="price">Free</div>
@@ -70,12 +88,12 @@
                     <li class="collection-item">3 task types</li>
                     <li class="collection-item">Rate taskees</li>
                   </ul>
-                  <button class="waves-effect waves-light btn">Default Plan</button>
+                  <h5> <span class="red-text">Default Plan</span></h5>
                 </div>
               </div>
             </div>
             <div class="col m4">
-              <div class="card">
+              <div class="card <%= "z-depth-4" if current_user.medial? %>">
                   <div class="card-image cyan waves-effect">
                     <div class="card-title">Medial</div>
                     <div class="price"><sup>$</sup>20<sub>/yr</sub></div>
@@ -96,13 +114,13 @@
                       data-amount="2000"
                       data-locale="auto">
                       </script>
-                      <%= hidden_field_tag :plan, "novice" %>
+                      <%= hidden_field_tag :plan, "medial" %>
                     <% end %>
                   </div>
                 </div>
               </div>
               <div class="col m4">
-                <div class="card">
+                <div class="card <%= "z-depth-4" if current_user.maestro? %>">
                     <div class="card-image green waves-effect">
                       <div class="card-title">Maestro</div>
                       <div class="price"><sup>$</sup>30<sub>/yr</sub></div>
@@ -114,7 +132,16 @@
                         <li class="collection-item">All task types</li>
                         <li class="collection-item">Rate taskees</li>
                       </ul>
-                      <button class="waves-effect waves-light btn">Select Plan</button>
+                      <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                        <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                        data-name="Workdey inc."
+                        data-amount="3000"
+                        data-locale="auto">
+                        </script>
+                        <%= hidden_field_tag :plan, "maestro" %>
+                      <% end %>
                     </div>
                   </div>
               </div>
