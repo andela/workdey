@@ -1,6 +1,14 @@
-var dispatcher = new WebSocketRails('localhost:3000/websocket')
+var dispatcher = new WebSocketRails(host_name())
 var map
 var markers = []
+
+function host_name() {
+  if (location.port.length === 0) {
+    return location.hostname + "/websocket";
+  } else {
+    return location.hostname + ":" + location.port + "/websocket";
+  }
+}
 
 var locationController = {
   getPosition: function () {
