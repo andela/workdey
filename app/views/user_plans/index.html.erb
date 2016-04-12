@@ -37,7 +37,7 @@
                     <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
                       <script
                       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                       data-name="Workdey inc."
                       data-amount="2000"
                       data-locale="auto">
@@ -63,7 +63,7 @@
                       <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
                       <script
                       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                      data-key="<%=  Rails.configuration.stripe[:publishable_key]  %>"
                       data-name="Workdey inc."
                       data-amount="3000"
                       data-locale="auto">
@@ -108,7 +108,7 @@
                     <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
                       <script
                       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                       data-name="Workdey inc."
                       data-amount="2000"
                       data-locale="auto">
@@ -134,7 +134,7 @@
                       <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
                         <script
                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                        data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                         data-name="Workdey inc."
                         data-amount="3000"
                         data-locale="auto">
