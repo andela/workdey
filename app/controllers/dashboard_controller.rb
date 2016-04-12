@@ -71,7 +71,7 @@ class DashboardController < ApplicationController
   end
 
   def assign_task
-    param = deobfuscate(params.except(:controller, :action))["taskee_id"]
+    deobfuscate(params.except(:controller, :action))["taskee_id"]
   end
 
   private

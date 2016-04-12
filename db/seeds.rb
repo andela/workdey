@@ -44,10 +44,10 @@ class SeedData
       },
       {
         firstname: "Hubert", lastname: "Nakitare",
-        email: "hubert.nakitare@andela.com", street_address: "525, Kindaruma Road",
-        city: "Nairobi", state: "Nairobi", password: "1234567890",
-        user_type: "tasker", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
+        email: "hubert.nakitare@andela.com", street_address: "525,
+        Kindaruma Road", city: "Nairobi", state: "Nairobi",
+        password: "1234567890", user_type: "tasker",
+        confirm_token: "112ewqee2123wqwqw12wq", image_url: cloudinary_img_url,
         latitude: "-1.297849", longitude: "36.7868873"
       },
       {

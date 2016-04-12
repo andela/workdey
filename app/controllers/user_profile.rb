@@ -45,6 +45,5 @@ class UserProfile < ApplicationController
   end
 
   def get_user_location(current_user, location_params)
-
   end
 end

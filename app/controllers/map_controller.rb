@@ -1,5 +1,4 @@
 class MapController < WebsocketRails::BaseController
-
   def get_nearby_taskees
     taskees = get_all_taskees
     send_message :success, taskees.to_json, namespace: :taskees
@@ -33,7 +32,7 @@ class MapController < WebsocketRails::BaseController
           [current_user.latitude, current_user.longitude],
           [taskee[:latitude], taskee[:longitude]]
         ).to_kilometers,
-        tasks: taskee.tasks.collect(&:name)
+        tasks: taskee.tasks.map(&:name)
       }
     end
     nearby_taskees
