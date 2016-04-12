@@ -1,15 +1,22 @@
-<body>
-  <main>
-    <section class="main container center-align">
-      <div class="row">
-        <section class="card">
-          <div id="map" style='width: 100%; height: 600px;'></div>
-        </section>
+<main>
+    <%= render "partials/sidebar_dashboard" %>
+    <section class="main container center-align map-search">
         <div class="row">
-          <button class="btn" id="tag-location" data-longitude="<%= @current_user.longitude %>" data-latitude="<%= @current_user.latitude %>">Update your location</button>
+            <div class="col m9 s12">
+                <div class="card" id="map" style='width: 100%; height: 600px;'></div>
+            </div>
+            <div class="col m3 s12">
+                <br>
+                <span class="hidden" id="marker-location" data-longitude="<%= @current_user.longitude %>" data-latitude="<%= @current_user.latitude %>"></span>
+                <label for="select_task">Search for tasks:</label>
+                <select name="select_task" id="select_task">
+                    <option value="all">All Tasks</option>
+                </select>
+                <br><br>
+                <button class="btn" id="reload-map">Reload Map</button>
+            </div>
         </div>
-      </div>
     </section>
-  </main>
-</body>
+</main>
+<div id="scripts"></div>
 

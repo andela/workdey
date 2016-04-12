@@ -61,21 +61,8 @@ class DashboardController < ApplicationController
   end
 
   def profile_view
-    @user = User.find(profile_params[:taskee_id])
-  end
-
-
-  def update_location
-    @current_user = current_user
-    loc = {
-      longitude: location_params[:longitude],
-      latitude: location_params[:latitude]
-    }
-    if @current_user.update_columns(loc)
-      render :json => { :status => 'success'  }.to_json
-    else
-      render :json => { :status => 'fail'  }.to_json
-    end
+    param = deobfuscate(params.except(:controller, :action))["taskee_id"]
+    @user = User.find(param)
   end
 
   def search_with_map

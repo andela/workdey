@@ -1,11 +1,12 @@
+var dispatcher = new WebSocketRails('localhost:3000/websocket')
+var map
+var markers = []
+
 var locationController = {
-  btn: function () {
-    return $('#tag-location')
-  },
   getPosition: function () {
     return {
-      longitude: this.btn().attr('data-longitude'),
-      latitude: this.btn().attr('data-latitude')
+      longitude: $('#marker-location').attr('data-longitude'),
+      latitude: $('#marker-location').attr('data-latitude')
     }
   },
   hasCoords: function () {
@@ -36,25 +37,54 @@ navigatorController.initMap = function (pos) {
   var mapOptions = {
     zoom: 12,
     center: position,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    maxZoom: 17
   }
 
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions)
+  map = new google.maps.Map(document.getElementById('map'), mapOptions)
+
 
   var marker = new google.maps.Marker({
     position: position,
-    map: map
+    map: map,
+		icon: {
+			path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+			scale: 6
+		}
   })
+
+  var infoWindow = new google.maps.InfoWindow({
+    content: '<h5>You are here!</h5>'
+  })
+
+  infoWindow.open(map, marker)
 
   marker.addListener('click', function () {
-    navigatorController.markerInfo().open(map, marker)
+    infoWindow.open(map, marker)
   })
 
-  this.createMarkers(map)
+  this.createTaskeesMarkers()
 }
 
-navigatorController.markerInfo = function () {
-  var infoString = "<h1>lorem ipsum</h1>"
+navigatorController.markerInfo = function (taskee) {
+  var phone = taskee.phone || 'n/a'
+
+  var infoString = [
+    '<section style="width: 400px; text-align: initial"><div class="row"><div class="col s4">',
+    '<img src="' + taskee.avatar + '" alt="' + taskee.name + '" width="50px" height="50px" style="border-radius: 100%">',
+    '</div><div class="col s8">',
+    '<h4>' + taskee.name + '</h4>',
+    '</div></div><div class="row"><div class="col s6">',
+    '<i class="material-icons">phone</i> ' + phone + '',
+    '</div><div class="col s6">',
+    '<b>Joined: </b>' + moment(taskee.joined, 'YYYYMMDD').fromNow() + '',
+    '</div></div><div class="row"><div class="col s12">',
+    '<i class="material-icons">room</i> ' + taskee.location + '',
+    '</div></div><div class="row">',
+    '<div class="col s12">',
+    '<a class="btn" href="' + taskee.link + '">View</a>',
+    '</div></div></section>',
+  ].join('')
 
   var infoWindow = new google.maps.InfoWindow({
     content: infoString
@@ -63,28 +93,64 @@ navigatorController.markerInfo = function () {
   return infoWindow
 }
 
-navigatorController.createMarkers = function (map) {
-  var markers = []
+navigatorController.createMarkers = function (taskees) {
   var bounds = new google.maps.LatLngBounds()
+  taskees.map(function (taskee) {
+    if (taskee.distance <= 50) {
+      var m = new google.maps.Marker({
+        position: {
+          lat: taskee.coords[0],
+          lng: taskee.coords[1]
+        }
+      })
+      markers.push({
+        marker: m,
+        taskee: taskee
+      })
+      bounds.extend(m.getPosition())
+      map.fitBounds(bounds)
+    }
+  })
+  navigatorController.addMarkers()
+}
 
-  for (var i = 0, len = 20; i < len; i++) {
-    var m = new google.maps.Marker({
-      position: {
-        lat: Math.random() * (-1.3 - -1.2) + -1.2,
-        lng: Math.random() * (36.7889 - 36.5) + 36.5
-      },
-      map: map
-    })
-    markers.push(m)
-    bounds.extend(m.getPosition())
-  }
+navigatorController.createTaskeesMarkers = function () {
+  dispatcher.trigger('taskees.get_nearby_taskees')
+  dispatcher.bind('taskees.success', function (taskee) {
+    var taskees = JSON.parse(taskee)
+    var tasks = navigatorController.getTasks(taskees)
+    navigatorController.createSelect(tasks)
+    navigatorController.createMarkers(taskees)
+  })
+}
 
-  map.fitBounds(bounds)
-
+navigatorController.addMarkers = function () {
   markers.map(function (marker) {
-    marker.addListener('click', function () {
-      navigatorController.markerInfo().open(map, marker)
+    marker.marker.setMap(map)
+    marker.marker.addListener('click', function () {
+      navigatorController.markerInfo(marker.taskee).open(map, marker.marker)
     })
+  })
+}
+
+navigatorController.getTasks = function (taskees) {
+  var tasks = []
+  taskees.map(function (taskee) {
+    if (taskee.distance <= 50) tasks.push(taskee.tasks)
+  })
+  var result = tasks.reduce(function (a, b) {
+    return a.concat(b)
+  }).filter(function (itm, i, a) {
+    return i === a.indexOf(itm)
+  })
+  return result
+}
+
+navigatorController.createSelect = function (tasks) {
+  var searchSelect = $('#select_task')
+  searchSelect.empty()
+  $.each(tasks, function (index, value) {
+    searchSelect.append($('<option></option>').attr('value', value).text(value))
   })
 }
 
@@ -92,7 +158,6 @@ navigatorController.geolocate = function () {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function success (pos) {
-        navigatorController.saveCordinates(pos)
         navigatorController.initMap(pos)
       },
       function error (err) {
@@ -107,38 +172,31 @@ navigatorController.geolocate = function () {
   }
 }
 
-navigatorController.saveCordinates = function (pos) {
-  $.post('/dashboard/update_location',
-    {
-      longitude: pos.coords.longitude,
-      latitude: pos.coords.latitude
-    },
-    function (data, textStatus, jqXHR) {
-      console.log(textStatus)
-    }
-  )
-}
+$('#select_task').change(function () {
+  dispatcher.trigger('search_taskee.search_by_task', this.value)
+  dispatcher.bind('search_taskee.success', function (taskee) {
+    var taskees = JSON.parse(taskee)
+    navigatorController.createMarkers(taskees)
+  })
+})
 
-navigatorController.handleClick = function () {
-  var btn = this.btn()
-
-  btn.on('click', function () {
-    navigatorController.geolocate()
+function reloadMap () {
+  $("#reload-map").on('click', function () {
+    getLocation()
   })
 }
 
-navigatorController.handleClick()
-
 function loadScript (src) {
-  var script = document.createElement('script')
-  document.getElementsByTagName('body')[0].appendChild(script)
-  script.src = src
+  $('#scripts').empty()
+  $('#scripts').append(src)
 }
 
 var getLocation = function () {
   navigatorController.getUserPosition()
 }
 
+reloadMap()
+
 if (document.getElementById('map')) {
-  loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyBiKS5l5Gh-4OeQS7HFY5-ps60Iz5YB-0s&callback=getLocation')
+  loadScript('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiKS5l5Gh-4OeQS7HFY5-ps60Iz5YB-0s&callback=getLocation" async defer></script>')
 }
