@@ -1,13 +1,13 @@
 module UserPlansHelper
   def novice?
-    self.user_plan && self.user_plan.name == 'novice'
+    user_plan && user_plan.name == "novice"
   end
 
   def medial?
-    self.user_plan && self.user_plan.name == 'medial'
+    user_plan && user_plan.name == "medial"
   end
 
   def maestro?
-    self.user_plan && self.user_plan.name == 'maestro'
+    user_plan && user_plan.name == "maestro"
   end
 end

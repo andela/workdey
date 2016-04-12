@@ -68,8 +68,8 @@ class SeedData
 
   def user_plan
     [
-      {user_id: 3, name: 'novice'},
-      {user_id: 2, name: 'novice'}
+      { user_id: 3, name: "novice" },
+      { user_id: 2, name: "novice" }
     ]
   end
 
