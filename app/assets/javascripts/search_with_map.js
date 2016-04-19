@@ -2,11 +2,11 @@ var dispatcher = new WebSocketRails(host_name())
 var map
 var markers = []
 
-function host_name() {
-  if (location.port.length === 0) {
-    return location.hostname + "/websocket";
+function host_name () {
+  if ( location.port.length === 0 ) {
+    return location.hostname + ':3001/websocket'
   } else {
-    return location.hostname + ":" + location.port + "/websocket";
+    return location.hostname + ':' + location.port + '/websocket'
   }
 }
 
