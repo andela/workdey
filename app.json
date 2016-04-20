@@ -23,6 +23,7 @@
   },
   "addons":[
     "heroku-postgresql",
-    "sendgrid"
+    "sendgrid",
+    "rediscloud"
   ]
 }

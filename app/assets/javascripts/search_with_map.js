@@ -4,7 +4,7 @@ var markers = []
 
 function host_name () {
   if ( location.port.length === 0 ) {
-    return location.hostname + ':3001/websocket'
+    return location.hostname + '/websocket'
   } else {
     return location.hostname + ':' + location.port + '/websocket'
   }
