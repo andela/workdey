@@ -194,7 +194,6 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.2.0)
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
@@ -381,7 +380,6 @@ DEPENDENCIES
   pg (= 0.17.1)
   pry
   pry-rails
-  puma
   rails (= 4.2.4)
   rails_12factor (= 0.0.2)
   redis
@@ -392,6 +390,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 3.1)
   sidekiq
+  thin
   travis (= 1.8.0)
   turbolinks
   tzinfo-data
