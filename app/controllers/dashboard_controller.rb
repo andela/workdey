@@ -65,6 +65,15 @@ class DashboardController < ApplicationController
     @user = User.find(param)
   end
 
+  def search_with_map
+    @current_user = current_user
+    @users = User.all
+  end
+
+  def assign_task
+    deobfuscate(params.except(:controller, :action))["taskee_id"]
+  end
+
   private
 
   def quiz_params
@@ -74,5 +83,9 @@ class DashboardController < ApplicationController
   def profile_params
     params.permit(:user_pix, :phone, :street_address, :city, :state, :gender,
                   :taskee_id, date: [:day, :month, :year])
+  end
+
+  def location_params
+    params.permit(:longitude, :latitude)
   end
 end

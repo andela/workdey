@@ -117,6 +117,7 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.3)
+    haversine (0.3.0)
     highline (1.7.8)
     hiredis (0.6.1)
     http-cookie (1.0.2)
@@ -146,6 +147,8 @@ GEM
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    momentjs-rails (2.11.0)
+      railties (>= 3.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -191,7 +194,6 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.2.0)
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
@@ -365,10 +367,12 @@ DEPENDENCIES
   factory_girl_rails
   faye-websocket (= 0.10.0)
   figaro
+  haversine
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
   materialize-sass (= 0.97.1)
+  momentjs-rails
   omniauth-facebook
   omniauth-google-oauth2 (= 0.2.10)
   omniauth-oauth2 (~> 1.3.1)
@@ -376,9 +380,9 @@ DEPENDENCIES
   pg (= 0.17.1)
   pry
   pry-rails
-  puma
   rails (= 4.2.4)
   rails_12factor (= 0.0.2)
+  redis
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
@@ -386,6 +390,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 3.1)
   sidekiq
+  thin
   travis (= 1.8.0)
   turbolinks
   tzinfo-data

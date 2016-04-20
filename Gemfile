@@ -3,20 +3,23 @@ ruby "2.3.0"
 gem "bcrypt", "~> 3.1.7"
 gem "bourbon"
 gem "cloudinary", "1.1.0"
-gem 'coveralls', require: false
-gem 'em-rspec', require: false
+gem "coveralls", require: false
+gem "em-rspec", require: false
 gem "eventmachine"
 gem "faye-websocket", "0.10.0"
-gem "jquery-rails"
+gem "haversine"
 gem "jbuilder", "~> 2.0"
+gem "jquery-rails"
 gem "jquery-turbolinks"
 gem "materialize-sass", "0.97.1"
-gem "omniauth-oauth2", "~> 1.3.1"
+gem "momentjs-rails"
 gem "omniauth-facebook"
-gem "omniauth-twitter"
 gem "omniauth-google-oauth2", "0.2.10"
+gem "omniauth-oauth2", "~> 1.3.1"
+gem "omniauth-twitter"
 gem "pg", "0.17.1"
 gem "rails", "4.2.4"
+gem "redis"
 gem "sass-rails", "~> 5.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "sidekiq"
@@ -32,7 +35,6 @@ group :development, :test do
   gem "database_cleaner"
   gem "pry"
   gem "pry-rails"
-  gem 'puma'
 end
 
 group :development do
@@ -43,6 +45,7 @@ end
 
 group :production do
   gem "rails_12factor", "0.0.2"
+  gem "thin"
 end
 
 group :test do

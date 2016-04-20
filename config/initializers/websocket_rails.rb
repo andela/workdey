@@ -15,7 +15,7 @@ WebsocketRails.setup do |config|
   # Change to true to enable standalone server mode
   # Start the standalone server with rake websocket_rails:start_server
   # * Requires Redis
-  config.standalone = false
+  config.standalone = true
 
   # Change to true to enable channel synchronization between
   # multiple server instances.
@@ -59,5 +59,17 @@ WebsocketRails.setup do |config|
   # requires CORS to be enabled for GET "/websocket" request.
   # List here the origin domains allowed to perform the request.
   # config.allowed_origins = ['http://localhost:3000']
+
+  if ENV["RAILS_ENV"] == 'production'
+    uri = URI.parse(URI.encode(ENV["REDISCLOUD_URL"]))
+    config.redis_options = {
+      host: uri.host, port: uri.port, user: uri.user, password: uri.password
+    }
+  else
+    config.redis_options = {
+      host: '127.0.0.1',
+      port: '6379'
+    }
+  end
 
 end
