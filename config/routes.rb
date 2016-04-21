@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get "auth/:provider/callback" => "sessions#create"
   get "auth/failure" => "sessions#destroy"
-  get "task_management" => ""
+  get "task_management" => "task_managements#index"
   get "role" => "dashboard#choose_role"
   post "role" => "dashboard#set_role"
   get "quiz" => "dashboard#quiz"
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
   get "pages/become_a_taskee"
 
-  get "dashboard/tasks" => "task_managements#index", as: :my_tasks
+  # get "dashboard/tasks" => "task_managements#index", as: :my_tasks
   get "dashboard/tasks/review" => "task_managements#show", as: :review_task
   post "tasks_managements/update" => "task_managements#update", as: :completed
   post "user/settings" => "users#update_notification_settings"

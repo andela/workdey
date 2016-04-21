@@ -61,7 +61,7 @@ class TaskManagementsController < ApplicationController
     end
     redirect_to dashboard_path
   end
-  
+
   private
 
   def task_details
@@ -111,9 +111,6 @@ class TaskManagementsController < ApplicationController
     flash[:day] = task_date[:day]
     flash[:time] = task_time[:task]
   end
-  
-
-  private
 
   def review_and_rate(params)
     review = Review.new

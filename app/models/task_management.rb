@@ -13,8 +13,6 @@ class TaskManagement < ActiveRecord::Base
             :task_desc,
             presence: true
 
-  # validates :end_time, presence: true,
-  #           numericality: { greater_than: Time.now.to_i }
   def self.notifications_count(user_type, id)
     if user_type == "taskee"
       where(taskee_id: id).where(taskee_notified: false).count
@@ -51,3 +49,4 @@ class TaskManagement < ActiveRecord::Base
     end
   end
 end
+ 
