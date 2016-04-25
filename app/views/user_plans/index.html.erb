@@ -1,0 +1,177 @@
+<main>
+  <%= render "partials/sidebar_dashboard" %>
+  <section class="main container center-align pricing-plans">
+    <div class="row">
+      <section class="col s12">
+        <div class="row">
+          <h2 class="header">User Plans</h2>
+          <% if current_user.user_type == "taskee" %>
+            <div class="col m4">
+              <div class="card <%= "z-depth-4" if current_user.novice? %>">
+                <div class="card-image purple waves-effect">
+                  <div class="card-title">Novice</div>
+                  <div class="price">Free</div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Receive 10 tasks</li>
+                    <li class="collection-item">3 task types</li>
+                    <li class="collection-item">Earn Reputation</li>
+                  </ul>
+                  <h5><span class="purple-text">Free plan</span></h5>
+                </div>
+              </div>
+            </div>
+            <div class="col m4">
+              <div class="card <%= "z-depth-4" if current_user.medial? %>">
+                <div class="card-image cyan waves-effect">
+                  <div class="card-title">Medial</div>
+                  <div class="price"><sup>$</sup>20<sub>/yr</sub></div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Receive 50 tasks</li>
+                    <li class="collection-item">All task types</li>
+                    <li class="collection-item">Earn Reputation</li>
+                  </ul>
+                  <% if current_user.medial? %>
+                    <h5 class="cyan-text">Your current plan</h5>
+                  <% elsif current_user.maestro? %>
+                    <h5 class="cyan-text">Medial plan</h5>
+                  <% else %>
+                    <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                      <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-name="Workdey inc."
+                      data-amount="2000"
+                      data-locale="auto">
+                      </script>
+                      <%= hidden_field_tag :plan, "medial" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col m4">
+              <div class="card <%= "z-depth-4" if current_user.maestro? %>">
+                <div class="card-image green waves-effect">
+                  <div class="card-title">Maestro</div>
+                  <div class="price"><sup>$</sup>30<sub>/yr</sub></div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Receive Unlimited tasks</li>
+                    <li class="collection-item">All task types</li>
+                    <li class="collection-item">Earn Reputation</li>
+                  </ul>
+                  <% if current_user.maestro? %>
+                    <h5 class="green-text">Your current plan</h5>
+                  <% else %>
+                    <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                      <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%=  Rails.configuration.stripe[:publishable_key]  %>"
+                      data-name="Workdey inc."
+                      data-amount="3000"
+                      data-locale="auto">
+                      </script>
+                      <%= hidden_field_tag :plan, "maestro" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% elsif current_user.user_type == "tasker" %>
+            <div class="col m4">
+              <div class="card  <%= "z-depth-4" if current_user.novice? %>" >
+                <div class="card-image purple waves-effect">
+                  <div class="card-title">Novice</div>
+                  <div class="price">Free</div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Assign 10 tasks</li>
+                    <li class="collection-item">Find taskees by reputation</li>
+                    <li class="collection-item">3 task types</li>
+                    <li class="collection-item">Rate taskees</li>
+                  </ul>
+                  <% if current_user.novice? %>
+                    <h5> <span class="purple-text">Your current plan</span></h5>
+                  <% else %>
+                    <h5> <span class="purple-text">Free plan</span></h5>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col m4">
+              <div class="card <%= "z-depth-4" if current_user.medial? %>">
+                <div class="card-image cyan waves-effect">
+                  <div class="card-title">Medial</div>
+                  <div class="price"><sup>$</sup>20<sub>/yr</sub></div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Assign 50 tasks</li>
+                    <li class="collection-item">Find taskees by reputation</li>
+                    <li class="collection-item">All task types</li>
+                    <li class="collection-item">Rate taskees</li>
+                  </ul>
+                  <% if current_user.medial? %>
+                    <h5 class="cyan-text">Your current plan</h5>
+                  <% elsif current_user.maestro? %>
+                    <h5 class="cyan-text">Medial plan</h5>
+                  <% else %>
+                    <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                      <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-name="Workdey inc."
+                      data-amount="2000"
+                      data-locale="auto">
+                      </script>
+                      <%= hidden_field_tag :plan, "medial" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col m4">
+              <div class="card <%= "z-depth-4" if current_user.maestro? %>">
+                <div class="card-image green waves-effect">
+                  <div class="card-title">Maestro</div>
+                  <div class="price"><sup>$</sup>30<sub>/yr</sub></div>
+                </div>
+                <div class="card-content">
+                  <ul class="collection">
+                    <li class="collection-item">Assign Unlimited tasks</li>
+                    <li class="collection-item">Find taskees by reputation</li>
+                    <li class="collection-item">All task types</li>
+                    <li class="collection-item">Rate taskees</li>
+                  </ul>
+                <% if current_user.maestro? %>
+                  <h5 class="green-text">Your current plan</h5>
+                <%  else %>
+                  <%= form_tag({controller: "user_plans", action: "create"}, method: "post") do %>
+                    <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-name="Workdey inc."
+                    data-amount="3000"
+                    data-locale="auto">
+                    </script>
+                    <%= hidden_field_tag :plan, "maestro" %>
+                  <% end %>
+                <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <% end %>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
