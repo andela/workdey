@@ -5,7 +5,7 @@
     <%= link_to raw("<li class='side-nav-button'>Task Management</li>"), dashboard_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), user_plans_path %><hr>
 <% if current_user.user_type == "tasker"%>
-    <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), dashboard_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), map_search_path %><hr>
 <% end %>
   </ul>
 </div>
