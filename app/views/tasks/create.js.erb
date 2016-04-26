@@ -1,0 +1,6 @@
+<% if @skillset.was_created %>
+  $('ul.collection').append("<%= j(render @task) %>");
+  $('input#task_name').val('').removeClass('invalid');
+<% else %>
+  $('input#task_name').val('').addClass('invalid');
+<% end %>

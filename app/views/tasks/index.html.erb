@@ -1,0 +1,26 @@
+<%= render 'partials/sidebar_dashboard' %>
+<section class="main container">
+  <div class="row">
+    <div class="col m10 offset-m1">
+      <div class="row">
+        <div class="col m5 offset-m1">
+          <% if @tasks.empty? %>
+            <p>You don't have any skillsets</p>
+          <% else %>
+            <ul class="collection with-header">
+              <li class="collection-header"><h4>My Skillsets</h4></li>
+              <%= render @tasks %>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col m5">
+          <div class="valign-wrapper">
+            <div class="valign">
+              <%= render 'form' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

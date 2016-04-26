@@ -51,5 +51,6 @@ Rails.application.routes.draw do
   post "tasks_managements/update" => "task_managements#update", as: :completed
   post "user/settings" => "users#update_notification_settings"
 
+  resources :tasks
   resources :users, only: [:create]
 end
