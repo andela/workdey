@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :skillsets
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
+  has_one :user_plan
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -79,6 +80,18 @@ class User < ActiveRecord::Base
     return nil if taskees.nil? || taskees.empty?
     return taskees if user_email.nil?
     taskees.where("email != ?", user_email)
+  end
+
+  def novice?
+    user_plan && user_plan.name == "novice"
+  end
+
+  def medial?
+    user_plan && user_plan.name == "medial"
+  end
+
+  def maestro?
+    user_plan && user_plan.name == "maestro"
   end
 
   private_class_method

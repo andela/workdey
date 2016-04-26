@@ -1,0 +1,49 @@
+.pricing-plans {
+  margin-left: 22%;
+}
+
+.card {
+  .card-image {
+    position: relative;
+    width: 100%;
+
+    .card-title {
+      position: relative;
+      font-size: 1.28rem;
+      line-height: 1.6em;
+      text-align: center;
+      width: 100%;
+      padding: 10px 15px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .price {
+      position: relative;
+      font-size: 3rem;
+      line-height: 1.6em;
+      color: #fff;
+      font-weight: 300;
+      text-align: center;
+
+      sup {
+        font-weight: 100;
+        font-size: 1.0rem;
+        line-height: 1.6em;
+        top: -23px;
+      }
+
+      sub {
+        font-weight: 100;
+        font-size: 1.0rem;
+        line-height: 1.6em;
+        top: 0px;
+      }
+    }
+  }
+
+  .card-content {
+    .collection {
+      border: none;
+    }
+  }
+}
