@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
     when current_user.user_type == "taskee" && !current_user.has_taken_quiz
       redirect_to quiz_path
     else
+      @profile_meter = calculate_profile_completeness
       render :home
     end
   end
@@ -87,5 +88,15 @@ class DashboardController < ApplicationController
 
   def location_params
     params.permit(:longitude, :latitude)
+  end
+
+  def calculate_profile_completeness
+     all_user_attr = current_user.attributes
+     unwanted_attribute = ["password_digest","created_at","updated_at",
+       "user_type","provider","oauth_id","confirm_token","confirmed",
+       "has_taken_quiz","enable_notifications","longitude","latitude","id"]
+     profile_parameters = all_user_attr.keep_if{|key, value| !unwanted_attribute.include? key}
+     completed = profile_parameters.values.count{|parameter| parameter }.to_f
+     ((completed / profile_parameters.count.to_f) * 100).round
   end
 end
