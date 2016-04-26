@@ -14,7 +14,7 @@
             <div class="col s8">
               <div class="group">
                 <%= f.label :task_name, "Task Name:" %>
-                <%= f.text_field :task_name, value: session[:searcher], disabled: true %>
+                <%= f.select :task_name, options_for_select(@tasks, session[:searcher]) %>
               </div>
 
               <div class="group">

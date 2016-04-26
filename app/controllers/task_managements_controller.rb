@@ -3,10 +3,13 @@ class TaskManagementsController < ApplicationController
                 only: [:index, :new, :show, :review_and_rate]
 
   def index
-    @tasks = current_user.tasks_created if current_user
+    @tasks = TaskManagement.all
   end
 
   def new
+    @tasks = Task.all.map do |task|
+      [task.name, task.id]
+    end
     if params.except(:controller, :action).empty?
       redirect_to(dashboard_path) && return
     end
@@ -17,12 +20,14 @@ class TaskManagementsController < ApplicationController
 
   def create
     @task = TaskManagement.new(task_details.except(:task_name))
-    @task.task_id = Task.find_by(name: task_details[:task_name].capitalize).id
+    @task.task_id = Task.find_by(
+      name: Task.find(task_details[:task_name]).name.capitalize).id
     @task.start_time = get_time(:start)
     @task.end_time = get_time(:end)
     if @task.save
       session.delete(:searcher)
       flash.clear
+      flash[:notice] = "Your taskee has been notified"
       notify("taskee", @task.taskee_id)
       redirect_to dashboard_path
     else
