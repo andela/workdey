@@ -26,6 +26,8 @@ gem "sidekiq"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 gem "websocket-rails"
+gem "stripe"
+gem 'puma'
 
 group :development, :test do
   gem "travis", "1.8.0"

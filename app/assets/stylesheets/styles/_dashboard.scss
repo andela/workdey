@@ -93,8 +93,7 @@ nav .nav-wrapper {
   }
 
 
-[class^="dashboard-"], .pages-search, .taskmanagements-new, [class^="notifications-"] {
-  .nav-wrapper {
+.nav-wrapper {
     .dropdown {
       @include display(flex);
       @include flex-direction(row-reverse);
@@ -208,5 +207,3 @@ nav .nav-wrapper {
         }
       }
     }
-
-}
