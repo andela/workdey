@@ -1,14 +1,17 @@
 <main>
   <section class="col m9 s12 offset-m1">
     <div class="row">
+      <h4>Here is a list of your tasks, those that have been started are marked as <span><strong>active</strong></span></h4>
+      <h4>while those are not yet started as marked as <span><strong>inactive</strong></span></h4>
       <ul class= "col m10 offset-m1" >
         <h2>My Tasks</h2>
         <table>
           <thead>
             <tr>
-              <td>Serial No</td>
-              <td>Taskee Name</td>
-              <td>Task Description</td>
+              <td><strong>Serial No</strong></td>
+              <td><strong>Taskee Name</strong></td>
+              <td><strong>Task Description</strong></td>
+              <td><strong>Status</strong></td>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +27,7 @@
                   <% if task.status.downcase == "done" %>
                     <span>Completed</span>
                   <% else %>
+                    <%= task.status %><br>
                     <%= link_to "Review", review_task_path(details) %>
                   <% end %>
                 </td>
