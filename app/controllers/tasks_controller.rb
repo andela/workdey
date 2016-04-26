@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :taskee_required
 
   def index
     @tasks = current_user.tasks
@@ -20,7 +21,8 @@ class TasksController < ApplicationController
   end
 
   private
-    def task_params
-      params.require(:task).permit(:name)
-    end
+
+  def task_params
+    params.require(:task).permit(:name)
+  end
 end
