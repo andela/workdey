@@ -3,7 +3,11 @@ class TaskManagementsController < ApplicationController
                 only: [:index, :new, :show, :review_and_rate]
 
   def index
-    @tasks = TaskManagement.all
+    if current_user.user_type == "tasker"
+      @tasks = current_user.tasks_created.order(status: :asc)
+    else
+      @tasks = current_user.tasks_given
+    end
   end
 
   def new
