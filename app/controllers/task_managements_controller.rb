@@ -30,9 +30,9 @@ class TaskManagementsController < ApplicationController
   end
 
   def index
-    if current_user.user_type == 'tasker'
+    if current_user.user_type == "tasker"
       @tasks = current_user.tasks_created
-    elsif current_user.user_type == 'taskee'
+    elsif current_user.user_type == "taskee"
       @tasks = current_user.tasks_given
     end
   end

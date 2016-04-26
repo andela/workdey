@@ -108,13 +108,22 @@ class SeedData
     ]
   end
 
+  def user_plan
+    [
+      { user_id: 3, name: "novice" },
+      { user_id: 2, name: "novice" }
+    ]
+  end
+
   def create_all
     User.destroy_all
     Task.destroy_all
     Skillset.destroy_all
+    UserPlan.destroy_all
     users_list.each { |user| User.create(user) }
     tasks_list.each { |task| Task.create(task) }
     skillsets.each { |skill| Skillset.create(skill) }
+    user_plan.each { |user| UserPlan.create(user) }
   end
 end
 workdey_data = SeedData.new
