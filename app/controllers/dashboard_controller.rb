@@ -91,12 +91,24 @@ class DashboardController < ApplicationController
   end
 
   def calculate_profile_completeness
-     all_user_attr = current_user.attributes
-     unwanted_attribute = ["password_digest","created_at","updated_at",
-       "user_type","provider","oauth_id","confirm_token","confirmed",
-       "has_taken_quiz","enable_notifications","longitude","latitude","id"]
-     profile_parameters = all_user_attr.keep_if{|key, value| !unwanted_attribute.include? key}
-     completed = profile_parameters.values.count{|parameter| parameter }.to_f
-     ((completed / profile_parameters.count.to_f) * 100).round
+    all_user_attr = current_user.attributes
+    unwanted_attribute = %w(password_digest created_at updated_at
+                            user_type provider oauth_id confirm_token confirmed
+                            has_taken_quiz enable_notifications longitude
+                            latitude id)
+    profile_parameters = all_user_attr.keep_if do |key, _value|
+      !unwanted_attribute.include? key
+    end
+    completed = profile_parameters.values.count { |parameter| parameter }.to_f
+    check_taskee_skillset(completed, profile_parameters.count)
+  end
+
+  def check_taskee_skillset(completed, profile_parameters)
+    if current_user.taskee?
+      skill_set = Skillset.where(id: current_user.id).empty? ? 0 : 1.0
+      completed += skill_set
+      profile_parameters += 1
+    end
+    ((completed / profile_parameters.to_f) * 100).round
   end
 end

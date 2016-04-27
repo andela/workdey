@@ -8,14 +8,20 @@
   height: $size;
 }
 .meter-header{
-  margin-top: 20%;
+  margin-top: 10%;
+  a{
+    color: gray;
+    &:hover{
+      color:#eb4D5c
+    }
+}
 }
 .profile-meter {
   float: right;
-  margin-top: 10%;
+  margin-top: 15%;
 }
 
-$size: 150px;
+$size: 120px;
 .progress-pie-chart {
   width: $size;
   height: $size;
@@ -60,7 +66,7 @@ $size: 150px;
   display: table;
   span {
     display: block;
-    font-size: 1.6em;
+    font-size: 1.2em;
     font-weight: bold;
     color: #eb4D5c;
   }
@@ -77,11 +83,7 @@ $size: 150px;
   color: #81CE97 !important;
 }
 
-//
-// body {
-//   font-family: Arial;
-//   background: #f7f7f7;
-// }
+
 .progress-pie-chart {
   margin: 50px auto 0;
 }
