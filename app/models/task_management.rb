@@ -12,9 +12,6 @@ class TaskManagement < ActiveRecord::Base
             :taskee_id,
             :task_desc,
             presence: true
-  
-  def task_name
-  end
 
   def self.notifications_count(user_type, id)
     if user_type == "taskee"

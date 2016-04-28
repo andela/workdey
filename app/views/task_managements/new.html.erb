@@ -9,9 +9,8 @@
             <% end %>
           </div>
         <% end %>
-
         <%= form_for @task, url: create_task_path, html: { class: "assign-form" } do |f| %>
-          <%#= f.hidden_field :task_name, value: session[:searcher] %>
+          <%= f.hidden_field :task_name, value: session[:searcher] %>
           <%= f.hidden_field :tasker_id, value: current_user.id %>
           <%= f.hidden_field :taskee_id, value: @taskee_id %>
 
@@ -19,7 +18,7 @@
             <div class="col s8">
               <div class="group">
                 <%= f.label :task_name, "Task Name:" %>
-                <%= f.select :task_name, options_for_select(@tasks, session[:searcher]) %>
+                <%= f.text_field :task_name, value: session[:searcher], disabled: true %>
               </div>
 
               <div class="group">

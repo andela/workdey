@@ -14,7 +14,7 @@
             <div class="col s8">
               <div class="group">
                 <%= f.label :task_name, "Task Name:" %>
-                <%= f.select :task_name, options_for_select(@tasks, session[:searcher]) %>
+                <%= f.text_field :task_name, value: session[:searcher], disabled: true %>
               </div>
 
               <div class="group">
@@ -46,7 +46,7 @@
 
               <div class="group">
                 <%= f.label :task_desc, "Give a little bit more info about this task:" %>
-                <%= f.text_area :task_desc, placeholder: "EXAMPLE: I have 3 bedrooms and it really needs a deep cleaning.", required: true %>
+                <%= f.text_area :task_desc, placeholder: "EXAMPLE: I have 3 bedrooms and it really needs deep cleaning.", required: true %>
               </div>
             </div>
 

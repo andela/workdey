@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   get "auth/:provider/callback" => "sessions#create"
   get "auth/failure" => "sessions#destroy"
-  # get "task_management" => "task_managements#index"
   get "role" => "dashboard#choose_role"
   post "role" => "dashboard#set_role"
   get "quiz" => "dashboard#quiz"
