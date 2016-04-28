@@ -49,4 +49,3 @@ class TaskManagement < ActiveRecord::Base
     end
   end
 end
- 

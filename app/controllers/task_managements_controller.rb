@@ -3,11 +3,11 @@ class TaskManagementsController < ApplicationController
                 only: [:index, :new, :show, :review_and_rate]
 
   def index
-    if current_user.user_type == "tasker"
-      @tasks = current_user.tasks_created.order(status: :asc)
-    else
-      @tasks = current_user.tasks_given
-    end
+    @tasks = if current_user.user_type == "tasker"
+               sort_status(current_user.tasks_created)
+             else
+               current_user.tasks_given
+             end
   end
 
   def new
@@ -128,5 +128,16 @@ class TaskManagementsController < ApplicationController
     end
   end
 
-
+  def sort_status(tasks)
+    completed_tasks = []
+    incomplete_tasks = []
+    tasks.each do |task|
+      if task.status == "done"
+        completed_tasks << task
+      else
+        incomplete_tasks << task
+      end
+    end
+    completed_tasks + incomplete_tasks.sort
+  end
 end

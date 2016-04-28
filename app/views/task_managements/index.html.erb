@@ -49,7 +49,7 @@
                 <td><%= desc = task.task_desc %></td>
                 <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
                   <% if task.status.downcase == "done" %>
-                    <span>Completed</span>
+                    <td><span>Done</span></td>
                   <% elsif task.status.downcase == "active" %>
                       <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
                      <%= link_to "Review", review_task_path(details) %></td>
