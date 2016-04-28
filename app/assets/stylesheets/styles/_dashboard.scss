@@ -39,18 +39,18 @@ nav .nav-wrapper {
     width: 15em;
     height: 15em;
   }
-  span {  
+  span {
     font-size: 1.1em;
     padding-right: 0.2em;
- }
+  }
   h3, span {
     font-weight: bold;
- }
+  }
 }
 
 .user-reviews {
   margin-top: 5em;
-    h4 {
+  h4 {
     font-weight: 400;
   }
 }
@@ -86,129 +86,131 @@ nav .nav-wrapper {
   }
 
   .side-nav-button {
-      padding: 20px 10px 20px 40px;
-    }
-    .side-nav-button:hover{
-      background-color: #9D9B9B !important;
-      color: #ECECEC;
-    }
-  }
-
-  .selected {
     padding: 20px 10px 20px 40px;
-    background-color:#FFFFFF;
-    color: grey !important;
   }
+  .side-nav-button:hover{
+    background-color: #9D9B9B !important;
+    color: #ECECEC;
+  }
+}
 
+.selected {
+  padding: 20px 10px 20px 40px;
+  background-color:#FFFFFF;
+  color: grey !important;
+}
 
-[class^="dashboard-"], .pages-search, .taskmanagements-new, [class^="notifications-"] {
-  .nav-wrapper {
-    .dropdown {
-      @include display(flex);
-      @include flex-direction(row-reverse);
-      padding: em(6px);
+.nav-wrapper {
+  .dropdown {
+    @include display(flex);
+    @include flex-direction(row-reverse);
+    padding: em(6px);
 
-     
-
-      .username {
-        padding-left: em(10px);
-        padding-right: em(10px);
-        font-weight: 600;
-      }
+    .user-profile-image {
+      width: 50px;
+      height: 50px;
+      max-width: 100%;
+      margin-top: em(7.5px);
+      border-radius: 100%;
     }
 
-    .dashboard-navlinks {
-      margin-top: em(15px);
-      position: relative;
-
-      .notification-badge {
-        position: absolute;
-        top: -15px;
-        left: -10px;
-
-        span {
-          border: 1px solid #fff;
-          padding: 1px 6px;
-          border-radius: 3px;
-          background-color: #fff;
-          color: #eb4d5c;
-        }
-      }
-    }
-
-    .dropdown-content {
-      overflow: hidden;
-
-      li > a {
-        font-size: inherit;
-      }
+    .username {
+      padding-left: em(10px);
+      padding-right: em(10px);
+      font-weight: 600;
     }
   }
 
-  // Assign task
+  .dashboard-navlinks {
+    margin-top: em(15px);
+    position: relative;
 
-    .assign-form {
-      .card-panel > img {
-        width: 150px;
-        height: 150px;
-        max-width: 100%;
-        margin-top: em(7.5px);
-        border-radius: 100%;
+    .notification-badge {
+      position: absolute;
+      top: -15px;
+      left: -10px;
+
+      span {
+        border: 1px solid #fff;
+        padding: 1px 6px;
+        border-radius: 3px;
+        background-color: #fff;
+        color: #eb4d5c;
       }
     }
+  }
 
-    // Notifications
+  .dropdown-content {
+    overflow: hidden;
 
-    .notifications {
-      transition-duration: 0.6s;
+    li > a {
+      font-size: inherit;
     }
+  }
+}
 
-    .notification-feed {
-      height: em(325px);
-      overflow: hidden;
+// Assign task
+
+.assign-form {
+  .card-panel > img {
+    width: 150px;
+    height: 150px;
+    max-width: 100%;
+    margin-top: em(7.5px);
+    border-radius: 100%;
+  }
+}
+
+// Notifications
+
+.notifications {
+  transition-duration: 0.6s;
+}
+
+.notification-feed {
+  height: em(325px);
+  overflow: hidden;
+}
+
+.feed {
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f6f7f8;
+  transition-duration: 0.6s;
+
+  &.viewed {
+    background-color: transparent;
+    transition-duration: 0.6s;
+  }
+
+  &:last-child {
+    border: 0;
+  }
+
+  img {
+    width: em(30px);
+    height: em(30px);
+    border-radius: 100%;
+  }
+
+  .btn {
+    height: em(25px);
+    line-height: em(25px);
+  }
+}
+
+.full_notification_message {
+  padding: em(55px);
+
+  .actions {
+    @include display(flex);
+    @include justify-content(space-around);
+
+    .btn > .material-icons {
+      pointer-events: none;
     }
-
-    .feed {
-      border-bottom: 1px solid #ccc;
-      padding: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f6f7f8;
-      transition-duration: 0.6s;
-
-      &.viewed {
-        background-color: transparent;
-        transition-duration: 0.6s;
-      }
-
-      &:last-child {
-        border: 0;
-      }
-
-      img {
-        width: em(30px);
-        height: em(30px);
-        border-radius: 100%;
-      }
-
-      .btn {
-        height: em(25px);
-        line-height: em(25px);
-      }
-    }
-
-    .full_notification_message {
-      padding: em(55px);
-
-      .actions {
-        @include display(flex);
-        @include justify-content(space-around);
-
-        .btn > .material-icons {
-          pointer-events: none;
-        }
-      }
-    }
-
+  }
 }
