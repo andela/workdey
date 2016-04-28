@@ -71,9 +71,6 @@ class DashboardController < ApplicationController
   end
 
   def assign_task
-    @tasks = Task.all.map do |task|
-      [task.name, task.id]
-    end
     deobfuscate(params.except(:controller, :action))["taskee_id"]
   end
 

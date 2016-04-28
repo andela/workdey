@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in(@user)
-      UserMailer.account_activation(@user).deliver_now
-      UserPlan.set_default_user_plan
+      # UserMailer.account_activation(@user).deliver_now
+      # UserPlan.set_default_user_plan
       redirect_to dashboard_path
     else
       render "new"
