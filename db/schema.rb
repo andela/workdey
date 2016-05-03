@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20160411161816) do
   end
 
   create_table "task_managements", force: :cascade do |t|
+    t.integer  "task_id"
     t.integer  "tasker_id"
     t.integer  "taskee_id"
     t.string   "task_desc"
@@ -45,7 +46,6 @@ ActiveRecord::Schema.define(version: 20160411161816) do
     t.boolean  "taskee_notified", default: false
     t.boolean  "viewed",          default: false
     t.boolean  "tasker_notified", default: false
-    t.integer  "task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
