@@ -1,4 +1,4 @@
-<%= form_for(Task.new, remote: true) do |f| %>
+<%= form_for(Task.new, url: skillsets_path, remote: true) do |f| %>
   <%= f.text_field :name, placeholder: 'New Skillset' %>
   <%= f.submit class: 'btn' do %>
     <span>Add Skillset</span>

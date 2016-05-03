@@ -54,6 +54,10 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
+  get "/skillsets" => "skillsets#index"
+  post "/skillsets" => "skillsets#create"
+  delete "/skillsets" => "skillsets#destroy"
+
   resources :tasks
   resources :users, only: [:create]
 end
