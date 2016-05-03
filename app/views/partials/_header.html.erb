@@ -2,10 +2,9 @@
   <header>
     <nav class="nav-wrapper">
       <div class="container">
-        <%= link_to "Workdey", root_path, class: "brand-logo" %>
+        <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
         <a href="#" class="right dropdown" data-activates="options">
-          <span style="float:right">
-          <%= cl_image_tag current_user.image_url, class: "circle", height: "50px", width:"50px" %> </span>
+          <%= cl_image_tag current_user.image_url, class: "user-profile-image" %>
           <span class="username">
             <%= "#{current_user.firstname} #{current_user.lastname}" %>
             <i class="fa fa-caret-down"></i>
@@ -36,9 +35,6 @@
           <% end %>
           <li>
             <%= link_to "Sign Out", signout_path, method: :delete, class: "waves-effect waves-light" %>
-          </li>
-          <li>
-            <%= link_to "Dashboard", dashboard_path, class: "waves-effect waves-light" %>
           </li>
         </ul>
       </div>
