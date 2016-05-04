@@ -15,10 +15,9 @@ class SkillsetsController < ApplicationController
   end
 
   def destroy
-    @skillset = Skillset.find_by(
-      user_id: current_user.id,
-      task_id: params[:task_id]
-    ).destroy
+    @skillset = current_user.skillsets.detect do |skillset|
+      skillset.task_id == params[:task_id].to_i
+    end.destroy
     respond_to :js
   end
 
