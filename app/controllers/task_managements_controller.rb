@@ -30,10 +30,14 @@ class TaskManagementsController < ApplicationController
   end
 
   def index
-    if current_user.user_type == "tasker"
-      @tasks = current_user.tasks_created
-    elsif current_user.user_type == "taskee"
-      @tasks = current_user.tasks_given
+    all_tasks = if current_user.taskee?
+                  current_user.tasks_given.order(created_at: "DESC")
+                elsif current_user.tasker?
+                  current_user.tasks_created.order(created_at: "DESC")
+                end
+
+    @tasks = all_tasks.all.map do |task|
+      TaskManagementsPresenter.new(task)
     end
   end
 
@@ -55,17 +59,17 @@ class TaskManagementsController < ApplicationController
   end
 
   def send_email_notifications(task)
-    notif_taskee = User.find_by_id(task.taskee_id)
-    notif_tasker = User.find_by_id(task.tasker_id)
-    task_category = Task.find_by_id(task.task_id)
-    @notif = current_user.enable_notifications
+    return unless current_user.enable_notifications
+    notif_taskee = User.find(task.taskee_id)
+    notif_tasker = User.find(task.tasker_id)
+    task_category = Task.find(task.task_id)
     NotificationMailer.send_notifications(
       current_user,
       task,
       task_category,
       notif_tasker,
       notif_taskee
-    ).deliver_now if @notif == true
+    ).deliver_now
   end
 
   private
