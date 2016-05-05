@@ -129,15 +129,11 @@ class TaskManagementsController < ApplicationController
   end
 
   def sort_status(tasks)
-    completed_tasks = []
+    complete_tasks = []
     incomplete_tasks = []
     tasks.each do |task|
-      if task.status == "done"
-        completed_tasks << task
-      else
-        incomplete_tasks << task
-      end
+      task.status == "done" ? complete_tasks << task : incomplete_tasks << task
     end
-    completed_tasks + incomplete_tasks.sort
+    complete_tasks + incomplete_tasks.sort
   end
 end
