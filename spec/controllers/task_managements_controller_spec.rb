@@ -14,7 +14,7 @@ RSpec.describe TaskManagementsController, type: :controller do
     context "no user is logged in" do
       before do
         allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(nil)
+          to receive(:current_user).and_return(nil)
       end
       it "should have a redirect status" do
         get :index
@@ -24,12 +24,21 @@ RSpec.describe TaskManagementsController, type: :controller do
     context "it should render the tasks logs page when a user is logged in" do
       before do
         allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
+          to receive(:current_user).and_return(@user)
       end
       it "render the index page" do
         get :index
         expect(response).to have_http_status(:success)
         expect(response).to render_template("index")
+      end
+      it "assigns tasks created to @tasks" do
+        get :index
+        expect(assigns(:tasks)).to eql @user.tasks_created.to_a
+      end
+      it "assigns tasks given to @tasks" do
+        @user.update_attribute(:user_type, "taskee")
+        get :index
+        expect(assigns(:tasks)).to eql @user.tasks_given
       end
     end
   end

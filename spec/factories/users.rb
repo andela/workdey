@@ -4,7 +4,7 @@ FactoryGirl.define do
     lastname "Pitan"
     email "mayowa.pitan@andela.com"
     password "andela rails"
-
+    user_type "tasker"
     factory "user_with_tasks" do
       transient do
         task_count 1
