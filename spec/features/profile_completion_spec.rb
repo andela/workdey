@@ -6,7 +6,13 @@ RSpec.describe "Profile completion meter" do
   end
 
   before(:each) do
-    @user = create(:user, user_type: "taskee", has_taken_quiz: true, confirmed: true, phone: nil)
+    user_attr = {
+      user_type: "taskee",
+      has_taken_quiz: true,
+      confirmed: true,
+      phone: nil
+    }
+    @user = create(:user, user_attr)
   end
 
   scenario "when a Users log into their account" do
