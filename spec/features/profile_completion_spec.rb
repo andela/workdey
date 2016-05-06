@@ -18,7 +18,8 @@ RSpec.describe "Profile completion meter" do
     end
   end
 
-  scenario "users after updating their account, their profile completeness should increase" do
+  scenario "users after updating their account, their profile completeness "\
+    " should increase" do
     log_in_with(@user.email, @user.password)
 
     within("div.profile-meter") do
@@ -35,8 +36,6 @@ RSpec.describe "Profile completion meter" do
       expect(page).to have_content "82%"
     end
   end
-
-
 
   def log_in_with(email, password)
     visit signin_path

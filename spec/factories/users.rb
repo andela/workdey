@@ -9,7 +9,7 @@ FactoryGirl.define do
     state "lagos"
     city "Yaba"
     image_url "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402"
-    
+
     factory "user_with_tasks" do
       transient do
         task_count 1
