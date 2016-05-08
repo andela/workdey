@@ -99,8 +99,8 @@ RSpec.describe User, type: :model do
     end
     describe ".get_user_address" do
       it "should return the user's address" do
-        create(:user, city: "Lagos", street_address: "55, Moleye Str")
-        expect(User.get_user_address("mayowa.pitan@andela.com").first).
+        user = create(:user, city: "Lagos", street_address: "55, Moleye Str")
+        expect(User.get_user_address(user.email).first).
           to eql ["Lagos", "55, Moleye Str"]
       end
     end
@@ -112,6 +112,16 @@ RSpec.describe User, type: :model do
         expect(User.get_taskees_by_task_name("trainer").count).to eql 2
         expect(User.get_taskees_by_task_name("trainer")).not_to include user1
       end
+    end
+  end
+  describe "#taskee" do
+    it "returns true if the user is a taskee" do
+      user = create(:user, user_type: "taskee")
+      expect(user.taskee?).to eq true
+    end
+    it "returns false for a tasker" do
+      user = create(:user, user_type: "tasker")
+      expect(user.taskee?).to eq false
     end
   end
 end

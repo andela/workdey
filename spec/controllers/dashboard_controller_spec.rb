@@ -45,7 +45,7 @@ RSpec.describe DashboardController, type: :controller do
       user_attr = {
         user_type: "tasker",
         has_taken_quiz: true,
-        street_address: "55, moleye sreet",
+        street_address: Faker::Address.street_address,
         birthday: Date.today
       }
       @user = create(:user, user_attr)

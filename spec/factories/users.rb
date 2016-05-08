@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :user do
-    firstname "Mayowa"
-    lastname "Pitan"
-    email "mayowa.pitan@andela.com"
-    password "andela rails"
+    firstname { Faker::Name.first_name }
+    lastname { Faker::Name.first_name }
+    email { Faker::Internet.free_email }
+    password { Faker::Internet.password }
     gender "male"
     phone "1234567890"
     state "lagos"

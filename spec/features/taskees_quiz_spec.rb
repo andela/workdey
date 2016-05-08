@@ -8,7 +8,6 @@ feature "SignUp" do
     Capybara.default_driver = :selenium
     workdey_data = Seed.new
     workdey_data.create_all
-    # page.driver.browser.manage.window.maximize
   end
 
   scenario "Take the taskee quiz" do
