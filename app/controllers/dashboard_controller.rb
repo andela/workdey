@@ -106,5 +106,4 @@ class DashboardController < ApplicationController
     end
     ((completed / profile_parameters.to_f) * 100).round
   end
-
 end

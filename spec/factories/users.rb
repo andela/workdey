@@ -6,7 +6,7 @@ FactoryGirl.define do
     password { Faker::Internet.password }
     gender  "male"
     phone { Faker::PhoneNumber.phone_number }
-    state  { Faker::Address.state } 
+    state  { Faker::Address.state }
     city { Faker::Address.city }
     image_url { Faker::Avatar.image }
 
