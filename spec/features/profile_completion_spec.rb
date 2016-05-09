@@ -15,7 +15,7 @@ RSpec.describe "Profile completion meter" do
     @user = create(:user, user_attr)
   end
 
-  scenario "when a Users log into their account" do
+  scenario "when a User logs into their account" do
     log_in_with(@user.email, @user.password)
     expect(page).to have_content "Welcome #{@user.firstname}"
 
@@ -33,8 +33,8 @@ RSpec.describe "Profile completion meter" do
     end
 
     click_link "Complete Your Profile"
-    fill_in "phone", with: "1234567890"
-    fill_in "street_address", with: "69, Olalekan Street"
+    fill_in "phone", with: Faker::PhoneNumber.phone_number
+    fill_in "street_address", with: Faker::Address.street_name
     click_button "UPDATE PROFILE"
     click_on "Home"
 

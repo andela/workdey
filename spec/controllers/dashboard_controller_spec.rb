@@ -1,4 +1,5 @@
 require "rails_helper"
+include DashboardHelper
 
 RSpec.describe DashboardController, type: :controller do
   describe "GET #home" do
@@ -9,6 +10,7 @@ RSpec.describe DashboardController, type: :controller do
           to receive(:current_user).and_return(@user)
         get :home
       end
+
       it "returns the percentage for a taskee with skillset" do
         expect(assigns[:completion_percentage]).to eq 73
       end

@@ -99,9 +99,11 @@ RSpec.describe User, type: :model do
     end
     describe ".get_user_address" do
       it "should return the user's address" do
-        user = create(:user, city: "Lagos", street_address: "55, Moleye Str")
+        street_address =  Faker::Address.street_name 
+        city =  Faker::Address.city
+        user = create(:user, city: city, street_address: street_address)
         expect(User.get_user_address(user.email).first).
-          to eql ["Lagos", "55, Moleye Str"]
+          to eql [city, street_address]
       end
     end
     describe ".get_taskees_by_task_name" do

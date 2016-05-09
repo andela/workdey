@@ -4,11 +4,11 @@ FactoryGirl.define do
     lastname { Faker::Name.first_name }
     email { Faker::Internet.free_email }
     password { Faker::Internet.password }
-    gender "male"
-    phone "1234567890"
-    state "lagos"
-    city "Yaba"
-    image_url "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402"
+    gender  "male"
+    phone { Faker::PhoneNumber.phone_number }
+    state  { Faker::Address.state } 
+    city { Faker::Address.city }
+    image_url { Faker::Avatar.image }
 
     factory "user_with_tasks" do
       transient do
