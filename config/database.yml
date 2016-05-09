@@ -18,6 +18,7 @@ default: &default
 
 
 development:
+  <<: *default
   adapter: postgresql
   encoding: unicode
   database: workdey_development
@@ -31,6 +32,7 @@ development:
 #   database: db/test.sqlite3
 
 test:
+  <<: *default
   adapter: postgresql
   encoding: unicode
   database: workdey_test
