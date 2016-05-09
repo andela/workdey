@@ -5,11 +5,11 @@ RSpec.feature "TaskLogs", type: :feature do
     Capybara.default_driver = :selenium
     @task1 = create(:task_management, task_desc: "Iron these clothes for me")
     @task2 = create(:task_management, task_desc: "Wash my dishes",
-                     tasker_id: 2, taskee_id: 3)
+                                      tasker_id: 2, taskee_id: 3)
     @user = create(:user)
     @user2 = create(:user, email: "olufunmi.abosede@andela.com",
-                    firstname: "Olufunmi", lastname: "Abosede",
-                    user_type: "taskee")
+                           firstname: "Olufunmi", lastname: "Abosede",
+                           user_type: "taskee")
   end
   context "user is a tasker" do
     before do
