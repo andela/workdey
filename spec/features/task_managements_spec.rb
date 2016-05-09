@@ -6,10 +6,10 @@ RSpec.feature "TaskLogs", type: :feature do
     @task1 = create(:task_management, task_desc: "Iron these clothes for me")
     @task2 = create(:task_management, task_desc: "Wash my dishes",
                                       tasker_id: 2, taskee_id: 3)
-    @user = create(:user)
+    @user = create(:user, confirmed: true)
     @user2 = create(:user, email: "olufunmi.abosede@andela.com",
                            firstname: "Olufunmi", lastname: "Abosede",
-                           user_type: "taskee")
+                           user_type: "taskee", confirmed: true)
   end
   context "user is a tasker" do
     before do

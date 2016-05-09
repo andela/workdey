@@ -6,7 +6,6 @@ FactoryGirl.define do
     password "andela rails"
     password_confirmation "andela rails"
     user_type "tasker"
-    confirmed true
     has_taken_quiz true
     factory "user_with_tasks" do
       transient do
