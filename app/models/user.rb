@@ -94,6 +94,10 @@ class User < ActiveRecord::Base
     user_plan && user_plan.name == "maestro"
   end
 
+  def taskee?
+    user_type == "taskee"
+  end
+
   private_class_method
   def self.users
     User.arel_table
