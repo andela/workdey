@@ -32,7 +32,7 @@ class TaskManagementsController < ApplicationController
     all_tasks = if current_user.taskee?
                   current_user.tasks_given.order(created_at: "DESC")
                 elsif current_user.tasker?
-                  sort_status(current_user.tasks_created)
+                  current_user.tasks_created.order(created_at: "DESC")
                 end
 
     @tasks = all_tasks.all.map do |task|
@@ -130,14 +130,5 @@ class TaskManagementsController < ApplicationController
       review.review = params[:comment] if params[:comment]
       return "success" if review.save
     end
-  end
-
-  def sort_status(tasks)
-    complete_tasks = []
-    incomplete_tasks = []
-    tasks.each do |task|
-      task.status == "done" ? complete_tasks << task : incomplete_tasks << task
-    end
-    complete_tasks + incomplete_tasks.sort
   end
 end

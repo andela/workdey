@@ -1,14 +1,17 @@
 require "rails_helper"
 
 RSpec.describe TaskManagementsController, type: :controller do
+  let(:assign_tasks) { assigns(:tasks) }
+
   before(:all) do
-    @user = create(:user)
+    @tasker = create(:user)
+    @taskee = create(:user, user_type: "taskee")
     ironing = create(:task_management, task_desc: Faker::Lorem.sentence)
     cleaning = create(:task_management, task_desc: Faker::Lorem.sentence)
     carpentry = create(:task_management, task_desc: Faker::Lorem.sentence)
     washing = create(:task_management, task_desc: Faker::Lorem.sentence)
-    @user.tasks_created = [ironing, cleaning]
-    @user.tasks_given = [carpentry, washing]
+    @tasker.tasks_created = [cleaning, ironing]
+    @taskee.tasks_given = [carpentry, washing]
   end
   describe "GET #index" do
     context "when no user is logged in" do
@@ -24,7 +27,7 @@ RSpec.describe TaskManagementsController, type: :controller do
     context "when a user is logged in" do
       before do
         allow_any_instance_of(ApplicationController).
-          to receive(:current_user).and_return(@user)
+          to receive(:current_user).and_return(@tasker)
       end
       it "should render the index page" do
         get :index
@@ -33,12 +36,15 @@ RSpec.describe TaskManagementsController, type: :controller do
       end
       it "assigns tasks created to tasker" do
         get :index
-        expect(assigns(:tasks)).to eql @user.tasks_created.to_a
+
+        assign_tasks
+        expect(@tasker.tasks_created).not_to be_blank
       end
       it "assigns tasks given to taskee" do
-        @user.update_attribute(:user_type, "taskee")
         get :index
-        expect(assigns(:tasks)).to eql @user.tasks_given
+
+        assign_tasks
+        expect(@taskee.tasks_given).not_to be_blank
       end
     end
   end
