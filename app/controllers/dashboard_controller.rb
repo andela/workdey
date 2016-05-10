@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
     when current_user.user_type == "taskee" && !current_user.has_taken_quiz
       redirect_to quiz_path
     else
+      @completion_percentage = calculate_profile_completeness
       render :home
     end
   end
@@ -87,5 +88,22 @@ class DashboardController < ApplicationController
 
   def location_params
     params.permit(:longitude, :latitude)
+  end
+
+  def calculate_profile_completeness
+    all_user_attr = current_user.attributes
+    profile_parameters = all_user_attr.keep_if do |key, _value|
+      !DEFAULT_ATTR.include? key
+    end
+    completed = profile_parameters.values.count { |parameter| parameter }.to_f
+    add_skillset_for_taskee(completed, profile_parameters.count)
+  end
+
+  def add_skillset_for_taskee(completed, profile_parameters)
+    if current_user.taskee?
+      completed += current_user.skillsets.empty? ? 0 : 1.0
+      profile_parameters += 1
+    end
+    ((completed / profile_parameters.to_f) * 100).round
   end
 end
