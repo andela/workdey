@@ -11,7 +11,7 @@
 <%= render "partials/sidebar_dashboard" %>
   <section class="main container center-align">
     <div class="row">
-        <section class="col s12">
+        <section class="col s6">
             <div class="user_info">
                 <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
                 <%= render "partials/search_for_taskee" if current_user.user_type == "tasker" %>
@@ -32,6 +32,22 @@
                     <button id='notification' class="waves-effect waves-light btn"> save </button>
                 </div>
             <% end %>
+        </section>
+        <section class="col s6">
+
+          <div class="profile-meter">
+            <div class="progress-pie-chart" data-percent="<%= @completion_percentage %>">
+          <div class="ppc-progress">
+            <div class="ppc-progress-fill"></div>
+          </div>
+          <div class="ppc-percents">
+            <div class="pcc-percents-wrapper">
+              <span>%</span>
+            </div>
+          </div>
+        </div>
+        <p class="meter-header"><a href="<%= profile_path %>"> Complete Your Profile</a> </p>
+          </div>
         </section>
     </div>
   </section>
@@ -56,5 +72,4 @@
     </div>
   </section>
   </main>
-
 <% end %>
