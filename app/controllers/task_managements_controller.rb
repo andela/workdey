@@ -2,14 +2,6 @@ class TaskManagementsController < ApplicationController
   before_action :login_required, :show_notification_count,
                 only: [:index, :new, :show, :review_and_rate]
 
-  def index
-    @tasks = if current_user.user_type == "tasker"
-               sort_status(current_user.tasks_created)
-             else
-               current_user.tasks_given
-             end
-  end
-
   def new
     if params.except(:controller, :action).empty?
       redirect_to(dashboard_path) && return
@@ -40,7 +32,7 @@ class TaskManagementsController < ApplicationController
     all_tasks = if current_user.taskee?
                   current_user.tasks_given.order(created_at: "DESC")
                 elsif current_user.tasker?
-                  current_user.tasks_created.order(created_at: "DESC")
+                  sort_status(current_user.tasks_created)
                 end
 
     @tasks = all_tasks.all.map do |task|
