@@ -1,14 +1,42 @@
 <main>
-  <section class="col m9 s12 offset-m1">
-    <div class="row">
-      <ul class= "col m10 offset-m1" >
-        <h2>My Tasks</h2>
+  <%= render "partials/sidebar_dashboard" %>
+  <div class="row">
+    <section class="col m9 offset-m2">
+      <h2>Task logs</h2>
+      <% if current_user.user_type == "taskee" %>
+          <table>
+              <thead>
+                  <tr>
+                      <td>Tasker</td>
+                      <td>Description</td>
+                      <td>Status</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% @tasks.each do |task| %>
+                      <tr>
+                          <% user = User.find(task.tasker_id) %>
+                          <td><%= "#{user.firstname} #{user.lastname}" %></td>
+                          <td><%= task.task_desc %></td>
+                          <% if task.status.downcase == "done" %>
+                              <td><span class="teal-text text-darken-2"><i class="tiny material-icons">done</i> <%= task.status.downcase %></span></td>
+                          <% elsif task.status.downcase == "active" %>
+                              <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span></td>
+                          <% elsif task.status.downcase == "inactive" %>
+                              <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span></td>
+                          <% end %>
+                      </tr>
+                  <% end %>
+              </tbody>
+          </table>
+      <% else %>
         <table>
           <thead>
             <tr>
-              <td>Serial No</td>
-              <td>Taskee Name</td>
-              <td>Task Description</td>
+              <td><strong>Serial No</strong></td>
+              <td><strong>Taskee Name</strong></td>
+              <td><strong>Task Description</strong></td>
+              <td><strong>Status</strong></td>
             </tr>
           </thead>
           <tbody>
@@ -20,19 +48,21 @@
                 <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
                 <td><%= desc = task.task_desc %></td>
                 <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
-                <td>
                   <% if task.status.downcase == "done" %>
-                    <span>Completed</span>
-                  <% else %>
-                    <%= link_to "Review", review_task_path(details) %>
+                    <td><span>Done</span></td>
+                  <% elsif task.status.downcase == "active" %>
+                      <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
+                     <%= link_to "Review", review_task_path(details) %></td>
+                  <% elsif task.status.downcase == "inactive" %>
+                      <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
+                      <%= link_to "Review", review_task_path(details) %></td>
                   <% end %>
-                </td>
               </tr>
               <% serial_no += 1 %>
             <% end %>
           </tbody>
-        </table>
-      </ul>
-    </div>
-  </section>
+      </table>
+      <% end %>
+    </section>
+  </div>
 </main>

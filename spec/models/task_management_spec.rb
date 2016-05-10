@@ -15,7 +15,7 @@ RSpec.describe TaskManagement, type: :model do
 
   it { is_expected.to belong_to(:taskee).class_name("User") }
   it { is_expected.to belong_to(:tasker).class_name("User") }
-  it { is_expected.to have_one(:task).with_foreign_key(:id) }
+  it { is_expected.to belong_to(:task) }
 
   describe ".validate_amount" do
     it "will fail if amount is not a number" do
