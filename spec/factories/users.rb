@@ -9,6 +9,8 @@ FactoryGirl.define do
     state  { Faker::Address.state }
     city { Faker::Address.city }
     image_url { Faker::Avatar.image }
+    has_taken_quiz true
+    user_type "tasker"
 
     factory "user_with_tasks" do
       transient do

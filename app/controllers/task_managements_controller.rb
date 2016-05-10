@@ -1,12 +1,19 @@
 class TaskManagementsController < ApplicationController
   before_action :login_required, :show_notification_count,
-                only: [:new, :index, :show, :review_and_rate]
+                only: [:index, :new, :show, :review_and_rate]
+
+  def index
+    @tasks = if current_user.user_type == "tasker"
+               sort_status(current_user.tasks_created)
+             else
+               current_user.tasks_given
+             end
+  end
 
   def new
     if params.except(:controller, :action).empty?
       redirect_to(dashboard_path) && return
     end
-
     @taskee_id = deobfuscate(params.except(:controller, :action))["id"]
     @taskee = User.find(@taskee_id) if @taskee_id
     @task = TaskManagement.new
@@ -17,10 +24,10 @@ class TaskManagementsController < ApplicationController
     @task.task_id = Task.find_by(name: task_details[:task_name].capitalize).id
     @task.start_time = get_time(:start)
     @task.end_time = get_time(:end)
-
     if @task.save
       session.delete(:searcher)
       flash.clear
+      flash[:notice] = "Your taskee has been notified"
       notify("taskee", @task.taskee_id)
       redirect_to dashboard_path
     else
@@ -74,17 +81,6 @@ class TaskManagementsController < ApplicationController
 
   private
 
-  def review_and_rate(params)
-    review = Review.new
-    if params[:user_id] && current_user.id
-      review.rating = params[:rating] if params[:rating]
-      review.reviewer_id = current_user.id
-      review.user_id = params[:user_id]
-      review.review = params[:comment] if params[:comment]
-      return "success" if review.save
-    end
-  end
-
   def task_details
     params.require(:task_management).
       permit(:task_name, :tasker_id, :taskee_id, :amount, :task_desc)
@@ -131,5 +127,25 @@ class TaskManagementsController < ApplicationController
     flash[:month] = task_date[:month]
     flash[:day] = task_date[:day]
     flash[:time] = task_time[:task]
+  end
+
+  def review_and_rate(params)
+    review = Review.new
+    if params[:user_id] && current_user.id
+      review.rating = params[:rating] if params[:rating]
+      review.reviewer_id = current_user.id
+      review.user_id = params[:user_id]
+      review.review = params[:comment] if params[:comment]
+      return "success" if review.save
+    end
+  end
+
+  def sort_status(tasks)
+    complete_tasks = []
+    incomplete_tasks = []
+    tasks.each do |task|
+      task.status == "done" ? complete_tasks << task : incomplete_tasks << task
+    end
+    complete_tasks + incomplete_tasks.sort
   end
 end

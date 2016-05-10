@@ -26,9 +26,10 @@
         <table>
           <thead>
             <tr>
-              <td>Serial No</td>
-              <td>Taskee Name</td>
-              <td>Task Description</td>
+              <td><strong>Serial No</strong></td>
+              <td><strong>Taskee Name</strong></td>
+              <td><strong>Task Description</strong></td>
+              <td><strong>Status</strong></td>
             </tr>
           </thead>
           <tbody>
@@ -40,13 +41,15 @@
                 <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
                 <td><%= desc = task.task_desc %></td>
                 <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
-                <td>
                   <% if task.status.downcase == "done" %>
-                    <span>Completed</span>
-                  <% else %>
-                    <%= link_to "Review", review_task_path(details) %>
+                    <td><span>Done</span></td>
+                  <% elsif task.status.downcase == "active" %>
+                      <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
+                     <%= link_to "Review", review_task_path(details) %></td>
+                  <% elsif task.status.downcase == "inactive" %>
+                      <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
+                      <%= link_to "Review", review_task_path(details) %></td>
                   <% end %>
-                </td>
               </tr>
               <% serial_no += 1 %>
             <% end %>
