@@ -28,19 +28,19 @@ RSpec.describe SkillsetsController, type: :controller do
   describe 'POST #create' do
     before(:each) { @task_count = Task.count }
 
-    context 'when the task exists' do
-      it 'should find a task' do
+    context "when the task exists" do
+      it "should find a task" do
         task = Task.first
-        post :create, { task: { name: task.name }, format: :js }
+        post :create, task: { name: task.name }, format: :js
         expect(assigns(:skillset).task_id).to eq(task.id)
         expect(Task.count).to eq(@task_count)
       end
     end
 
-    context 'when the task does not exist' do
-      it 'should create a task' do
-        task = create(:task, name: 'Cleaning')
-        post :create, { task: { name: task.name }, format: :js }
+    context "when the task does not exist" do
+      it "should create a task" do
+        task = create(:task, name: "Cleaning")
+        post :create, task: { name: task.name }, format: :js
         expect(assigns(:skillset).task_id).to eq(task.id)
         expect(Task.count).to eq(@task_count + 1)
       end
@@ -48,12 +48,12 @@ RSpec.describe SkillsetsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'should delete a skillset' do
-      task = create(:task, name: 'Cleaning')
-      skillset = create(:skillset, task_id: task.id, user_id: @user.id)
-      expect {
-        delete :destroy, { task_id: task.id, format: :js }
-      }.to change(Skillset, :count).by(-1)
+    it "should delete a skillset" do
+      task = create(:task, name: "Cleaning")
+      create(:skillset, task_id: task.id, user_id: @user.id)
+      expect do
+        delete :destroy, task_id: task.id, format: :js
+      end.to change(Skillset, :count).by(-1)
     end
   end
 end
