@@ -10,7 +10,7 @@ FactoryGirl.define do
     city { Faker::Address.city }
     image_url { Faker::Avatar.image }
 
-    factory "user_with_tasks" do
+    factory :user_with_tasks do
       transient do
         task_count 1
       end
