@@ -31,11 +31,11 @@ RSpec.describe TaskManagementsController, type: :controller do
         expect(response).to have_http_status(:success)
         expect(response).to render_template("index")
       end
-      it "assigns tasks created to @tasks" do
+      it "assigns tasks created to tasker" do
         get :index
         expect(assigns(:tasks)).to eql @user.tasks_created.to_a
       end
-      it "assigns tasks given to @tasks" do
+      it "assigns tasks given to taskee" do
         @user.update_attribute(:user_type, "taskee")
         get :index
         expect(assigns(:tasks)).to eql @user.tasks_given
