@@ -1,19 +1,17 @@
-class TaskManagementsPresenter
-  def initialize(task)
-    @task = task
-  end
+require "delegate"
 
+class TaskManagementsPresenter < SimpleDelegator
   def tasker_details(view)
-    tasker = User.find(@task.tasker_id)
+    tasker = User.find(model.tasker_id)
     view.content_tag(:td, "#{tasker.firstname} #{tasker.lastname}")
   end
 
   def task_description(view)
-    view.content_tag(:td, @task.task_desc.to_s)
+    view.content_tag(:td, model.task_desc.to_s)
   end
 
   def task_status(view)
-    status = @task.status
+    status = model.status
 
     if status == "done"
       view.content_tag(
@@ -38,9 +36,7 @@ class TaskManagementsPresenter
     end
   end
 
-  def method_missing(method)
-    @task.send(method)
-  rescue
-    nil
+  def model
+    __getobj__
   end
 end
