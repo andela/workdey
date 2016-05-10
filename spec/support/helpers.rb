@@ -13,10 +13,12 @@ module Helpers
       user_type: "taskee"
     }
 
+    @statuses = %w(done active inactive rejected)
+
     @tasker = create(:user, user_type: "tasker")
     @taskee = create(:user, taskee_attr)
 
-    %w(done active inactive rejected).each do |status|
+    @statuses.each do |status|
       create(:task_management,
              task_desc: Faker::Lorem.sentence,
              status: status)

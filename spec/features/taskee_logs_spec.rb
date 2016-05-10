@@ -31,7 +31,7 @@ RSpec.feature "Taskee Log" do
         expect(page).to have_content("inactive")
         expect(page).to have_content("done")
 
-        expect(page.find_all("tr").size).to eql 4
+        expect(page.find_all("tr").size).to eql @statuses.size
       end
     end
   end
