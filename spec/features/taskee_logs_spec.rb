@@ -1,25 +1,32 @@
 require "rails_helper"
 
-RSpec.feature "TaskeeLogs" do
-  let(:user) { create(:user) }
-  let(:user_tasks) { create(:user_with_tasks, email: "hbu@gumba.com") }
-
-  before do
+RSpec.feature "Taskee Log" do
+  before :all do
     Capybara.default_driver = :selenium
-    workdey_data = Seed.new
-    workdey_data.create_all
   end
 
-  scenario "view profile" do
-    log_in_with attributes_for(:user)[:email], attributes_for(:user)[:password]
-    visit profile_path
-    expect(page).to have_content("User Profile Settings")
+  before :each do
+    taskee_stub
   end
 
-  def log_in_with(email, password)
-    visit signin_path
-    fill_in "session_email", with: email
-    fill_in "session_password", with: password
-    click_button "Sign in"
+  context "Task logs page" do
+    before do
+      log_in_with @taskee.email, @taskee.password
+    end
+
+    it { expect(page).to have_content("Welcome #{@taskee.firstname}") }
+
+    scenario "the task logs page" do
+      visit my_tasks_path
+
+      within "table tbody" do
+        expect(page).to have_content("rejected")
+        expect(page).to have_content("active")
+        expect(page).to have_content("inactive")
+        expect(page).to have_content("done")
+
+        expect(page.find_all("tr").size).to eql 4
+      end
+    end
   end
 end

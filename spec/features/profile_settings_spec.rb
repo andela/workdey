@@ -32,11 +32,4 @@ RSpec.feature "ProfileSettings", type: :feature do
     click_button "UPDATE PROFILE"
     expect(page).to have_content("Your profile has been successfully updated!")
   end
-
-  def log_in_with(email, password)
-    visit signin_path
-    fill_in "session_email", with: email
-    fill_in "session_password", with: password
-    click_button "Sign in"
-  end
 end
