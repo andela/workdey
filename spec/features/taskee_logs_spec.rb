@@ -16,7 +16,13 @@ RSpec.feature "Taskee Log" do
 
     it { expect(page).to have_content("Welcome #{@taskee.firstname}") }
 
-    scenario "the task logs page" do
+    scenario "see tasker names for the task assigned" do
+      visit my_tasks_path
+
+      expect(page).to have_content("Tasker")
+    end
+
+    scenario "taskee sees assigned tasks" do
       visit my_tasks_path
 
       within "table tbody" do
