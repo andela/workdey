@@ -36,15 +36,13 @@ RSpec.describe TaskManagementsController, type: :controller do
       end
       it "assigns tasks created to tasker" do
         get :index
-
         assign_tasks
-        expect(@tasker.tasks_created).not_to be_blank
+        expect(@tasker.tasks_created.size).to eql(2)
       end
       it "assigns tasks given to taskee" do
         get :index
-
         assign_tasks
-        expect(@taskee.tasks_given).not_to be_blank
+        expect(@taskee.tasks_given.size).to eql(2)
       end
     end
   end
