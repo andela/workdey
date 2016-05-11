@@ -15,9 +15,19 @@
           <tbody>
             <% @tasks.each do |task| %>
               <tr>
-                <%= task.tasker_details(self) %>
-                <%= task.task_description(self) %>
-                <%= task.task_status(self) %>
+                <% tasker = User.find(task.tasker_id) %>
+                <td><%= "#{tasker.firstname} #{tasker.lastname}" %></td>
+                <td><%= task.task_desc %></td>
+                <% status = task.status %>
+                <% if task.status.downcase == "done" %>
+                  <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
+                <% elsif task.status.downcase == "active" %>
+                  <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %></td>
+                <% elsif task.status.downcase == "inactive" %>
+                  <td class="red-text"><i class='tiny material-icons'>not_interested</i> <%= "#{status.downcase}" %></td>
+                <% elsif task.status.downcase == "rejected" %>
+                  <td class="grey-text text-lighten-1"><i class='tiny material-icons'>thumb_down</i> <%= "#{status.downcase}" %></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
