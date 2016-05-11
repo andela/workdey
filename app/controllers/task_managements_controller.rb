@@ -2,14 +2,6 @@ class TaskManagementsController < ApplicationController
   before_action :login_required, :show_notification_count,
                 only: [:index, :new, :show, :review_and_rate]
 
-  def index
-    @tasks = if current_user.user_type == "tasker"
-               sort_status(current_user.tasks_created)
-             else
-               current_user.tasks_given
-             end
-  end
-
   def new
     if params.except(:controller, :action).empty?
       redirect_to(dashboard_path) && return
@@ -36,6 +28,14 @@ class TaskManagementsController < ApplicationController
     end
   end
 
+  def index
+    @tasks = if current_user.taskee?
+               sort_status(current_user.tasks_given)
+             elsif current_user.tasker?
+               sort_status(current_user.tasks_created)
+             end
+  end
+
   def show
   end
 
@@ -54,17 +54,17 @@ class TaskManagementsController < ApplicationController
   end
 
   def send_email_notifications(task)
-    notif_taskee = User.find_by_id(task.taskee_id)
-    notif_tasker = User.find_by_id(task.tasker_id)
-    task_category = Task.find_by_id(task.task_id)
-    @notif = current_user.enable_notifications
+    return unless current_user.enable_notifications
+    notif_taskee = User.find(task.taskee_id)
+    notif_tasker = User.find(task.tasker_id)
+    task_category = Task.find(task.task_id)
     NotificationMailer.send_notifications(
       current_user,
       task,
       task_category,
       notif_tasker,
       notif_taskee
-    ).deliver_now if @notif == true
+    ).deliver_now
   end
 
   private
