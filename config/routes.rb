@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get "user/profile" => "dashboard#profile_view", as: :user_profile
 
+  get "skillsets/index" => "skillsets#index", as: :my_skillset
+
   get "account_activations/:id/edit" =>
   "account_activations#confirm_email", as: :confirm
 
@@ -51,5 +53,10 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
+  get "/skillsets" => "skillsets#index"
+  post "/skillsets" => "skillsets#create"
+  delete "/skillsets" => "skillsets#destroy"
+
+  resources :tasks
   resources :users, only: [:create]
 end

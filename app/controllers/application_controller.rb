@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     redirect_to dashboard_path if logged_in?
   end
 
+  def taskee_required
+    redirect_to root_path unless current_user.taskee?
+  end
+
   def obfuscate(hash)
     require "base64"
 
