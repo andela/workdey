@@ -12,7 +12,7 @@ FactoryGirl.define do
     has_taken_quiz true
     user_type "tasker"
 
-    factory "user_with_tasks" do
+    factory :user_with_tasks do
       transient do
         task_count 1
       end

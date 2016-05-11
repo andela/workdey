@@ -1,0 +1,7 @@
+<li class="collection-item">
+  <%= div_for skillset do %>
+    <%= skillset.name %><%= link_to skillsets_path(task_id: skillset.id), method: :delete, remote: :true, class: "secondary-content" do %>
+      <i class="material-icons">delete</i>
+    <% end %>
+  <% end %>
+</li>
