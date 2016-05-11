@@ -39,7 +39,7 @@ RSpec.describe SkillsetsController, type: :controller do
 
     context "when the task does not exist" do
       it "should create a task" do
-        task = create(:task, name: "Cleaning")
+        task = create(:task, name: Faker::Lorem.word)
         post :create, task: { name: task.name }, format: :js
         expect(assigns(:skillset).task_id).to eq(task.id)
         expect(Task.count).to eq(@task_count + 1)
@@ -49,7 +49,7 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it "should delete a skillset" do
-      task = create(:task, name: "Cleaning")
+      task = create(:task, name: Faker::Lorem.word)
       create(:skillset, task_id: task.id, user_id: @user.id)
       expect do
         delete :destroy, task_id: task.id, format: :js
