@@ -12,6 +12,7 @@ class SkillsetsController < ApplicationController
       task_id: @task.id
     ) { |skillset| skillset.was_created = true }
     respond_to :js
+    @skillset.was_created = false
   end
 
   def destroy
