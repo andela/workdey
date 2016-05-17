@@ -1,7 +1,16 @@
+var toastActive = false;
+function triggerToast() {
+  if (!toastActive) {
+    toastActive = true;
+    Materialize.toast("<%= @skillset.task.name %> already exists.", 2000);
+    toastActive = false;
+  }
+}
+
 <% if @skillset.was_created %>
   $('ul.collection').append("<%= j(render partial: 'skillset', object: @skillset.task) %>");
   $('input#task_name').val('').removeClass('invalid');
 <% else %>
   $('input#task_name').val('').addClass('invalid');
-  Materialize.toast("<%= @skillset.task.name %> already exists.", 4000);
+  triggerToast();
 <% end %>
