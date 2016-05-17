@@ -1,8 +1,8 @@
 var toastActive = false;
-function triggerToast() {
+function triggerToast(name) {
   if (!toastActive) {
     toastActive = true;
-    Materialize.toast("<%= @skillset.task.name %> already exists.", 2000);
+    Materialize.toast( name + ' already exists.', 2000);
     toastActive = false;
   }
 }
@@ -12,5 +12,5 @@ function triggerToast() {
   $('input#task_name').val('').removeClass('invalid');
 <% else %>
   $('input#task_name').val('').addClass('invalid');
-  triggerToast();
+  triggerToast("<%= @skillset.task.name %>");
 <% end %>
