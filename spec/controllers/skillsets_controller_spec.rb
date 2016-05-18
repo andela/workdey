@@ -26,8 +26,6 @@ RSpec.describe SkillsetsController, type: :controller do
   end
 
   describe 'POST #create' do
-    # let(:task) { create(:task) }
-    # let(:skillset) { create(:skillset, task_id: task.id, user_id: @user.id) }
     before do
       @task = create(:task)
       @skillset = create(:skillset, task_id: @task.id, user_id: @user.id)
