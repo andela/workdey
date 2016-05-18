@@ -20,29 +20,32 @@ RSpec.describe SkillsetsController, type: :controller do
     end
 
     it "assigns current_user skillset to @skillset" do
-      skillsets = @user.tasks
+      skillsets = @user.skillsets
       expect(assigns(:skillsets)).to eq(skillsets)
     end
   end
 
   describe 'POST #create' do
-    before(:each) { @task_count = Task.count }
+    # let(:task) { create(:task) }
+    # let(:skillset) { create(:skillset, task_id: task.id, user_id: @user.id) }
+    before do
+      @task = create(:task)
+      @skillset = create(:skillset, task_id: @task.id, user_id: @user.id)
+      @skillset_count = Skillset.count
+    end
 
-    context "when the task exists" do
-      it "should find a task" do
-        task = Task.first
-        post :create, task: { name: task.name }, format: :js
-        expect(assigns(:skillset).task_id).to eq(task.id)
-        expect(Task.count).to eq(@task_count)
+    context "when the skillset exists" do
+      it "should find a skillset" do
+        post :create, skillset: { name: @skillset.name }, format: :js
+        expect(assigns(:skillset).task_id).to eq(@task.id)
+        expect(Skillset.count).to eq(@skillset_count)
       end
     end
 
-    context "when the task does not exist" do
-      it "should create a task" do
-        task = create(:task, name: Faker::Lorem.word)
-        post :create, task: { name: task.name }, format: :js
-        expect(assigns(:skillset).task_id).to eq(task.id)
-        expect(Task.count).to eq(@task_count + 1)
+    context "when the skillset does not exist" do
+      it "should create a skillset" do
+        post :create, skillset: { name: Faker::Name.name }, format: :js
+        expect(Skillset.count).to eq(@skillset_count + 1)
       end
     end
   end

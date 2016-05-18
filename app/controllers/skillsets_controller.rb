@@ -2,14 +2,13 @@ class SkillsetsController < ApplicationController
   before_action :taskee_required
 
   def index
-    @skillsets = current_user.tasks
+    @skillsets = current_user.skillsets.select(&:name)
   end
 
   def create
-    @task = Task.find_or_create_by(name: task_params[:name])
     @skillset = Skillset.find_or_create_by(
       user_id: current_user.id,
-      task_id: @task.id
+      name: skillset_params[:name]
     ) { |skillset| skillset.was_created = true }
     respond_to :js
     @skillset.was_created = false
@@ -24,7 +23,7 @@ class SkillsetsController < ApplicationController
 
   private
 
-  def task_params
-    params.require(:task).permit(:name)
+  def skillset_params
+    params.require(:skillset).permit(:name)
   end
 end
