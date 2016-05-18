@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   post "/skillsets" => "skillsets#create"
   delete "/skillsets" => "skillsets#destroy"
 
+  resources :biddings
   resources :tasks
   resources :users, only: [:create]
 end
