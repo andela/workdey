@@ -2,7 +2,7 @@
   <ul>
     <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %><hr>
-    <%= link_to raw("<li class='side-nav-button'>Task Management</li>"), dashboard_path %><hr>
+    <%= link_to raw("<li class='side-nav-button'>Biddings</li>"), dashboard_path %><hr>
     <% if current_user.taskee? %>
       <%= link_to raw("<li class='side-nav-button'>My Skillset</li>"), skillsets_path %> <hr>
     <% end %>

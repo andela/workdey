@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411161816) do
+ActiveRecord::Schema.define(version: 20160518082354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "biddings", force: :cascade do |t|
+    t.integer  "task_id"
+    t.text     "description"
+    t.string   "price_range"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "biddings", ["task_id"], name: "index_biddings_on_task_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,6 +57,15 @@ ActiveRecord::Schema.define(version: 20160411161816) do
     t.boolean  "viewed",          default: false
     t.boolean  "tasker_notified", default: false
   end
+
+  create_table "taskee_biddings", force: :cascade do |t|
+    t.integer  "bidding_id"
+    t.integer  "taskee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "taskee_biddings", ["bidding_id"], name: "index_taskee_biddings_on_bidding_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -83,11 +102,13 @@ ActiveRecord::Schema.define(version: 20160411161816) do
     t.string   "street_address"
     t.string   "image_url"
     t.boolean  "has_taken_quiz",       default: false
-    t.boolean  "enable_notifications", default: true
     t.float    "longitude"
     t.float    "latitude"
+    t.boolean  "enable_notifications", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "biddings", "tasks"
+  add_foreign_key "taskee_biddings", "biddings"
 end
