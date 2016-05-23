@@ -2,6 +2,7 @@ class Task < ActiveRecord::Base
   has_many :skillsets
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
+  has_many :biddings
 
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_task_name(keyword, user_email)

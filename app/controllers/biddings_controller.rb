@@ -4,9 +4,9 @@ class BiddingsController < ApplicationController
 
   def create
     @task = Task.find_or_create_by(bidding_params[:tasks])
-    @bidding = @task.bidding.new(bidding_params)
-    @bidding.task_id = @task.id
-    @bidding.save
+    @bidding = @task.biddings.new(bidding_params.except(:tasks))
+    # @bidding.save
+    respond_to :js
   end
 
   private

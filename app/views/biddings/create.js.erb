@@ -1,0 +1,7 @@
+<% if @bidding.new_record? %>
+  $('input#biddings_task_name').val('');
+  $('input#')
+  Materialize.toast("<% @bidding.errors.full_messages.first %>", 2000);
+<% else %>
+
+<% end %>
