@@ -2,8 +2,7 @@
   "name":"workdey",
   "description":"",
   "scripts":{
-    "predeploy": "bundle exec rake assets:clean",
-    "postdeploy":"bundle exec rake websocket_rails:start_server && bundle exec rake db:migrate && bundle exec rake db:seed"
+    "postdeploy":"bundle exec rake websocket_rails:start_server && bundle exec rake db:migrate && bundle exec rake db:seed && bundle exec rake assets:clean"
   },
   "env":{
     "LANG":{
