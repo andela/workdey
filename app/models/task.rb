@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  has_many :biddings
   has_many :skillsets
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id

@@ -1,4 +1,4 @@
-<%= form_for(Bidding.new, remote: true) do |f| %>
+<%= form_for(@bidding) do |f| %>
   <%= f.fields_for :tasks do |tasks_form| %>
     <div class="input-field">
       <%= tasks_form.text_field :name %>
