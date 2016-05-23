@@ -1,12 +1,21 @@
 class BiddingsController < ApplicationController
+
+  def new
+    @bidding = Bidding.new
+  end
+
   def index
+    @biddings = Bidding.all
   end
 
   def create
     @task = Task.find_or_create_by(bidding_params[:tasks])
     @bidding = @task.biddings.new(bidding_params.except(:tasks))
-    # @bidding.save
-    respond_to :js
+    if @bidding.save
+      redirect_to biddings_path
+    else
+      render :new
+    end
   end
 
   private
