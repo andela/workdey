@@ -8,6 +8,11 @@ class BiddingsController < ApplicationController
     @biddings = Bidding.paginate(page: params[:page], per_page: 5)
   end
 
+  def edit
+    @bidding = Bidding.find(params[:id])
+    render :new
+  end
+
   def create
     @task = Task.find_or_create_by(bidding_params[:tasks])
     @bidding = @task.biddings.new(bidding_params.except(:tasks))
@@ -16,6 +21,23 @@ class BiddingsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def update
+    @bidding = Bidding.find(params[:id])
+    if @bidding.update(bidding_params)
+      flash[:success] = "Successfully updated"
+      redirect_to biddings_path
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    @bidding = Bidding.find(params[:id])
+    @bidding.destroy
+    flash[:success] = "Successfully deleted"
+    redirect_to biddings_path
   end
 
   private
