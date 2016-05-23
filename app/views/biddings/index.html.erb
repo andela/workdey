@@ -17,6 +17,7 @@
              <%= render @biddings %>
             </tbody>
             </table>
+            <%= will_paginate @biddings %>
         </div>
         <div class="col m3 offset-m1">
           <%= link_to new_bidding_path, class: 'btn-floating btn-large waves-effect waves-light red', id: 'new-bid-btn' do %>
