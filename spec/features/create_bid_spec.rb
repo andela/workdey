@@ -39,10 +39,26 @@ RSpec.feature "Create Task for bidding", type: :feature do
     expect(page).to have_content("House Cleaning")
   end
 
+  scenario "tasker can edit a bid" do
+    create(:bidding, tasker_id: @user.id)
+    visit biddings_path
+    click_link "Edit"
+    fill_in "bidding_name", with: "Washing"
+    click_button "Update Bidding"
+    expect(page).to have_content("Washing")
+  end
+
+  scenario "tasker can delete a bid" do
+    create(:bidding, tasker_id: @user.id)
+    visit biddings_path
+    click_link "delete"
+    expect(page).to have_no_content("Cleaning")
+  end
+
   def create_a_bid(task_name, description, price_range)
     click_link "Biddings"
     click_link "add"
-    fill_in "bidding_tasks_name", with: task_name
+    fill_in "bidding_name", with: task_name
     fill_in "bidding_description", with: description
     fill_in "bidding_price_range", with: price_range
     click_button "Create Bidding"
