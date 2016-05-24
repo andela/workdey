@@ -25,7 +25,7 @@ class BiddingsController < ApplicationController
 
   def update
     @bidding = Bidding.find(params[:id])
-    if @bidding.update(bidding_params)
+    if @bidding.update(bidding_params.except(:tasks))
       flash[:success] = "Successfully updated"
       redirect_to biddings_path
     else
