@@ -34,7 +34,7 @@ module Workdey
     config.middleware.delete Rack::Lock
     config.generators do |g|
       g.view_specs false
-      g.controller_specs false
+      g.controller_specs true
     end
   end
 end
