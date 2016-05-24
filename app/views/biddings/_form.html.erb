@@ -1,16 +1,12 @@
 <%= form_for(@bidding) do |f| %>
-  <%= f.fields_for :tasks do |tasks_form| %>
-    <div class="input-field">
-    <% unless params[:action] == "edit"  %>
-      <%= tasks_form.text_field :name %>
-      <%= tasks_form.label :name %>
-    <% end %>
-    </div>
-  <% end %>
-    <div class="input-field">
-      <%= f.text_field :description, class: 'materialize-textarea' %>
-      <%= f.label :description %>
-    </div>
+  <div class="input-field">
+    <%= f.text_field :name %>
+    <%= f.label :name %>
+  </div>
+  <div class="input-field">
+    <%= f.text_field :description, class: 'materialize-textarea' %>
+    <%= f.label :description %>
+  </div>
   <div class="input-field">
     <%= f.text_field :price_range %>
     <%= f.label :price_range %>
