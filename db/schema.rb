@@ -28,15 +28,6 @@ ActiveRecord::Schema.define(version: 20160524140542) do
 
   add_index "biddings", ["task_id"], name: "index_biddings_on_task_id", using: :btree
 
-  create_table "plans", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "number_of_tasks"
-    t.integer  "number_of_task_types"
-    t.integer  "price"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "reviewer_id"
