@@ -1,5 +1,8 @@
 FactoryGirl.define do
   factory :bidding do
-    description { Faker::Lorem.sentence }
+    name "Cleaning"
+    description { Faker::Lorem.sentence(5) }
+    price_range "2000"
+    tasker_id nil
   end
 end

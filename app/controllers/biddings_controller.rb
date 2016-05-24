@@ -1,5 +1,6 @@
 class BiddingsController < ApplicationController
-
+  before_action :login_required
+  before_action :set_bidding, only: [:edit, :update, :destroy]
   def new
     @bidding = Bidding.new
   end
@@ -9,13 +10,11 @@ class BiddingsController < ApplicationController
   end
 
   def edit
-    @bidding = Bidding.find(params[:id])
     render :new
   end
 
   def create
-    @task = Task.find_or_create_by(bidding_params[:tasks])
-    @bidding = @task.biddings.new(bidding_params.except(:tasks))
+    @bidding = current_user.biddings.new(bidding_params)
     if @bidding.save
       redirect_to biddings_path
     else
@@ -24,8 +23,7 @@ class BiddingsController < ApplicationController
   end
 
   def update
-    @bidding = Bidding.find(params[:id])
-    if @bidding.update(bidding_params.except(:tasks))
+    if @bidding.update(bidding_params)
       flash[:success] = "Successfully updated"
       redirect_to biddings_path
     else
@@ -34,7 +32,6 @@ class BiddingsController < ApplicationController
   end
 
   def destroy
-    @bidding = Bidding.find(params[:id])
     @bidding.destroy
     flash[:success] = "Successfully deleted"
     redirect_to biddings_path
@@ -42,11 +39,15 @@ class BiddingsController < ApplicationController
 
   private
 
+  def set_bidding
+    @bidding = Bidding.find(params[:id])
+  end
+
   def bidding_params
     params.require(:bidding).permit(
       :description,
       :price_range,
-      tasks: [:name]
+      :name
     )
   end
 end
