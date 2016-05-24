@@ -201,6 +201,7 @@ nav .nav-wrapper {
   .actions {
     @include display(flex);
     @include justify-content(space-around);
+    padding: 15px 0;
 
     .btn > .material-icons {
       pointer-events: none;
