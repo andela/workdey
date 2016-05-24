@@ -45,7 +45,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: "localhost", port: "3000" }
 
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method =  :smtp
   config.action_mailer.smtp_settings =
     {
       address: "smtp.gmail.com",
@@ -54,7 +54,6 @@ Rails.application.configure do
       user_name: ENV["GOOGLE_MAIL"],
       password: ENV["GOOGLE_PASSWORD"],
       authentication: "plain",
-      openssl_verify_mode: "none",
-      domain: "http://localhost:3000"
+      openssl_verify_mode: "none"
     }
 end
