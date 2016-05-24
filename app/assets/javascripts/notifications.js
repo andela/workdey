@@ -67,9 +67,9 @@
                             "<strong>" + msg.amount + "<strong>"
                             ),
           actions = $("<div class='actions'>"),
-          accept = $("<button class='btn' data-accept=" + requestId + ">")
+          accept = $("<button class='btn waves-effect waves-light teal' data-accept=" + requestId + ">")
                       .html("<i class='material-icons left'>thumb_up</i> Accept"),
-          reject = $("<button class='btn' data-reject=" + requestId + ">")
+          reject = $("<button class='btn waves-effect waves-light' data-reject=" + requestId + ">")
                       .html("<i class='material-icons left'>thumb_down</i> Reject");
 
       actions.append(accept).append(reject)
