@@ -14,7 +14,11 @@
       <div class="col m12">
         <div class="row">
           <div class="col m5 offset-m1">
+          <% if params[:action] == "new" %>
             <h2>New Bid</h2>
+          <% else %>
+            <h2>Update bid</h2>
+          <% end %>
             <%= render 'form' %>
           </div>
         </div>

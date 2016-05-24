@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
   has_one :user_plan
+  has_many :biddings, foreign_key: :tasker_id
   has_many :taskee_biddings, foreign_key: :taskee_id
 
   before_save { self.email = email.downcase }

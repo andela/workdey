@@ -1,8 +1,10 @@
 <%= form_for(@bidding) do |f| %>
   <%= f.fields_for :tasks do |tasks_form| %>
     <div class="input-field">
+    <% unless params[:action] == "edit"  %>
       <%= tasks_form.text_field :name %>
       <%= tasks_form.label :name %>
+    <% end %>
     </div>
   <% end %>
     <div class="input-field">
