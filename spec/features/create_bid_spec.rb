@@ -63,5 +63,4 @@ RSpec.feature "Create Task for bidding", type: :feature do
     fill_in "bidding_price_range", with: price_range
     click_button "Create Bidding"
   end
-
 end

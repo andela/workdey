@@ -3,5 +3,5 @@
   <td><%= bidding.description %></td>
   <td><%= bidding.price_range %></td>
   <td><%= link_to("Edit", edit_bidding_path(bidding)) %></td>
-  <td><%= link_to("delete", bidding_path(bidding), method: :delete) %></td>
+  <td><%= link_to("delete", bidding_path(bidding), method: :delete, data: {confirm: "Really want to delete this bid?"} ) %></td>
 </tr>
