@@ -20,13 +20,15 @@ RSpec.feature "Create Task for bidding", type: :feature do
     within("div.sidebar-dash") { expect(page).to have_content("Biddings") }
   end
 
-  scenario "tasker can click on biddings link and be directed to biddings page" do
+  scenario "tasker can click on biddings link and be directed to biddings\
+   page" do
     click_link "Biddings"
     expect(page).to have_selector("h1", "Bids")
     expect(page).to have_selector("a", "add")
   end
 
-  scenario "tasker can click on add button and be redirected to an add bid form" do
+  scenario "tasker can click on add button and be redirected to an add bid\
+   form" do
     click_link "Biddings"
     click_link "add"
     expect(page).to have_selector("h2", "New Bid")
@@ -52,6 +54,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
     create(:bidding, tasker_id: @user.id)
     visit biddings_path
     click_link "delete"
+    page.driver.browser.switch_to.alert.accept
     expect(page).to have_no_content("Cleaning")
   end
 

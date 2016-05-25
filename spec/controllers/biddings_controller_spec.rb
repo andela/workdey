@@ -4,14 +4,13 @@ RSpec.describe BiddingsController, type: :controller do
   before(:each) do
     @user = build_stubbed(:user)
     create_list(:bidding, 3, tasker_id: @user.id)
+    allow_any_instance_of(ApplicationController).
+      to receive(:current_user).and_return(@user)
   end
 
   describe "GET #new" do
-    before(:each) do
-      allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
-      get :new
-    end
+    before(:each) { get :new }
+
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end
@@ -24,11 +23,8 @@ RSpec.describe BiddingsController, type: :controller do
   end
 
   describe "GET #index" do
-    before(:each) do
-      allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
-      get :index
-    end
+    before(:each) { get :index }
+
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end
@@ -41,25 +37,17 @@ RSpec.describe BiddingsController, type: :controller do
   end
 
   describe "GET #edit" do
-    before(:each) do
-      allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
-    end
+    before(:each) { get :edit, id: Bidding.last.id }
+
     it "renders the new template" do
-      get :edit, id: Bidding.last.id
       expect(response).to render_template :new
     end
     it "assigns a bidding to a varaible" do
-      get :edit, id: Bidding.last.id
       expect(assigns(:bidding)).to eql Bidding.last
     end
   end
 
   describe "GET #create" do
-    before(:each) do
-      allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
-    end
     context "when parameters are valid" do
       before do
         get :create, bidding: attributes_for(:bidding)
@@ -79,10 +67,6 @@ RSpec.describe BiddingsController, type: :controller do
   end
 
   describe "GET #update" do
-    before(:each) do
-      allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
-    end
     context "when parameters are valid" do
       before do
         get :update, id: Bidding.last.id, bidding: attributes_for(:bidding)
@@ -104,10 +88,6 @@ RSpec.describe BiddingsController, type: :controller do
   end
 
   describe "GET #destroy" do
-    before(:each) do
-      allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
-    end
     context "when there is no call to delete" do
       it { expect(Bidding.count).to eql 3 }
     end
