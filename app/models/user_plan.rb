@@ -9,7 +9,7 @@ class UserPlan < ActiveRecord::Base
     )
   end
 
-  def self.set_default_user_plan
-    create(name: "novice", user_id: current_user.id)
+  def self.set_default_user_plan(id)
+    create(name: "novice", user_id: id)
   end
 end
