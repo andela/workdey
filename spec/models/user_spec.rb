@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:skillsets) }
   it { is_expected.to have_many(:reviews) }
   it { is_expected.to have_many(:tasks).through(:skillsets) }
+  it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
   it do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
       with_foreign_key(:taskee_id)
