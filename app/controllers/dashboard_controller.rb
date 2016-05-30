@@ -4,10 +4,9 @@ class DashboardController < ApplicationController
                 only: [:home, :user_profile, :profile_view, :choose_role, :quiz]
 
   def home
-    case
-    when current_user.user_type.nil?
+    if current_user.user_type.nil?
       redirect_to role_path
-    when current_user.user_type == "taskee" && !current_user.has_taken_quiz
+    elsif current_user.user_type == "taskee" && !current_user.has_taken_quiz
       redirect_to quiz_path
     else
       @completion_percentage = calculate_profile_completeness
@@ -16,12 +15,11 @@ class DashboardController < ApplicationController
   end
 
   def choose_role
-    case
-    when current_user.user_type.nil?
+    if current_user.user_type.nil?
       render :choose_role
-    when current_user.user_type == "taskee" && current_user.confirmed
+    elsif current_user.user_type == "taskee" && current_user.confirmed
       redirect_to dashboard_path
-    when current_user.user_type == "taskee" && !current_user.confirmed
+    elsif current_user.user_type == "taskee" && !current_user.confirmed
       redirect_to quiz_path
     else
       redirect_to dashboard_path

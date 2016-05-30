@@ -44,7 +44,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   scenario "tasker can edit a bid" do
     create(:bidding, tasker_id: @user.id)
     visit biddings_path
-    click_link "Edit"
+    click_link "mode_edit"
     fill_in "bidding_name", with: "Washing"
     click_button "Update Bidding"
     expect(page).to have_content("Washing")

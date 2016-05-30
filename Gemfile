@@ -28,7 +28,7 @@ gem "uglifier", ">= 1.3.0"
 gem "websocket-rails"
 gem "stripe"
 gem 'puma'
-gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-materialize'
 
 group :development, :test do
   gem "capybara"
