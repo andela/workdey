@@ -5,6 +5,5 @@ class ApplicationMailer < ActionMailer::Base
                "chinedu.daniel@andela.com",
                "amodu.temitope@andela.com",
                "ruth.chukwumam@andela.com",
-               "workdeycomet@gmail.com"
-              ]
+               "workdeycomet@gmail.com"]
 end

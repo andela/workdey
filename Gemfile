@@ -28,15 +28,19 @@ gem "uglifier", ">= 1.3.0"
 gem "websocket-rails"
 gem "stripe"
 gem 'puma'
+gem 'will_paginate-materialize'
 
 group :development, :test do
-  gem "travis", "1.8.0"
-  gem "rspec-rails"
   gem "capybara"
-  gem "selenium-webdriver"
   gem "database_cleaner"
+  gem "factory_girl_rails"
+  gem "faker"
   gem "pry"
   gem "pry-rails"
+  gem "pry-nav"
+  gem "rspec-rails"
+  gem "selenium-webdriver"
+  gem "travis", "1.8.0"
 end
 
 group :development do
@@ -52,8 +56,6 @@ end
 
 group :test do
   gem "shoulda-matchers", "~> 3.1"
-  gem "factory_girl_rails"
-  gem "faker"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

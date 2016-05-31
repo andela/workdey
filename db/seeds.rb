@@ -10,38 +10,33 @@ class SeedData
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, has_taken_quiz: true,
         image_url: cloudinary_img_url,
-        latitude: "6.5001035", longitude: "3.376697"
-      },
+        latitude: "6.5001035", longitude: "3.376697" },
       { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "tasker", confirmed: true,
         confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "6.4994906", longitude: "3.3780381"
-      },
+        latitude: "6.4994906", longitude: "3.3780381" },
       { firstname: "Temitope", lastname: "Amodu",
         email: "temitope.amodu@andela.com", street_address: "2 Funso Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "tasker", confirmed: true,
         confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "6.5066561", longitude: "3.3816401"
-      },
+        latitude: "6.5066561", longitude: "3.3816401" },
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url,
-        latitude: "6.5275368", longitude: "3.367699"
-      },
+        latitude: "6.5275368", longitude: "3.367699" },
       { firstname: "Chinedu", lastname: "Dan",
         email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
         city: "VI", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "6.4377563", longitude: "3.4232642"
-      },
+        latitude: "6.4377563", longitude: "3.4232642" },
       {
         firstname: "Hubert", lastname: "Nakitare",
         email: "hubert.nakitare@andela.com",
@@ -114,15 +109,26 @@ class SeedData
     ]
   end
 
+  def biddings
+    Bidding.create(
+      tasker_id: User.where(firstname: "Olaide").first.id,
+      name: Faker::Lorem.word,
+      description: Faker::Lorem.sentence(5),
+      price_range: Faker::Number.number(4)
+    )
+  end
+
   def create_all
     User.destroy_all
     Task.destroy_all
     Skillset.destroy_all
     UserPlan.destroy_all
+    Bidding.destroy_all
     users_list.each { |user| User.create(user) }
     tasks_list.each { |task| Task.create(task) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
+    10.times { biddings }
   end
 end
 workdey_data = SeedData.new

@@ -14,8 +14,7 @@ class Task < ActiveRecord::Base
 
   def self.get_taskees_nearby(taskees, user_street, user_city)
     taskees_nearby = taskees.where("city LIKE ? AND street_address LIKE ?",
-                                   user_city, user_street
-                                  )
+                                   user_city, user_street)
     if taskees_nearby.nil?
       taskees_nearby = taskees.where("city LIKE ?", user_city)
     end

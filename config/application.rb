@@ -34,7 +34,9 @@ module Workdey
     config.middleware.delete Rack::Lock
     config.generators do |g|
       g.view_specs false
-      g.controller_specs false
+      g.controller_specs true
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
   end
 end

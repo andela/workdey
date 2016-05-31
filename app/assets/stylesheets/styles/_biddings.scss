@@ -1,0 +1,18 @@
+.inline {
+  display: inline-block;
+}
+
+#new-bid-btn {
+  margin-bottom: 1.5rem;
+  margin-left: 33rem;
+}
+
+.pagination a li.active {
+  color: #fff;
+}
+
+.pagination {
+  .waves-effect {
+    vertical-align: inherit !important;
+  }
+}

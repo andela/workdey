@@ -19,6 +19,14 @@
   }
 }
 
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
 button.btn[disabled] {
   cursor: not-allowed;
 }
@@ -37,7 +45,7 @@ button.btn[disabled] {
   position: absolute;
   top: 25%;
   right: 1%;
- } 
+ }
 }
 
 .flash-invalid {

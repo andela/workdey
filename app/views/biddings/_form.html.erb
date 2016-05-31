@@ -1,0 +1,17 @@
+<%= form_for(@bidding) do |f| %>
+  <div class="input-field">
+    <%= f.text_field :name %>
+    <%= f.label :name %>
+  </div>
+  <div class="input-field">
+    <%= f.text_field :description, class: 'materialize-textarea' %>
+    <%= f.label :description %>
+  </div>
+  <div class="input-field">
+    <%= f.text_field :price_range %>
+    <%= f.label :price_range %>
+  </div>
+  <%= f.submit class: 'btn' do %>
+    <span>Add Bid</span>
+  <% end %>
+<% end %>
