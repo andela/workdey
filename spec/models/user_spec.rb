@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
       with_foreign_key(:taskee_id)
   end
-  it { expect(User.count).to eql 0 }
+
   it do
     is_expected.to have_many(:tasks_created).class_name("TaskManagement").
       with_foreign_key(:tasker_id)
@@ -70,6 +70,7 @@ RSpec.describe User, type: :model do
         to eql false
     end
   end
+
   describe ".validate_password" do
     it "ensures a password is supplied, it cannot be nil" do
       expect(build(:user, password: nil).save).to eql false
@@ -78,10 +79,7 @@ RSpec.describe User, type: :model do
       expect(build(:user, password: "andela").save).to be false
     end
   end
-  pending ".first_or_create_from_oauth" do
-    it "" do
-    end
-  end
+
   describe ".confirm_user" do
     it "can confirm a user's token" do
       user = create(:user)
@@ -118,6 +116,7 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
   describe "#taskee" do
     it "returns true if the user is a taskee" do
       user = create(:user, user_type: "taskee")
@@ -128,6 +127,7 @@ RSpec.describe User, type: :model do
       expect(user.taskee?).to eq false
     end
   end
+
   describe ".first_or_create_from_oauth" do
     context "when a user is not found" do
       before do

@@ -38,15 +38,17 @@ class User < ActiveRecord::Base
             length: { minimum: 8 }
 
   def self.first_or_create_from_oauth(auth)
-    where(email: auth.info.email).first_or_create do |u|
-      u.provider = auth.provider
-      u.oauth_id = auth.uid
-      u.firstname = auth.info.name.split(" ").first
-      u.lastname = auth.info.name.split(" ").last
-      u.email = auth.info.email
-      u.password = SecureRandom.urlsafe_base64
-      u.confirmed = true
-      u.image_url = auth.info.image
+    if auth.provider == "facebook"
+      where(email: auth.info.email).first_or_create do |u|
+        u.provider = auth.provider
+        u.oauth_id = auth.uid
+        u.firstname = auth.info.name.split(" ").first
+        u.lastname = auth.info.name.split(" ").last
+        u.email = auth.info.email
+        u.password = SecureRandom.urlsafe_base64
+        u.confirmed = true
+        u.image_url = auth.info.image
+      end
     end
   end
 
