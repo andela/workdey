@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+
   it { is_expected.to have_many(:skillsets) }
   it { is_expected.to have_many(:reviews) }
   it { is_expected.to have_many(:tasks).through(:skillsets) }
@@ -9,6 +10,7 @@ RSpec.describe User, type: :model do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
       with_foreign_key(:taskee_id)
   end
+  it { expect(User.count).to eql 0 }
   it do
     is_expected.to have_many(:tasks_created).class_name("TaskManagement").
       with_foreign_key(:tasker_id)
@@ -127,4 +129,34 @@ RSpec.describe User, type: :model do
       expect(user.taskee?).to eq false
     end
   end
+  describe ".first_or_create_from_oauth" do
+    context "when a user is not found" do
+      before do
+        @user_attributes = OmniAuth.config.mock_auth[:facebook]
+      end
+      it "will create a new user if no user is found" do
+        expect { User.first_or_create_from_oauth(@user_attributes) }.
+          to change{ User.count }.by(1)
+      end
+      it "the new user should be confirmed" do
+        User.first_or_create_from_oauth(@user_attributes)
+        expect(User.first.confirmed).to eql true
+      end
+    end
+
+    context "when the user is already in the database" do
+      before do
+        @user_attributes = OmniAuth.config.mock_auth[:facebook]
+        @user = User.first_or_create_from_oauth(@user_attributes)
+      end
+      it "user count should remain one if a user is available" do
+        expect { User.first_or_create_from_oauth(@user_attributes) }.
+          to change{ User.count }.by(0)
+      end
+      it "will return the user if found" do
+        expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
+      end
+    end
+  end
+
 end
