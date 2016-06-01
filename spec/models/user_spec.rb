@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-
   it { is_expected.to have_many(:skillsets) }
   it { is_expected.to have_many(:reviews) }
   it { is_expected.to have_many(:tasks).through(:skillsets) }
@@ -136,7 +135,7 @@ RSpec.describe User, type: :model do
       end
       it "will create a new user if no user is found" do
         expect { User.first_or_create_from_oauth(@user_attributes) }.
-          to change{ User.count }.by(1)
+          to change { User.count }.by(1)
       end
       it "the new user should be confirmed" do
         User.first_or_create_from_oauth(@user_attributes)
@@ -151,12 +150,11 @@ RSpec.describe User, type: :model do
       end
       it "user count should remain one if a user is available" do
         expect { User.first_or_create_from_oauth(@user_attributes) }.
-          to change{ User.count }.by(0)
+          to change { User.count }.by(0)
       end
       it "will return the user if found" do
         expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
       end
     end
   end
-
 end
