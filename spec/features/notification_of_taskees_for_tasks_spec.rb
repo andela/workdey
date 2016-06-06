@@ -5,40 +5,31 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
     Capybara.default_driver = :selenium
   end
 
-  before :each do
-    user_attr = {
-      street_address: Faker::Address.street_address,
-      has_taken_quiz: true,
-      confirmed: true,
-      phone: nil
-    }
-    @taskee = create(:user, user_attr.merge(user_type: "taskee"))
-    @tasker = create(:user, user_attr.merge(user_type: "tasker"))
-    @task = create(:task)
-    @skillset = create(:skillset, task: @task, user: @taskee)
-  end
+  let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
+  let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
+  let(:task) { create(:task) }
+  let!(:skillset) { create(:skillset, task: task, user: taskee) }
 
-  scenario "when a taskee rejects a task" do
+  before(:each) do
     assign_task
-    log_in_with @taskee.email, @taskee.password
+    log_in_with taskee.email, taskee.password
     visit notifications_path
     page.all(".btn")[0].click
+  end
+
+  scenario "taskee rejects a task" do
     click_on "Reject"
     expect(page).to have_content "Task rejected"
   end
 
-  scenario "when a taskee accepts a task" do
-    assign_task
-    log_in_with @taskee.email, @taskee.password
-    visit notifications_path
-    page.all(".btn")[0].click
+  scenario "taskee accepts a task" do
     click_on "Accept"
     expect(page).to have_content "Task accepted"
   end
 
   def assign_task
-    log_in_with @tasker.email, @tasker.password
-    fill_in "searcher", with: @task.name
+    log_in_with tasker.email, tasker.password
+    fill_in "searcher", with: task.name
     click_button "Search"
     page.all(".searched-taskee")[0].click
     click_link "ASSIGN TASK"
