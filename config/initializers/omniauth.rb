@@ -1,9 +1,22 @@
+scopes = %w(
+  userinfo.email
+  userinfo.profile
+  plus.me
+  ).join(', ')
+
 Rails.application.config.middleware.use OmniAuth::Builder do
   OmniAuth.config.on_failure = SessionsController.action(:destroy)
   provider :facebook, ENV["facebook_app_id"], ENV["facebook_app_secret"]
   provider :twitter, ENV["twitter_app_id"], ENV["twitter_app_secret"]
   provider :google_oauth2,
-           ENV["google_app_id"],
-           ENV["google_app_secret"],
-           skip_jwt: true
+           ENV["GOOGLE_CLIENT_ID"],
+           ENV["GOOGLE_CLIENT_SECRET"],
+           {
+             name: "google_oauth2",
+             scope: scopes,
+             prompt: "select_account",
+             image_aspect_ratio: "square",
+             image_size: 50,
+             skip_jwt: true
+           }
 end

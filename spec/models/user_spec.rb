@@ -77,10 +77,6 @@ RSpec.describe User, type: :model do
       expect(build(:user, password: "andela").save).to be false
     end
   end
-  pending ".first_or_create_from_oauth" do
-    it "" do
-    end
-  end
   describe ".confirm_user" do
     it "can confirm a user's token" do
       user = create(:user)
@@ -125,6 +121,51 @@ RSpec.describe User, type: :model do
     it "returns false for a tasker" do
       user = create(:user, user_type: "tasker")
       expect(user.taskee?).to eq false
+    end
+  end
+
+  describe ".first_or_create_from_oauth" do
+    before do
+      OmniAuth.config.test_mode = true
+    end
+    after do
+      OmniAuth.config.test_mode = false
+    end
+    subject do
+      OmniAuth.config.add_mock(
+        :google_oauth2,
+        provider: "google_oauth2",
+        uid: Faker::Number.number(5),
+        info: {
+          name: Faker::Name.name,
+          email: Faker::Internet.safe_email,
+          image: Faker::Avatar.image
+        }
+      )
+    end
+
+    context "when a user signs up" do
+      it "creates new user" do
+        expect do
+          User.first_or_create_from_oauth(subject)
+        end.to change { User.count }.by(1)
+      end
+
+      it "sets user's properties" do
+        User.first_or_create_from_oauth(subject)
+        expect(User.first.provider).to eql subject.provider
+        expect(User.first.email).to eql subject.info.email
+        expect(User.first.confirmed).to eql true
+      end
+    end
+
+    context "when a user logs in" do
+      it "does not create a new user" do
+        User.first_or_create_from_oauth(subject)
+        expect do
+          User.first_or_create_from_oauth(subject)
+        end.to change { User.count }.by(0)
+      end
     end
   end
 end

@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
       u.lastname = auth.info.name.split(" ").last
       u.email = auth.info.email
       u.password = SecureRandom.urlsafe_base64
+      u.image_url = auth.info.image
       u.confirmed = true
     end
   end
