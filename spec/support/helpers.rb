@@ -24,4 +24,13 @@ module Helpers
              status: status)
     end
   end
+
+  def user_attr
+    {
+      street_address: Faker::Address.street_address,
+      has_taken_quiz: true,
+      confirmed: true,
+      phone: nil
+    }
+  end
 end

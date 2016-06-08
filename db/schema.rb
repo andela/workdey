@@ -105,9 +105,9 @@ ActiveRecord::Schema.define(version: 20160528040440) do
     t.string   "street_address"
     t.string   "image_url"
     t.boolean  "has_taken_quiz",       default: false
-    t.boolean  "enable_notifications", default: true
     t.float    "longitude"
     t.float    "latitude"
+    t.boolean  "enable_notifications", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

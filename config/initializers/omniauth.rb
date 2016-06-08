@@ -6,7 +6,7 @@ scopes = %w(
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   OmniAuth.config.on_failure = SessionsController.action(:destroy)
-  provider :facebook, ENV["facebook_app_id"], ENV["facebook_app_secret"]
+  provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
   provider :twitter, ENV["twitter_app_id"], ENV["twitter_app_secret"]
   provider :google_oauth2,
            ENV["GOOGLE_CLIENT_ID"],
