@@ -6,6 +6,7 @@ gem "cloudinary", "1.1.0"
 gem "coveralls", require: false
 gem "em-rspec", require: false
 gem "eventmachine"
+gem "faker"
 gem "faye-websocket", "0.10.0"
 gem "haversine"
 gem "jbuilder", "~> 2.0"
@@ -34,7 +35,6 @@ group :development, :test do
   gem "capybara"
   gem "database_cleaner"
   gem "factory_girl_rails"
-  gem "faker"
   gem "pry"
   gem "pry-rails"
   gem "pry-nav"
