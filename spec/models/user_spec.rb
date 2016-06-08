@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
       with_foreign_key(:taskee_id)
   end
+
   it do
     is_expected.to have_many(:tasks_created).class_name("TaskManagement").
       with_foreign_key(:tasker_id)
@@ -69,6 +70,7 @@ RSpec.describe User, type: :model do
         to eql false
     end
   end
+
   describe ".validate_password" do
     it "ensures a password is supplied, it cannot be nil" do
       expect(build(:user, password: nil).save).to eql false
@@ -77,10 +79,7 @@ RSpec.describe User, type: :model do
       expect(build(:user, password: "andela").save).to be false
     end
   end
-  pending ".first_or_create_from_oauth" do
-    it "" do
-    end
-  end
+
   describe ".confirm_user" do
     it "can confirm a user's token" do
       user = create(:user)
@@ -117,6 +116,7 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
   describe "#taskee" do
     it "returns true if the user is a taskee" do
       user = create(:user, user_type: "taskee")
@@ -125,6 +125,36 @@ RSpec.describe User, type: :model do
     it "returns false for a tasker" do
       user = create(:user, user_type: "tasker")
       expect(user.taskee?).to eq false
+    end
+  end
+
+  describe ".first_or_create_from_oauth" do
+    context "when a user is not found" do
+      before do
+        @user_attributes = OmniAuth.config.mock_auth[:facebook]
+      end
+      it "will create a new user if no user is found" do
+        expect { User.first_or_create_from_oauth(@user_attributes) }.
+          to change { User.count }.by(1)
+      end
+      it "the new user should be confirmed" do
+        User.first_or_create_from_oauth(@user_attributes)
+        expect(User.first.confirmed).to eql true
+      end
+    end
+
+    context "when the user is already in the database" do
+      before do
+        @user_attributes = OmniAuth.config.mock_auth[:facebook]
+        @user = User.first_or_create_from_oauth(@user_attributes)
+      end
+      it "user count should remain one if a user is available" do
+        expect { User.first_or_create_from_oauth(@user_attributes) }.
+          to change { User.count }.by(0)
+      end
+      it "will return the user if found" do
+        expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
+      end
     end
   end
 end
