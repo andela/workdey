@@ -11,11 +11,6 @@ RSpec.feature "Oauth Authentication" do
                                                     mock_auth[:google_oauth2]
   end
 
-  after :all do
-    OmniAuth.config.test_mode = false
-    OmniAuth.config.mock_auth[:google_oauth2] = nil
-  end
-
   context "when a user signs up" do
     scenario "user should be able to choose a role" do
       visit signin_path
