@@ -28,8 +28,8 @@ google_authenticator = {
     image: Faker::Avatar.image
   }
 }
-OmniAuth.config.add_mock(:facebook, facebook_authenticator)
 OmniAuth.config.add_mock(:google_oauth2, google_authenticator)
+OmniAuth.config.add_mock(:facebook, facebook_authenticator)
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

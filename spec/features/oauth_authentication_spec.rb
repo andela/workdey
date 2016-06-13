@@ -7,7 +7,8 @@ RSpec.feature "Oauth Authentication" do
   before :all do
     Capybara.default_driver = :selenium
     Rails.application.env_config["omniauth.auth"] = OmniAuth.
-      config.mock_auth[:google_oauth2]
+                                                    config.
+                                                    mock_auth[:google_oauth2]
   end
 
   after :all do
