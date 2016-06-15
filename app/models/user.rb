@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :skillsets
-  has_many :reviews
-  has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
+  has_many :reviews, foreign_key: :reviewer_id
+  has_many :feedbacks, class_name: "Review", foreign_key: :reviewee_id
   has_many :tasks, through: :skillsets
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
@@ -50,6 +50,24 @@ class User < ActiveRecord::Base
         u.image_url = auth.info.image
       end
     end
+  end
+
+  def taskees
+    taskee_ids = tasks_created.map { |task| task.taskee_id }.uniq
+    taskee_ids.map do |id|
+      [User.find(id).firstname_and_lastname, id]
+    end
+  end
+
+  def taskers
+    tasker_ids = tasks_given.map { |task| task.tasker_id }.uniq
+    tasker_ids.map do |id|
+      [User.find(id).firstname_and_lastname, id]
+    end
+  end
+
+  def firstname_and_lastname
+    "#{firstname} #{lastname}"
   end
 
   def self.confirm_user(token)

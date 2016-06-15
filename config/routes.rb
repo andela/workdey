@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  resources :reviews, except: [:edit, :update, :destroy] do
+    resources :review_comments, only: [:create, :update, :destroy]
+  end
 
   get "signup" => "users#new"
   get "signin" => "sessions#new"
