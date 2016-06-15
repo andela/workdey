@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615043112) do
+ActiveRecord::Schema.define(version: 20160615114515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,10 +51,13 @@ ActiveRecord::Schema.define(version: 20160615043112) do
     t.integer  "reviewer_id"
     t.integer  "rating"
     t.text     "review"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "reviewee_id"
+    t.integer  "task_management_id"
   end
+
+  add_index "reviews", ["task_management_id"], name: "index_reviews_on_task_management_id", using: :btree
 
   create_table "skillsets", force: :cascade do |t|
     t.integer  "user_id"
@@ -125,4 +128,5 @@ ActiveRecord::Schema.define(version: 20160615043112) do
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
   add_foreign_key "review_comments", "reviews"
+  add_foreign_key "reviews", "task_managements"
 end

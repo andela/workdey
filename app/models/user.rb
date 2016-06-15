@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
 
-  ALLOWED = /\A[a-zA-Z]+\z/
+  ALLOWED = /\A[^\d]+\z/
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\.]+[\w+]\.[a-z]+\z/i
 
   has_secure_password
