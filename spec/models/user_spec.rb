@@ -147,11 +147,17 @@ RSpec.describe User, type: :model do
     end
 
     context "when a user logs in" do
+      let(:test_user) { User.first_or_create_from_oauth(user_attr) }
+
       it "does not create a new user" do
         User.first_or_create_from_oauth(user_attr)
         expect do
           User.first_or_create_from_oauth(user_attr)
         end.to change { User.count }.by(0)
+      end
+
+      it "will return the user if found" do
+        expect(User.first_or_create_from_oauth(user_attr)).to eql test_user
       end
     end
   end
