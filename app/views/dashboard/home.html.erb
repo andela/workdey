@@ -13,6 +13,8 @@
     <div class="row">
         <section class="col s6">
             <div class="user_info">
+            <h5><%= link_to("Reviews", reviews_path) %>
+            <h5><%= link_to(review_someone, new_review_path) %>
                 <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
                 <%= render "partials/search_for_taskee" if current_user.user_type == "tasker" %>
                 <h5>enable mail notifications</h5>
