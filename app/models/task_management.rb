@@ -2,6 +2,7 @@ class TaskManagement < ActiveRecord::Base
   belongs_to :taskee, class_name: "User"
   belongs_to :tasker, class_name: "User"
   belongs_to :task
+  has_many :reviews
 
   validates :amount,
             numericality: { greater_than_or_equal_to: 2000 },
@@ -12,6 +13,10 @@ class TaskManagement < ActiveRecord::Base
             :taskee_id,
             :task_desc,
             presence: true
+
+  def to_s
+    task_desc[0..20] + "..."
+  end
 
   def self.notifications_count(user_type, id)
     if user_type == "taskee"

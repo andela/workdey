@@ -122,7 +122,8 @@ class TaskManagementsController < ApplicationController
     if params[:user_id] && current_user.id
       review.rating = params[:rating] if params[:rating]
       review.reviewer_id = current_user.id
-      review.user_id = params[:user_id]
+      review.reviewee_id = params[:user_id]
+      review.task_management_id = params[:task_id]
       review.review = params[:comment] if params[:comment]
       return "success" if review.save
     end

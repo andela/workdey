@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
     average = Review.connection.execute("SELECT (SUM(rating) / COUNT(rating))
                               AS average
                               FROM reviews
-                              WHERE user_id = #{user_id}").first["average"]
+                              WHERE reviewee_id = #{user_id}").first["average"]
     average.nil? ? 0 : average
   end
 
