@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
 
-  ALLOWED = /\A[a-zA-Z]+\z/
+  ALLOWED = /\A[^\d]+\z/
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\.]+[\w+]\.[a-z]+\z/i
 
   has_secure_password
@@ -38,17 +38,15 @@ class User < ActiveRecord::Base
             length: { minimum: 8 }
 
   def self.first_or_create_from_oauth(auth)
-    if auth.provider == "facebook"
-      where(email: auth.info.email).first_or_create do |u|
-        u.provider = auth.provider
-        u.oauth_id = auth.uid
-        u.firstname = auth.info.name.split(" ").first
-        u.lastname = auth.info.name.split(" ").last
-        u.email = auth.info.email
-        u.password = SecureRandom.urlsafe_base64
-        u.confirmed = true
-        u.image_url = auth.info.image
-      end
+    where(email: auth.info.email).first_or_create do |u|
+      u.provider = auth.provider
+      u.oauth_id = auth.uid
+      u.firstname = auth.info.name.split(" ").first
+      u.lastname = auth.info.name.split(" ").last
+      u.email = auth.info.email
+      u.password = SecureRandom.urlsafe_base64
+      u.image_url = auth.info.image
+      u.confirmed = true
     end
   end
 

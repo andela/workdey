@@ -115,13 +115,15 @@
       margin-bottom: em(15px);
 
       .fa {
-        border-right: 1px solid #fff;
         padding-right: em(10px);
       }
 
       &.btn-fb {
-        padding-right: em(12px);
         background-color: #47639e;
+
+        .fa {
+          color: #FFFFFF;
+        }
       }
 
       &.btn-twt {
@@ -130,6 +132,10 @@
 
       &.btn-goog {
         background-color: #eb4436;
+
+        .fa {
+          color: #FFFFFF;
+        }
       }
     }
   }

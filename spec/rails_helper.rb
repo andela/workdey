@@ -10,16 +10,26 @@ require "capybara/rails"
 require "database_cleaner"
 require "em_helper"
 OmniAuth.config.test_mode = true
-authenticator = {
-                  "provider" => "facebook",
-                  "uid" => Faker::Number.number(5),
-                  "info" => {
-                    "name" => "#{Faker::Name.first_name} #{Faker::Name.last_name}",
-                    "email" => Faker::Internet.free_email,
-                    "image" => Faker::Avatar.image
-                  }
-                }
-OmniAuth.config.add_mock(:facebook, authenticator)
+facebook_authenticator = {
+  "provider" => "facebook",
+  "uid" => Faker::Number.number(5),
+  "info" => {
+    "name" => "#{Faker::Name.first_name} #{Faker::Name.last_name}",
+    "email" => Faker::Internet.free_email,
+    "image" => Faker::Avatar.image
+  }
+}
+google_authenticator = {
+  provider: "google_oauth2",
+  uid: Faker::Number.number(5),
+  info: {
+    name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
+    email: Faker::Internet.safe_email,
+    image: Faker::Avatar.image
+  }
+}
+OmniAuth.config.add_mock(:google_oauth2, google_authenticator)
+OmniAuth.config.add_mock(:facebook, facebook_authenticator)
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

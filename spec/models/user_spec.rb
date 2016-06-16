@@ -129,31 +129,35 @@ RSpec.describe User, type: :model do
   end
 
   describe ".first_or_create_from_oauth" do
-    context "when a user is not found" do
-      before do
-        @user_attributes = OmniAuth.config.mock_auth[:facebook]
+    let(:user_attr) { OmniAuth.config.mock_auth[:google_oauth2] }
+
+    context "when a user signs up" do
+      it "creates new user" do
+        expect do
+          User.first_or_create_from_oauth(user_attr)
+        end.to change { User.count }.by(1)
       end
-      it "will create a new user if no user is found" do
-        expect { User.first_or_create_from_oauth(@user_attributes) }.
-          to change { User.count }.by(1)
-      end
-      it "the new user should be confirmed" do
-        User.first_or_create_from_oauth(@user_attributes)
+
+      it "sets user's properties" do
+        User.first_or_create_from_oauth(user_attr)
+        expect(User.first.provider).to eql user_attr.provider
+        expect(User.first.email).to eql user_attr.info.email
         expect(User.first.confirmed).to eql true
       end
     end
 
-    context "when the user is already in the database" do
-      before do
-        @user_attributes = OmniAuth.config.mock_auth[:facebook]
-        @user = User.first_or_create_from_oauth(@user_attributes)
+    context "when a user logs in" do
+      let(:test_user) { User.first_or_create_from_oauth(user_attr) }
+
+      it "does not create a new user" do
+        User.first_or_create_from_oauth(user_attr)
+        expect do
+          User.first_or_create_from_oauth(user_attr)
+        end.to change { User.count }.by(0)
       end
-      it "user count should remain one if a user is available" do
-        expect { User.first_or_create_from_oauth(@user_attributes) }.
-          to change { User.count }.by(0)
-      end
+
       it "will return the user if found" do
-        expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
+        expect(User.first_or_create_from_oauth(user_attr)).to eql test_user
       end
     end
   end
