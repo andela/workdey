@@ -23,7 +23,7 @@ google_authenticator = {
   provider: "google_oauth2",
   uid: Faker::Number.number(5),
   info: {
-    name: Faker::Name.name,
+    name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
     email: Faker::Internet.safe_email,
     image: Faker::Avatar.image
   }
