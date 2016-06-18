@@ -21,7 +21,7 @@ gem "omniauth-oauth2", "~> 1.3.1"
 gem "omniauth-twitter"
 gem "pg", "0.17.1"
 gem "rails", "4.2.4"
-gem "redis"
+gem "redis", "~>3.2"
 gem "sass-rails", "~> 5.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "sidekiq"
