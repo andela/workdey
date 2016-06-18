@@ -11,6 +11,12 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
+    users = if current_user.tasker?
+               current_user.taskees
+             else
+               current_user.taskers
+             end
+    @users = UsersDecorator.new users
   end
 
   def create

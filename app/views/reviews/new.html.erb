@@ -1,2 +1,33 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<main>
+  <section class="col m9 s12 offset-m1">
+    <div class="row">
+      <ul class= "col m10 offset-m1" >
+        <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", params[:taskee], disabled: true) %></li>
+
+        <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", params[:task], disabled: true ) %></li>
+        <%= form_tag completed_path do %>
+        <div class="form-group col-md-3">
+          <%= label_tag(:reviewee_id, reviewee) %>
+          <%= select_tag(:reviewee_id, options_for_select(@users), class: "form-control") %>
+          <% binding.pry %>
+        </div>
+        <li><strong><%= label_tag "Add a comment about the taskee or their job:" %></strong></li>
+          <input type="hidden" name= "task_id" value= "<%= params[:num] %>" >
+          <input type="hidden" name= "user_id" value= "<%= params[:user_id] %>" >
+        <li><%= text_area_tag "comment" %></li>
+        <li><strong><%= label_tag "Rate taskee" %></strong>
+          <div>&nbsp;</div>
+            <% 1.upto(5) do |n| %>
+              <div class="group">
+                <i class="fa fa-star-o"></i>
+                <input type="radio" name="rating" value="<%= n %>">
+              </div>
+            <% end %>
+          <div>&nbsp;</div>
+        </li>
+        <li><button class="btn waves-effect" type="submit">Completed</button></li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+</main>
