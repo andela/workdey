@@ -53,14 +53,14 @@ class User < ActiveRecord::Base
   end
 
   def taskees
-    taskee_ids = tasks_created.map { |task| task.taskee_id }.uniq
+    taskee_ids = tasks_created.map(&:taskee_id).uniq
     taskee_ids.map do |id|
       [User.find(id).firstname_and_lastname, id]
     end
   end
 
   def taskers
-    tasker_ids = tasks_given.map { |task| task.tasker_id }.uniq
+    tasker_ids = tasks_given.map(&:tasker_id).uniq
     tasker_ids.map do |id|
       [User.find(id).firstname_and_lastname, id]
     end

@@ -68,11 +68,6 @@ class TaskManagementsController < ApplicationController
   end
 
   def return_taskmanagements
-    taskmanagements = if current_user.tasker?
-                       current_user.tasks_created.where(taskee_id: params[:reviewee_id])
-                     else
-                       current_user.tasks_given.where(tasker_id: params[:reviewee_id])
-                     end
     @task_managements = taskmanagements.map do |task|
       [task.to_s, task.id]
     end
@@ -88,6 +83,14 @@ class TaskManagementsController < ApplicationController
 
   def task_date
     params.require(:date).permit(:month, :day)
+  end
+
+  def taskmanagements
+    if current_user.tasker?
+      current_user.tasks_created.where(taskee_id: params[:reviewee_id])
+    else
+      current_user.tasks_given.where(tasker_id: params[:reviewee_id])
+    end
   end
 
   def task_time
