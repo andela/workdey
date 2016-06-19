@@ -1,13 +1,13 @@
 class ReviewDecorator < Draper::Decorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def type_of_review id, name
+    if id == current_user.id
+      "You"
+    else
+      name
+    end
+  end
+
 
 end

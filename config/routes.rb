@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
   match "dashboard/profile" => "dashboard#user_profile", as: :profile, via: [:post, :get]
-
+  get "review/tasks/:reviewee_id" => "task_managements#return_taskmanagements", as: :reviewee
   get "dashboard/assign" => "task_managements#new", as: :assign_task
   post "dashboard/assign" => "task_managements#create", as: :create_task
   get "dashboard/notifications" => "notifications#index", as: :notifications

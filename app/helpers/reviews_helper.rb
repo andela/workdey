@@ -1,6 +1,6 @@
 module ReviewsHelper
-  def reviewee(user)
-    if user.tasker?
+  def review_me
+    if current_user.tasker?
       label("taskee")
     else
       label("tasker")
