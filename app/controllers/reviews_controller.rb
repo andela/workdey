@@ -39,7 +39,7 @@ class ReviewsController < ApplicationController
     if current_user.tasker?
       current_user.taskees
     else
-     current_user.taskers
+      current_user.taskers
     end
   end
 end
