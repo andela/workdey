@@ -5,4 +5,25 @@ class Review < ActiveRecord::Base
   has_many :review_comments
 
   validates :review, presence: true
+  validate :presence_of_rating
+  validate :presence_of_reviewee
+  validate :presence_of_task
+
+  def presence_of_task
+    unless task_management_id
+      errors[:no_task] = " -  Please select a task"
+    end
+  end
+
+  def presence_of_reviewee
+    unless reviewee_id
+      errors[:reviewee] = " -  Please select someone to review"
+    end
+  end
+
+  def presence_of_rating
+    unless rating.to_i >= 1
+      errors[:no_rating] = " -  Please do not forget to include a rating"
+    end
+  end
 end

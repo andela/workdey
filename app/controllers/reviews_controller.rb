@@ -11,11 +11,6 @@ class ReviewsController < ApplicationController
 
   def new
     @review = Review.new
-    users = if current_user.tasker?
-               current_user.taskees
-             else
-               current_user.taskers
-             end
     @users = UsersDecorator.new users
   end
 
@@ -24,18 +19,27 @@ class ReviewsController < ApplicationController
     @review.reviewer_id = current_user.id
     if @review.save
       flash[:success] = "Your review has been successfully submitted"
-      redirect_to dashbooard_path
+      redirect_to dashboard_path
     else
       flash.now[:errors] = "There were errors while trying to review"
-      render :new
+      @users = UsersDecorator.new users
+      render "new"
     end
   end
 
   private
 
   def review_params
-    params.require(review).permit(
+    params.permit(
       :rating, :review, :reviewee_id, :task_management_id
     )
+  end
+
+  def users
+    if current_user.tasker?
+      current_user.taskees
+    else
+     current_user.taskers
+    end
   end
 end

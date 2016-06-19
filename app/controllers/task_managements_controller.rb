@@ -73,6 +73,18 @@ class TaskManagementsController < ApplicationController
     ).deliver_now
   end
 
+  def return_taskmanagements
+    taskmanagements = if current_user.tasker?
+                       current_user.tasks_created.where(taskee_id: params[:reviewee_id])
+                     else
+                       current_user.tasks_given.where(tasker_id: params[:reviewee_id])
+                     end
+    @task_managements = taskmanagements.map do |task|
+      [task.to_s, task.id]
+    end
+    render layout: false
+  end
+
   private
 
   def task_details
