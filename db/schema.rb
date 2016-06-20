@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620070444) do
+ActiveRecord::Schema.define(version: 20160620143915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20160620070444) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.boolean  "user_notified",   default: false
-    t.boolean  "viewed",          default: false
     t.integer  "notifiable_id"
     t.string   "notifiable_type"
   end
@@ -76,15 +75,12 @@ ActiveRecord::Schema.define(version: 20160620070444) do
     t.integer  "tasker_id"
     t.integer  "taskee_id"
     t.string   "task_desc"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "amount"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "status",          default: "inactive"
-    t.boolean  "taskee_notified", default: false
-    t.boolean  "viewed",          default: false
-    t.boolean  "tasker_notified", default: false
+    t.string   "status",     default: "inactive"
   end
 
   create_table "tasks", force: :cascade do |t|

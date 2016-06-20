@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
 
   def show
     notification = Notification.find(params[:id])
-    notification.update_attribute(:viewed, true)
+    notification.update_as_viewed
     request = TaskManagement.find(notification.notifiable_id)
     title = params[:title]
     description = request.task_desc
@@ -29,7 +29,7 @@ class NotificationsController < ApplicationController
     notification = Notification.find(params[:id])
     record = TaskManagement.find(notification.notifiable_id)
     if record.update_attribute(:status, params[:status])
-      taskee_response = record.status == 'active' ? 'accepted': 'rejected'
+      taskee_response = record.status == "active" ? "accepted" : "rejected"
       notification = Notification.create(
         message: "#{record.taskee.firstname} #{taskee_response} your task.",
         sender_id: record.taskee_id,
@@ -38,7 +38,7 @@ class NotificationsController < ApplicationController
       notification.update_attribute(:notifiable, record)
       notification.update_as_viewed
       tasker_unnotified_count = Notification.unnotified_count(record.tasker_id)
-      Notification.notify(record.tasker_id, tasker_unnotified_count, 'new_task')
+      Notification.notify(record.tasker_id, tasker_unnotified_count, "new_task")
       render json: { message: "success" }
     end
   end

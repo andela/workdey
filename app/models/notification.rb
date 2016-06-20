@@ -4,7 +4,7 @@ class Notification < ActiveRecord::Base
   belongs_to :notifiable, polymorphic: true
 
   def update_as_viewed
-    self.update_attribute(:read, true)
+    update_attribute(:read, true)
   end
 
   def self.unseen(user)
