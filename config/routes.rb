@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   post "/skillsets" => "skillsets#create"
   delete "/skillsets" => "skillsets#destroy"
 
+  get "/search/skillset/:query", to: "skillsets#search_skillsets"
   resources :biddings
   resources :tasks
   resources :users, only: [:create]

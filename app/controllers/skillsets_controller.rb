@@ -1,5 +1,5 @@
 class SkillsetsController < ApplicationController
-  before_action :taskee_required
+  before_action :taskee_required, except: :search_skillsets
 
   def index
     @skillsets = current_user.skillsets.select(&:name)
@@ -19,6 +19,14 @@ class SkillsetsController < ApplicationController
       skillset.task_id == params[:task_id].to_i
     end.destroy
     respond_to :js
+  end
+
+  def search_skillsets
+    query = params[:query]
+    skillsets = Skillset.where("LOWER(name) Like ?", "%#{query.downcase}%")
+    respond_to do |format|
+      format.json { render json: skillsets }
+    end
   end
 
   private

@@ -18,4 +18,3 @@
 //= require websocket_rails/main
 //= require moment
 //= require_tree .
-
