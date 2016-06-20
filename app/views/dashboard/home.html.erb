@@ -13,8 +13,7 @@
     <div class="row">
         <section class="col s6">
             <div class="user_info">
-            <h5><%= link_to("Reviews", reviews_path) %>
-            <h5><%= link_to(review_someone, new_review_path) %>
+
                 <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
                 <%= render "partials/search_for_taskee" if current_user.user_type == "tasker" %>
                 <h5>enable mail notifications</h5>
@@ -35,7 +34,7 @@
                 </div>
             <% end %>
         </section>
-        <section class="col s6">
+        <div class="col s6">
 
           <div class="profile-meter">
             <div class="progress-pie-chart" data-percent="<%= @completion_percentage %>">
@@ -49,8 +48,14 @@
           </div>
         </div>
         <p class="meter-header"><a href="<%= profile_path %>"> Complete Your Profile</a> </p>
+
+          <br />
+          <h5><%= link_to("Reviews", reviews_path) %></h5>
+            <h5><%= link_to(review_someone, new_review_path) %></h5>
+
           </div>
-        </section>
+        </div>
+
     </div>
   </section>
 </main>
