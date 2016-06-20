@@ -47,14 +47,6 @@ class ApplicationController < ActionController::Base
   end
 
   def show_notification_count
-    if current_user
-      @count = TaskManagement.
-               notifications_count(current_user.user_type, current_user.id)
-    end
-  end
-
-  def notify(user_type, id)
-    data = TaskManagement.notifications_count(user_type, id)
-    WebsocketRails.users[id].send_message :new_task, data
+    @count = Notification.unseen(current_user).count if current_user
   end
 end

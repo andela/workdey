@@ -22,6 +22,15 @@
         $(".notification-badge").remove();
     }
 
+    // dispatcher.bind("new_task", function(msg) {
+    //   if (msg >= 1) {
+    //     notificationElemChild.text(msg);
+    //     notificationWrapper.prepend( notificationElem.append(notificationElemChild) );
+    //   } else {
+    //     return
+    //   }
+    // })
+
     dispatcher.bind("new_task", function (msg) {
       if (msg === 1) {
         notificationElemChild.text(msg);

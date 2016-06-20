@@ -3,6 +3,8 @@ class TaskManagement < ActiveRecord::Base
   belongs_to :tasker, class_name: "User"
   belongs_to :task
 
+  has_many :notifications, as: :notifiable
+
   validates :amount,
             numericality: { greater_than_or_equal_to: 2000 },
             presence: true

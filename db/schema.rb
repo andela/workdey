@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528040440) do
+ActiveRecord::Schema.define(version: 20160620070444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,23 @@ ActiveRecord::Schema.define(version: 20160528040440) do
   end
 
   add_index "biddings", ["task_id"], name: "index_biddings_on_task_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "message"
+    t.boolean  "read",            default: false
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "user_notified",   default: false
+    t.boolean  "viewed",          default: false
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+  end
+
+  add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
+  add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
+  add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -105,9 +122,9 @@ ActiveRecord::Schema.define(version: 20160528040440) do
     t.string   "street_address"
     t.string   "image_url"
     t.boolean  "has_taken_quiz",       default: false
+    t.boolean  "enable_notifications", default: true
     t.float    "longitude"
     t.float    "latitude"
-    t.boolean  "enable_notifications", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

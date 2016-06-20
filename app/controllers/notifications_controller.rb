@@ -2,12 +2,14 @@ class NotificationsController < ApplicationController
   before_action :show_notification_count, only: :index
 
   def index
-    show_notifications(current_user.user_type)
+    @notifications = Notification.unread(current_user)
+    Notification.update_as_notified(current_user)
   end
 
   def show
-    request = TaskManagement.find params[:id]
-    request.update_attribute(:viewed, true)
+    notification = Notification.find(params[:id])
+    notification.update_attribute(:viewed, true)
+    request = TaskManagement.find(notification.notifiable_id)
     title = params[:title]
     description = request.task_desc
     date = pad_date(request.start_time.strftime("%B %e")) << " of this year"
@@ -24,29 +26,24 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    record = TaskManagement.find params[:id]
+    notification = Notification.find(params[:id])
+    record = TaskManagement.find(notification.notifiable_id)
     if record.update_attribute(:status, params[:status])
-      record.update_attribute(:tasker_notified, false)
-      notify("tasker", record.tasker_id)
+      taskee_response = record.status == 'active' ? 'accepted': 'rejected'
+      notification = Notification.create(
+        message: "#{record.taskee.firstname} #{taskee_response} your task.",
+        sender_id: record.taskee_id,
+        receiver_id: record.tasker_id
+      )
+      notification.update_attribute(:notifiable, record)
+      notification.update_as_viewed
+      tasker_unnotified_count = Notification.unnotified_count(record.tasker_id)
+      Notification.notify(record.tasker_id, tasker_unnotified_count, 'new_task')
       render json: { message: "success" }
     end
   end
 
   private
-
-  def show_notifications(user_type)
-    all_notifications_seen_for(current_user)
-    notifications_for(user_type)
-  end
-
-  def notifications_for(user_type)
-    @notifications ||= TaskManagement.
-                       all_notifications_for(user_type, current_user.id)
-  end
-
-  def all_notifications_seen_for(user)
-    TaskManagement.update_all_notifications_as_seen(user)
-  end
 
   def pad_date(date_str)
     date_num = date_str.split(" ").detect { |v| v.match(/[0-9]/) }[-1].to_i

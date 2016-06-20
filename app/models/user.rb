@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_one :user_plan
   has_many :biddings, foreign_key: :tasker_id
   has_many :bid_managements, foreign_key: :taskee_id
+  has_many :notifications, class_name: "Notification", foreign_key: :receiver_id
+  has_many :sent_notifications, class_name: "Notification", foreign_key: :sender_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?

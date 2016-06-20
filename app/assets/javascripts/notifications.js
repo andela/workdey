@@ -45,7 +45,8 @@
     });
   }
 
-  $(".notification-feed").on("click", ".btn", function () {
+  $(".notification-feed").on("click", ".btn", function (e) {
+    console.log(e)
     var requestId = $(this).data("id"),
         title = $(this).prev(".title").text().trim()
         request = $.ajax({
