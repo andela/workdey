@@ -2,6 +2,17 @@ class Task < ActiveRecord::Base
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
 
+  validates :name, presence: true
+  validate :end_time_must_be_later_than_start_time
+  validates :amount,
+            numericality: { greater_than_or_equal_to: 2000 },
+            presence: true
+  validates :tasker_id,
+            :skillset,
+            :description,
+            presence: true
+
+
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_task_name(keyword, user_email)
     current_user_city_street user_email
@@ -29,6 +40,16 @@ class Task < ActiveRecord::Base
   def self.assign_task(taskee_id, task_id)
     task = Task.find(task_id)
     task.update_attributes(taskee_id: taskee_id, status: "assigned")
+  end
+
+  def end_time_must_be_later_than_start_time
+    if start_date && end_date
+      unless end_date > start_date && end_date > Time.now
+        errors[:end_date] = "End_time cannot be in the past"
+      end
+    else
+      errors[:date] = "Task date cannot be nil"
+    end
   end
 
   private_class_method
