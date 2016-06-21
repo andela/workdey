@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :notification do
-    message "MyString"
+    message { Faker::Lorem.sentence(6) }
     read false
-    user nil
+    receiver nil
   end
 end

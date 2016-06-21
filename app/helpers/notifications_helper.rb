@@ -1,10 +1,9 @@
 module NotificationsHelper
   def show_notifications(notification)
     css_class_name = notification.user_notified ? "feed viewed" : "feed"
-    tasker_image = notification.sender.image_url
     generate_html(
       css_class_name,
-      tasker_image,
+      notification.sender.image_url,
       notification.message,
       notification.id
     )

@@ -1,33 +1,33 @@
 (function () {
-  var dispatcher = new WebSocketRails(host_name())
+  var dispatcher = new WebSocketRails(host_name());
 
   function host_name () {
     if ( location.port.length === 0 ) {
-      return location.hostname + '/websocket'
+      return location.hostname + '/websocket';
     } else {
-      return location.hostname + ':' + location.port + '/websocket'
+      return location.hostname + ':' + location.port + '/websocket';
     }
-  }
+  };
 
   dispatcher.on_open = function (data) {
     var notificationIndicator = $(".notification-badge span"),
         notificationWrapper = $(".dashboard-navlinks"),
         notificationElem = $("<li class='notification-badge'>"),
-        notificationElemChild = $("<span>")
+        notificationElemChild = $("<span>");
 
     if (location.pathname === "/dashboard/notifications") {
-      $(".notification-badge").remove()
+      $(".notification-badge").remove();
     }
 
-    dispatcher.bind("new_task", showMessage)
+    dispatcher.bind("new_task", showNotificationCount);
 
-    function showMessage (msg) {
+    function showNotificationCount (msg) {
       if (msg >= 1) {
-        notificationElemChild.text(msg)
-        notificationWrapper.prepend( notificationElem.append(notificationElemChild) )
+        notificationElemChild.text(msg);
+        notificationWrapper.prepend( notificationElem.append(notificationElemChild) );
       } else {
-        return
+        return;
       }
-    }
-  }
+    };
+  };
 }())
