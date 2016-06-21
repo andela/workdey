@@ -26,6 +26,11 @@ class Task < ActiveRecord::Base
     @user_street = "%#{user_addy[0][1]}%"
   end
 
+  def self.assign_task(taskee_id, task_id)
+    task = Task.find(task_id)
+    task.update_attributes(taskee_id: taskee_id, status: "assigned")
+  end
+
   private_class_method
   def self.users
     User.arel_table

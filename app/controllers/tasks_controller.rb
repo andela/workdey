@@ -5,18 +5,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params.except(:type).merge(tasker_id: current_user.id))
-    if task.save
-      if task_params[:type] == "assign"
-        @taskees = Skillset.get_taskees(task[:skillsets])
-        street_address, city = task[:location].split(",")
-        @taskees = Task.get_taskees_nearby(
-          @taskees,
-          street_address.strip.downcase,
-          city.strip.downcase
-        ) unless task[:location].empty?
-        render "partials/search_result", locals: { task_id: task.id, assigns: true }
-      end
+    @task = Task.new(task_params.except(:type).merge(tasker_id: current_user.id))
+    if @task.save
+      assign_to_taskee if task_params[:type] == "assign"
+    else
+      render "new"
     end
   end
 
@@ -27,10 +20,10 @@ class TasksController < ApplicationController
   end
 
   def assign
-    task = Task.find(params[:task_id])
-    task.update_attributes(taskee_id: params[:id], status: "assigned")
+    Task.assign_task(params[:taskee_id], params[:task_id])
     redirect_to dashboard_path, notice: "You have assigned the task to a Taskee"
   end
+
   private
 
   def task_params
@@ -45,5 +38,16 @@ class TasksController < ApplicationController
       :skillsets,
       :type
     )
+  end
+
+  def assign_to_taskee
+    @taskees = Skillset.get_taskees(task_params[:skillsets])
+    street_address, city = task_params[:location].split(",")
+    @taskees = Task.get_taskees_nearby(
+      @taskees,
+      street_address.strip.downcase,
+      city.strip.downcase
+    ) unless task_params[:location].empty?
+    render "partials/search_result", locals: { task_id: @task.id, assigns: true }
   end
 end
