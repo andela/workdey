@@ -9,6 +9,8 @@ class ReviewsController < ApplicationController
     review = Review.find(params[:id])
     @review = review.decorate
     @comments = ReviewCommentsDecorator.new review.review_comments
+    @review_comment = ReviewComment.new
+    @review_comment.review_id = review.id
   end
 
   def new

@@ -9,6 +9,7 @@ class Review < ActiveRecord::Base
   validate :presence_of_rating
   validate :presence_of_reviewee
   validate :presence_of_task
+  validate :uniqueness_of_review
 
   def presence_of_task
     unless task_management_id
@@ -25,6 +26,16 @@ class Review < ActiveRecord::Base
   def presence_of_rating
     unless rating.to_i >= 1
       errors[:no_rating] = " -  Please do not forget to include a rating"
+    end
+  end
+
+  def uniqueness_of_review
+    first_review = Review.find_by(
+      reviewer_id: reviewer_id,
+      task_management_id: task_management_id
+    )
+    if first_review
+      errors[:not_allowed] = "You cannot review a task more than once"
     end
   end
 end

@@ -7,14 +7,16 @@
       <h3><span><strong>Reviewee: &nbsp;</strong></span><%= @review.you_or_reviewee(current_user) %></h3>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col offset-s1 section card-panel hoverable container">
-      <div class="col s12">
-        <p class="center-align"><strong><%= @review.object.review %></strong></p>
+    <div class="row">
+      <div class="col section offset-s1 card-panel hoverable container">
+        <div class="col s12">
+          <p class="center-align"><strong><%= @review.object.review %></strong></p>
+        </div>
       </div>
     </div>
-  </div>
+    <%= render partial: 'review_comments/form' %>
+      <h3>Comments</h3>
+      <%= @comments.render_comments %>
 </main>
 
 

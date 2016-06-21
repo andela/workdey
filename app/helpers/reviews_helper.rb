@@ -1,13 +1,13 @@
 module ReviewsHelper
   def review_me
     if current_user.tasker?
-      label("taskee")
+      user_type("taskee")
     else
-      label("tasker")
+      user_type("tasker")
     end
   end
 
-  def label(user_type)
-    "Select a #{user_type}"
+  def user_type(type)
+    "Select a #{type}"
   end
 end
