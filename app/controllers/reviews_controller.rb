@@ -6,7 +6,9 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find(params[:id]).decorate
+    review = Review.find(params[:id])
+    @review = review.decorate
+    @comments = ReviewCommentsDecorator.new review.review_comments
   end
 
   def new
