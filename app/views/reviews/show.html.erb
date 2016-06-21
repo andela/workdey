@@ -1,0 +1,24 @@
+<main>
+  <div class="row section">
+    <div class="col s6 offset-s1">
+      <h3><span><strong>Reviewer: &nbsp;</strong></span><%= @review.you_or_reviewer(current_user) %></h3>
+    </div>
+    <div class="col s5">
+      <h3><span><strong>Reviewee: &nbsp;</strong></span><%= @review.you_or_reviewee(current_user) %></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col offset-s1 section card-panel hoverable container">
+      <div class="col s12">
+        <p class="center-align"><strong><%= @review.object.review %></strong></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
