@@ -1,5 +1,4 @@
 class Task < ActiveRecord::Base
-  has_many :skillsets
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
 
@@ -13,10 +12,10 @@ class Task < ActiveRecord::Base
   end
 
   def self.get_taskees_nearby(taskees, user_street, user_city)
-    taskees_nearby = taskees.where("city LIKE ? AND street_address LIKE ?",
+    taskees_nearby = taskees.where("LOWER(city) LIKE ? AND LOWER(street_address) LIKE ?",
                                    user_city, user_street)
     if taskees_nearby.nil?
-      taskees_nearby = taskees.where("city LIKE ?", user_city)
+      taskees_nearby = taskees.where("LOWER(city) LIKE ?", user_city)
     end
     taskees_nearby
   end

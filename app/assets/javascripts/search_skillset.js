@@ -19,12 +19,12 @@ remote: {
 
   $('.typeahead').materialtags({
       typeaheadjs: {
-          // name: 'skillsets',
-          // displayKey: 'value',
-          // valueKey: 'value',
-          // source: skillsets
           name: 'skillsets',
-          display: 'value',
+          displayKey: 'value',
+          valueKey: 'value',
+          // source: skillsets
+          // name: 'skillsets',
+          // display: 'value',
           source: skillsets.ttAdapter()
       }
   });
