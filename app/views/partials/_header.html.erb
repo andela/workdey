@@ -21,9 +21,14 @@
           </li>
 
           <li>
-            <a href="<%= new_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
+            <% if current_user.tasker? %>
+              <a href="<%= new_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
+                <i class="material-icons">rate_review</i>
+              </a>
+            <% else %>
+              <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Tasks">
               <i class="material-icons">rate_review</i>
-            </a>
+              <% end %>
           </li>
         </ul>
 
