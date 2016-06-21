@@ -74,7 +74,46 @@ class TaskManagementsController < ApplicationController
     ).deliver_now
   end
 
+  def show_notification
+    notification = Notification.find(params[:id])
+    notification.update_as_viewed
+    request = TaskManagement.find(notification.notifiable_id)
+    title = params[:title]
+    description = request.task_desc
+    date = pad_date(request.start_time.strftime("%B %e")) << " of this year"
+    time = format_for_view(request.start_time, request.end_time)
+    amount = request.amount
+
+    render json: {
+      title: title,
+      description: description,
+      date: date,
+      time: time,
+      amount: amount
+    }
+  end
+
+  def update_notification
+    notification = Notification.find(params[:id])
+    record = TaskManagement.find(notification.notifiable_id)
+    if record.update_attribute(:status, params[:status])
+      taskee_response = record.status == "active" ? "accepted" : "rejected"
+      notification = Notification.create(
+        message: "#{record.taskee.firstname} #{taskee_response} your task.",
+        sender_id: record.taskee_id,
+        receiver_id: record.tasker_id
+      )
+      notification.update_attribute(:notifiable, record)
+      notification.update_as_viewed
+      tasker_unnotified_count = Notification.unnotified_count(record.tasker_id)
+      Notification.notify(record.tasker_id, tasker_unnotified_count, "new_task")
+      render json: { message: "success" }
+    end
+  end
+
   private
+
+
 
   def task_details
     params.require(:task_management).

@@ -13,7 +13,7 @@
         userAction;
 
     userAction = $.ajax({
-      url: ("/dashboard/notifications/" + urlParam),
+      url: ("dashboard/task_management_notifications/" + urlParam),
       method: "PUT",
       data: { status: obj.status }
     });
@@ -50,7 +50,7 @@
     var requestId = $(this).data("id"),
         title = $(this).prev(".title").text().trim()
         request = $.ajax({
-          url: ("/dashboard/notifications/" + requestId),
+          url: ("dashboard/task_management_notifications/" + requestId),
           method: "POST",
           data: { title: title },
           dataType: "json"

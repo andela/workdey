@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   get "dashboard/assign" => "task_managements#new", as: :assign_task
   post "dashboard/assign" => "task_managements#create", as: :create_task
   get "dashboard/notifications" => "notifications#index", as: :notifications
-  post "dashboard/notifications/:id" => "notifications#show"
-  put "dashboard/notifications/:id" => "notifications#update"
+  post "dashboard/task_management_notifications/:id" => "task_managements#show_notification"
+  put "dashboard/task_management_notifications/:id" => "task_managements#update_notification"
 
   get "user/profile" => "dashboard#profile_view", as: :user_profile
 

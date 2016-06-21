@@ -49,4 +49,31 @@ class ApplicationController < ActionController::Base
   def show_notification_count
     @count = Notification.unseen(current_user).count if current_user
   end
+
+  def pad_date(date_str)
+    date_num = date_str.split(" ").detect { |v| v.match(/[0-9]/) }[-1].to_i
+    date_str << pad_with(date_num)
+  end
+
+  def pad_with(date_num)
+    return "st" if date_num == 1
+    return "nd" if date_num == 2
+    return "rd" if date_num == 3
+    "th"
+  end
+
+  def format_for_view(start_time, end_time)
+    start_time = (start_time + 3600).strftime("%l%P").strip
+    end_time = (end_time + 3600).strftime("%l%P").strip
+    time_range = "#{start_time} - #{end_time}"
+    "#{day_period(time_range)} (#{time_range})"
+  end
+
+  def day_period(time_range)
+    return "Anytime" if time_range == "8am - 8pm"
+    return "Morning" if time_range == "8am - 12pm"
+    return "Afternoon" if time_range == "12pm - 4pm"
+    "Evening" if time_range == "4pm - 8pm"
+  end
+
 end
