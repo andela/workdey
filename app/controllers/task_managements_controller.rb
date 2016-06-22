@@ -26,8 +26,7 @@ class TaskManagementsController < ApplicationController
         sender_id: @task.tasker_id,
         receiver_id: @task.taskee_id,
         notifiable: @task
-      )
-      Notification.notify(@task.taskee_id, "new_task")
+      ).notify_receiver("new_task")
       redirect_to dashboard_path
     else
       retain_form_values

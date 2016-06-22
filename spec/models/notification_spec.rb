@@ -11,19 +11,19 @@ RSpec.describe Notification, type: :model do
 
   it { is_expected.to belong_to(:notifiable) }
 
-  describe '#update_as_viewed' do
+  describe '#update_as_read' do
     it "sets a notification as read" do
-      notification.update_as_viewed
+      notification.update_as_read
       expect(notification.read).to be true
     end
   end
 
-  describe ".unseen" do
-    context "when unseen" do
+  describe ".unnotified" do
+    context "when unnotified" do
       before { user.notifications.update_all(user_notified: false) }
 
       it "returns a users unseen notifications" do
-        unseen_notifications = Notification.unseen(user)
+        unseen_notifications = Notification.unnotified(user)
         expect(unseen_notifications.size).to eq(1)
       end
     end
@@ -32,9 +32,18 @@ RSpec.describe Notification, type: :model do
       before { user.notifications.update_all(user_notified: true) }
 
       it "returns empty array" do
-        unseen_notifications = Notification.unseen(user)
+        unseen_notifications = Notification.unnotified(user)
         expect(unseen_notifications.size).to eq(0)
       end
+    end
+  end
+
+  describe ".unnotified_count" do
+    before { user.notifications.update_all(user_notified: false) }
+
+    it "return number of unsent notifications" do
+      unnotified_count = Notification.unnotified_count(user.id)
+      expect(unnotified_count).to eq(1)
     end
   end
 
@@ -59,8 +68,8 @@ RSpec.describe Notification, type: :model do
   describe ".update_as_notified" do
     it "updates notifications as seen" do
       Notification.update_as_notified(user)
-      unseen = Notification.unseen(user)
-      expect(unseen.size).to eq(0)
+      unnotified_count = Notification.unnotified_count(user.id)
+      expect(unnotified_count).to eq(0)
     end
   end
 end

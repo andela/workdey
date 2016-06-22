@@ -47,6 +47,6 @@ class ApplicationController < ActionController::Base
   end
 
   def show_notification_count
-    @count = Notification.unseen(current_user).count if current_user
+    @count = Notification.unread(current_user).count if current_user
   end
 end
