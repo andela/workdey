@@ -4,10 +4,10 @@
   <%= form_for [ @review, @review_comment ], remote: true do |f| %>
     <p>
       <%= f.label :body %><br/>
-      <%= f.text_area :body %>
+      <%= f.text_area :body, id: "comment_body" %>
     </p>
     <p>
-      <%= f.submit 'Submit' %>
+      <%= f.submit 'Submit', id: "submit_comment" %>
     </p>
   <% end %>
   </div>
