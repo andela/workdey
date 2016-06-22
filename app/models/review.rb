@@ -24,7 +24,7 @@ class Review < ActiveRecord::Base
   end
 
   def presence_of_rating
-    unless rating.to_i >= 1
+    unless rating && rating.to_i >= 1
       errors[:no_rating] = " -  Please do not forget to include a rating"
     end
   end
@@ -35,7 +35,7 @@ class Review < ActiveRecord::Base
       task_management_id: task_management_id
     )
     if first_review
-      errors[:not_allowed] = "You cannot review a task more than once"
+      errors[:not_allowed] = " - You cannot review a task more than once"
     end
   end
 end
