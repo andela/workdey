@@ -4,8 +4,9 @@ class Review < ActiveRecord::Base
   belongs_to :task_management
   has_many :review_comments
 
-  validates :review, presence: true,
-            uniqueness: { message: " - That same review has been given before"}
+  validates :review,
+            presence: true,
+            uniqueness: { message: " - That same review has been given before" }
   validate :presence_of_rating
   validate :presence_of_reviewee
   validate :presence_of_task

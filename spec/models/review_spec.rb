@@ -65,18 +65,18 @@ RSpec.describe Review, type: :model do
 
     context "when a user has reviewed a task before" do
       it "user cannot review task" do
-        review = create(
+        create(
           :review,
           reviewer_id: @user.id,
           task_management_id: @task.id
         )
-        review2 = build(
+        review = build(
           :review,
           reviewer_id: @user.id,
           task_management_id: @task.id
         )
-        expect(review2.valid?).to be false
-        expect(review2.errors.full_messages).
+        expect(review.valid?).to be false
+        expect(review.errors.full_messages).
           to include("Not allowed  - You cannot review a task more than once")
       end
     end
