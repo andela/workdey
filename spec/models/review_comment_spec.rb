@@ -4,7 +4,7 @@ RSpec.describe ReviewComment, type: :model do
   it { is_expected.to belong_to(:review) }
   it { is_expected.to belong_to(:user) }
   describe "#presence_of_body" do
-    before(:each) do
+    before(:all) do
       @review_comment = build(:review_comment)
     end
 
