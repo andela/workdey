@@ -4,7 +4,7 @@ class ReviewComment < ActiveRecord::Base
   validate :presence_of_body
 
   def presence_of_body
-    unless body
+    if body.empty?
       errors[:no_comment] = "Comment field cannot be empty!"
     end
   end

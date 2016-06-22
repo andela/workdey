@@ -14,9 +14,11 @@
         </div>
       </div>
     </div>
-    <%= render partial: 'review_comments/form' %>
-      <h3>Comments</h3>
+    <div id="comments">
+      <h5>Comments</h5>
       <%= @comments.render_comments %>
+    </div>
+    <%= render partial: 'review_comments/form' %>
 </main>
 
 
