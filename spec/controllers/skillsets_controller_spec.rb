@@ -27,7 +27,7 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'POST #create' do
     before do
-      @task = create(:task)
+      @task = create(:task, task_attr)
       @skillset = create(:skillset, task_id: @task.id, user_id: @user.id)
       @skillset_count = Skillset.count
     end
@@ -50,11 +50,32 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it "should delete a skillset" do
-      task = create(:task, name: Faker::Lorem.word)
+      task = create(:task, task_attr.merge(name: Faker::Lorem.word) )
       create(:skillset, task_id: task.id, user_id: @user.id)
       expect do
         delete :destroy, task_id: task.id, format: :js
       end.to change(Skillset, :count).by(-1)
+    end
+  end
+
+  describe "GET #search_skillset" do
+    before(:each) do
+      @skillset = create(:skillset)
+    end
+    context "when the right query is passed to the controller" do
+      it "returns the correct skillset" do
+        get :search_skillsets, query: "#{@skillset.name}", format: :json
+        result = JSON.parse(response.body)
+        expect(result.first["name"]).to eq @skillset.name
+      end
+    end
+
+    context "when a query that doesn't have result is passed" do
+      it "returns an empty array" do
+        get :search_skillsets, query: Faker::Lorem.word, format: :json
+        result = JSON.parse(response.body)
+        expect(result).to eq []
+      end
     end
   end
 end

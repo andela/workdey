@@ -30,7 +30,19 @@ module Helpers
       street_address: Faker::Address.street_address,
       has_taken_quiz: true,
       confirmed: true,
-      phone: nil
+      phone: nil,
+      city: Faker::Address.city
+    }
+  end
+
+  def task_attr
+    {
+      start_date: Date.today,
+      end_date: 1.day.from_now,
+      price: 5000,
+      skillsets: Faker::Lorem.word,
+      description: Faker::Lorem.sentence,
+      tasker_id: 3
     }
   end
 end

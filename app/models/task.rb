@@ -1,14 +1,14 @@
 class Task < ActiveRecord::Base
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
-
+  # has_many :skillsets
   validates :name, presence: true
   validate :end_time_must_be_later_than_start_time
-  validates :amount,
+  validates :price,
             numericality: { greater_than_or_equal_to: 2000 },
             presence: true
   validates :tasker_id,
-            :skillset,
+            :skillsets,
             :description,
             presence: true
 
