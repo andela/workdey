@@ -64,11 +64,12 @@ ActiveRecord::Schema.define(version: 20160620143915) do
   create_table "reviews", force: :cascade do |t|
     t.integer  "reviewer_id"
     t.integer  "rating"
-    t.text     "review"
+    t.text     "body"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "reviewee_id"
     t.integer  "task_management_id"
+    t.text     "response"
   end
 
   add_index "reviews", ["task_management_id"], name: "index_reviews_on_task_management_id", using: :btree
@@ -138,6 +139,5 @@ ActiveRecord::Schema.define(version: 20160620143915) do
 
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
-  add_foreign_key "review_comments", "reviews"
   add_foreign_key "reviews", "task_managements"
 end
