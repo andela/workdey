@@ -51,6 +51,10 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
 RSpec.configure do |config|
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
@@ -97,7 +101,3 @@ RSpec.configure do |config|
   config.include ApplicationControllerSpecHelper, type: :controller
 end
 include Helpers
-
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end

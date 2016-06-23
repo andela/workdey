@@ -30,7 +30,6 @@ gem "websocket-rails"
 gem "stripe"
 gem 'puma'
 gem 'will_paginate-materialize'
-gem "chromedriver-helper", "1.0.0"
 
 group :development, :test do
   gem "capybara"
@@ -41,6 +40,7 @@ group :development, :test do
   gem "pry-nav"
   gem "rspec-rails"
   gem "selenium-webdriver"
+  gem "chromedriver-helper", "1.0.0"
 end
 
 group :development do
