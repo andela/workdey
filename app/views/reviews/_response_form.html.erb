@@ -1,0 +1,14 @@
+<p>&nbsp; &nbsp;You may respond to this review </p>
+<div class="row">
+  <div class=" col s8 container">
+  <%= form_tag "/update/review/#{review.object.id}" do %>
+    <p>
+      <%= label_tag :response %><br/>
+      <%= text_area_tag :response %>
+    </p>
+    <p>
+      <%= submit_tag 'Submit' %>
+    </p>
+  <% end %>
+  </div>
+</div>

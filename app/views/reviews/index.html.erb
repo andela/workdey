@@ -1,6 +1,7 @@
-<div class="main">
+<main>
+<%= render "partials/sidebar_dashboard" %>
 <div class="row valign-wrapper"">
-    <section class = "col s4 offset-s2">
+    <section class = "col s4 offset-s3">
         <h3>Reviews Given</h3>
           <%= @reviews.render_reviews("reviews") %>
     </section>
@@ -9,4 +10,4 @@
         <%= @feedbacks.render_reviews("feedbacks") %>
     </section>
 </div>
-</div>
+</main>
