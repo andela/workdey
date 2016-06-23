@@ -6,35 +6,37 @@
       </div>
     <% end %>
   <% end %>
+
 <main>
-<% if @review.errors.any? %>
-  <div class="error-explanation center-align">
-    <i class="material-icons">bug_report</i>
-    <p class="error-count">
-      The form contains <%= pluralize(@review.errors.count, "error") %>.
-    </p>
-    <ul>
-    <% @review.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+  <% if @review.errors.any? %>
+    <div class="error-explanation center-align">
+      <i class="material-icons">bug_report</i>
+      <p class="error-count">
+        The form contains <%= pluralize(@review.errors.count, "error") %>.
+      </p>
+      <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <section class="col m9 s12 offset-m1">
     <div class="row">
       <ul class= "col m10 offset-m1" >
-
+        <h2>Complete this deal</h2>
+        <p>You can review and/or rate the <%= tasker_or_taskee %>.</p>
+        <% if current_user.tasker? %>
+        <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", params[:taskee], disabled: true) %></li>
+        <% else %>
+        <li><strong><%= label_tag "Tasker's name" %></strong><%= text_field_tag("name", params[:tasker], disabled: true) %></li>
+        <% end %>
+        <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", params[:task], disabled: true ) %></li>
         <%= form_tag reviews_path do %>
-        <div class="form-group col-md-3">
-          <%= label_tag(:reviewee_id) %>
-          <%= select_tag(:reviewee_id, options_for_select(@users), include_blank: review_me, class: "form-control", id: "reviewers") %>
-        </div>
-        <div id="tasks">
-
-        </div>
-        <li><strong><%= label_tag "Add your review here:" %></strong></li>
-
-        <li><%= text_area_tag "review" %></li>
+        <li><strong><%= label_tag "Add a comment about the taskee or their job:" %></strong></li>
+          <input type="hidden" name= "task_management_id" value= "<%= params[:task_management_id] %>" >
+          <input type="hidden" name= "reviewee_id" value= "<%= params[:reviewee_id] %>" >
+        <li><%= text_area_tag "body" %></li>
         <li><strong><%= label_tag "Rate taskee" %></strong>
           <div>&nbsp;</div>
             <% 1.upto(5) do |n| %>
@@ -45,9 +47,10 @@
             <% end %>
           <div>&nbsp;</div>
         </li>
-        <li><button class="btn waves-effect" type="submit">Complete Review</button></li>
+        <li><button class="btn waves-effect" type="submit">Completed</button></li>
         <% end %>
       </ul>
     </div>
   </section>
 </main>
+
