@@ -97,3 +97,7 @@ RSpec.configure do |config|
   config.include ApplicationControllerSpecHelper, type: :controller
 end
 include Helpers
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end

@@ -30,6 +30,7 @@ gem "websocket-rails"
 gem "stripe"
 gem 'puma'
 gem 'will_paginate-materialize'
+gem "chromedriver-helper", "1.0.0"
 
 group :development, :test do
   gem "capybara"
