@@ -1,7 +1,7 @@
 <main>
   <%= render "partials/sidebar_dashboard" %>
   <div class="row">
-    <section class="col m9 offset-m2">
+    <section class="col m9 offset-m2 main container center-align">
       <h2>Task logs</h2>
       <% if current_user.taskee? %>
         <table>
@@ -15,10 +15,13 @@
           <tbody>
             <% @tasks.each do |task| %>
               <tr>
-                <% tasker = User.find(task.tasker_id) %>
+                <% user = User.find(task.tasker_id); tasker = user %>
                 <td><%= "#{tasker.firstname} #{tasker.lastname}" %></td>
                 <td><%= task.task_desc %></td>
                 <% status = task.status %>
+                <td><%= desc = task.task_desc %></td>
+                <% user = User.find(task.tasker_id) %>
+                <% details = { task_management_id: task.id, task: desc, tasker: user.firstname_and_lastname, reviewee_id: user.id } %>
                 <% if task.status.downcase == "done" %>
                   <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
                 <% elsif task.status.downcase == "active" %>
@@ -28,6 +31,7 @@
                 <% elsif task.status.downcase == "rejected" %>
                   <td class="grey-text text-lighten-1"><i class='tiny material-icons'>thumb_down</i> <%= "#{status.downcase}" %></td>
                 <% end %>
+                  <td><%= link_to "Review", new_review_path(details) %></td>
               </tr>
             <% end %>
           </tbody>
@@ -48,17 +52,20 @@
               <tr>
                 <td><%= serial_no %></td>
                 <% user = User.find(task.taskee_id) %>
-                <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
+                <td><%= taskee = "#{user.firstname_and_lastname}" %></td>
                 <td><%= desc = task.task_desc %></td>
-                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
+                <% details = { task_management_id: task.id, task: desc, taskee: taskee, reviewee_id: user.id } %>
                   <% if task.status.downcase == "done" %>
                     <td><span>Done</span></td>
                   <% elsif task.status.downcase == "active" %>
                       <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
-                     <%= link_to "Review", review_task_path(details) %></td>
+                      </td>
                   <% elsif task.status.downcase == "inactive" %>
                       <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
-                      <%= link_to "Review", review_task_path(details) %></td>
+                      </td>
+                  <% end %>
+                  <% unless reviewed?(task) %>
+                    <td><%= link_to "Review", new_review_path(details) %></td>
                   <% end %>
               </tr>
               <% serial_no += 1 %>

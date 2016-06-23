@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   end
 
   def has_no_reviews?
-    reviews.map(&:review).all? { |comment| comment == "" }
+    reviews.map(&:body).all? { |comment| comment == "" }
   end
 
   def review_comments
