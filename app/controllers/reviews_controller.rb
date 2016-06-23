@@ -8,14 +8,10 @@ class ReviewsController < ApplicationController
   def show
     review = Review.find(params[:id])
     @review = review.decorate
-    @comments = ReviewCommentsDecorator.new review.review_comments
-    @review_comment = ReviewComment.new
-    @review_comment.review_id = review.id
   end
 
   def new
     @review = Review.new
-    @users = UsersDecorator.new users
   end
 
   def create
@@ -26,8 +22,23 @@ class ReviewsController < ApplicationController
       redirect_to dashboard_path
     else
       flash.now[:errors] = "There were errors while trying to review"
-      @users = UsersDecorator.new users
+      params[:task] = TaskManagement.find(params[:task_management_id]).task_desc
+      params[:tasker] = User.find(params[:reviewee_id]).firstname_and_lastname
+      params[:taskee] = User.find(params[:reviewee_id]).firstname_and_lastname
       render "new"
+    end
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    @review.response = params[:response]
+    if @review.save
+      flash[:success] = "Your response has been recorded"
+      redirect_to reviews_path
+    else
+      flash[:error] = "An error occured"
+      @review = @review.decorate
+      render "show"
     end
   end
 
@@ -35,7 +46,7 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.permit(
-      :rating, :review, :reviewee_id, :task_management_id
+      "rating", "body", "reviewee_id", "task_management_id"
     )
   end
 
