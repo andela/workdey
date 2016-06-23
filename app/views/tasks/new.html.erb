@@ -39,7 +39,7 @@
             <i class="material-icons prefix">my_location</i>
 
             <label for="location"> Location(street, city) </label>
-             <%= f.text_field "location", class: "form-control" %>
+             <%= f.text_field "location" %>
           </div>
         </div>
         <div class="row">
@@ -51,7 +51,8 @@
             <!-- <i class="material-icons prefix">list</i> -->
             <%= f.label :Skillsets%>
             <!-- <%= f.text_field "skillsets", class: "form-control typeahead", "data-role" => "materialtags" %> -->
-            <input type="text" class="typeahead" name="task[skillsets]" data-role="materialtags"/>
+            <input type="text" class="typeahead" name="task[skillsets]" data-ids="task[skillsets]"  data-role="materialtags"/>
+            <input type="hidden", name="skillsetid" value="" id="skillsetid"/>
           </div>
 
         </div>

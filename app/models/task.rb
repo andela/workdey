@@ -1,17 +1,15 @@
 class Task < ActiveRecord::Base
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
-  # has_many :skillsets
+  has_and_belongs_to_many :skillsets
   validates :name, presence: true
   validate :end_time_must_be_later_than_start_time
   validates :price,
             numericality: { greater_than_or_equal_to: 2000 },
             presence: true
   validates :tasker_id,
-            :skillsets,
             :description,
             presence: true
-
 
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_task_name(keyword, user_email)
@@ -23,8 +21,10 @@ class Task < ActiveRecord::Base
   end
 
   def self.get_taskees_nearby(taskees, user_street, user_city)
-    taskees_nearby = taskees.where("LOWER(city) LIKE ? AND LOWER(street_address) LIKE ?",
-                                   user_city, user_street)
+    taskees_nearby = taskees.where(
+      "LOWER(city) LIKE ? AND LOWER(street_address)"\
+      " LIKE ?", user_city, user_street
+    )
     if taskees_nearby.nil?
       taskees_nearby = taskees.where("LOWER(city) LIKE ?", user_city)
     end
@@ -40,6 +40,10 @@ class Task < ActiveRecord::Base
   def self.assign_task(taskee_id, task_id)
     task = Task.find(task_id)
     task.update_attributes(taskee_id: taskee_id, status: "assigned")
+  end
+
+  def self.add_skillsets_to_task(task)
+    task.skillsets << Skillset.selected_skillsets
   end
 
   def end_time_must_be_later_than_start_time

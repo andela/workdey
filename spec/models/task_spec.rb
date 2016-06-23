@@ -33,7 +33,7 @@ RSpec.describe Task, type: :model do
       it { expect(Task.get_taskees("Marketting", user_email)).to eq nil }
     end
     context "returns an array of taskees nearby with the correct Keyword" do
-      it { expect(Task.get_taskees("Cleaning", user_email).count).to eq 2 }
+      it { expect(Task.get_taskees("cleaning", user_email).count).to eq 2 }
     end
   end
 end

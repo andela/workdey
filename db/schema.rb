@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620121938) do
+ActiveRecord::Schema.define(version: 20160622223722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(version: 20160620121938) do
     t.string   "name"
   end
 
+  create_table "skillsets_tasks", id: false, force: :cascade do |t|
+    t.integer "skillset_id"
+    t.integer "task_id"
+  end
+
   create_table "task_managements", force: :cascade do |t|
     t.integer  "task_id"
     t.integer  "tasker_id"
@@ -83,7 +88,6 @@ ActiveRecord::Schema.define(version: 20160620121938) do
     t.integer  "taskee_id"
     t.string   "location"
     t.string   "status"
-    t.string   "skillsets"
   end
 
   create_table "user_plans", force: :cascade do |t|

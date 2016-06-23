@@ -62,7 +62,7 @@ class DashboardController < ApplicationController
   def profile_view
     param = deobfuscate(params.except(:controller, :action))["taskee_id"]
     @user = User.find(param)
-    render "partials/profile_view", locals: {assign: false}
+    render "partials/profile_view", locals: { assign: false }
   end
 
   def search_with_map

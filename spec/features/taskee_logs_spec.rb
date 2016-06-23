@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Taskee Log" do
   before :all do
-    Capybara.default_driver = :selenium
+    # Capybara.default_driver = :selenium
   end
 
   before :each do

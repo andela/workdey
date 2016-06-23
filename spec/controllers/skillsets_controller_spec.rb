@@ -50,7 +50,7 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it "should delete a skillset" do
-      task = create(:task, task_attr.merge(name: Faker::Lorem.word) )
+      task = create(:task, task_attr.merge(name: Faker::Lorem.word))
       create(:skillset, task_id: task.id, user_id: @user.id)
       expect do
         delete :destroy, task_id: task.id, format: :js
@@ -64,7 +64,7 @@ RSpec.describe SkillsetsController, type: :controller do
     end
     context "when the right query is passed to the controller" do
       it "returns the correct skillset" do
-        get :search_skillsets, query: "#{@skillset.name}", format: :json
+        get :search_skillsets, query: @skillset.name.to_s, format: :json
         result = JSON.parse(response.body)
         expect(result.first["name"]).to eq @skillset.name
       end

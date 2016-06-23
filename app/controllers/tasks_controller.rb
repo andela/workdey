@@ -1,11 +1,13 @@
 class TasksController < ApplicationController
-
   def new
     @task = Task.new
   end
 
   def create
-    @task = Task.new(task_params.except(:type).merge(tasker_id: current_user.id))
+    task_attributes = task_params.except(:type, :skillsets).merge(
+      tasker_id: current_user.id
+    )
+    @task = Task.new(task_attributes)
     if @task.save
       assign_to_taskee if task_params[:type] == "assign"
     else
@@ -16,7 +18,10 @@ class TasksController < ApplicationController
   def view_taskee
     taskee_id = params[:taskee_id]
     @user = User.find(taskee_id)
-    render 'partials/profile_view', locals: { assign: true, task_id: params[:task_id] }
+    render(
+      "partials/profile_view",
+      locals: { assign: true, task_id: params[:task_id] }
+    )
   end
 
   def assign
@@ -48,6 +53,10 @@ class TasksController < ApplicationController
       street_address.strip.downcase,
       city.strip.downcase
     ) unless task_params[:location].empty?
-    render "partials/search_result", locals: { task_id: @task.id, assigns: true }
+    Task.add_skillsets_to_task(@task)
+    render(
+      "partials/search_result",
+      locals: { task_id: @task.id, assigns: true }
+    )
   end
 end

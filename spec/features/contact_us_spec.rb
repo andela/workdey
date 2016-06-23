@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature do
   before do
-    Capybara.default_driver = :selenium
+    # Capybara.default_driver = :selenium
   end
 
   scenario "guest can open Contact Us page" do
