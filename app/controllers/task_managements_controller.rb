@@ -67,13 +67,6 @@ class TaskManagementsController < ApplicationController
     ).deliver_now
   end
 
-  def return_taskmanagements
-    @task_managements = taskmanagements.map do |task|
-      [task.to_s, task.id]
-    end
-    render layout: false
-  end
-
   private
 
   def task_details
