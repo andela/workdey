@@ -19,7 +19,6 @@ RSpec.feature "Reviews", type: :feature do
   scenario "user can see links to reviews on his dashboard" do
     log_in_with @user.email, @user.password
     expect(page).to have_link "Reviews"
-    expect(page).to have_link "Review a taskee"
   end
 
   scenario "user can see the list of reviews given" do
@@ -27,7 +26,7 @@ RSpec.feature "Reviews", type: :feature do
     click_on "Reviews"
     expect(page).to have_content "Reviews Given"
     expect(page).to have_content "Feedbacks Received"
-    expect(page).to have_link @review.task_management
+    expect(page).to have_link @review.task_management.task_desc
     expect(page).to have_content @user2.firstname_and_lastname
   end
 end
