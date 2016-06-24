@@ -7,7 +7,7 @@ module ReviewsHelper
     end
   end
 
-  def reviewed? task
+  def reviewed?(task)
     review = Review.find_by(
       reviewer_id: current_user.id,
       task_management_id: task.id

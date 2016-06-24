@@ -13,12 +13,10 @@ RSpec.describe Review, type: :model do
 
   it { is_expected.to belong_to(:task_management) }
 
-  it { is_expected.to have_many(:review_comments) }
-
-  it { is_expected.to validate_presence_of(:review) }
+  it { is_expected.to validate_presence_of(:body) }
 
   it "" do
-    is_expected.to validate_uniqueness_of(:review).
+    is_expected.to validate_uniqueness_of(:body).
       with_message(" - That same review has been given before")
   end
 
@@ -30,55 +28,8 @@ RSpec.describe Review, type: :model do
     expect(@review.valid?).to be true
   end
 
-  describe "it validates presence of certain properties" do
-    it "requires the presence of a rating" do
-      @review.rating = nil
-      expect(@review.valid?).to be false
-    end
-
-    it "requires the presence of a reviewee" do
-      @review.reviewee = nil
-      expect(@review.valid?).to be false
-    end
-
-    it "requires the presence of a task" do
-      @review.task_management_id = nil
-      expect(@review.valid?).to be false
-    end
-  end
-
-  describe "#uniqueness_of_review" do
-    before(:each) do
-      @user = create(:user)
-      @task = create(:task_management)
-    end
-    context "when a user has not reviewed a task before" do
-      it "user can review a task" do
-        review = build(
-          :review,
-          reviewer_id: @user.id,
-          task_management_id: @task.id
-        )
-        expect(review.valid?).to be true
-      end
-    end
-
-    context "when a user has reviewed a task before" do
-      it "user cannot review task" do
-        create(
-          :review,
-          reviewer_id: @user.id,
-          task_management_id: @task.id
-        )
-        review = build(
-          :review,
-          reviewer_id: @user.id,
-          task_management_id: @task.id
-        )
-        expect(review.valid?).to be false
-        expect(review.errors.full_messages).
-          to include("Not allowed  - You cannot review a task more than once")
-      end
-    end
+  it "requires the presence of a rating" do
+    @review.rating = nil
+    expect(@review.valid?).to be false
   end
 end
