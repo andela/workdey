@@ -36,7 +36,7 @@ class PagesController < ApplicationController
   protected
 
   def get_taskees_by_search(keyword)
-    return User.get_taskees_by_task_name(keyword) unless current_user
+    return User.get_taskees_by_skillset(keyword) unless current_user
     user_email = current_user.email
     Task.get_taskees(keyword, user_email)
   end

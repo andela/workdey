@@ -11,8 +11,9 @@ class Task < ActiveRecord::Base
             :description,
             presence: true
 
-  def self.get_taskees(keyword, user_email)
-    taskees = User.get_taskees_by_task_name(keyword, user_email)
+  def self.get_taskees(skillset, user_email)
+    # taskees = User.get_taskees_by_task_name(keyword, user_email)
+    taskees = User.get_taskees_by_skillset(skillset)
     current_user_city_street user_email
     return nil if taskees.nil? || taskees.empty?
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
@@ -37,13 +38,17 @@ class Task < ActiveRecord::Base
     @user_street = "%#{user_addy[0][1]}%"
   end
 
-  def self.assign_task(taskee_id, task_id)
+  def self.assign_task(taskee_id, task_id, skillsets)
     task = Task.find(task_id)
-    task.update_attributes(taskee_id: taskee_id, status: "assigned")
+    if skillsets
+      task.skillsets << Skillset.where("LOWER(name) LIKE ?", "%#{skillsets}%")
+    else
+      task.update_attributes(taskee_id: taskee_id, status: "assigned")
+    end
   end
 
-  def self.add_skillsets_to_task(task)
-    task.skillsets << Skillset.selected_skillsets
+  def add_skillsets_to_task(task_skillset)
+    skillsets << task_skillset
   end
 
   def end_time_must_be_later_than_start_time

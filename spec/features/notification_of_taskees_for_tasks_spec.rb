@@ -1,14 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "Notification of taskees for new tasks", type: :feature do
-  before(:all) do
-    # Capybara.default_driver = :selenium
-  end
-
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
-  let(:task) { create(:task) }
-  let!(:skillset) { create(:skillset, task: task, user: taskee) }
+  let(:task) { create(:task, task_attr) }
+  let!(:skillset) { create(:skillset, user: taskee) }
 
   before(:each) do
     log_in_with tasker.email, tasker.password

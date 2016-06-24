@@ -9,6 +9,11 @@ class TasksController < ApplicationController
     )
     @task = Task.new(task_attributes)
     if @task.save
+      redirect_to assign_path(
+        taskee_id: task_params[:taskee_id],
+        task_id: @task.id,
+        skillsets: task_params[:skillsets]
+      ) if session[:searcher]
       assign_to_taskee if task_params[:type] == "assign"
     else
       render "new"
@@ -25,7 +30,8 @@ class TasksController < ApplicationController
   end
 
   def assign
-    Task.assign_task(params[:taskee_id], params[:task_id])
+    Task.assign_task(params[:taskee_id], params[:task_id], params[:skillsets])
+    session[:searcher] = nil
     redirect_to dashboard_path, notice: "You have assigned the task to a Taskee"
   end
 
@@ -41,19 +47,22 @@ class TasksController < ApplicationController
       :location,
       :description,
       :skillsets,
-      :type
+      :type,
+      :taskee_id
     )
   end
 
   def assign_to_taskee
-    @taskees = Skillset.get_taskees(task_params[:skillsets])
+    @taskees, skillsets = Skillset.get_taskees_and_skillsets(
+      task_params[:skillsets]
+    )
     street_address, city = task_params[:location].split(",")
     @taskees = Task.get_taskees_nearby(
       @taskees,
       street_address.strip.downcase,
       city.strip.downcase
     ) unless task_params[:location].empty?
-    Task.add_skillsets_to_task(@task)
+    @task.add_skillsets_to_task(skillsets)
     render(
       "partials/search_result",
       locals: { task_id: @task.id, assigns: true }

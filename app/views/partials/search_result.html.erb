@@ -1,7 +1,7 @@
 <main>
 <section class="col m9 s12 offset-m3">
   <div class="row">
-    <% if @taskees.nil? %>
+    <% if @taskees.nil? || @taskees.empty? %>
       <div class="col m8 offset-m2 s6">
         <p>Oooops! We could not find any result matching your query. You can modify it or use one of our suggested keywords and search again.</p>
       </div>
