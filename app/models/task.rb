@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  has_many :users, through: :skillsets
+  # has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
   has_and_belongs_to_many :skillsets
   validates :name, presence: true
@@ -12,7 +12,6 @@ class Task < ActiveRecord::Base
             presence: true
 
   def self.get_taskees(skillset, user_email)
-    # taskees = User.get_taskees_by_task_name(keyword, user_email)
     taskees = User.get_taskees_by_skillset(skillset)
     current_user_city_street user_email
     return nil if taskees.nil? || taskees.empty?
@@ -42,9 +41,8 @@ class Task < ActiveRecord::Base
     task = Task.find(task_id)
     if skillsets
       task.skillsets << Skillset.where("LOWER(name) LIKE ?", "%#{skillsets}%")
-    else
-      task.update_attributes(taskee_id: taskee_id, status: "assigned")
     end
+    task.update_attributes(taskee_id: taskee_id, status: "assigned")
   end
 
   def add_skillsets_to_task(task_skillset)

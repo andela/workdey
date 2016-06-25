@@ -8,12 +8,4 @@ class Skillset < ActiveRecord::Base
     taskees = skillsets.map(&:user)
     [User.where(id: taskees.map(&:id)), skillsets]
   end
-
-  # def self.get_taskess_by_skillset(keyword)
-  #   where(name: "")
-  # end
-
-  # def self.selected_skillsets
-  #   @skillsets
-  # end
 end

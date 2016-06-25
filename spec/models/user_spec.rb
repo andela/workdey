@@ -87,33 +87,47 @@ RSpec.describe User, type: :model do
       User.confirm_user(user.confirm_token)
       expect(user.reload.confirmed).to be true
     end
-    describe "#oath_user" do
-      it "should return true if present" do
-        user = build(:user, oauth_id: "487584789")
-        expect(user.send(:oauth_user?)).to be true
-      end
-      it "should return false if absent" do
-        user = build(:user)
-        expect(user.send(:oauth_user?)).to be false
-      end
+  end
+  describe "#oath_user" do
+    it "should return true if present" do
+      user = build(:user, oauth_id: "487584789")
+      expect(user.send(:oauth_user?)).to be true
     end
-    describe ".get_user_address" do
-      it "should return the user's address" do
-        street_address = Faker::Address.street_name
-        city = Faker::Address.city
-        user = create(:user, city: city, street_address: street_address)
-        expect(User.get_user_address(user.email).first).
-          to eql [city, street_address]
-      end
+    it "should return false if absent" do
+      user = build(:user)
+      expect(user.send(:oauth_user?)).to be false
     end
-    describe ".get_taskees_by_task_name" do
-      it "can return users by their task name" do
-        user1 = create(:user)
-        create(:user_with_tasks, email: "ikem.okonkwo@andela.com")
-        create(:user_with_tasks, email: "bukola.makinwa@andela.com")
-        expect(User.get_taskees_by_task_name("trainer").count).to eql 2
-        expect(User.get_taskees_by_task_name("trainer")).not_to include user1
-      end
+  end
+  describe ".get_user_address" do
+    it "should return the user's address" do
+      street_address = Faker::Address.street_name
+      city = Faker::Address.city
+      user = create(:user, city: city, street_address: street_address)
+      expect(User.get_user_address(user.email).first).
+        to eql [city, street_address]
+    end
+  end
+  #   describe ".get_taskees_by_task_name" do
+  #     it "can return users by their task name" do
+  #       user1 = create(:user)
+  #       create(:user_with_tasks, email: "ikem.okonkwo@andela.com")
+  #       create(:user_with_tasks, email: "bukola.makinwa@andela.com")
+  #       expect(User.get_taskees_by_task_name("trainer").count).to eql 2
+  #       expect(User.get_taskees_by_task_name("trainer")).not_to include user1
+  #     end
+  #   end
+  # end
+  # def self.get_taskees_by_skillset(skillset)
+  #   User.joins(:skillsets).where(
+  #     "LOWER(name) LIKE ?", "%#{skillset.downcase}%"
+  #   )
+  # end
+  describe ".get_taskee_by_skillset_name" do
+    it "return users by their skillset name" do
+      user = create(:user, user_attr.merge(user_type: "taskee"))
+      skillset = create(:skillset, user: user)
+      create_list(:skillset, 2)
+      expect(User.get_taskees_by_skillset(skillset.name).count).to eq 1
     end
   end
 

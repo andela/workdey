@@ -24,8 +24,9 @@
 #     fill_in "task[location]", with: "#{@taskee.street_address},"\
 #      " #{@taskee.city}"
 #     fill_in "task[description]", with: Faker::Lorem.sentence
-#     page.execute_script('$("#skillsets").attr("value", "#{@skillset.name}")')
+#     fill_in "typeahead", with: @skillset.name
 #     page.execute_script('$("#assign").attr("checked", "checked")')
+#
 #     click_button "Create Task"
 #   end
 # end

@@ -50,10 +50,9 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it "should delete a skillset" do
-      task = create(:task, task_attr.merge(name: Faker::Lorem.word))
-      create(:skillset, task_id: task.id, user_id: @user.id)
+      skillset = create(:skillset, user_id: @user.id)
       expect do
-        delete :destroy, task_id: task.id, format: :js
+        delete :destroy, skillset_id: skillset.id, format: :js
       end.to change(Skillset, :count).by(-1)
     end
   end

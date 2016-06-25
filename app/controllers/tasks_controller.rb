@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :taskers_only
   def new
     @task = Task.new
   end
@@ -31,7 +32,7 @@ class TasksController < ApplicationController
 
   def assign
     Task.assign_task(params[:taskee_id], params[:task_id], params[:skillsets])
-    session[:searcher] = nil
+    session.delete(:searcher)
     redirect_to dashboard_path, notice: "You have assigned the task to a Taskee"
   end
 
@@ -67,5 +68,12 @@ class TasksController < ApplicationController
       "partials/search_result",
       locals: { task_id: @task.id, assigns: true }
     )
+  end
+
+  def taskers_only
+    redirect_to(
+      dashboard_path,
+      notice: "Only Taskers have access to this respource"
+    ) if current_user.taskee?
   end
 end
