@@ -375,7 +375,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bourbon
   capybara
-  chromedriver-helper (= 1.0.0)
+  chromedriver-helper
   cloudinary (= 1.1.0)
   coveralls
   database_cleaner
