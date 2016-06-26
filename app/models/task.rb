@@ -1,9 +1,7 @@
 class Task < ActiveRecord::Base
-  # has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
   has_and_belongs_to_many :skillsets
   validates :name, presence: true
-  validate :end_time_must_be_later_than_start_time
   validates :price,
             numericality: { greater_than_or_equal_to: 2000 },
             presence: true
@@ -47,16 +45,6 @@ class Task < ActiveRecord::Base
 
   def add_skillsets_to_task(task_skillset)
     skillsets << task_skillset
-  end
-
-  def end_time_must_be_later_than_start_time
-    if start_date && end_date
-      unless end_date > start_date && end_date > Time.now
-        errors[:end_date] = "End_time cannot be in the past"
-      end
-    else
-      errors[:date] = "Task date cannot be nil"
-    end
   end
 
   private_class_method

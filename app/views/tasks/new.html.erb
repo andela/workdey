@@ -4,7 +4,9 @@
     <h3>Create New task</h3>
     <div class="col m12">
        <%= form_for @task do |f| %>
-        <%= render "partials/error_msg", object:  @task%>
+       <div class="row">
+         <%= render "partials/error_msg", object:  @task%>
+       </div>
       <div class="row">
           <div class="input-field col m6">
             <i class="material-icons prefix">edit_mode</i>
