@@ -78,14 +78,6 @@ class TaskManagementsController < ApplicationController
     params.require(:date).permit(:month, :day)
   end
 
-  def taskmanagements
-    if current_user.tasker?
-      current_user.tasks_created.where(taskee_id: params[:reviewee_id])
-    else
-      current_user.tasks_given.where(tasker_id: params[:reviewee_id])
-    end
-  end
-
   def task_time
     params.require(:time_range).permit(:task)
   end
