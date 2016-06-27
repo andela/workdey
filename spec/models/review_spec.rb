@@ -1,21 +1,25 @@
 require "rails_helper"
 
 RSpec.describe Review, type: :model do
-  it "" do
-    is_expected.to belong_to(:reviewer).class_name("User").
-      with_foreign_key(:reviewer_id)
+  describe "a review should belong to a user" do
+    it "should belong to a reviewer" do
+      is_expected.to belong_to(:reviewer).class_name("User").
+        with_foreign_key(:reviewer_id)
+    end
+
+    it "should belong to a reviewee" do
+      is_expected.to belong_to(:reviewee).class_name("User").
+        with_foreign_key(:reviewee_id)
+    end
   end
 
-  it "" do
-    is_expected.to belong_to(:reviewee).class_name("User").
-      with_foreign_key(:reviewee_id)
+  describe "a review should belong to a task_management" do
+    it { is_expected.to belong_to(:task_management) }
+
+    it { is_expected.to validate_presence_of(:body) }
   end
 
-  it { is_expected.to belong_to(:task_management) }
-
-  it { is_expected.to validate_presence_of(:body) }
-
-  it "" do
+  it "should be unique" do
     is_expected.to validate_uniqueness_of(:body).
       with_message(" - That same review has been given before")
   end
