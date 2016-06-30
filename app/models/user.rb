@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :skillsets
-  has_many :reviews, foreign_key: :reviewer_id
-  has_many :feedbacks, class_name: "Review", foreign_key: :reviewee_id
+  has_many :reviews
+  has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks, through: :skillsets
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
@@ -54,10 +54,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def firstname_and_lastname
-    "#{firstname} #{lastname}"
-  end
-
   def self.confirm_user(token)
     user = find_by_confirm_token(token)
     user ? user.update_attribute(:confirmed, true) : false
@@ -67,12 +63,12 @@ class User < ActiveRecord::Base
     average = Review.connection.execute("SELECT (SUM(rating) / COUNT(rating))
                               AS average
                               FROM reviews
-                              WHERE reviewee_id = #{user_id}").first["average"]
+                              WHERE user_id = #{user_id}").first["average"]
     average.nil? ? 0 : average
   end
 
   def has_no_reviews?
-    reviews.map(&:body).all? { |comment| comment == "" }
+    reviews.map(&:review).all? { |comment| comment == "" }
   end
 
   def review_comments

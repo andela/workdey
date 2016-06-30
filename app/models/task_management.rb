@@ -2,7 +2,6 @@ class TaskManagement < ActiveRecord::Base
   belongs_to :taskee, class_name: "User"
   belongs_to :tasker, class_name: "User"
   belongs_to :task
-  has_many :reviews
 
   has_many :notifications, as: :notifiable
 
