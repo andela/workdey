@@ -24,8 +24,8 @@
       <div class="row user-reviews">
         <h4 class= "col m9 offset-m2"> See what people are saying about <%= firstname %></h4>
         <div class="col m9 offset-m2">
-          <% @user.feedbacks.each do |comment| %>
-            <p><%= comment.body %></p>
+          <% @user.review_comments.each do |comment| %>
+            <p><%= comment.review %></p>
             <% reviewer_info(comment) %>
             <p>- <%= "#{ @reviewer_name } on #{ @comment_date }" %></p>
           <% end %>
