@@ -31,7 +31,9 @@
                 <% elsif task.status.downcase == "rejected" %>
                   <td class="grey-text text-lighten-1"><i class='tiny material-icons'>thumb_down</i> <%= "#{status.downcase}" %></td>
                 <% end %>
+                <% unless reviewed?(task) %>
                   <td><%= link_to "Review", new_review_path(details) %></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
