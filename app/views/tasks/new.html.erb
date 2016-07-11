@@ -1,0 +1,90 @@
+<main>
+  <div class="container">
+    <div class="container">
+    <h3>Create New task</h3>
+    <div class="col m12">
+       <%= form_for @task do |f| %>
+       <div class="row">
+         <%= render "partials/error_msg", object:  @task%>
+       </div>
+      <div class="row">
+          <div class="input-field col m6">
+            <i class="material-icons prefix">edit_mode</i>
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control", :required => true %>
+          </div>
+        <div class=" input-field col m6">
+          <i class="material-icons prefix">credit_card</i>
+          <%= f.label :price %>
+          <%= f.text_field :price, pattern: "[0-9]+", class: "form-control", :required => true %>
+        </div>
+        </div>
+        <div class="row">
+          <div class="input-field col m6">
+            <i class="material-icons prefix">perm_contact_calendar</i>
+            <%= f.label :start_time%>
+             <%= f.date_field :start_date, class: "datepicker start_date", placeholder: "Start Date", required: true, :required => true %>
+          </div>
+          <div class="input-field col m6">
+            <i class="material-icons prefix">perm_contact_calendar</i>
+            <%= f.label :end_time%>
+             <%= f.date_field :end_date, class: "datepicker end_date", placeholder: "End Date", required: true, :required => true %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col m6">
+            <i class="material-icons prefix">schedule</i>
+            <%= f.label :time%>
+             <%= f.text_field "time", class: "timepicker", placeholder: "Start Time", :required => true %>
+          </div>
+          <div class="input-field col m6">
+            <i class="material-icons prefix">my_location</i>
+            <% if session[:searcher] %>
+            <input type="text" value="location" disabled />
+            <%= f.hidden_field :taskee_id, value: params[:taskee_id] %>
+            <% else %>
+            <label for="location"> Location(street, city) </label>
+             <%= f.text_field "location" %>
+             <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col m6">
+             <%= f.text_area "description", class: "form-control", placeholder: "Enter the description of the task here", :required => true %>
+          </div>
+          <div class="input-field col m5 offset-m1">
+          <%= f.label :Skillsets%>
+          <% if session[:searcher] %>
+          <input type="text" value="<%= session[:searcher]%>" disabled />
+          <input type="hidden" name="task[skillsets]" value="<%= session[:searcher]%>" />
+          <% else %>
+            <input type="text" class="typeahead" name="task[skillsets]" id="skillsets"  data-role="materialtags"/>
+            <% end %>
+          </div>
+        </div>
+        <% unless session[:searcher] %>
+        <div class="row">
+          <div class="col m6">
+             <input name="task[type]" type="radio" id="broadcast" value="broadcast" required />
+              <label for="broadcast">Broadcast tis task for bidding</label>
+          </div>
+          <div class="col m6">
+
+            <input name="task[type]" type="radio" id="assign" value="assign" />
+             <label for="assign">Assign This task to a taskee</label>
+          </div>
+        </div>
+        <% end %>
+        <div class="row">
+          <div class="text-center" style="text-align: center">
+            <button class="btn waves-effect waves-light" type="submit">Create Task
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</main>
