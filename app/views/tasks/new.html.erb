@@ -39,13 +39,8 @@
           </div>
           <div class="input-field col m6">
             <i class="material-icons prefix">my_location</i>
-            <% if session[:searcher] %>
-            <input type="text" value="location" disabled />
-            <%= f.hidden_field :taskee_id, value: params[:taskee_id] %>
-            <% else %>
             <label for="location"> Location(street, city) </label>
              <%= f.text_field "location" %>
-             <% end %>
           </div>
         </div>
         <div class="row">
@@ -54,27 +49,10 @@
           </div>
           <div class="input-field col m5 offset-m1">
           <%= f.label :Skillsets%>
-          <% if session[:searcher] %>
-          <input type="text" value="<%= session[:searcher]%>" disabled />
-          <input type="hidden" name="task[skillsets]" value="<%= session[:searcher]%>" />
-          <% else %>
             <input type="text" class="typeahead" name="task[skillsets]" id="skillsets"  data-role="materialtags"/>
-            <% end %>
           </div>
         </div>
-        <% unless session[:searcher] %>
-        <div class="row">
-          <div class="col m6">
-             <input name="task[type]" type="radio" id="broadcast" value="broadcast" required />
-              <label for="broadcast">Broadcast tis task for bidding</label>
-          </div>
-          <div class="col m6">
 
-            <input name="task[type]" type="radio" id="assign" value="assign" />
-             <label for="assign">Assign This task to a taskee</label>
-          </div>
-        </div>
-        <% end %>
         <div class="row">
           <div class="text-center" style="text-align: center">
             <button class="btn waves-effect waves-light" type="submit">Create Task
