@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Profile completion meter" do
   before(:all) do
-    Capybara.default_driver = :selenium
+    # Capybara.default_driver = :selenium
   end
 
   before(:each) do

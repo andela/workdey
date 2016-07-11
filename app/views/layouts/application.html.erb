@@ -24,5 +24,9 @@
 
   <%= javascript_include_tag "https://cdn.firebase.com/js/client/2.3.2/firebase.js" if current_page?(quiz_path) %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <% if current_page?(new_task_path) %>
+  <%= javascript_include_tag "datePicker", "materialize-tags", "typeahead", "search_skillset" %>
+  <%= stylesheet_link_tag "pickDate", "materialize-tags" %>
+  <% end %>
 </body>
 </html>

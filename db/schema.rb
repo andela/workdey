@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528040440) do
+ActiveRecord::Schema.define(version: 20160622223722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(version: 20160528040440) do
     t.string   "name"
   end
 
+  create_table "skillsets_tasks", id: false, force: :cascade do |t|
+    t.integer "skillset_id"
+    t.integer "task_id"
+  end
+
   create_table "task_managements", force: :cascade do |t|
     t.integer  "task_id"
     t.integer  "tasker_id"
@@ -72,8 +77,17 @@ ActiveRecord::Schema.define(version: 20160528040440) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
+    t.integer  "price"
+    t.string   "time"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "tasker_id"
+    t.integer  "taskee_id"
+    t.string   "location"
+    t.string   "status"
   end
 
   create_table "user_plans", force: :cascade do |t|
@@ -105,9 +119,9 @@ ActiveRecord::Schema.define(version: 20160528040440) do
     t.string   "street_address"
     t.string   "image_url"
     t.boolean  "has_taken_quiz",       default: false
+    t.boolean  "enable_notifications", default: true
     t.float    "longitude"
     t.float    "latitude"
-    t.boolean  "enable_notifications", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

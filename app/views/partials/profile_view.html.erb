@@ -15,7 +15,11 @@
           </p>
           <% unless current_user.user_type == "taskee" %>
             <% id = "WKDY#{@user.id}"%>
-            <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)), class: "btn waves-effect" %>
+            <% if assign %>
+            <%= link_to "ASSIGN TASK", assign_path(taskee_id: @user.id, task_id: task_id), class: "btn waves-effect" %>
+            <% else %>
+            <%= link_to "ASSIGN TASK", new_task_path(taskee_id: @user.id), class: "btn waves-effect" %>
+            <% end %>
           <% end %>
         </div>
       </div>

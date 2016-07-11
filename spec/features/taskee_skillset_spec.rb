@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Taskee skillset" do
-  before(:all) do
-    Capybara.default_driver = :selenium
-  end
-
   before(:each) do
     user_attr = {
       user_type: "taskee",
@@ -12,7 +8,7 @@ RSpec.feature "Taskee skillset" do
       confirmed: true,
       phone: nil
     }
-    @user = create(:user_with_tasks, user_attr)
+    @user = create(:user, user_attr)
     @skillset = create(:skillset, user: @user)
     log_in_with(@user.email, @user.password)
   end

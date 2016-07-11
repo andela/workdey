@@ -30,13 +30,13 @@ class PagesController < ApplicationController
       session[:searcher] = params[:searcher] if params[:searcher]
       @taskees = get_taskees_by_search(session[:searcher])
     end
-    render "search_result"
+    render "partials/search_result", locals: { assigns: false }
   end
 
   protected
 
   def get_taskees_by_search(keyword)
-    return User.get_taskees_by_task_name(keyword) unless current_user
+    return User.get_taskees_by_skillset(keyword) unless current_user
     user_email = current_user.email
     Task.get_taskees(keyword, user_email)
   end
