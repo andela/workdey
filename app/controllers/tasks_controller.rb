@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def new
     @task = Task.new
+    @skillsets = Skillset.all.select(&:name)
   end
 
   def create
@@ -23,8 +24,7 @@ class TasksController < ApplicationController
       :time,
       :location,
       :description,
-      :skillsets,
-      :taskee_id
+      :skillset
     ).merge(tasker_id: current_user.id)
   end
 end
