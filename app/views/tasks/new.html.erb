@@ -1,8 +1,8 @@
 <main>
   <div class="container">
     <div class="container">
-    <h3>Create New task</h3>
     <div class="col m12">
+      <h3>Create Need</h3>
        <%= form_for @task do |f| %>
        <div class="row">
          <%= render "partials/error_msg", object:  @task%>
@@ -48,14 +48,20 @@
              <%= f.text_area "description", class: "form-control", placeholder: "Enter the description of the task here", :required => true %>
           </div>
           <div class="input-field col m5 offset-m1">
-          <%= f.label :Skillsets%>
-            <input type="text" class="typeahead" name="task[skillsets]" id="skillsets"  data-role="materialtags"/>
+          <%#= f.label :Skillset%>
+            <!-- <input type="text" class="typeahead" name="task[skillsets]" id="skillsets"  data-role="materialtags"/> -->
+            <select class="browser-default">
+              <option value="" disabled selected>Choose your Skillset</option>
+              <% @skillsets.each do |skillset| %>
+              <option value="<%=skillset.id%>"><%= skillset.name %></option>
+              <% end %>
+            </select>
           </div>
         </div>
 
         <div class="row">
           <div class="text-center" style="text-align: center">
-            <button class="btn waves-effect waves-light" type="submit">Create Task
+            <button class="btn waves-effect waves-light" type="submit">Post Need
               <i class="material-icons right">send</i>
             </button>
           </div>
