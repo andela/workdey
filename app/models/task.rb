@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  has_many :skillsets
+  belongs_to :skillset
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
 
