@@ -100,5 +100,5 @@ Capybara.default_driver = :selenium
 #   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 # end
 # Capybara.default_driver = :chrome
-Capybara.javascript_driver = :chrome
+# Capybara.javascript_driver = :chrome
 include Helpers
