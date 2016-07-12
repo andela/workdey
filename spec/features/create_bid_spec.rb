@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Create Task for bidding", type: :feature do
-  before(:all) do
-    Capybara.default_driver = :selenium
-  end
-
   before(:each) do
     user_attr = {
       user_type: "tasker",

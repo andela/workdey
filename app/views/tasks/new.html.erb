@@ -51,6 +51,7 @@
              <%= f.text_area "description", class: "materialize-textarea", placeholder: "Enter the description of the task here", :required => true %>
           </div>
           <div class="input-field col m6">
+            
               <%= f.collection_select :skillset_id, @skillsets, :id, :name%>
           </div>
         </div>
