@@ -27,15 +27,15 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'POST #create' do
     before do
-      @task = create(:task)
-      @skillset = create(:skillset, task_id: @task.id, user_id: @user.id)
+      # @task = create(:task)
+      @skillset = create(:skillset, user_id: @user.id)
       @skillset_count = Skillset.count
     end
 
     context "when the skillset exists" do
       it "should find a skillset" do
         post :create, skillset: { name: @skillset.name }, format: :js
-        expect(assigns(:skillset).task_id).to eq(@task.id)
+        expect(assigns(:skillset).id).to eq(@skillset.id)
         expect(Skillset.count).to eq(@skillset_count)
       end
     end
@@ -50,10 +50,10 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it "should delete a skillset" do
-      task = create(:task, name: Faker::Lorem.word)
-      create(:skillset, task_id: task.id, user_id: @user.id)
+      # task = create(:task, name: Faker::Lorem.word)
+      skillset = create(:skillset, user_id: @user.id)
       expect do
-        delete :destroy, task_id: task.id, format: :js
+        delete :destroy, skillset_id: skillset.id, format: :js
       end.to change(Skillset, :count).by(-1)
     end
   end

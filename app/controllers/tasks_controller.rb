@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    binding.pry
     @task = Task.new(task_params)
     if @task.save
       redirect_to dashboard_path, notice: "You need has been created"
