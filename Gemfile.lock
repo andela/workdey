@@ -142,6 +142,10 @@ GEM
       railties (>= 3.2.16)
     json (1.8.3)
     jwt (1.5.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -372,6 +376,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  letter_opener
   materialize-sass (= 0.97.1)
   momentjs-rails
   omniauth-facebook

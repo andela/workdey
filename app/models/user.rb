@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class User < ActiveRecord::Base
+  include Utilities::User
+
   has_many :skillsets
   has_many :reviews
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
@@ -13,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :sent_notifications,
            class_name: "Notification",
            foreign_key: :sender_id
+  has_many :references, foreign_key: :taskee_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -70,10 +73,6 @@ class User < ActiveRecord::Base
 
   def has_no_reviews?
     reviews.map(&:review).all? { |comment| comment == "" }
-  end
-
-  def fullname
-    "#{firstname} #{lastname}"
   end
 
   def review_comments
