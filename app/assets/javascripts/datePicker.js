@@ -3,5 +3,9 @@ $(document).ready(function(){
     selectMonths: true,
     selectYears: 15
   });
-  $('select').material_select();
+  // $('select').material_select();
+  $('#timepicker').pickatime({
+    autoclose: false
+    // twelvehour: false
+  });
 });

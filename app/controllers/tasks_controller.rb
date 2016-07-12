@@ -5,10 +5,12 @@ class TasksController < ApplicationController
   end
 
   def create
+    binding.pry
     @task = Task.new(task_params)
     if @task.save
       redirect_to dashboard_path, notice: "You need has been created"
     else
+      @skillsets = Skillset.all.select(&:name)
       render "new"
     end
   end
@@ -24,7 +26,7 @@ class TasksController < ApplicationController
       :time,
       :location,
       :description,
-      :skillset
+      :skillset_id
     ).merge(tasker_id: current_user.id)
   end
 end

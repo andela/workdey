@@ -1,3 +1,5 @@
+
+
 <main>
   <div class="container">
     <div class="container">
@@ -22,12 +24,12 @@
         <div class="row">
           <div class="input-field col m6">
             <i class="material-icons prefix">perm_contact_calendar</i>
-            <%= f.label :start_time%>
+            <%= f.label :start_date%>
              <%= f.date_field :start_date, class: "datepicker start_date", placeholder: "Start Date", required: true, :required => true %>
           </div>
           <div class="input-field col m6">
             <i class="material-icons prefix">perm_contact_calendar</i>
-            <%= f.label :end_time%>
+            <%= f.label :end_date%>
              <%= f.date_field :end_date, class: "datepicker end_date", placeholder: "End Date", required: true, :required => true %>
           </div>
         </div>
@@ -35,7 +37,7 @@
           <div class="input-field col m6">
             <i class="material-icons prefix">schedule</i>
             <%= f.label :time%>
-             <%= f.text_field "time", class: "timepicker", placeholder: "Start Time", :required => true %>
+             <%= f.text_field "time", class: "timepicker", id: "timepicker", placeholder: "Start Time", :required => true %>
           </div>
           <div class="input-field col m6">
             <i class="material-icons prefix">my_location</i>
@@ -45,17 +47,11 @@
         </div>
         <div class="row">
           <div class="input-field col m6">
-             <%= f.text_area "description", class: "form-control", placeholder: "Enter the description of the task here", :required => true %>
+            <i class="material-icons prefix">perm_contact_calendar</i>
+             <%= f.text_area "description", class: "materialize-textarea", placeholder: "Enter the description of the task here", :required => true %>
           </div>
-          <div class="input-field col m5 offset-m1">
-          <%#= f.label :Skillset%>
-            <!-- <input type="text" class="typeahead" name="task[skillsets]" id="skillsets"  data-role="materialtags"/> -->
-            <select class="browser-default">
-              <option value="" disabled selected>Choose your Skillset</option>
-              <% @skillsets.each do |skillset| %>
-              <option value="<%=skillset.id%>"><%= skillset.name %></option>
-              <% end %>
-            </select>
+          <div class="input-field col m6">
+              <%= f.collection_select :skillset_id, @skillsets, :id, :name%>
           </div>
         </div>
 
