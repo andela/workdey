@@ -48,6 +48,7 @@ group :development do
   gem "web-console", "~> 2.0"
   gem "rubocop", require: false
   gem "figaro"
+  gem "letter_opener"
 end
 
 group :assets do

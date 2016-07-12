@@ -1,0 +1,21 @@
+<%= form_for @reference do |f| %>
+  <div class="input-field">
+    <%= f.text_field :firstname %>
+    <%= f.label :firstname %>
+  </div>
+  <div class="input-field">
+    <%= f.text_field :lastname %>
+    <%= f.label :lastname %>
+  </div>
+  <div class="input-field">
+    <%= f.text_field :relationship %>
+    <%= f.label :relationship %>
+  </div>
+  <div class="input-field">
+    <%= f.email_field :email %>
+    <%= f.label :email %>
+  </div>
+  <%= f.submit class: 'btn' do %>
+    <span>Send Email</span>
+  <% end %>
+<% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'references/new'
+
   root "pages#index"
 
   get "signup" => "users#new"
@@ -64,4 +66,5 @@ Rails.application.routes.draw do
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: [:create]
   resources :charges, only: [:new, :create]
+  resources :references
 end

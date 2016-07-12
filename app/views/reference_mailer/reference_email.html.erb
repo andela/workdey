@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @reference.firstname %></h1>
+    <p>
+      Your contact <%= @reference.taskee.full_name %> listed you as a reference on our platform.
+    </p>
+    <p>
+      Please follow <a href="<%= @url %>">this link </a>to verify this request.
+    </p>
+    <p>Thanks!</p>
+  </body>
+</html>
