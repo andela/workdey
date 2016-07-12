@@ -27,7 +27,6 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'POST #create' do
     before do
-      # @task = create(:task)
       @skillset = create(:skillset, user_id: @user.id)
       @skillset_count = Skillset.count
     end
@@ -50,7 +49,6 @@ RSpec.describe SkillsetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it "should delete a skillset" do
-      # task = create(:task, name: Faker::Lorem.word)
       skillset = create(:skillset, user_id: @user.id)
       expect do
         delete :destroy, skillset_id: skillset.id, format: :js
