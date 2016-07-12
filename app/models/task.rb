@@ -35,18 +35,22 @@ class Task < ActiveRecord::Base
     @user_street = "%#{user_addy[0][1]}%"
   end
 
-  private
+  private_class_method
   def end_time_must_be_greater_than_start_time
     if start_date && end_date
-      unless (end_date > start_date && end_date > Time.now) || start_date == end_date
-        errors[:date] = "End date cannot be in the past"
-      end
+      check_start_and_end_dates
     else
       errors[:time] = "Task time cannot be nil"
     end
   end
 
-  private_class_method
+  def check_start_and_end_dates
+    same_day = start_date == end_date
+    unless (end_date > start_date && end_date > Time.now) || same_day
+      errors[:date] = "End date cannot be in the past"
+    end
+  end
+
   def self.users
     User.arel_table
   end

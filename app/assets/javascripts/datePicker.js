@@ -3,7 +3,7 @@ $(document).ready(function(){
     selectMonths: true,
     selectYears: 15
   });
-  // $('select').material_select();
+  // $('#task_skillset_id').material_select();
   $('#timepicker').pickatime({
     autoclose: false
     // twelvehour: false
