@@ -100,10 +100,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include ApplicationControllerSpecHelper, type: :controller
 end
-# Capybara.default_driver = :selenium
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
-end
-Capybara.default_driver = :chrome
+Capybara.default_driver = :selenium
+# Capybara.register_driver :chrome do |app|
+#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# end
+# Capybara.default_driver = :chrome
 Capybara.javascript_driver = :chrome
 include Helpers
