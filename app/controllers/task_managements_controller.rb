@@ -20,7 +20,13 @@ class TaskManagementsController < ApplicationController
       session.delete(:searcher)
       flash.clear
       flash[:notice] = "Your taskee has been notified"
-      notify("taskee", @task.taskee_id)
+      tasker = User.find(@task.tasker_id).firstname
+      Notification.create(
+        message: "#{@task.task.name} task from #{tasker}",
+        sender_id: @task.tasker_id,
+        receiver_id: @task.taskee_id,
+        notifiable: @task
+      ).notify_receiver("new_task")
       redirect_to dashboard_path
     else
       retain_form_values

@@ -40,7 +40,7 @@ group :development, :test do
   gem "pry-nav"
   gem "rspec-rails"
   gem "selenium-webdriver"
-  gem "travis", "1.8.0"
+  gem "chromedriver-helper", "1.0.0"
 end
 
 group :development do

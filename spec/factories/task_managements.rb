@@ -8,8 +8,5 @@ FactoryGirl.define do
     start_time Date.tomorrow
     end_time 2.days.from_now
     status "done"
-    taskee_notified true
-    viewed true
-    tasker_notified true
   end
 end

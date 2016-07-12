@@ -5,7 +5,7 @@
         <h3>Notifications</h3>
       </div>
 
-      <% if @notifications.present? && current_user.user_type == "taskee"  %>
+      <% if @notifications.present? && current_user.taskee?  %>
       <div class="notification-feed col s6">
         <% @notifications.each do |object| %>
           <%= show_notifications(object) %>
