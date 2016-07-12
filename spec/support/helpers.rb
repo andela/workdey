@@ -33,4 +33,14 @@ module Helpers
       phone: nil
     }
   end
+
+  def task_attr
+    {
+      start_date: Date.today,
+      end_date: 1.day.from_now,
+      price: 5000,
+      description: Faker::Lorem.sentence,
+      tasker_id: 3
+    }
+  end
 end
