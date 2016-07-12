@@ -2,8 +2,6 @@ require "rails_helper"
 
 RSpec.describe "User Signup", type: :feature do
   before(:all) do
-    Capybara.default_driver = :selenium
-
     @firstname = Faker::Name.first_name
     @lastname = Faker::Name.last_name
     @email = Faker::Internet.free_email

@@ -34,29 +34,29 @@
 
           <div class= "col m5">
             <li><strong><%= label_tag "last name" %></strong><%= text_tags("lastname", @current_user.lastname, "", "validate", true, true) %></li>
-            <li><%= select_tag "gender", options_for_select(["Gender", "Male",  "Female", "Others"], "Gender") %>
+            <li><%= select_tag "gender", options_for_select(["Gender", "Male",  "Female", "Others"], "Gender"), {class: "browser-default"} %>
             </li>
             <li>
               <fieldset><legend>Birthday</legend>
                 <div class= "row">
                   <li class= "col m4 left">
-                    <%= select_day(nil, prompt: "Day")%>
+                    <%= select_day(nil, {prompt: "Day"}, {class: "browser-default"})%>
                   </li>
                   <li class= "col m4 left">
-                    <%= select_month(nil, prompt: "Month")%>
+                    <%= select_month(nil, {prompt: "Month"}, {class: "browser-default"})%>
                   </li>
                   <li class= "col m4 left">
-                    <%= select_year(nil, prompt: "Year", start_year: 1960,
-                                    end_year: 1997)%>
+                    <%= select_year(nil, {prompt: "Year", start_year: 1960,
+                                    end_year: 1997}, {class: "browser-default"})%>
                   </li>
                 </div>
               </fieldset>
             </li>
             <li>
               <div class= "row">
-                <li class= "col m6 left"><%= select_tag "city", options_for_select(["City", "Yaba"], "City") %>
+                <li class= "col m6 left"><%= select_tag "city", options_for_select(["City", "Yaba"], "City"), {class: "browser-default"} %>
                 </li>
-                <li class= "col m6 left"><%= select_tag "state", options_for_select(["State", "Lagos"], "State") %>
+                <li class= "col m6 left"><%= select_tag "state", options_for_select(["State", "Lagos"], "State"), {class: "browser-default"} %>
                 </li>
               </div>
             </li>
