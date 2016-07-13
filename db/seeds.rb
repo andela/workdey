@@ -130,6 +130,12 @@ class SeedData
     user_plan.each { |user| UserPlan.create(user) }
     10.times { biddings }
   end
+
+  def add_skillset_name
+    skillsets = ["Capentry", "Pluming", "Electrician", "Cleaner"]
+    Skillset.all[-4..-1].each{|skillset| skillset.name = skillsets.sample }
+  end
 end
 workdey_data = SeedData.new
 workdey_data.create_all
+workdey_data.add_skillset_name
