@@ -4,7 +4,7 @@ RSpec.describe "Profile completion meter" do
   before do
     Capybara.default_driver = :selenium
   end
-  
+
   before(:each) do
     user_attr = {
       user_type: "taskee",

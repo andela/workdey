@@ -4,7 +4,7 @@ RSpec.feature "Taskee Log" do
   before do
     Capybara.default_driver = :selenium
   end
-  
+
   before :each do
     taskee_stub
   end

@@ -4,7 +4,7 @@ RSpec.feature do
   before do
     Capybara.default_driver = :selenium
   end
-  
+
   scenario "guest can open Contact Us page" do
     visit root_path
     click_link "Contact us"
