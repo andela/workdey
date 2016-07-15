@@ -19,6 +19,7 @@ RSpec.describe TasksController, type: :controller do
 
     context "when users try to create a task with valid data" do
       it "saves the task" do
+        let(t);
         expect do
           post :create, task: @task_param
         end.to change(Task, :count).by(1)
