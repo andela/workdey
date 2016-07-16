@@ -50,8 +50,8 @@
             <i class="material-icons prefix">description</i>
              <%= f.text_area "description", class: "materialize-textarea", placeholder: "Enter the description of the task here", :required => true %>
           </div>
-          <div class="input-field col m6">
-            
+          <div class="input-field col m6 jiji">
+
               <%= f.collection_select :skillset_id, @skillsets, :id, :name%>
           </div>
         </div>

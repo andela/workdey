@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Task, type: :model do
+
   before :each do
     @user = create(:user, user_attr.merge(user_type: "taskee"))
     create(:user, user_attr.merge(user_type: "taskee"))

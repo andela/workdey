@@ -4,6 +4,11 @@ padding: 0 1rem;
 color: #eb4D5c;
 }
 
+.input-field.col.m6.jiji{
+  padding-top: 35px;
+  z-index: 10000;
+}
+
 .picker__date-display, .picker__weekday-display{
   background-color: #eb4D5c;
 }
