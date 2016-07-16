@@ -1,39 +1,42 @@
 require "rails_helper"
 
 RSpec.describe TasksController, type: :controller do
+  let!(:user) do
+    create(:user, user_attr.merge(user_type: "tasker"))
+  end
+
   before(:each) do
-    @user = create(:user, user_attr.merge(user_type: "tasker"))
     allow_any_instance_of(ApplicationController).
-      to receive(:current_user).and_return(@user)
+      to receive(:current_user).and_return(user)
   end
 
   describe "POST create" do
-    before(:each) do
-      skillset = create(:skillset, user: @user)
-      @task_param = task_attr.merge(
+    let(:task_param) do
+      task_attr.merge(
         name: Faker::Lorem.word,
         location: "",
         skillset_id: skillset.id
       )
     end
 
+    let!(:skillset) { create(:skillset, user: user) }
+
     context "when users try to create a task with valid data" do
       it "saves the task" do
-        let(t);
         expect do
-          post :create, task: @task_param
+          post :create, task: task_param
         end.to change(Task, :count).by(1)
       end
 
       it "redirects to dashboard" do
-        post :create, task: @task_param
+        post :create, task: task_param
         expect(response).to redirect_to dashboard_path
       end
     end
 
     context "when users try to create a task with invalid data" do
       before(:each) do
-        post :create, task: @task_param.except(:name)
+        post :create, task: task_param.except(:name)
       end
 
       it "renders the new page" do

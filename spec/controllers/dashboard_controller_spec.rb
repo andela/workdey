@@ -4,10 +4,10 @@ include DashboardHelper
 RSpec.describe DashboardController, type: :controller do
   describe "GET #home" do
     context "when a taskee  without skillsets visits the dashboard " do
+      let(:user) { create(:user, user_type: "taskee", has_taken_quiz: true) }
       before(:each) do
-        @user = create(:user, user_type: "taskee", has_taken_quiz: true)
         allow_any_instance_of(ApplicationController).
-          to receive(:current_user).and_return(@user)
+          to receive(:current_user).and_return(user)
         get :home
       end
 
@@ -23,11 +23,11 @@ RSpec.describe DashboardController, type: :controller do
     end
 
     context "when a taskee with skillset visits the dashboard" do
+      let(:user) { create(:user, user_type: "taskee", has_taken_quiz: true) }
       before(:each) do
-        @user = create(:user, user_type: "taskee", has_taken_quiz: true)
-        @skillset = create(:skillset, user: @user)
+        create(:skillset, user: user)
         allow_any_instance_of(ApplicationController).
-          to receive(:current_user).and_return(@user)
+          to receive(:current_user).and_return(user)
         get :home
       end
       it "returns the percentage for a taskee with skillset" do
@@ -43,16 +43,18 @@ RSpec.describe DashboardController, type: :controller do
   end
 
   context "when a tasker with complete profile visits the dashboard" do
+    user_attr = {
+      user_type: "tasker",
+      has_taken_quiz: true,
+      street_address: Faker::Address.street_address,
+      birthday: Date.today
+    }
+
+    let(:user) { create(:user, user_attr) }
+
     before(:each) do
-      user_attr = {
-        user_type: "tasker",
-        has_taken_quiz: true,
-        street_address: Faker::Address.street_address,
-        birthday: Date.today
-      }
-      @user = create(:user, user_attr)
       allow_any_instance_of(ApplicationController).
-        to receive(:current_user).and_return(@user)
+        to receive(:current_user).and_return(user)
       get :home
     end
     it "returns the percentage for a taskee with skillset" do

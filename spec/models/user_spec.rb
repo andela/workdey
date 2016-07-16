@@ -1,9 +1,7 @@
 require "rails_helper"
-
 RSpec.describe User, type: :model do
   it { is_expected.to have_many(:skillsets) }
   it { is_expected.to have_many(:reviews) }
-  # it { is_expected.to have_many(:tasks).through(:skillsets) }
   it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
   it do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
@@ -107,21 +105,7 @@ RSpec.describe User, type: :model do
         to eql [city, street_address]
     end
   end
-  #   describe ".get_taskees_by_task_name" do
-  #     it "can return users by their task name" do
-  #       user1 = create(:user)
-  #       create(:user_with_tasks, email: "ikem.okonkwo@andela.com")
-  #       create(:user_with_tasks, email: "bukola.makinwa@andela.com")
-  #       expect(User.get_taskees_by_task_name("trainer").count).to eql 2
-  #       expect(User.get_taskees_by_task_name("trainer")).not_to include user1
-  #     end
-  #   end
-  # end
-  # def self.get_taskees_by_skillset(skillset)
-  #   User.joins(:skillsets).where(
-  #     "LOWER(name) LIKE ?", "%#{skillset.downcase}%"
-  #   )
-  # end
+  
   describe ".get_taskee_by_skillset_name" do
     it "return users by their skillset name" do
       user = create(:user, user_attr.merge(user_type: "taskee"))

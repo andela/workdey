@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe BiddingsController, type: :controller do
+  let(:user) { build_stubbed(:user) }
   before(:each) do
-    @user = build_stubbed(:user)
-    create_list(:bidding, 3, tasker_id: @user.id)
+    create_list(:bidding, 3, tasker_id: user.id)
     allow_any_instance_of(ApplicationController).
-      to receive(:current_user).and_return(@user)
+      to receive(:current_user).and_return(user)
   end
 
   describe "GET #new" do
@@ -32,7 +32,7 @@ RSpec.describe BiddingsController, type: :controller do
       expect(response).to render_template :index
     end
     it "assigns user's biddings to biddings" do
-      expect(assigns(:biddings).to_a).to eql @user.biddings.to_a
+      expect(assigns(:biddings).to_a).to eql user.biddings.to_a
     end
   end
 

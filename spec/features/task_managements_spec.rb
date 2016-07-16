@@ -14,6 +14,7 @@ RSpec.feature "TaskLogs", type: :feature do
                            lastname: Faker::Name.last_name,
                            user_type: "taskee", confirmed: true)
   end
+
   it { expect(TaskManagement.count).to eql 2 }
   context "user is a tasker" do
     before do
