@@ -105,7 +105,7 @@ RSpec.describe User, type: :model do
         to eql [city, street_address]
     end
   end
-  
+
   describe ".get_taskee_by_skillset_name" do
     it "return users by their skillset name" do
       user = create(:user, user_attr.merge(user_type: "taskee"))

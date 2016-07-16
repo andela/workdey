@@ -4,7 +4,9 @@ RSpec.describe TaskManagementsController, type: :controller do
   let!(:user) { create(:user) }
   let!(:ironing) { create(:task_management, task_desc: Faker::Lorem.sentence) }
   let!(:cleaning) { create(:task_management, task_desc: Faker::Lorem.sentence) }
-  let!(:carpentry) { create(:task_management, task_desc: Faker::Lorem.sentence) }
+  let!(:carpentry) do
+    create(:task_management, task_desc: Faker::Lorem.sentence)
+  end
   let!(:washing) { create(:task_management, task_desc: Faker::Lorem.sentence) }
 
   describe "GET #index" do
