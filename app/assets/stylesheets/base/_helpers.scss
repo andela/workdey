@@ -27,6 +27,11 @@
   }
 }
 
+.input-field.col.m6.jiji{
+  padding-top: 35px;
+  z-index: 10000;
+}
+
 button.btn[disabled] {
   cursor: not-allowed;
 }
