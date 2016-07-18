@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to dashboard_path, notice: "You need has been created"
+      redirect_to dashboard_path, notice: "Your need has been created"
     else
       @skillsets = Skillset.all.select(&:name)
       render "new"
