@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Taskee skillset" do
-
   before(:each) do
     user_attr = {
       user_type: "taskee",

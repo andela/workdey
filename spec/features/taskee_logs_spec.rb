@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Taskee Log" do
-
   before :each do
     taskee_stub
   end

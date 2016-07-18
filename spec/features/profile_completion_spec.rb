@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Profile completion meter" do
-
   let(:user) { create(:user, user_attr) }
   let(:user_attr) do
     {
