@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "OmniauthSignins", type: :feature do
   before(:all) do
-    Capybara.default_driver = :selenium
+    # Capybara.default_driver = :selenium
     Rails.application.env_config["omniauth.auth"] = OmniAuth.
                                                     config.
                                                     mock_auth[:facebook]

@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "SearchBySkillset", type: :feature do
-  before do
-    Capybara.default_driver = :selenium
-  end
+  # before do
+  #   Capybara.default_driver = :selenium
+  # end
 
   scenario "search by skillset" do
     taskee = create(:user, user_attr.merge(user_type: "taskee"))

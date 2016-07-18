@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Taskee skillset" do
-  before do
-    Capybara.default_driver = :selenium
-  end
+  # before do
+  #   Capybara.default_driver = :selenium
+  # end
 
   before(:each) do
     user_attr = {

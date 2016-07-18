@@ -19,6 +19,11 @@
   }
 }
 
+i.material-icons.prefix.ji {
+    position: relative;
+    bottom: -4px;
+}
+
 #error_explanation {
   color: red;
   ul {
@@ -27,9 +32,9 @@
   }
 }
 
-.input-field.col.m6.jiji{
-  padding-top: 35px;
-  z-index: 10000;
+.input-field.col.m6.push-5.jiji{
+  // padding-top: 35px;
+  z-index: 9999;
 }
 
 button.btn[disabled] {
