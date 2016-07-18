@@ -9,6 +9,7 @@
             <% end %>
           </div>
         <% end %>
+        <%= render "partials/error_msg", object: @task %>
         <%= form_for @task, url: create_task_path, html: { class: "assign-form" } do |f| %>
           <%= f.hidden_field :task_name, value: session[:searcher] %>
           <%= f.hidden_field :tasker_id, value: current_user.id %>
@@ -91,7 +92,7 @@
                 <p class="center-align">
                   <%= "#{@taskee.firstname} #{@taskee.lastname}" %>
                 </p>
-                <%= f.button "Notify Taskee", class: "btn" %>
+                <%= f.button "Create Task", class: "btn" %>
               </div>
             </div>
           </div>

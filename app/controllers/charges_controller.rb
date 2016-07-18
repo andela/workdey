@@ -4,8 +4,8 @@ class ChargesController < ApplicationController
 
   def create
     # Amount in cents
-    @amount = 500
-
+    @amount = params[:amount]
+    @task =
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source  => params[:stripeToken]
@@ -14,12 +14,15 @@ class ChargesController < ApplicationController
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
-      :description => 'Rails Stripe customer',
+      :description => 'Task payment charge',
       :currency    => 'usd'
     )
-    redirect_to dashboard_path, notice: "You have been charged successfully"
+    @task.update_attribute(:paid, true)
+    notify("taskee", @task.taskee_id)
+    redirect_to dashboard_path, notice: "You have been charged successfully"\
+      "and your taskee has been notified"
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_charge_path
+    render "task_managements/pay"
   end
 end
