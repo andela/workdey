@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
-  before do
-    Capybara.default_driver = :selenium
-  end
-
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:taskee2) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }

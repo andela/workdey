@@ -5,7 +5,7 @@ RSpec.feature "Oauth Authentication" do
   let(:buttons) { ["I need help with tasks", "I want to carry out tasks"] }
 
   before :all do
-    Capybara.default_driver = :selenium
+    # Capybara.default_driver = :selenium
     Rails.application.env_config["omniauth.auth"] = OmniAuth.
                                                     config.
                                                     mock_auth[:google_oauth2]
