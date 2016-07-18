@@ -52,8 +52,7 @@
           </div>
           <div class="input-field col m6 push-5 jiji">
             <i class="material-icons prefix ji">work</i>
-              <%= f.label :choose_your_skillset%>
-              <%= f.collection_select :skillset_id, @skillsets, :id, :name%>
+            <%= f.collection_select :skillset_id, @skillsets, :id, :name, prompt: "Choose a skillset"%>
           </div>
         </div>
 
