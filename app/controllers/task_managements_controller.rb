@@ -23,7 +23,7 @@ class TaskManagementsController < ApplicationController
     if @task.save
       session.delete(:searcher)
       flash.clear
-      flash[:notice] = "Your task has been created"
+      flash.now[:notice] = "Your task has been created"
       render "show"
     else
       retain_form_values
