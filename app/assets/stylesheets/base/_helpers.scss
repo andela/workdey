@@ -36,6 +36,11 @@ i.material-icons.prefix.ji {
   // padding-top: 35px;
   z-index: 9999;
 }
+.select-wrapper {
+    margin-left: 3rem;
+    width: 92%;
+    width: calc(100% - 3rem);
+}
 
 button.btn[disabled] {
   cursor: not-allowed;
