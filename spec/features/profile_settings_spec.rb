@@ -4,7 +4,6 @@ RSpec.feature "ProfileSettings", type: :feature do
   before do
     workdey_data = Seed.new
     workdey_data.create_all
-    # Capybara.default_driver = :selenium
   end
 
   scenario "login with valid email and password" do
