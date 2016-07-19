@@ -56,7 +56,6 @@ module Helpers
                         .pickadate('picker').set('select', #{start_date})")
     page.execute_script("$('.end_date')\
                         .pickadate('picker').set('select', #{end_date})")
-    fill_in "task[time]", with: "4:00 PM"
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
 end
