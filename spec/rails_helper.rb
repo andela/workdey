@@ -61,10 +61,11 @@ RSpec.configure do |config|
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) { DatabaseCleaner.clean }
   config.include FactoryGirl::Syntax::Methods
+  config.before(:each) { Capybara.default_driver = :selenium }
 
   config.after(:each, js: true) do
-   TransactionalCapybara::AjaxHelpers.wait_for_ajax(page)
- end
+    TransactionalCapybara::AjaxHelpers.wait_for_ajax(page)
+  end
 
   config.infer_spec_type_from_file_location!
   config.include ApplicationControllerSpecHelper, type: :controller
