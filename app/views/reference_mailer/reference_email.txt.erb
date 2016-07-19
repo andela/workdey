@@ -3,6 +3,10 @@ Hello, <%= @reference.firstname %>
 
 Your contact <%= @reference.taskee.full_name %> listed you as a reference on our platform.
 
-Please follow this link to verify this request. <%= @url %>
+Does <%= @reference.taskee.firstname %> have these skills or expertise?
+<% @reference.skillsets.keys.each.with_index do |skillset, i| %>
+   <%= i + 1 %>). <%= skillset %>
+<% end %>
+Please follow this link to endorse <%= @reference.taskee.firstname %>: <%= @url %>
 
 Thanks!
