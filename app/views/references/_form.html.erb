@@ -1,21 +1,40 @@
-<%= form_for @reference do |f| %>
-  <div class="input-field">
-    <%= f.text_field :firstname %>
-    <%= f.label :firstname %>
-  </div>
-  <div class="input-field">
-    <%= f.text_field :lastname %>
-    <%= f.label :lastname %>
-  </div>
-  <div class="input-field">
-    <%= f.text_field :relationship %>
-    <%= f.label :relationship %>
-  </div>
-  <div class="input-field">
-    <%= f.email_field :email %>
-    <%= f.label :email %>
-  </div>
-  <%= f.submit class: 'btn' do %>
-    <span>Send Email</span>
+<div class="row">
+  <%= form_for @reference, html: { class: "col s12" } do |f| %>
+    <h4>Personal details of your reference</h4>
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.text_field :firstname %>
+        <%= f.label :firstname %>
+      </div>
+      <div class="input-field col s6">
+        <%= f.text_field :lastname %>
+        <%= f.label :lastname %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.email_field :email %>
+        <%= f.label :email %>
+      </div>
+      <div class="input-field col s6">
+        <%= f.text_field :relationship %>
+        <%= f.label :relationship %>
+      </div>
+    </div>
+    <h4>Skillset profiles to be verified</h4>
+    <div class="row">
+      <% if @taskee_skillsets.present? %>
+      <div class="col s12">
+        <%= f.collection_check_boxes :skillsets, @taskee_skillsets, :name, :name %>
+      </div>
+      <% else %>
+        <p>
+          You don't have any skill set. Please <%= link_to "add a skill", new_skillset_path %> to continue.
+        </p>
+      <% end %>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit">Send Email
+      <i class="material-icons right">send</i>
+    </button>
   <% end %>
-<% end %>
+</div>

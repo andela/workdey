@@ -9,7 +9,15 @@
       Your contact <%= @reference.taskee.full_name %> listed you as a reference on our platform.
     </p>
     <p>
-      Please follow <a href="<%= @url %>">this link </a>to verify this request.
+      Does <%= @reference.taskee.firstname %> have these skills or expertise?
+    </p>
+    <ul>
+      <% @reference.skillsets.keys.each do |skillset| %>
+        <li> <%= skillset %> </li>
+      <% end %>
+    </ul>
+    <p>
+      Please follow <a href="<%= @url %>">this link </a>to endorse <%= @reference.taskee.firstname %>.
     </p>
     <p>Thanks!</p>
   </body>
