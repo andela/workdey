@@ -33,4 +33,29 @@ module Helpers
       phone: nil
     }
   end
+
+  def task_attr
+    {
+      start_date: Date.today,
+      end_date: 1.day.from_now,
+      price: 5000,
+      description: Faker::Lorem.sentence,
+      tasker_id: 3
+    }
+  end
+
+  def new_task_helper(price)
+    log_in_with(tasker.email, tasker.password)
+    visit new_task_path
+    fill_in "task[name]", with: Faker::Lorem.word
+    fill_in "task[price]", with: price
+
+    end_date = Date.tomorrow.in_time_zone.to_i * 1000
+    start_date = Date.today.in_time_zone.to_i * 1000
+    page.execute_script("$('.start_date')\
+                        .pickadate('picker').set('select', #{start_date})")
+    page.execute_script("$('.end_date')\
+                        .pickadate('picker').set('select', #{end_date})")
+    fill_in "task[description]", with: Faker::Lorem.sentence
+  end
 end

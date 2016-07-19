@@ -1,19 +1,17 @@
 require "rails_helper"
 
 RSpec.feature "Create Task for bidding", type: :feature do
-  before(:all) do
-    Capybara.default_driver = :selenium
-  end
-
-  before(:each) do
-    user_attr = {
+  let(:user) { create(:user, user_attr) }
+  let(:user_attr) do
+    {
       user_type: "tasker",
       has_taken_quiz: true,
       confirmed: true,
       phone: nil
     }
-    @user = create(:user, user_attr)
-    log_in_with(@user.email, @user.password)
+  end
+  before(:each) do
+    log_in_with(user.email, user.password)
   end
 
   scenario "tasker can see a link to the biddings page" do
@@ -42,7 +40,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   end
 
   scenario "tasker can edit a bid" do
-    create(:bidding, tasker_id: @user.id)
+    create(:bidding, tasker_id: user.id)
     visit biddings_path
     click_link "mode_edit"
     fill_in "bidding_name", with: "Washing"
@@ -51,7 +49,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   end
 
   scenario "tasker can delete a bid" do
-    create(:bidding, tasker_id: @user.id)
+    create(:bidding, tasker_id: user.id)
     visit biddings_path
     click_link "delete"
     page.driver.browser.switch_to.alert.accept

@@ -1,34 +1,12 @@
 require "rails_helper"
 
-RSpec.feature "SearchByTasks", type: :feature do
-  let(:email) { "olaide.ojewale@andela.com" }
-  let(:password) { "1234567890" }
-
-  before do
-    Capybara.default_driver = :selenium
-    workdey_data = Seed.new
-    workdey_data.create_all
-  end
-
-  scenario "search by tasks" do
+RSpec.feature "SearchBySkillset", type: :feature do
+  scenario "search by skillset" do
+    taskee = create(:user, user_attr.merge(user_type: "taskee"))
+    skillset = create(:skillset, user: taskee)
     visit "/"
-    fill_in "searcher", with: "Cleaning"
+    fill_in "searcher", with: skillset.name
     click_button "Search"
-    expect(page).to have_selector("p", text: "Chinedu Daniel")
+    expect(page).to have_selector("p", text: taskee.firstname)
   end
-
-  # pending "redirect user to login when s/he searches for taskees by tasks" do
-  #   visit "/"
-  #   fill_in "searcher", with: "Cleaning"
-  #   click_button "Search"
-  #   page.all(".searched-taskee")[0].click
-  #
-  #   expect(page).to have_content("Login to continue")
-  #
-  #   fill_in "session_email", with: email
-  #   fill_in "session_password", with: password
-  #   click_button "Sign in "
-  #
-  #   expect(page).to have_content("User Profile")
-  # end
 end

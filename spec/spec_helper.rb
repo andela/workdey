@@ -1,4 +1,5 @@
 require 'coveralls'
+require 'capybara'
 
 Coveralls.wear!
 

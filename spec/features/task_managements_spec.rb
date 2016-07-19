@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.feature "TaskLogs", type: :feature do
   before do
-    Capybara.default_driver = :selenium
     task1_desc = Faker::Lorem.sentence
     task2_desc = Faker::Lorem.sentence
     @task1 = create(:task_management, task_desc: task1_desc)
@@ -14,6 +13,7 @@ RSpec.feature "TaskLogs", type: :feature do
                            lastname: Faker::Name.last_name,
                            user_type: "taskee", confirmed: true)
   end
+
   it { expect(TaskManagement.count).to eql 2 }
   context "user is a tasker" do
     before do

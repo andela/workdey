@@ -1,10 +1,18 @@
 class Task < ActiveRecord::Base
-  has_many :skillsets
+  belongs_to :skillset
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
+  validates :name, presence: true
+  validates :price,
+            numericality: { greater_than_or_equal_to: 2000 },
+            presence: true
+  validates :tasker_id,
+            :description,
+            presence: true
+  validate :end_time_must_be_greater_than_start_time
 
   def self.get_taskees(keyword, user_email)
-    taskees = User.get_taskees_by_task_name(keyword, user_email)
+    taskees = User.get_taskees_by_skillset(keyword, user_email)
     current_user_city_street user_email
     return nil if taskees.nil? || taskees.empty?
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
@@ -13,8 +21,11 @@ class Task < ActiveRecord::Base
   end
 
   def self.get_taskees_nearby(taskees, user_street, user_city)
-    taskees_nearby = taskees.where("city LIKE ? AND street_address LIKE ?",
-                                   user_city, user_street)
+    taskees_nearby = taskees.where(
+      "LOWER(city) LIKE ? AND LOWER(street_address) LIKE ?",
+      user_city,
+      user_street
+    )
     if taskees_nearby.nil?
       taskees_nearby = taskees.where("city LIKE ?", user_city)
     end
@@ -28,6 +39,21 @@ class Task < ActiveRecord::Base
   end
 
   private_class_method
+  def end_time_must_be_greater_than_start_time
+    if start_date && end_date
+      check_start_and_end_dates
+    else
+      errors[:time] = "Task time cannot be nil"
+    end
+  end
+
+  def check_start_and_end_dates
+    same_day = start_date == end_date
+    unless (end_date > start_date && end_date > Time.now) || same_day
+      errors[:date] = "End date cannot be in the past"
+    end
+  end
+
   def self.users
     User.arel_table
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528040440) do
+ActiveRecord::Schema.define(version: 20160711165717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,9 +72,20 @@ ActiveRecord::Schema.define(version: 20160528040440) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
+    t.integer  "price"
+    t.time     "time"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "tasker_id"
+    t.string   "location"
+    t.string   "status"
+    t.integer  "skillset_id"
   end
+
+  add_index "tasks", ["skillset_id"], name: "index_tasks_on_skillset_id", using: :btree
 
   create_table "user_plans", force: :cascade do |t|
     t.string   "name"
@@ -114,4 +125,5 @@ ActiveRecord::Schema.define(version: 20160528040440) do
 
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
+  add_foreign_key "tasks", "skillsets"
 end
