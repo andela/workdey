@@ -1,0 +1,15 @@
+ <%= render 'partials/sidebar_dashboard' %>
+
+<section class="main container search-height">
+<div class="row" style="margin-left: 50px">
+<% if @tasks.empty? %>
+<h5 class="text-center"> No search result found! Please try again later. </h5>
+<% else %>
+  <h5 class="text-center"> Search results </h5>
+  <%= render @tasks %>
+
+
+  <%= will_paginate @tasks %>
+ <%end %>
+</div>
+</section>

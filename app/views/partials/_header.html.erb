@@ -16,6 +16,7 @@
             <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
           <li>
+            <% if current_user.taskee? %>
             <div class="search-bar">
               <div class="input-field my-input" id="search-input">
                 <%= form_tag({controller: "tasks", action: "index"}, method: "get") do %>
@@ -33,7 +34,7 @@
               <i class="material-icons search-i" id="search">search</i>
             </span>
           </li>
-
+          <% end %>
           <li class="notification-dropdown" data-activates="tasks">
             <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
           </li>
