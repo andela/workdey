@@ -2,6 +2,7 @@
 FactoryGirl.define do
   factory :skillset do
     user
-    name { Faker::Name.name }
+    # task nil
+    name { Faker::Lorem.word }
   end
 end

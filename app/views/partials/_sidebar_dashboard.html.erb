@@ -5,7 +5,7 @@
     <%= link_to raw("<li class='side-nav-button'>Biddings</li>"), biddings_path %><hr>
     <% if current_user.taskee? %>
       <%= link_to raw("<li class='side-nav-button'>My Skillset</li>"), skillsets_path %> <hr>
-      <%= link_to raw("<li class='side-nav-button'>My References</li>"), references_path %> <hr>
+      <%= link_to raw("<li class='side-nav-button'>My References</li>"), dashboard_references_path %> <hr>
     <% end %>
     <% if current_user.tasker? %>
       <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), map_search_path %><hr>

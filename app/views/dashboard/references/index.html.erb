@@ -6,12 +6,16 @@
         <div class="col m8 offset-m1">
           <ul class="collection with-header">
             <li class="collection-header"><h4>My References</h4></li>
-            <%= render @references %>
+            <% if @references.present? %>
+              <%= render @references %>
+            <% else %>
+              <li class="collection-item">You have no existing references</li>
+            <% end %>
           </ul>
         </div>
         <div class="col m3">
           <div class="fixed-action-btn">
-            <%= link_to new_reference_path, class: 'btn-floating btn-large waves-effect waves-light red tooltipped',
+            <%= link_to new_dashboard_reference_path, class: 'btn-floating btn-large waves-effect waves-light red tooltipped',
               id: 'new-reference-btn', "data-position": "left", "data-delay": "50", "data-tooltip": "add a reference" do %>
               <i class="material-icons">add</i>
             <% end %>
