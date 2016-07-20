@@ -15,7 +15,7 @@ class TaskManagement < ActiveRecord::Base
 
   def self.notifications_count(user_type, id)
     if user_type == "taskee"
-      where(taskee_id: id).where(taskee_notified: false).count
+      where(taskee_id: id).where(taskee_notified: false, paid: true).count
     else
       where(tasker_id: id).where(tasker_notified: false).
         where.not(status: "inactive").count
@@ -35,7 +35,7 @@ class TaskManagement < ActiveRecord::Base
   def self.update_all_notifications_as_seen(user)
     query = user.user_type == "tasker" ? "tasker_id" : "taskee_id"
     attribute = query.gsub("id", "notified")
-    where(query => user.id).where(attribute => false).
+    where(query => user.id).where(attribute => false).where(paid: true).
       update_all(attribute => true)
   end
 

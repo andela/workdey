@@ -14,7 +14,7 @@
         <% if @task %>
           <p> You will have to pay before your taskee will be notified</p>
           <p>You may pay below</p>
-          <% @taskee = User.find(@task.taskee).fullname %>
+          <% @taskee = @task.taskee.fullname %>
           <% @description = @task.task_desc %>
           <% @amount = @task.amount %>
           <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", @taskee, disabled: true) %></li>

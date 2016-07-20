@@ -21,6 +21,7 @@ class TaskManagementsController < ApplicationController
     @task.start_time = get_time(:start)
     @task.end_time = get_time(:end)
     if @task.save
+      session.delete(:searcher)
       flash.clear
       flash.now[:notice] = "Your task has been created"
       render "show"
@@ -32,7 +33,7 @@ class TaskManagementsController < ApplicationController
 
   def index
     @tasks = if current_user.taskee?
-               sort_status(current_user.tasks_given)
+               sort_status(current_user.tasks_given.where(paid: true))
              elsif current_user.tasker?
                sort_status(current_user.tasks_created)
              end
