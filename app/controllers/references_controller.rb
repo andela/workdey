@@ -3,9 +3,7 @@ class ReferencesController < ApplicationController
   before_action :set_endorsement, only: [:new_endorsement, :create_endorsement]
 
   def index
-    @references = current_user.references.paginate(
-      page: params[:page], per_page: 5
-    )
+    @references = current_user.references
   end
 
   def show
@@ -18,8 +16,9 @@ class ReferencesController < ApplicationController
 
   def create
     @reference = current_user.references.new(formatted_reference_params)
+    @reference.confirmation_token = SecureRandom.urlsafe_base64.to_s
     if @reference.save
-      url = "#{root_url}references/endorse?email=#{@reference.email}"
+      url = "#{new_endorsement_url}?t=#{@reference.confirmation_token}"
       ReferenceMailer.reference_email(@reference, url).deliver_later
       flash[:notice] = "An email will be sent to #{@reference.email}"
     else
@@ -34,18 +33,18 @@ class ReferencesController < ApplicationController
   end
 
   def create_endorsement
-    endorsement_params[:references][:skillsets].each do |skillset|
-      @reference.skillsets[skillset] = {
-        comment: endorsement_params[:recommendation],
-        relationship: endorsement_params[:relationship]
-      }
+    endorsement_params[:references][:skillsets].each.with_index do |skill, i|
+      @reference.skillsets[skill] = [
+        endorsement_params[:recommendation],
+        endorsement_params[:relationship]
+      ]
     end
     if @reference.save
-      flash[:notice] = "Successfully submitted. Thank you."
+      flash[:notice] = "Your recommendation has been sent."
     else
       flash[:notice] = "Oops, something went wrong please try again."
     end
-    redirect_to new_endorsement_path
+    redirect_to root_path
   end
 
   private
@@ -55,7 +54,7 @@ class ReferencesController < ApplicationController
   end
 
   def set_endorsement
-    @reference = Reference.find_by(email: params[:email])
+    @reference = Reference.find_by(confirmation_token: params[:t])
   end
 
   def formatted_reference_params

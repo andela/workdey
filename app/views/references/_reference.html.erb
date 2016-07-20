@@ -1,4 +1,15 @@
-<tr>
-  <td><%= reference.firstname %> <%= reference.lastname %></td>
-  <td><%= reference.email %></td>
-</tr>
+<li class="collection-item avatar">
+  <i class="material-icons circle green">perm_identity</i>
+    <% if reference.skillsets.present?  %>
+     <% reference.skillsets.each do |skill| %>
+      <span class="title"><strong><%= skill[0] %></strong></span>
+      <p>
+        <em>Comment:</em> <%= JSON.parse(skill[1])[0] %> <br>
+        <em> Relationship:</em> <%= JSON.parse(skill[1])[1] %>
+      </p>
+     <% end %>
+   <% else %>
+    <span class="title">No skill set</span>
+  <% end %>
+  <span class="bottom-secondary-content"><small><em>by</em></small> <%= reference.firstname %> <%= reference.lastname %></span>
+</li>
