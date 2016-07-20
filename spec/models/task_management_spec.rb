@@ -87,6 +87,7 @@ RSpec.describe TaskManagement, type: :model do
     context "should return necessary notifications" do
       before(:each) { task_management.save }
       it do
+        task_management.update_attribute(:paid, true)
         expect(TaskManagement.all_notifications_for("taskee", 1).
         first).to eql task_management
       end

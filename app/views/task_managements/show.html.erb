@@ -9,21 +9,19 @@
 <main>
   <section class="col m9 s12 offset-m1">
     <div class="row">
-      <ul class= "col m10 offset-m1" >
+      <ul class= "col m5 offset-m1" >
         <h2>Complete this deal</h2>
-        <% if params["task_management"] %>
+        <% if @task %>
           <p> You will have to pay before your taskee will be notified</p>
           <p>You may pay below</p>
-          <% @taskee = User.find(params["task_management"]["taskee_id"]).fullname %>
-          <% @description = params["task_management"]["task_desc"] %>
-          <% @amount = params["task_management"]["amount"] %>
+          <% @taskee = User.find(@task.taskee).fullname %>
+          <% @description = @task.task_desc %>
+          <% @amount = @task.amount %>
           <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", @taskee, disabled: true) %></li>
           <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", @description, disabled: true ) %></li>
-          <% if @task %>
             <% unless @task.paid? %>
               <%= render "pay" %>
             <% end %>
-          <% end %>
         <% else %>
           <p>You can review and/or rate the taskee before you click on " complete" button.</p>
           <p><strong>NB:</strong> Clicking on the complete button means that the task has been completed by the taskee.</p>

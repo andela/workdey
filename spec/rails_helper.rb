@@ -46,7 +46,7 @@ OmniAuth.config.add_mock(:facebook, facebook_authenticator)
 # require only the support files necessary.
 #
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
+Rails.configuration.stripe[:publishable_key] = "pk_test_28YqniZIIgGBqP4laQE7iISh"
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!

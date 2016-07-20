@@ -24,7 +24,7 @@ class TaskManagement < ActiveRecord::Base
 
   def self.all_notifications_for(user_type, id)
     if user_type == "taskee"
-      where(taskee_id: id, status: "inactive").
+      where(taskee_id: id, status: "inactive", paid: true).
         order(viewed: :asc, created_at: :desc).
         select(:id, :task_id, :tasker_id, :viewed)
     else
