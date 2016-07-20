@@ -100,9 +100,13 @@ function initLocationMap () {
 function getStaticMap () {
   var mapcenter = $('.map-center').text(),
     maplat = $('.map-latitude').text(),
-    maplng = $('.map-longitude').text()
+    maplng = $('.map-longitude').text(),
+    mapWidth = 900,
+    mapHeight = 300,
+    mapURI = 'https://maps.googleapis.com/maps/api/staticmap'
 
-  var src = 'https://maps.googleapis.com/maps/api/staticmap?center=' + encodeURI(mapcenter) + '&scale=2&zoom=12&size=600x300&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C' + encodeURI(mapcenter) + '&key=' + geoKeyBrowser
+  var src = mapURI + '?center=' + encodeURI(mapcenter) + '&scale=2&zoom=12&size=' + mapWidth + 'x' + mapHeight +
+    '&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C' + encodeURI(mapcenter) + '&key=' + geoKeyBrowser
 
   $('#task_location_map > img').fadeIn('slow', function () {
     $(this).removeClass('hide')
