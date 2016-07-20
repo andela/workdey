@@ -20,17 +20,17 @@ class TaskManagement < ActiveRecord::Base
       where(taskee_id: id).where(taskee_notified: false).count
     else
       where(tasker_id: id).where(tasker_notified: false).
-        where.not(status: "inactive").count
+        where.not(status: "unassigned").count
     end
   end
 
   def self.all_notifications_for(user_type, id)
     if user_type == "taskee"
-      where(taskee_id: id, status: "inactive").
+      where(taskee_id: id, status: "unassigned").
         order(viewed: :asc, created_at: :desc).
         select(:id, :task_id, :tasker_id, :viewed)
     else
-      where(tasker_id: id).where.not(status: "inactive")
+      where(tasker_id: id).where.not(status: "unassigned")
     end
   end
 
