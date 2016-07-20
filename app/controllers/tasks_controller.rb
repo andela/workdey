@@ -25,7 +25,9 @@ class TasksController < ApplicationController
       :time,
       :location,
       :description,
-      :skillset_id
+      :skillset_id,
+      :longitude,
+      :latitude
     ).merge(tasker_id: current_user.id)
   end
 end

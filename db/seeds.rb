@@ -132,9 +132,9 @@ class SeedData
   end
 
   def add_skillset_name
-    skillsets = %w(Capentry Pluming Electrician Cleaner)
-    Skillset.all[-4..-1].each do |skillset|
-      skillset.name = skillsets.sample
+    skillsets = %w(Carpentry Plumbing Electrician Cleaner)
+    Skillset.all[-4..-1].each_with_index do |skillset, index|
+      skillset.name = skillsets[index]
       skillset.save
     end
   end
