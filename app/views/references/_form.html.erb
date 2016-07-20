@@ -1,6 +1,6 @@
 <div class="row">
   <%= form_for @reference, html: { class: "col s12" } do |f| %>
-    <h4>Personal details of your reference</h4>
+    <h4>1.) Input details of your reference</h4>
     <div class="row">
       <div class="input-field col s6">
         <%= f.text_field :firstname %>
@@ -21,11 +21,16 @@
         <%= f.label :relationship %>
       </div>
     </div>
-    <h4>Skillset profiles to be verified</h4>
+    <h4>2.) Choose skills to be verified</h4>
     <div class="row">
       <% if @taskee_skillsets.present? %>
       <div class="col s12">
-        <%= f.collection_check_boxes :skillsets, @taskee_skillsets, :name, :name %>
+        <% @taskee_skillsets.each do |skillset| %>
+          <p>
+            <%= check_box_tag 'reference[skillsets][]', skillset.name, false, id: "reference_skillsets_#{skillset.name}" %>
+            <%= label_tag "reference_skillsets_#{skillset.name}", skillset.name %>
+          </p>
+        <% end %>
       </div>
       <% else %>
         <p>
