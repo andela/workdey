@@ -13,6 +13,8 @@ class TasksController < ApplicationController
       render "new"
     end
   end
+  def index
+  end
 
   private
 

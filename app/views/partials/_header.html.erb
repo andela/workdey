@@ -15,6 +15,24 @@
           <% if @count && @count > 0 %>
             <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
+          <li>
+            <div class="search-bar">
+              <div class="input-field my-input" id="search-input">
+                <%= form_tag({controller: "tasks", action: "index"}, method: "get") do %>
+                <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+          <li class="">
+            <!-- <a href="" class="tooltipped" data-position="left" data-delay="50" data-tooltip="search for tasks">
+                 <i class="material-icons">search</i>
+            </a>           -->
+
+            <span class="search-icon-span left">
+              <i class="material-icons search-i" id="search">search</i>
+            </span>
+          </li>
 
           <li class="notification-dropdown" data-activates="tasks">
             <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
@@ -26,9 +44,9 @@
                  <i class="material-icons">rate_review</i>
             </a>
             <% else %>
-            <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Tasks">
+            <!-- <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Tasks">
               <i class="material-icons">rate_review</i>
-            </a>
+            </a> -->
             <% end %>
           </li>
         </ul>
