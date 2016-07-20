@@ -38,6 +38,10 @@ class Task < ActiveRecord::Base
     @user_street = "%#{user_addy[0][1]}%"
   end
 
+  def self.search_for_need(need)
+    Skillset.where("LOWER(name) LIKE ?", "%cleaning%").tasks.where(taskee_id: nil)
+  end
+
   private_class_method
   def end_time_must_be_greater_than_start_time
     if start_date && end_date
