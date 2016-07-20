@@ -92,7 +92,7 @@ button.btn[disabled] {
   position: relative;
 }
 .search-bar {
-  border-bottom: 2px solid #338574;
+  border-bottom: 2px solid #A43540;
   display: none;
   height: 3em;
   width: 100%;
@@ -104,11 +104,20 @@ button.btn[disabled] {
   font-size: 1em !important;
   padding-left: 0 !important;
 }
+.apply{
+  color: #eb4D5c !important;
+}
 .my-input {
   #my-input-field:focus {
     border-bottom: 0 solid;
     box-shadow: 0 0 0 0;
   }
+}
+.search-result-task{
+  border: none !important;
+}
+.search-height{
+  min-height: 550px;
 }
 .search-container {
   padding-right: 0 !important;

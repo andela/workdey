@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
+  belongs_to :tasker, class_name: "User"
+
   belongs_to :skillset
-  has_many :users, through: :skillsets
+  # has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
   validates :name, presence: true
   validates :price,
@@ -38,8 +40,13 @@ class Task < ActiveRecord::Base
     @user_street = "%#{user_addy[0][1]}%"
   end
 
-  def self.search_for_need(need)
-    Skillset.where("LOWER(name) LIKE ?", "%cleaning%").tasks.where(taskee_id: nil)
+  def self.search_for_available_need(need)
+    skill_with_tasks = Skillset.where(
+      "LOWER(name) LIKE ?",
+      "%#{need.downcase}%"
+    ).includes(:tasks).first
+    return skill_with_tasks unless skill_with_tasks
+    skill_with_tasks.tasks.where(taskee_id: nil)
   end
 
   private_class_method

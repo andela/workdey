@@ -13,8 +13,10 @@ class TasksController < ApplicationController
       render "new"
     end
   end
+
   def index
-    @tasks = Task.search_for_need(params[:need])
+    search_tasks = Task.search_for_available_need(params[:need])
+    @tasks = search_tasks ? paginate_tasks(search_tasks) : []
   end
 
   private
@@ -30,5 +32,9 @@ class TasksController < ApplicationController
       :description,
       :skillset_id
     ).merge(tasker_id: current_user.id)
+  end
+
+  def paginate_tasks(tasks)
+    tasks.paginate(page: params[:page], per_page: 9)
   end
 end
