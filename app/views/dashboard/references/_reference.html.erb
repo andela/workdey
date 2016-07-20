@@ -1,13 +1,14 @@
 <li class="collection-item avatar">
   <i class="material-icons circle green">perm_identity</i>
     <% if reference.skillsets.present?  %>
-     <% reference.skillsets.each do |skill| %>
-      <span class="title"><strong><%= skill[0] %></strong></span>
-      <p>
-        <em>Comment:</em> <%= JSON.parse(skill[1])[0] %> <br>
-        <em> Relationship:</em> <%= JSON.parse(skill[1])[1] %>
-      </p>
-     <% end %>
+     <% JSON.parse(reference.skillsets["skills"]).each do |skill| %>
+      <span class="title"><strong><%= skill %></strong></span>
+    <% end %>
+    <p>
+      <% JSON.parse(reference.skillsets["endorsement"]).each.with_index do |msg, i| %>
+        <em><%= msg %></em>  <br>
+      <% end %>
+    </p>
    <% else %>
     <span class="title">No skill set</span>
   <% end %>

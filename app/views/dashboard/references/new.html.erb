@@ -2,9 +2,9 @@
 <section class="main container">
   <% if @reference.errors.any? %>
    <div id="error_explanation">
-    <h3><%= pluralize(@bidding.errors.count, "error") %></h3>
+    <h3><%= pluralize(@reference.errors.count, "error") %></h3>
     <ul>
-      <% @bidding.errors.full_messages.each do |message| %>
+      <% @reference.errors.full_messages.each do |message| %>
       <li><%= message %></li>
       <% end %>
     </ul>

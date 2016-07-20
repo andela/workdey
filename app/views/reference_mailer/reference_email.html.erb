@@ -12,8 +12,8 @@
       Does <%= @reference.taskee.firstname %> have these skills or expertise?
     </p>
     <ul>
-      <% @reference.skillsets.keys.each do |skillset| %>
-        <li> <%= skillset %> </li>
+      <% JSON.parse(@reference.skillsets["skills"]).each do |skill| %>
+        <li> <%= skill %> </li>
       <% end %>
     </ul>
     <p>

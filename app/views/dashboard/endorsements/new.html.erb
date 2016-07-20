@@ -1,8 +1,7 @@
-<%= render 'partials/sidebar_dashboard' %>
 <section class="main container">
   <div class="row">
     <div class="col s7 offset-s3">
-      <%= form_tag "/references/endorse", method: "post" do %>
+      <%= form_tag dashboard_endorsements_path, method: "post" do %>
         <div class="row">
           <h4 class="col s12">1.) Endorse <%= @taskee %> for the following skill set</h4>
           <div class="col s12">
@@ -19,7 +18,7 @@
           <div class="input-field col s11">
             <%= select_tag :relationship, options_for_select(["Professional: I have worked with #{@taskee}",
                  "Education: I know #{@taskee} from an academic background",
-                 "Personal: I have a personal relationship with #{@taskee}"]) %>
+                 "Personal: I have a personal relationship with #{@taskee}"]), class: "browser-default" %>
           </div>
         </div>
         <div class="row">
