@@ -1,0 +1,65 @@
+<%= render 'partials/sidebar_dashboard' %>
+<section class="main container">
+  <div class="row">
+    <div class="col s11 offset-s1 broadcast-container">
+      <div class="row">
+        <div class="col s3 right broadcast-clmn">
+          <a class="waves-effect waves-light btn-large teal broadcast-btn">Broadcast Task</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="row">
+            <div class="col s8">
+              <div class="row">
+                <div class="col s8 task-title">
+                  <h3><%= @task.name %></h3>
+                </div>
+                <div class="col s3 task-status">
+                  <div class="status">
+                    <% if @task.status == "unassigned" %>
+                      <i class="fa fa-ban text-red"></i> <span class="red-text"><%= @task.status %></span>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="col s12 task-description">
+                  <%= @task.description %>
+                </div>
+                <div class="col s12 task-tags">
+                  <span><%= @task.skillset.name %></span>
+                </div>
+              </div>
+            </div>
+            <div class="col s3 right">
+              <div class="row">
+                <div class="col s12 task-pricing">
+                  <span><%= number_to_currency(@task.price, precision: 0) %></span>
+                </div>
+                <div class="col s12 task-due-date">
+                  <span>Due in <%= distance_of_time_in_words_to_now(@task.end_date) %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col s12">
+              <h3>Location</h3>
+
+              <div class="location-title">
+                <span class="red-text"><%= @task.location %></span>
+              </div>
+              <div id="task_location_map">
+                <span class="hide map-center"><%= @task.location %></span>
+                <span class="hide map-latitude"><%= @task.latitude %></span>
+                <span class="hide map-longitude"><%= @task.longitude %></span>
+                <img src="" alt="Task location" class="hide"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

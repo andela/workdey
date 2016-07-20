@@ -55,14 +55,6 @@ ActiveRecord::Schema.define(version: 20160620143915) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "review_comments", ["review_id"], name: "index_review_comments_on_review_id", using: :btree
-
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "reviewer_id"
     t.integer  "rating"
     t.string   "review"
