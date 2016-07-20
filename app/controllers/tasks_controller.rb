@@ -14,6 +14,7 @@ class TasksController < ApplicationController
     end
   end
   def index
+    @tasks = Task.search_for_need(params[:need])
   end
 
   private
