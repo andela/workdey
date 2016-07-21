@@ -33,7 +33,7 @@ class TaskManagementsController < ApplicationController
 
   def index
     @tasks = if current_user.taskee?
-               sort_status(current_user.tasks_given.where(paid: true))
+               sort_status(current_user.tasks_given.paid_for)
              elsif current_user.tasker?
                sort_status(current_user.tasks_created)
              end
