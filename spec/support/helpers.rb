@@ -59,4 +59,11 @@ module Helpers
                         .pickadate('picker').set('select', #{end_date})")
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
+
+  def search_helper(taskee, skillset)
+    log_in_with(taskee.email, taskee.password)
+    find("#search").click
+    fill_in "need", with: skillset.name
+    find("#my-input-field").native.send_keys(:return)
+  end
 end
