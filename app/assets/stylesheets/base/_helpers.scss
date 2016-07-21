@@ -122,6 +122,25 @@ button.btn[disabled] {
 .search-container {
   padding-right: 0 !important;
 }
+div.apply-link {
+  width: 236px;
+  height: 86px;
+  background: white;
+  display: none;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 35px;
+}
+
+li.collection-item:hover {
+  .apply-link {
+    display: block;
+    position: absolute;
+  }
+}
+
 
 .flash-mail {
   text-align: center;
