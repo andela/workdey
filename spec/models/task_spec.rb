@@ -37,13 +37,16 @@ RSpec.describe Task, type: :model do
   end
 
   describe ".search_for_available_need" do
-    let(:skillset) {create(:skillset)}
-    let(:skillset2) {create(:skillset)}
-    let!(:task1) {create(:task, task_attr.merge(skillset_id: skillset.id))}
+    let(:skillset) { create(:skillset) }
+    let(:skillset2) { create(:skillset) }
+    let!(:task1) { create(:task, task_attr.merge(skillset_id: skillset.id)) }
     let!(:task2) do
       create(:task,
-        task_attr.merge(skillset_id: skillset.id, start_date: Date.yesterday)
-      )
+             task_attr.merge(
+               skillset_id: skillset.id,
+               start_date: Date.yesterday
+             )
+            )
     end
 
     context "when searching for a need that has a task" do
@@ -60,7 +63,7 @@ RSpec.describe Task, type: :model do
 
     context "when searching for a need that has no task" do
       it "returns an empty array " do
-        expect(Task.search_for_available_need(skillset2.name)).to  eq []
+        expect(Task.search_for_available_need(skillset2.name)).to eq []
       end
     end
   end
