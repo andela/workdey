@@ -16,7 +16,7 @@ class SkillsetsController < ApplicationController
 
   def destroy
     @skillset = current_user.skillsets.detect do |skillset|
-      skillset.task_id == params[:task_id].to_i
+      skillset.id == params[:skillset_id].to_i
     end.destroy
     respond_to :js
   end

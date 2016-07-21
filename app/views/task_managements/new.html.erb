@@ -37,22 +37,22 @@
                 </div>
                 <div class="col s6">
                   <% if flash[:month].present? %>
-                    <%= select_month flash[:month].to_i %>
+                    <%= select_month flash[:month].to_i, {}, {class: "browser-default"} %>
                   <% else %>
-                    <%= select_month Date.today %>
+                    <%= select_month Date.today, {},{class: "browser-default"} %>
                   <% end %>
                 </div>
 
                 <div class="col s6">
                   <% if flash[:day].present? %>
-                    <%= select_day flash[:day].to_i %>
+                    <%= select_day flash[:day].to_i , {}, {class: "browser-default"}%>
                   <% else %>
-                    <%= select_day Date.today %>
+                    <%= select_day Date.today, {}, { class: "browser-default"} %>
                   <% end %>
                 </div>
 
                 <div class="col s12">
-                  <%= select :time_range, "task" do %>
+                  <%= select :time_range, "task", nil, {}, {class: "browser-default"} do %>
                     <% if flash[:time].present? %>
                       <option <%= "selected" if flash[:time] == "Anytime 8am - 8pm" %>>
                         Anytime 8am - 8pm

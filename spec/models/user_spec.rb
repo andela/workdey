@@ -1,9 +1,7 @@
 require "rails_helper"
-
 RSpec.describe User, type: :model do
   it { is_expected.to have_many(:skillsets) }
   it { is_expected.to have_many(:reviews) }
-  it { is_expected.to have_many(:tasks).through(:skillsets) }
   it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
   it do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
@@ -87,33 +85,33 @@ RSpec.describe User, type: :model do
       User.confirm_user(user.confirm_token)
       expect(user.reload.confirmed).to be true
     end
-    describe "#oath_user" do
-      it "should return true if present" do
-        user = build(:user, oauth_id: "487584789")
-        expect(user.send(:oauth_user?)).to be true
-      end
-      it "should return false if absent" do
-        user = build(:user)
-        expect(user.send(:oauth_user?)).to be false
-      end
+  end
+  describe "#oath_user" do
+    it "should return true if present" do
+      user = build(:user, oauth_id: "487584789")
+      expect(user.send(:oauth_user?)).to be true
     end
-    describe ".get_user_address" do
-      it "should return the user's address" do
-        street_address = Faker::Address.street_name
-        city = Faker::Address.city
-        user = create(:user, city: city, street_address: street_address)
-        expect(User.get_user_address(user.email).first).
-          to eql [city, street_address]
-      end
+    it "should return false if absent" do
+      user = build(:user)
+      expect(user.send(:oauth_user?)).to be false
     end
-    describe ".get_taskees_by_task_name" do
-      it "can return users by their task name" do
-        user1 = create(:user)
-        create(:user_with_tasks, email: "ikem.okonkwo@andela.com")
-        create(:user_with_tasks, email: "bukola.makinwa@andela.com")
-        expect(User.get_taskees_by_task_name("trainer").count).to eql 2
-        expect(User.get_taskees_by_task_name("trainer")).not_to include user1
-      end
+  end
+  describe ".get_user_address" do
+    it "should return the user's address" do
+      street_address = Faker::Address.street_name
+      city = Faker::Address.city
+      user = create(:user, city: city, street_address: street_address)
+      expect(User.get_user_address(user.email).first).
+        to eql [city, street_address]
+    end
+  end
+
+  describe ".get_taskee_by_skillset_name" do
+    it "return users by their skillset name" do
+      user = create(:user, user_attr.merge(user_type: "taskee"))
+      skillset = create(:skillset, user: user)
+      create_list(:skillset, 2)
+      expect(User.get_taskees_by_skillset(skillset.name).count).to eq 1
     end
   end
 
@@ -129,35 +127,31 @@ RSpec.describe User, type: :model do
   end
 
   describe ".first_or_create_from_oauth" do
-    let(:user_attr) { OmniAuth.config.mock_auth[:google_oauth2] }
-
-    context "when a user signs up" do
-      it "creates new user" do
-        expect do
-          User.first_or_create_from_oauth(user_attr)
-        end.to change { User.count }.by(1)
+    context "when a user is not found" do
+      before do
+        @user_attributes = OmniAuth.config.mock_auth[:facebook]
       end
-
-      it "sets user's properties" do
-        User.first_or_create_from_oauth(user_attr)
-        expect(User.first.provider).to eql user_attr.provider
-        expect(User.first.email).to eql user_attr.info.email
+      it "will create a new user if no user is found" do
+        expect { User.first_or_create_from_oauth(@user_attributes) }.
+          to change { User.count }.by(1)
+      end
+      it "the new user should be confirmed" do
+        User.first_or_create_from_oauth(@user_attributes)
         expect(User.first.confirmed).to eql true
       end
     end
 
-    context "when a user logs in" do
-      let(:test_user) { User.first_or_create_from_oauth(user_attr) }
-
-      it "does not create a new user" do
-        User.first_or_create_from_oauth(user_attr)
-        expect do
-          User.first_or_create_from_oauth(user_attr)
-        end.to change { User.count }.by(0)
+    context "when the user is already in the database" do
+      before do
+        @user_attributes = OmniAuth.config.mock_auth[:facebook]
+        @user = User.first_or_create_from_oauth(@user_attributes)
       end
-
+      it "user count should remain one if a user is available" do
+        expect { User.first_or_create_from_oauth(@user_attributes) }.
+          to change { User.count }.by(0)
+      end
       it "will return the user if found" do
-        expect(User.first_or_create_from_oauth(user_attr)).to eql test_user
+        expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
       end
     end
   end

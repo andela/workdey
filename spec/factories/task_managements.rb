@@ -7,9 +7,5 @@ FactoryGirl.define do
     amount { Faker::Commerce.price(2000..50_000.0) }
     start_time Date.tomorrow
     end_time 2.days.from_now
-    status "done"
-    taskee_notified true
-    viewed true
-    tasker_notified true
   end
 end

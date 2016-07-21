@@ -121,7 +121,7 @@ strong {
 // Site Footer
 
 .page-footer {
-  z-index: 9999;
+  z-index: 9998;
   width: 100%;
   background-color: #525252;
   box-shadow: 0 0 3px #444;
@@ -178,11 +178,4 @@ strong {
 //  Text area
 textarea {
   min-height: 10em;
-}
-
-// Select tag
-select {
-  display: inline-block !important;
-  visibility: visible !important;
-
 }

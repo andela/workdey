@@ -17,5 +17,5 @@
 //= require smooth-scroll.min.js
 //= require websocket_rails/main
 //= require moment
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
-

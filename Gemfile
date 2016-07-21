@@ -40,6 +40,7 @@ group :development, :test do
   gem "pry-nav"
   gem "rspec-rails"
   gem "selenium-webdriver"
+  gem "transactional_capybara"
 end
 
 group :development do

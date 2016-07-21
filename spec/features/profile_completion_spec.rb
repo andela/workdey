@@ -1,23 +1,19 @@
 require "rails_helper"
 
 RSpec.describe "Profile completion meter" do
-  before(:all) do
-    Capybara.default_driver = :selenium
-  end
-
-  before(:each) do
-    user_attr = {
+  let(:user) { create(:user, user_attr) }
+  let(:user_attr) do
+    {
       user_type: "taskee",
       has_taken_quiz: true,
       confirmed: true,
       phone: nil
     }
-    @user = create(:user, user_attr)
   end
 
   scenario "when a User logs into their account" do
-    log_in_with(@user.email, @user.password)
-    expect(page).to have_content "Welcome #{@user.firstname}"
+    log_in_with(user.email, user.password)
+    expect(page).to have_content "Welcome #{user.firstname}"
 
     within("div.profile-meter") do
       expect(page).to have_content "64%"
@@ -26,7 +22,7 @@ RSpec.describe "Profile completion meter" do
 
   scenario "users after updating their account, their profile completeness "\
     " should increase" do
-    log_in_with(@user.email, @user.password)
+    log_in_with(user.email, user.password)
 
     within("div.profile-meter") do
       expect(page).to have_content "64%"
