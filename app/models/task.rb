@@ -47,7 +47,7 @@ class Task < ActiveRecord::Base
     ).includes(:tasks).first
     return skill_with_tasks unless skill_with_tasks
     skill_with_tasks.tasks.where(
-      "taskee_id IS NULL AND start_date > ?",
+      "taskee_id IS NULL AND start_date >= ?",
       Time.now
     )
   end
