@@ -49,7 +49,30 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  describe "GET index" do
-    
+  describe "POST search" do
+    context "when a skillset with a task is supplied as search params" do
+      let!(:skillset) {create(:skillset)}
+      let!(:task) {create(:task, task_attr.merge(tasker_id: user.id, skillset_id: skillset.id))}
+
+      before(:each) do
+        post :search, need: skillset.name
+      end
+
+      it "returns the task object that has the skillset" do
+        expect(assigns[:tasks].first).to eq task
+      end
+
+      it "renders the search template" do
+        expect(response).to render_template :search
+      end
+    end
+
+    context "when a skillset without a task is supplied as search params" do
+      it "returns an empty array" do
+        post :search, need: Faker::Lorem.word
+        expect(assigns[:tasks]).to eq []
+      end
+    end
+
   end
 end
