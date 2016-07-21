@@ -2,7 +2,6 @@ class Task < ActiveRecord::Base
   belongs_to :tasker, class_name: "User"
 
   belongs_to :skillset
-  # has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
   validates :name, presence: true
   validates :price,
