@@ -19,7 +19,7 @@
             <% if current_user.taskee? %>
             <div class="search-bar">
               <div class="input-field my-input" id="search-input">
-                <%= form_tag({controller: "tasks", action: "index"}, method: "get") do %>
+                <%= form_tag({controller: "tasks", action: "search"}, method: "post") do %>
                 <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
                 <% end %>
               </div>
