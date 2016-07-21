@@ -5,7 +5,7 @@ RSpec.feature "TaskLogs", type: :feature do
     Capybara.default_driver = :selenium
     task1_desc = Faker::Lorem.sentence
     task2_desc = Faker::Lorem.sentence
-    @task1 = create(:task_management, task_desc: task1_desc)
+    @task1 = create(:task_management, task_desc: task1_desc, paid: true)
     @task2 = create(:task_management, task_desc: task2_desc,
                                       tasker_id: 2, taskee_id: 3)
     @user = create(:user, confirmed: true)

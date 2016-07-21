@@ -38,7 +38,7 @@ RSpec.describe TaskManagementsController, type: :controller do
       it "assigns tasks given to taskee" do
         @user.update_attribute(:user_type, "taskee")
         get :index
-        expect(assigns(:tasks)).to eql @user.tasks_given.to_a
+        expect(assigns(:tasks)).to eql @user.tasks_given.where(paid: true).to_a
       end
     end
   end
