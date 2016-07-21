@@ -46,7 +46,10 @@ class Task < ActiveRecord::Base
       "%#{need.downcase}%"
     ).includes(:tasks).first
     return skill_with_tasks unless skill_with_tasks
-    skill_with_tasks.tasks.where(taskee_id: nil)
+    skill_with_tasks.tasks.where(
+      "taskee_id IS NULL AND start_date > ?",
+      Time.now
+    )
   end
 
   private_class_method
