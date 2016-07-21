@@ -51,8 +51,12 @@ RSpec.describe TasksController, type: :controller do
 
   describe "POST search" do
     context "when a skillset with a task is supplied as search params" do
-      let!(:skillset) {create(:skillset)}
-      let!(:task) {create(:task, task_attr.merge(tasker_id: user.id, skillset_id: skillset.id))}
+      let!(:skillset) { create(:skillset) }
+      let!(:task) do
+        create(
+          :task,
+          task_attr.merge(tasker_id: user.id, skillset_id: skillset.id))
+      end
 
       before(:each) do
         post :search, need: skillset.name
@@ -73,6 +77,5 @@ RSpec.describe TasksController, type: :controller do
         expect(assigns[:tasks]).to eq []
       end
     end
-
   end
 end
