@@ -48,4 +48,8 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
+
+  describe "GET index" do
+    
+  end
 end

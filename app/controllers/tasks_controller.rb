@@ -14,7 +14,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def index
+  def search
     search_tasks = Task.search_for_available_need(params[:need])
     @tasks = search_tasks ? paginate_tasks(search_tasks) : []
   end
