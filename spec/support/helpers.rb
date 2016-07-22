@@ -62,9 +62,9 @@ module Helpers
                         .pickadate('picker').set('select', #{start_date})")
     page.execute_script("$('.end_date')\
                         .pickadate('picker').set('select', #{end_date})")
-    find('div.select-wrapper input').click
+    find("div.select-wrapper input").click
     sleep(0.2)
-    find('div.select-wrapper li', text: skillset.name).click
+    find("div.select-wrapper li", text: skillset.name).click
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
 end
