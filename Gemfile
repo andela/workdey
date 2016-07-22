@@ -50,6 +50,10 @@ group :development do
   gem "figaro"
 end
 
+group :assets do
+  gem "coffee-rails"
+end
+
 group :production do
   gem "rails_12factor", "0.0.2"
   gem "thin"
