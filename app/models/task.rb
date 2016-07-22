@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Task < ActiveRecord::Base
   belongs_to :tasker, class_name: "User"
 

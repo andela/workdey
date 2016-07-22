@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module DashboardHelper
   def reviewer_info(comment)
     firstname = comment.reviewer.firstname

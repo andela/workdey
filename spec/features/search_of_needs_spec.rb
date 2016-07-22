@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe "Searching for needs", type: :feature do
@@ -16,8 +17,7 @@ RSpec.describe "Searching for needs", type: :feature do
              name: Faker::Lorem.word,
              skillset_id: skillset.id,
              start_date: Date.yesterday
-           )
-          )
+           ))
   end
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   scenario "when user search for need that has a task" do

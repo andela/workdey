@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SeedData
   def users_list
     cloudinary_img_url =

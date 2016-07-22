@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TaskManagement < ActiveRecord::Base
   belongs_to :taskee, class_name: "User"
   belongs_to :tasker, class_name: "User"

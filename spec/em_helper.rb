@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 begin
   require "fiber"
 rescue LoadError

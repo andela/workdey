@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe TasksController, type: :controller do
@@ -55,7 +56,8 @@ RSpec.describe TasksController, type: :controller do
       let!(:task) do
         create(
           :task,
-          task_attr.merge(tasker_id: user.id, skillset_id: skillset.id))
+          task_attr.merge(tasker_id: user.id, skillset_id: skillset.id)
+        )
       end
 
       before(:each) do

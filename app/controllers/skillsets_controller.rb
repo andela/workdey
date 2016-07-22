@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SkillsetsController < ApplicationController
   before_action :taskee_required
 

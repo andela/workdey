@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateTaskManagements < ActiveRecord::Migration
   def change
     create_table :task_managements do |t|

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class NotificationMailer < ApplicationMailer
   def send_notifications(
     user,

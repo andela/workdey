@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Bidding < ActiveRecord::Base
   belongs_to :task
   belongs_to :tasker, class_name: "User"
