@@ -19,7 +19,7 @@ class TaskManagementsController < ApplicationController
   def create
     @task = TaskManagement.new(task_details.except(:task_name))
     @task.task_id = Skillset.find_by(name: task_details[:task_name].capitalize).
-      id
+                    id
     @task.start_time = get_time(:start)
     @task.end_time = get_time(:end)
     if @task.save
