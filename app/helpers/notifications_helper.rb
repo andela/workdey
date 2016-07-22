@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module NotificationsHelper
   def show_notifications(object)
     css_class_name = object.viewed ? "feed viewed" : "feed"

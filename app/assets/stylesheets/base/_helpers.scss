@@ -80,6 +80,68 @@ button.btn[disabled] {
   }
 }
 
+.search-i {
+  cursor: pointer;
+  // font-size: 20px !important;
+  // font-weight: normal !important;
+  // line-height: 65px !important;
+}
+
+.search-icon-span {
+  // display: inline-block;
+  position: relative;
+}
+.search-bar {
+  border-bottom: 2px solid #ffffff;
+  display: none;
+  height: 3em;
+  width: 100%;
+}
+#search-input {
+  width: 80%;
+}
+#my-input-field {
+  font-size: 1em !important;
+  padding-left: 0 !important;
+}
+.apply{
+  color: #eb4D5c !important;
+}
+.my-input {
+  #my-input-field:focus {
+    border-bottom: 0 solid;
+    box-shadow: 0 0 0 0;
+  }
+}
+.search-result-task{
+  border: none !important;
+}
+.search-height{
+  min-height: 550px;
+}
+.search-container {
+  padding-right: 0 !important;
+}
+div.apply-link {
+  width: 236px;
+  height: 86px;
+  background: white;
+  display: none;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 35px;
+}
+
+li.collection-item:hover {
+  .apply-link {
+    display: block;
+    position: absolute;
+  }
+}
+
+
 .flash-mail {
   text-align: center;
   width: 50%;

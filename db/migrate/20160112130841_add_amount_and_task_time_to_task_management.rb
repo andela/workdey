@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddAmountAndTaskTimeToTaskManagement < ActiveRecord::Migration
   def change
     add_column :task_managements, :amount, :integer

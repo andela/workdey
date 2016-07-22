@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TasksController < ApplicationController
   def new
     @task = Task.new
@@ -14,6 +15,11 @@ class TasksController < ApplicationController
     end
   end
 
+  def search
+    search_tasks = Task.search_for_available_need(params[:need])
+    @tasks = search_tasks ? paginate_tasks(search_tasks) : []
+  end
+
   private
 
   def task_params
@@ -27,5 +33,9 @@ class TasksController < ApplicationController
       :description,
       :skillset_id
     ).merge(tasker_id: current_user.id)
+  end
+
+  def paginate_tasks(tasks)
+    tasks.paginate(page: params[:page], per_page: 9)
   end
 end

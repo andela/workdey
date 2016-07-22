@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class UserPlansController < ApplicationController
   before_action :check_amount, only: :create
 

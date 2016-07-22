@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class BiddingsController < ApplicationController
   before_action :login_required
   before_action :set_bidding, only: [:edit, :update, :destroy]

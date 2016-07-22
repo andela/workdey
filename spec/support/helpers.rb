@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Helpers
   def log_in_with(email, password)
     visit signin_path
@@ -58,5 +59,12 @@ module Helpers
     page.execute_script("$('.end_date')\
                         .pickadate('picker').set('select', #{end_date})")
     fill_in "task[description]", with: Faker::Lorem.sentence
+  end
+
+  def search_helper(taskee, skillset)
+    log_in_with(taskee.email, taskee.password)
+    find("#search").click
+    fill_in "need", with: skillset.name
+    find("#my-input-field").native.send_keys(:return)
   end
 end

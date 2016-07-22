@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddColumnsToTaskManagement < ActiveRecord::Migration
   def change
     add_column :task_managements, :status, :string, default: "inactive"

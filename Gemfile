@@ -11,6 +11,7 @@ gem "faye-websocket", "0.10.0"
 gem "haversine"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
+gem "jquery-ui-rails"
 gem "jquery-turbolinks"
 gem "materialize-sass", "0.97.1"
 gem "momentjs-rails"
@@ -49,6 +50,10 @@ group :development do
   gem "figaro"
 end
 
+group :assets do
+  gem "coffee-rails"
+end
+
 group :production do
   gem "rails_12factor", "0.0.2"
   gem "thin"
@@ -56,10 +61,6 @@ end
 
 group :test do
   gem "shoulda-matchers", "~> 3.1"
-end
-
-group :assets do
-  gem 'coffee-rails'
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

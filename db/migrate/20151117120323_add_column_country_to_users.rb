@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddColumnCountryToUsers < ActiveRecord::Migration
   def change
     add_column :users, :country, :string

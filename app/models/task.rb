@@ -1,6 +1,8 @@
+# frozen_string_literal: true
 class Task < ActiveRecord::Base
+  belongs_to :tasker, class_name: "User"
+
   belongs_to :skillset
-  has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
   validates :name, presence: true
   validates :price,
@@ -36,6 +38,18 @@ class Task < ActiveRecord::Base
     user_addy = User.get_user_address user_email
     @user_city = "%#{user_addy.first.first}%"
     @user_street = "%#{user_addy[0][1]}%"
+  end
+
+  def self.search_for_available_need(need)
+    skill_with_tasks = Skillset.where(
+      "LOWER(name) LIKE ?",
+      "%#{need.downcase}%"
+    ).includes(:tasks).first
+    return skill_with_tasks unless skill_with_tasks
+    skill_with_tasks.tasks.where(
+      "taskee_id IS NULL AND start_date >= ?",
+      Time.now
+    )
   end
 
   private_class_method

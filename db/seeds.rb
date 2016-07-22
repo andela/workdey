@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SeedData
   def users_list
     cloudinary_img_url =
@@ -133,9 +134,11 @@ class SeedData
 
   def add_skillset_name
     skillsets = %w(Capentry Pluming Electrician Cleaner)
+    index = 0
     Skillset.all[-4..-1].each do |skillset|
-      skillset.name = skillsets.sample
+      skillset.name = skillsets[index]
       skillset.save
+      index += 1
     end
   end
 end

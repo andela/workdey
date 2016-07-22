@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class RemoveColumnsFromUsers < ActiveRecord::Migration
   def change
     remove_column :users, :user_plan, :string
