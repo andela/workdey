@@ -50,6 +50,10 @@ group :development do
   gem "figaro"
 end
 
+group :assets do
+  gem "coffee-rails"
+end
+
 group :production do
   gem "rails_12factor", "0.0.2"
   gem "thin"
@@ -57,10 +61,6 @@ end
 
 group :test do
   gem "shoulda-matchers", "~> 3.1"
-end
-
-group :assets do
-  gem 'coffee-rails'
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
