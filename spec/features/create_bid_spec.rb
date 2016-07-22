@@ -22,15 +22,15 @@ RSpec.feature "Create Task for bidding", type: :feature do
   scenario "tasker can click on biddings link and be directed to biddings\
    page" do
     click_link "Biddings"
-    expect(page).to have_selector("h1", "Bids")
-    expect(page).to have_selector("a", "add")
+    expect(page).to have_selector("h1", text: "Bids")
+    expect(page).to have_selector("a", text: "add")
   end
 
   scenario "tasker can click on add button and be redirected to an add bid\
    form" do
     click_link "Biddings"
     click_link "add"
-    expect(page).to have_selector("h2", "New Bid")
+    expect(page).to have_selector("h2", text: "New Bid")
     expect(page).to have_css("form.new_bidding")
   end
 
