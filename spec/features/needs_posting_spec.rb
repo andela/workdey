@@ -12,7 +12,7 @@ RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
     scenario "when creating a Task without location" do
       new_task_helper(4000)
       click_button "Create Task"
-      expect(page).to have_content "Your need has been created"
+      expect(page).to have_content "Your task has been created"
     end
   end
 
