@@ -22,7 +22,7 @@
   .broadcast-clmn {
     padding: 10px;
 
-    a.broadcast-btn {
+    a.broadcast-btn, a.close-btn {
       width: 100%;
     }
   }
@@ -68,6 +68,15 @@
       font-size: 1.5em;
       float: right;
       font-weight: 200;
+    }
+  }
+
+  .task-location-sm {
+    padding-top: 10px;
+    span {
+      font-size: 1.5em;
+      float: right;
+      font-weight: 500;
     }
   }
 

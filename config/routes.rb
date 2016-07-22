@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   post "/skillsets" => "skillsets#create"
   delete "/skillsets" => "skillsets#destroy"
 
+  get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
+
   resources :biddings
   resources :tasks
   resources :users, only: [:create]

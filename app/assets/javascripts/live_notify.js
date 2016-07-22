@@ -20,6 +20,7 @@
     }
 
     dispatcher.bind("new_task", showNotificationCount);
+    dispatcher.bind("broadcast_task", showNotificationCount);
 
     function showNotificationCount (msg) {
       if (msg >= 1) {

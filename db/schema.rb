@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719132806) do
+ActiveRecord::Schema.define(version: 20160721110318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 20160719132806) do
     t.integer  "skillset_id"
     t.decimal  "latitude",    precision: 10, scale: 6
     t.decimal  "longitude",   precision: 10, scale: 6
+    t.text     "price_range"
+    t.boolean  "broadcasted",                          default: false
   end
 
   add_index "tasks", ["skillset_id"], name: "index_tasks_on_skillset_id", using: :btree

@@ -79,9 +79,9 @@ class User < ActiveRecord::Base
     where("email = ?", user_email).pluck(:city, :street_address)
   end
 
-  def self.get_taskees_by_skillset(skillset, _user_email = nil)
+  def self.get_taskees_by_skillset(skillset)
     User.joins(:skillsets).where(
-      "LOWER(name) LIKE ?", "%#{skillset.downcase}%"
+      "name ILIKE ?", "%#{skillset}%"
     )
   end
 

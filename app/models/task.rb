@@ -2,6 +2,8 @@ class Task < ActiveRecord::Base
   belongs_to :skillset
   has_many :users, through: :skillsets
   has_many :task_management, foreign_key: :task_id
+  has_many :notifications, as: :notifiable
+  serialize :price_range, Array
   validates :name, presence: true
   validates :price,
             numericality: { greater_than_or_equal_to: 2000 },
@@ -12,7 +14,7 @@ class Task < ActiveRecord::Base
   validate :end_time_must_be_greater_than_start_time
 
   def self.get_taskees(keyword, user_email)
-    taskees = User.get_taskees_by_skillset(keyword, user_email)
+    taskees = User.get_taskees_by_skillset(keyword)
     current_user_city_street user_email
     return nil if taskees.nil? || taskees.empty?
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)

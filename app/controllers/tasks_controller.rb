@@ -1,7 +1,5 @@
 class TasksController < ApplicationController
-  def show
-    @task = Task.find(params[:id])
-  end
+  before_action :set_task, only: [:update, :show, :close_bid]
 
   def new
     @task = Task.new
@@ -18,6 +16,23 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    price_range = [params[:min_price], params[:max_price]]
+    if price_range.first > price_range.last
+      redirect_to @task, notice: "Minimum price must be less than the maximum"
+    elsif @task.update(price_range: price_range, broadcasted: true)
+      create_task_notification(@task)
+      redirect_to @task, notice: "Available Taskees have been notified"
+    else
+      render "show"
+    end
+  end
+
+  def close_bid
+    @task.update(broadcasted: false)
+    redirect_to @task, notice: "Bids successfully closed"
+  end
+
   private
 
   def task_params
@@ -31,7 +46,28 @@ class TasksController < ApplicationController
       :description,
       :skillset_id,
       :longitude,
-      :latitude
+      :latitude,
+      :min_price,
+      :max_price
     ).merge(tasker_id: current_user.id)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  def available_taskees(skillset)
+    User.get_taskees_by_skillset(skillset)
+  end
+
+  def create_task_notification(task)
+    available_taskees(task.skillset.name).map do |taskee|
+      Notification.create(
+        message: "New Task available that matches your skillset.",
+        sender_id: task.tasker_id,
+        receiver_id: taskee.id,
+        notifiable: task
+      ).notify_receiver("broadcast_task")
+    end
   end
 end

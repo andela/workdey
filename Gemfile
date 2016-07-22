@@ -26,7 +26,7 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "sidekiq"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
-gem "websocket-rails"
+gem "websocket-rails", github: "moaa/websocket-rails", branch: "sync_fixes"
 gem "stripe"
 gem 'puma'
 gem 'will_paginate-materialize'

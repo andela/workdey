@@ -7,10 +7,11 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
 
   before(:each) do
     create(
-      :task_management,
-      task_id: task.id,
-      taskee_id: taskee.id,
-      tasker_id: tasker.id
+      :notification,
+      notifiable_id: task.id,
+      receiver_id: taskee.id,
+      sender_id: tasker.id,
+      notifiable_type: "Task"
     )
     log_in_with taskee.email, taskee.password
     visit notifications_path
