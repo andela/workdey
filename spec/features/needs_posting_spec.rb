@@ -11,7 +11,7 @@ RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
   describe "creating task with valid data" do
     scenario "when creating a Task without location" do
       new_task_helper(4000)
-      click_button "Post Need"
+      click_button "Create Task"
       expect(page).to have_content "Your need has been created"
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
   describe "creating a task with invalid data" do
     scenario "when creating a task with less than 2000" do
       new_task_helper(1599)
-      click_button "Post Need"
+      click_button "Create Task"
       expect(page).to have_content "Price must be greater than or equal to 2000"
     end
   end
