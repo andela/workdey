@@ -51,7 +51,7 @@ module Helpers
   end
 
   def new_task_helper(price)
-    log_in_with(tasker.email, tasker.password)
+    log_in_with(user.email, user.password)
     visit new_task_path
     fill_in "task[name]", with: Faker::Lorem.word
     fill_in "task[price]", with: price
@@ -62,6 +62,9 @@ module Helpers
                         .pickadate('picker').set('select', #{start_date})")
     page.execute_script("$('.end_date')\
                         .pickadate('picker').set('select', #{end_date})")
+    find('div.select-wrapper input').click
+    sleep(0.2)
+    find('div.select-wrapper li', text: skillset.name).click
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
 end
