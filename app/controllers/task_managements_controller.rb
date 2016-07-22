@@ -11,6 +11,10 @@ class TaskManagementsController < ApplicationController
     @task = TaskManagement.new
   end
 
+  def show
+    @task = TaskManagement.find(params[:id])
+  end
+
   def create
     @task = TaskManagement.new(task_details.except(:task_name))
     @task.task_id = Task.find_by(name: task_details[:task_name].capitalize).id
@@ -36,13 +40,10 @@ class TaskManagementsController < ApplicationController
 
   def index
     @tasks = if current_user.taskee?
-               sort_status(current_user.tasks_given)
+               sort_status(current_user.tasks_given.paid_for)
              elsif current_user.tasker?
                sort_status(current_user.tasks_created)
              end
-  end
-
-  def show
   end
 
   def update

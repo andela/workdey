@@ -10,7 +10,7 @@ RSpec.describe SkillsetsController, type: :controller do
       to receive(:current_user).and_return(user)
   end
 
-  describe 'GET #index' do
+  describe "GET #index" do
     before(:each) { get :index }
 
     it "renders the index template" do
@@ -27,7 +27,7 @@ RSpec.describe SkillsetsController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
+  describe "POST #create" do
     let!(:skillset) { create(:skillset, user_id: user.id) }
     let!(:skillset_count) { Skillset.count }
 
@@ -47,7 +47,7 @@ RSpec.describe SkillsetsController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy' do
+  describe "DELETE #destroy" do
     it "should delete a skillset" do
       skillset = create(:skillset, user_id: user.id)
       expect do

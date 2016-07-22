@@ -22,9 +22,9 @@ feature "SignUp" do
     right_answers_arr = [2, 2, 3, 2, 1, 2, 3, 2, 2, 4, 2]
     right_answers_arr.each do |ans|
       find(:xpath, "//label[@for='radio #{ans}']").click
-      sleep(1.2)
+      sleep(1.5)
       click_button "Submit"
-      sleep(1.2)
+      sleep(1.5)
       click_button "Next"
     end
   end

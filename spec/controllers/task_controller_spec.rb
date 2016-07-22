@@ -26,6 +26,8 @@ RSpec.describe TasksController, type: :controller do
       )
     end
 
+    let!(:skillset) { create(:skillset, user: user) }
+
     context "when users try to create a task with valid data" do
       it "saves the task" do
         expect do

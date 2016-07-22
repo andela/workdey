@@ -31,7 +31,7 @@ RSpec.feature "Taskee skillset" do
 
   scenario "taskee can remove task from skillset", js: true do
     visit "/skillsets"
-    within('div#skillset_1') { click_link "delete" }
+    within("div#skillset_1") { click_link "delete" }
     expect(page).not_to have_selector("#task_1")
   end
 
