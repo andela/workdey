@@ -340,6 +340,7 @@ DEPENDENCIES
   bourbon
   capybara
   cloudinary (= 1.1.0)
+  coffee-rails
   coveralls
   database_cleaner
   em-rspec
