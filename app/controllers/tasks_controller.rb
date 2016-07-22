@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TasksController < ApplicationController
   before_action :set_task, only: [:update, :show, :close_bid]
 
@@ -31,6 +32,11 @@ class TasksController < ApplicationController
   def close_bid
     @task.update(broadcasted: false)
     redirect_to @task, notice: "Bids successfully closed"
+  end
+
+  def search
+    search_tasks = Task.search_for_available_need(params[:need])
+    @tasks = search_tasks ? paginate_tasks(search_tasks) : []
   end
 
   private
@@ -69,5 +75,9 @@ class TasksController < ApplicationController
         notifiable: task
       ).notify_receiver("broadcast_task")
     end
+  end
+
+  def paginate_tasks(tasks)
+    tasks.paginate(page: params[:page], per_page: 9)
   end
 end

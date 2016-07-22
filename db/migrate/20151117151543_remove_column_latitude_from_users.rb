@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class RemoveColumnLatitudeFromUsers < ActiveRecord::Migration
   def change
     remove_column :users, :latitude

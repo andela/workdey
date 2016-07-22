@@ -61,6 +61,7 @@ Rails.application.routes.draw do
 
   resources :biddings
   resources :tasks
+  post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: [:create]
   resources :charges, only: [:new, :create]
 end

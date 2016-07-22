@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PagesHelper
   def text_tags(name, value = "", holder = "", class_name = "", req = false,
                 disabled = false)

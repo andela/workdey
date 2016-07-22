@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MapController < WebsocketRails::BaseController
   def get_nearby_taskees
     taskees = get_all_taskees

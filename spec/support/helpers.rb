@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Helpers
   def log_in_with(email, password)
     visit signin_path
@@ -66,5 +67,12 @@ module Helpers
     sleep(0.2)
     find("div.select-wrapper li", text: skillset.name).click
     fill_in "task[description]", with: Faker::Lorem.sentence
+  end
+
+  def search_helper(taskee, skillset)
+    log_in_with(taskee.email, taskee.password)
+    find("#search").click
+    fill_in "need", with: skillset.name
+    find("#my-input-field").native.send_keys(:return)
   end
 end

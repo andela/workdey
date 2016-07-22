@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160721110318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "bid_managements", force: :cascade do |t|
     t.integer  "bidding_id"
@@ -52,6 +53,21 @@ ActiveRecord::Schema.define(version: 20160721110318) do
   add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "references", force: :cascade do |t|
+    t.integer  "taskee_id"
+    t.string   "email"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "relationship"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.hstore   "skillsets",          default: {},    null: false
+    t.string   "confirmation_token",                 null: false
+    t.boolean  "done",               default: false
+  end
+
+  add_index "references", ["taskee_id"], name: "index_references_on_taskee_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -97,6 +113,7 @@ ActiveRecord::Schema.define(version: 20160721110318) do
     t.string   "location"
     t.string   "status",                               default: "unassigned"
     t.integer  "skillset_id"
+    t.integer  "taskee_id"
     t.decimal  "latitude",    precision: 10, scale: 6
     t.decimal  "longitude",   precision: 10, scale: 6
     t.text     "price_range"
@@ -134,9 +151,9 @@ ActiveRecord::Schema.define(version: 20160721110318) do
     t.string   "street_address"
     t.string   "image_url"
     t.boolean  "has_taken_quiz",       default: false
-    t.boolean  "enable_notifications", default: true
     t.float    "longitude"
     t.float    "latitude"
+    t.boolean  "enable_notifications", default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

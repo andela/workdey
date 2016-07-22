@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddColumnsToTasks < ActiveRecord::Migration
   def change
     add_column :tasks, :description, :string

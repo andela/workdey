@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TaskManagementsController < ApplicationController
   before_action :login_required, :show_notification_count,
                 only: [:index, :new, :show, :review_and_rate]

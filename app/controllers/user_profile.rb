@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class UserProfile < ApplicationController
   before_action :login_required
 

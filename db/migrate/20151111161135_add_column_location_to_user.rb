@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddColumnLocationToUser < ActiveRecord::Migration
   def change
     add_column :users, :latitude, :string

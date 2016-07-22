@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateTaskeeBiddings < ActiveRecord::Migration
   def change
     create_table :taskee_biddings do |t|
