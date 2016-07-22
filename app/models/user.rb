@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     reviews.map(&:review).all? { |comment| comment == "" }
   end
 
+  def fullname
+    "#{firstname} #{lastname}"
+  end
+
   def review_comments
     reviews.where("review != ?", "")
   end

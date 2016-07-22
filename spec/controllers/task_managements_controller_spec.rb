@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TaskManagementsController, type: :controller do
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
   let!(:ironing) { create(:task_management, task_desc: Faker::Lorem.sentence) }
   let!(:cleaning) { create(:task_management, task_desc: Faker::Lorem.sentence) }
   let!(:carpentry) do
@@ -23,7 +23,7 @@ RSpec.describe TaskManagementsController, type: :controller do
       end
     end
     context "when a user is logged in" do
-      before do
+      before(:each) do
         allow_any_instance_of(ApplicationController).
           to receive(:current_user).and_return(user)
         user.tasks_created = [ironing, cleaning]
@@ -41,7 +41,7 @@ RSpec.describe TaskManagementsController, type: :controller do
       it "assigns tasks given to taskee" do
         user.update_attribute(:user_type, "taskee")
         get :index
-        expect(assigns(:tasks)).to eql user.tasks_given.to_a
+        expect(assigns(:tasks)).to eql user.tasks_given.paid_for.to_a
       end
     end
   end

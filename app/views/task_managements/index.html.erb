@@ -50,15 +50,19 @@
                 <% user = User.find(task.taskee_id) %>
                 <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
                 <td><%= desc = task.task_desc %></td>
-                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
+                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id, id: task.id } %>
                   <% if task.status.downcase == "done" %>
                     <td><span>Done</span></td>
                   <% elsif task.status.downcase == "active" %>
                       <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
-                     <%= link_to "Review", review_task_path(details) %></td>
+                      <% unless task.paid? %>
+                        <%= link_to "Pay for this task", review_task_path(details) %>
+                        <% end %></td>
                   <% elsif task.status.downcase == "inactive" %>
                       <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
-                      <%= link_to "Review", review_task_path(details) %></td>
+                      <% unless task.paid? %>
+                        <%= link_to "Pay for this task", review_task_path(details) %>
+                        <% end %></td>
                   <% end %>
               </tr>
               <% serial_no += 1 %>

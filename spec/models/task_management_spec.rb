@@ -78,7 +78,11 @@ RSpec.describe TaskManagement, type: :model do
   describe ".notifications_count" do
     context "should return the proper count" do
       before(:each) { task_management.save }
-      it { expect(TaskManagement.notifications_count("taskee", 1)).to eql 1 }
+      it do
+        task_management.update_attribute(:paid, true)
+        expect(TaskManagement.notifications_count("taskee", 1)).to eql 1
+      end
+
       it { expect(TaskManagement.notifications_count("tasker", 1)).to eql 0 }
     end
   end
@@ -87,6 +91,7 @@ RSpec.describe TaskManagement, type: :model do
     context "should return necessary notifications" do
       before(:each) { task_management.save }
       it do
+        task_management.update_attribute(:paid, true)
         expect(TaskManagement.all_notifications_for("taskee", 1).
         first).to eql task_management
       end
@@ -98,12 +103,21 @@ RSpec.describe TaskManagement, type: :model do
   end
 
   describe ".update_all_notifications_as_seen" do
-    it "can update all taskers" do
-      user = create(:user, user_type: "tasker")
+    let(:user) { create(:user, user_type: "tasker") }
+
+    before(:each) do
       task_management.tasker = user
       task_management.save
+    end
+
+    it "will not update a task if it has not been paid for" do
+      TaskManagement.update_all_notifications_as_seen(user)
       expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).
         to be false
+    end
+
+    it "will update a task if tasker has paid for it" do
+      task_management.update_attribute(:paid, true)
       TaskManagement.update_all_notifications_as_seen(user)
       expect(TaskManagement.find_by(tasker_id: user.id).tasker_notified).
         to be true

@@ -21,7 +21,8 @@ module Helpers
     @statuses.each do |status|
       create(:task_management,
              task_desc: Faker::Lorem.sentence,
-             status: status)
+             status: status,
+             paid: true)
     end
   end
 
