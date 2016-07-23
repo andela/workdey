@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddLatLngToTask < ActiveRecord::Migration
   def change
     add_column :tasks, :latitude, :decimal, precision: 10, scale: 6

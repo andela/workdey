@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe NotificationsController, type: :controller do
@@ -14,7 +15,7 @@ RSpec.describe NotificationsController, type: :controller do
 
   before(:each) { stub_current_user(user) }
 
-  describe 'GET #index' do
+  describe "GET #index" do
     before { get :index }
 
     it "renders the index template" do

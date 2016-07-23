@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ApplicationControllerSpecHelper
   def stub_current_user(user)
     allow_any_instance_of(ApplicationController).

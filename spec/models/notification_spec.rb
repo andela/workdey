@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe Notification, type: :model do
@@ -11,7 +12,7 @@ RSpec.describe Notification, type: :model do
 
   it { is_expected.to belong_to(:notifiable) }
 
-  describe '#update_as_read' do
+  describe "#update_as_read" do
     it "sets a notification as read" do
       notification.update_as_read
       expect(notification.read).to be true

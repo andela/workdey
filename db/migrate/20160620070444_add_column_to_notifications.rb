@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddColumnToNotifications < ActiveRecord::Migration
   def change
     add_column :notifications, :user_notified, :boolean, default: :false
