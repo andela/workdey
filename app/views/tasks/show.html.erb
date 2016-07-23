@@ -1,3 +1,4 @@
+<%= render 'partials/sidebar_dashboard' %>
 <% if flash.present?  %>
   <% flash.each do | name | %>
     <div class="flash-mail">
@@ -6,74 +7,75 @@
     </div>
   <% end %>
 <% end %>
-<%= render 'partials/sidebar_dashboard' %>
-<section class="main container">
-  <div class="row">
-    <div class="col s11 offset-s1 broadcast-container">
-      <div class="row">
-        <div class="col s3 right broadcast-clmn">
-          <% if @task.broadcasted %>
-            <%= link_to "Close Bid", close_bid_path, method: :get, class: "waves-effect waves-light btn-large red close-btn" %>
-          <% else %>
-            <a href="#broadcast_modal" class="waves-effect waves-light btn-large teal broadcast-btn">Broadcast Task</a>
-            <%= render 'tasks/partials/broadcast' %>
-          <% end %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <div class="row">
-            <div class="col s8">
-              <div class="row">
-                <div class="col s8 task-title">
-                  <h3><%= @task.name %></h3>
-                </div>
-                <div class="col s3 task-status">
-                  <div class="status">
-                    <% if @task.status == "unassigned" %>
-                      <i class="fa fa-ban text-red"></i> <span class="red-text">
-                      <% elsif @task.status == "started" %>
-                        <i class="fa fa-ban text-cyan"></i> <span class="cyan-text">
-                        <% end %><%= @task.status %></span>
-                    </div>
-                  </div>
-                  <div class="col s12 task-description">
-                    <%= @task.description %>
-                  </div>
-                  <div class="col s12 task-tags">
-                    <span><%= @task.skillset.name %></span>
-                  </div>
-                </div>
-              </div>
-              <div class="col s3 right">
-                <div class="row">
-                  <div class="col s12 task-pricing">
-                    <% if @task.broadcasted %>
-                      <span><%= number_to_currency(@task.price_range.first, precision: 0) %> - <%= number_to_currency(@task.price_range.last, precision: 0) %></span>
-                    <% else %>
-                      <span><%= number_to_currency(@task.price, precision: 0) %></span>
-                    <% end %>
-                  </div>
-                  <div class="col s12 task-due-date">
-                    <span>Due in <%= distance_of_time_in_words_to_now(@task.end_date) %></span>
-                  </div>
-                  <% if @task.broadcasted %>
-                    <div class="col s12 task-location-sm">
-                      <span><i class="material-icons">my_location</i> <%= @task.location %></span>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <hr>
+<main>
+  <section class="container">
+    <div class="row">
+      <div class="col s10 offset-s2 broadcast-container">
+        <div class="row">
+          <div class="col s3 right broadcast-clmn">
             <% if @task.broadcasted %>
-              <%= render 'tasks/partials/bids_list' %>
+              <%= link_to "Close Bid", close_bid_path, method: :get, class: "waves-effect waves-light btn-large red close-btn" %>
             <% else %>
-              <%= render 'tasks/partials/location' %>
+              <a href="#broadcast_modal" class="waves-effect waves-light btn-large teal broadcast-btn">Broadcast Task</a>
+              <%= render 'tasks/partials/broadcast' %>
             <% end %>
           </div>
         </div>
+        <div class="row">
+          <div class="col s12">
+            <div class="row">
+              <div class="col s8">
+                <div class="row">
+                  <div class="col s8 task-title">
+                    <h3><%= @task.name %></h3>
+                  </div>
+                  <div class="col s4 task-status">
+                    <div class="status center-align">
+                      <% if @task.status == "unassigned" %>
+                        <i class="fa fa-ban text-red"></i> <span class="red-text">
+                      <% elsif @task.status == "started" %>
+                        <i class="fa fa-ban text-cyan"></i> <span class="cyan-text">
+                      <% end %><%= @task.status %></span>
+                      </div>
+                    </div>
+                    <div class="col s12 task-description">
+                      <%= @task.description %>
+                    </div>
+                    <div class="col s12 task-tags">
+                      <span><%= @task.skillset.name %></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s3 right">
+                  <div class="row">
+                    <div class="col s12 task-pricing">
+                      <% if @task.broadcasted %>
+                        <span><%= number_to_currency(@task.price_range.first, precision: 0) %> - <%= number_to_currency(@task.price_range.last, precision: 0) %></span>
+                      <% else %>
+                        <span><%= number_to_currency(@task.price, precision: 0) %></span>
+                      <% end %>
+                    </div>
+                    <div class="col s12 task-due-date">
+                      <span>Due in <%= distance_of_time_in_words_to_now(@task.end_date) %></span>
+                    </div>
+                    <% if @task.broadcasted %>
+                      <div class="col s12 task-location-sm">
+                        <span><i class="material-icons">my_location</i> <%= @task.location %></span>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <% if @task.broadcasted %>
+                <%= render 'tasks/partials/bids_list' %>
+              <% else %>
+                <%= render 'tasks/partials/location' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+  </main>

@@ -21,6 +21,8 @@ class TasksController < ApplicationController
     price_range = [params[:min_price], params[:max_price]]
     if price_range.first > price_range.last
       redirect_to @task, notice: "Minimum price must be less than the maximum"
+    elsif (price_range.first.to_i || price_range.last.to_i) < 2000
+      redirect_to @task, notice: "Price must be more than 2000"
     elsif @task.update(price_range: price_range, broadcasted: true)
       create_task_notification(@task)
       redirect_to @task, notice: "Available Taskees have been notified"

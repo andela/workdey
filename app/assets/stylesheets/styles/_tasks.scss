@@ -32,9 +32,8 @@
   .task-status {
     .status {
       border: 1px solid red;
-      padding-left: 15px;
       margin: 0 auto;
-      width: 75%;
+      width: 115px;
 
       i {
         font-size: 1em;
@@ -74,27 +73,35 @@
   .task-location-sm {
     padding-top: 10px;
     span {
-      font-size: 1.5em;
+      font-size: 1em;
       float: right;
       font-weight: 500;
+
+      i {
+        vertical-align: text-bottom;
+      }
     }
   }
 
-  .location-title {
-    background: #fff;
-    margin: 9px;
-    padding: 10px 15px;
-    position: absolute;
+  .location-section {
+    margin-top: 10px;
 
-    span {
-      font-size: 1.5em;
+    .location-title {
+      background: #fff;
+      margin: 9px;
+      padding: 10px 15px;
+      position: absolute;
+
+      span {
+        font-size: 1.5em;
+      }
     }
-  }
 
-  #task_location_map {
-    img {
-      width: 100%;
-      height: 400px;
+    #task_location_map {
+      img {
+        width: 100%;
+        height: 400px;
+      }
     }
   }
 }
