@@ -222,8 +222,6 @@ Style/WhenThen:
   Description: Use when x then ... for one-line cases.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#one-line-cases
   Enabled: false
-Style/FrozenStringLiteralComment:
-  Enabled: false
 Lint/EachWithObjectArgument:
   Description: Check for immutable argument given to each_with_object.
   Enabled: true
