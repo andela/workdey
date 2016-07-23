@@ -20,14 +20,14 @@ RSpec.feature "Taskee skillset" do
 
   scenario "taskee can see a list of own skillset" do
     click_link "My Skillset"
-    expect(page).to have_selector("li.collection-item", @skillset.name)
+    expect(page).to have_selector("li.collection-item", text: @skillset.name)
   end
 
   scenario "taskee can add a new task to skillset", js: true do
     visit "/skillsets"
     fill_in "skillset_name", with: "Cleaning"
     click_button "Create Skillset"
-    expect(page).to have_selector("li.collection-item", "Cleaning")
+    expect(page).to have_selector("li.collection-item", text: "Cleaning")
   end
 
   scenario "taskee can remove task from skillset", js: true do

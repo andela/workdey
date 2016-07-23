@@ -96,10 +96,10 @@ class SeedData
       { user_id: 3, task_id: 1 },
       { user_id: 2, task_id: 4 },
       { user_id: 5, task_id: 2 },
-      { user_id: 8, task_id: 6 },
+      { user_id: 1, task_id: 6 },
       { user_id: 7, task_id: 5 },
       { user_id: 8, task_id: 3 },
-      { user_id: 9, task_id: 2 }
+      { user_id: 4, task_id: 2 }
     ]
   end
 
