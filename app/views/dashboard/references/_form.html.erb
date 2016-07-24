@@ -1,38 +1,30 @@
 <% if @taskee_skillsets.present? %>
-  <div class="row">
-    <%= form_for @reference, url: dashboard_references_path(@reference), html: { class: "col s12" } do |f| %>
+  <div class="container">
+    <%= form_for@reference, url: dashboard_references_path(@reference), html: { class: "col s12" } do |f| %>
       <h4>1.) Input details of your reference</h4>
-      <div class="row">
-        <div class="input-field col s6">
-          <%= f.text_field :firstname, required: true %>
-          <%= f.label :firstname %>
-        </div>
-        <div class="input-field col s6">
-          <%= f.text_field :lastname, required: true %>
-          <%= f.label :lastname %>
-        </div>
+      <div class="input-field row">
+        <%= f.text_field :firstname %>
+        <%= f.label :firstname %>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <%= f.email_field :email %>
-          <%= f.label :email %>
-        </div>
-        <div class="input-field col s6">
-          <%= f.text_field :relationship, required: true %>
-          <%= f.label :relationship %>
-        </div>
+      <div class="input-field row">
+        <%= f.text_field :lastname, class: "validate", required: true %>
+        <%= f.label :lastname %>
+      </div>
+      <div class="input-field row">
+        <%= f.email_field :email, required: true %>
+        <%= f.label :email %>
+      </div>
+      <div class="input-field row">
+        <%= f.text_field :relationship, required: true %>
+        <%= f.label :relationship %>
       </div>
       <h4>2.) Choose skills to be verified</h4>
-      <div class="row">
-          <div class="col s12">
-            <% @taskee_skillsets.each do |skillset| %>
-              <p>
-                <%= check_box_tag 'reference[skillsets][]', skillset.name, false,
-                  id: "reference_skillsets_#{skillset.name}", required: true %>
-                <%= label_tag "reference_skillsets_#{skillset.name}", skillset.name %>
-              </p>
-            <% end %>
-          </div>
+      <div class="input-field row">
+        <% @taskee_skillsets.each do |skillset| %>
+          <%= check_box_tag 'reference[skillsets][]', skillset.name, false,
+            id: "reference_skillsets_#{skillset.name}", class: "validate" %>
+          <%= label_tag "reference_skillsets_#{skillset.name}", skillset.name %>
+        <% end %>
       </div>
       <button class="btn waves-effect waves-light" type="submit">Send Email
         <i class="material-icons right">send</i>
