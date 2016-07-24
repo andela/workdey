@@ -1,5 +1,6 @@
 <% if @taskee_skillsets.present? %>
   <div class="container">
+    <%= render partial: "partials/flash" %>
     <%= form_for@reference, url: dashboard_references_path(@reference), html: { class: "col s12" } do |f| %>
       <h4>1.) Input details of your reference</h4>
       <div class="input-field row">

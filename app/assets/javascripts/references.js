@@ -1,5 +1,5 @@
 $(function() {
-  var $toastErrorMessage = $('<span>Please choose atleast one skill</span>');
+  var $toastErrorMessage = $('<span>Please choose at least one skill</span>');
 
   $('#new_reference').validate({
     rules: {
@@ -11,7 +11,7 @@ $(function() {
       }
     },
     messages: {
-      "reference[skillsets][]": "Please choose atleast one skill"
+      "reference[skillsets][]": "Please choose at least one skill"
     },
     errorClass: 'invalid',
     errorPlacement: function (error, element) {

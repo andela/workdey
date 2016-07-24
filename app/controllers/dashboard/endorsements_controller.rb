@@ -26,8 +26,7 @@ module Dashboard
     def set_endorsement
       @reference = Reference.find_by(confirmation_token: params[:t])
       if @reference.done
-        redirect_to new_dashboard_reference_path,
-                    notice: Message.expired_endorsement_token
+        redirect_to root_path, notice: Message.expired_endorsement_token
       end
     end
 

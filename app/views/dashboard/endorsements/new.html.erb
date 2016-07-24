@@ -1,12 +1,15 @@
 <div class="container">
   <div class="row">
-    <%= form_tag dashboard_endorsements_path, method: "post", id: "new_endorsement", class: "col s7 offset-s3" do %>
+    <%= render partial: "partials/flash" %>
+    <%= form_tag dashboard_endorsements_path, method: "post",
+      id: "new_endorsement", class: "col s7 offset-s3" do %>
       <%= hidden_field_tag 't', "#{@reference.confirmation_token}" %>
       <h4 class="row">1.) Endorse <%= @taskee %> for the following skill set</h4>
       <div class="row">
         <% @taskee_skillsets.each do |skillset| %>
         <p>
-          <%= check_box_tag 'references[skillsets][]', skillset, false, id: "skillset_#{skillset}", required: true %>
+          <%= check_box_tag 'references[skillsets][]', skillset, false,
+            id: "skillset_#{skillset}", required: true %>
           <%= label_tag "skillset_#{skillset}", skillset %>
         </p>
         <% end %>
