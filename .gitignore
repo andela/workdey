@@ -31,3 +31,6 @@ index.html
 .idea/
 coverage/
 .DS_Store
+
+#Ignore vendor assets
+/vendor/assets/components/*

@@ -1,38 +1,35 @@
-<section class="main container">
+<div class="container">
   <div class="row">
-    <div class="col s7 offset-s3">
-      <%= form_tag dashboard_endorsements_path, method: "post" do %>
-        <div class="row">
-          <h4 class="col s12">1.) Endorse <%= @taskee %> for the following skill set</h4>
-          <div class="col s12">
-            <% @taskee_skillsets.each do |skillset| %>
-            <p>
-              <%= check_box_tag 'references[skillsets][]', skillset, false, id: "skillset_#{skillset}" %>
-              <%= label_tag "skillset_#{skillset}", skillset %>
-            </p>
-            <% end %>
-          </div>
+    <%= form_tag dashboard_endorsements_path, method: "post", id: "new_endorsement", class: "col s7 offset-s3" do %>
+      <%= hidden_field_tag 't', "#{@reference.confirmation_token}" %>
+      <h4 class="row">1.) Endorse <%= @taskee %> for the following skill set</h4>
+      <div class="row">
+        <% @taskee_skillsets.each do |skillset| %>
+        <p>
+          <%= check_box_tag 'references[skillsets][]', skillset, false, id: "skillset_#{skillset}", required: true %>
+          <%= label_tag "skillset_#{skillset}", skillset %>
+        </p>
+        <% end %>
+      </div>
+      <h4 class="row">2.) State your relationship with <%= @taskee %></h4>
+      <div class="input-field row">
+        <%= select_tag :relationship, options_for_select(["Professional: I have worked with #{@taskee}",
+          "Education: I know #{@taskee} from an academic background",
+          "Personal: I have a personal relationship with #{@taskee}"]),
+          class: "browser-default", required: true %>
         </div>
-        <div class="row">
-          <h4 class="col s12">2.) State your relationship with <%= @taskee %></h4>
-          <div class="input-field col s11">
-            <%= select_tag :relationship, options_for_select(["Professional: I have worked with #{@taskee}",
-                 "Education: I know #{@taskee} from an academic background",
-                 "Personal: I have a personal relationship with #{@taskee}"]), class: "browser-default" %>
-          </div>
+        <h4 class="row">3.) Write a recommendation</h4>
+        <div class="input-field row">
+          <%= text_field_tag :recommendation, nil,
+          placeholder: "Ex. #{@reference.taskee.firstname} is very detail-oriented and produced great results for the company...",
+          class: "materialize-textarea", required: true %>
+          <label for="recommendation"></label>
         </div>
-        <div class="row">
-          <h4 class="col s12">3.) Write a recommendation</h4>
-          <div class="input-field col s11">
-            <%= text_field_tag :recommendation, nil,
-              placeholder: "Ex. #{@reference.taskee.firstname} is very detail-oriented and produced great results for the company...", class: "materialize-textarea" %>
-          </div>
+        <div class="input-field row">
+          <button class="btn waves-effect waves-light" type="submit">Send
+            <i class="material-icons right">send</i>
+          </button>
         </div>
-        <%= hidden_field_tag 't', "#{@reference.confirmation_token}" %>
-        <button class="btn waves-effect waves-light" type="submit">Send
-          <i class="material-icons right">send</i>
-        </button>
       <% end %>
-    </div>
   </div>
-</section>
+</div>

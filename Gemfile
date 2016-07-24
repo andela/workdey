@@ -31,6 +31,7 @@ gem "websocket-rails", github: "moaa/websocket-rails", branch: "sync_fixes"
 gem "stripe"
 gem 'puma'
 gem 'will_paginate-materialize'
+gem 'bower'
 
 group :development, :test do
   gem "capybara"
