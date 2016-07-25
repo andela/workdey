@@ -30,6 +30,9 @@ class PagesController < ApplicationController
     if params[:searcher] || session[:searcher]
       session[:searcher] = params[:searcher] if params[:searcher]
       @taskees = get_taskees_by_search(session[:searcher])
+      skillset = Skillset.where("LOWER(name) LIKE ?",
+                                "%#{session[:searcher].downcase}%").first
+      session[:searcher] = skillset.name if skillset
     end
     render "search_result"
   end

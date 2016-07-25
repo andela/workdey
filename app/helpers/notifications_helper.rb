@@ -15,7 +15,7 @@ module NotificationsHelper
   end
 
   def fetch_task(object)
-    @task ||= Task.find(object.task_id)
+    @task ||= Skillset.find(object.task_id)
   end
 
   def generate_html(css_class_name, tasker_image, tasker_name, task_name, task)
