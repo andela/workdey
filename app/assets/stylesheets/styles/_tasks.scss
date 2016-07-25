@@ -1,3 +1,107 @@
 #new_task {
-  padding: 4rem 0 0 1rem;
+  padding: 1rem 0 0 1rem;
+
+  .jiji {
+    .ji {
+      float: left;
+    }
+    .select-wrapper {
+      float: left;
+      margin-left: 0;
+    }
+  }
+
+  .location {
+    #location-map {
+      height: 300px;
+    }
+  }
+}
+
+.broadcast-container {
+  .broadcast-clmn {
+    padding: 10px;
+
+    a.broadcast-btn, a.close-btn {
+      width: 100%;
+    }
+  }
+
+  .task-title {}
+
+  .task-status {
+    .status {
+      border: 1px solid red;
+      margin: 0 auto;
+      width: 115px;
+
+      i {
+        font-size: 1em;
+      }
+    }
+  }
+
+  .task-description {
+    font-weight: 200;
+  }
+
+  .task-tags {
+    margin-top: 15px;
+
+    span {
+      border: 1px solid grey;
+      padding: 3px 15px;
+    }
+  }
+
+  .task-pricing {
+    span {
+      float: right;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+
+  .task-due-date {
+    span {
+      font-size: 1.5em;
+      float: right;
+      font-weight: 200;
+    }
+  }
+
+  .task-location-sm {
+    padding-top: 10px;
+    span {
+      font-size: 1em;
+      float: right;
+      font-weight: 500;
+
+      i {
+        vertical-align: text-bottom;
+      }
+    }
+  }
+
+  .location-section {
+    margin-top: 10px;
+
+    .location-title {
+      background: #fff;
+      margin: 9px;
+      padding: 10px 15px;
+      position: absolute;
+
+      span {
+        font-size: 1.5em;
+      }
+    }
+
+    #task_location_map {
+      img {
+        width: 100%;
+        height: 400px;
+      }
+    }
+  }
 }

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "dashboard/assign" => "task_managements#new", as: :assign_task
   post "dashboard/assign" => "task_managements#create", as: :create_task
   get "dashboard/notifications" => "notifications#index", as: :notifications
-  post "dashboard/notifications/:id" => "notifications#show"
+  get "dashboard/notifications/:id" => "notifications#show"
   put "dashboard/notifications/:id" => "notifications#update"
 
   get "user/profile" => "dashboard#profile_view", as: :user_profile
@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   get "/skillsets" => "skillsets#index"
   post "/skillsets" => "skillsets#create"
   delete "/skillsets" => "skillsets#destroy"
+
+  get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
 
   resources :biddings
   resources :tasks

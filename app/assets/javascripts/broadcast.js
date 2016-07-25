@@ -1,0 +1,3 @@
+(function() {
+  $('.broadcast-btn').leanModal()
+}());

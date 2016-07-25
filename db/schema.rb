@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720093535) do
+ActiveRecord::Schema.define(version: 20160721110318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "bid_managements", force: :cascade do |t|
     t.integer  "bidding_id"
@@ -36,6 +37,37 @@ ActiveRecord::Schema.define(version: 20160720093535) do
   end
 
   add_index "biddings", ["task_id"], name: "index_biddings_on_task_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "message"
+    t.boolean  "read",            default: false
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "user_notified",   default: false
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+  end
+
+  add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
+  add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
+  add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "references", force: :cascade do |t|
+    t.integer  "taskee_id"
+    t.string   "email"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "relationship"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.hstore   "skillsets",          default: {},    null: false
+    t.string   "confirmation_token",                 null: false
+    t.boolean  "done",               default: false
+  end
+
+  add_index "references", ["taskee_id"], name: "index_references_on_taskee_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,22 +91,19 @@ ActiveRecord::Schema.define(version: 20160720093535) do
     t.integer  "tasker_id"
     t.integer  "taskee_id"
     t.string   "task_desc"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "amount"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "status",          default: "inactive"
-    t.boolean  "taskee_notified", default: false
-    t.boolean  "viewed",          default: false
-    t.boolean  "tasker_notified", default: false
-    t.boolean  "paid",            default: false
+    t.string   "status",     default: "inactive"
+    t.boolean  "paid",       default: false
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.string   "description"
     t.integer  "price"
     t.time     "time"
@@ -82,9 +111,13 @@ ActiveRecord::Schema.define(version: 20160720093535) do
     t.date     "end_date"
     t.integer  "tasker_id"
     t.string   "location"
-    t.string   "status"
+    t.string   "status",                               default: "unassigned"
     t.integer  "skillset_id"
     t.integer  "taskee_id"
+    t.decimal  "latitude",    precision: 10, scale: 6
+    t.decimal  "longitude",   precision: 10, scale: 6
+    t.text     "price_range"
+    t.boolean  "broadcasted",                          default: false
   end
 
   add_index "tasks", ["skillset_id"], name: "index_tasks_on_skillset_id", using: :btree

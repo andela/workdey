@@ -1,29 +1,20 @@
 # frozen_string_literal: true
 module NotificationsHelper
-  def show_notifications(object)
-    css_class_name = object.viewed ? "feed viewed" : "feed"
-    tasker_image = fetch_user(object).image_url
-    tasker_name = fetch_user(object).firstname
-    task_name = fetch_task(object).name
-    task = object.id
-
-    generate_html(css_class_name, tasker_image, tasker_name, task_name, task)
+  def show_notifications(notification)
+    css_class_name = notification.user_notified ? "feed viewed" : "feed"
+    generate_html(
+      css_class_name,
+      notification.sender.image_url,
+      notification.message,
+      notification.id
+    )
   end
 
-  def fetch_user(object)
-    @tasker ||= User.find(object.tasker_id)
-  end
-
-  def fetch_task(object)
-    @task ||= Skillset.find(object.task_id)
-  end
-
-  def generate_html(css_class_name, tasker_image, tasker_name, task_name, task)
+  def generate_html(css_class_name, tasker_image, message, id)
     raw "<div class='#{css_class_name}'>
       #{cl_image_tag tasker_image}
-      <p class='title'> <strong>#{task_name} task</strong>
-      from #{tasker_name} </p>
-      #{button_tag 'view', class: 'btn', data: { id: task }}
+      <p class='title'>#{message}</p>
+      #{button_tag 'view', class: 'btn', data: { id: id }}
     </div>"
   end
 end

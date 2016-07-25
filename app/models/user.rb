@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   has_one :user_plan
   has_many :biddings, foreign_key: :tasker_id
   has_many :bid_managements, foreign_key: :taskee_id
+  has_many :notifications, class_name: "Notification", foreign_key: :receiver_id
+  has_many :sent_notifications,
+           class_name: "Notification",
+           foreign_key: :sender_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -80,9 +84,9 @@ class User < ActiveRecord::Base
     where("email = ?", user_email).pluck(:city, :street_address)
   end
 
-  def self.get_taskees_by_skillset(skillset, _user_email = nil)
+  def self.get_taskees_by_skillset(skillset)
     User.joins(:skillsets).where(
-      "LOWER(name) LIKE ?", "%#{skillset.downcase}%"
+      "name ILIKE ?", "%#{skillset}%"
     )
   end
 

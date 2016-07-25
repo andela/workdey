@@ -194,11 +194,6 @@ function reloadMap () {
   })
 }
 
-function loadScript (src) {
-  $('#scripts').empty()
-  $('#scripts').append(src)
-}
-
 var getLocation = function () {
   navigatorController.getUserPosition()
 }

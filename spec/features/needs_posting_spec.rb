@@ -2,11 +2,11 @@
 require "rails_helper"
 
 RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
-  let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
-  let(:taskee2) { create(:user, user_attr.merge(user_type: "taskee")) }
-  let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
-  let(:skillset) { create(:skillset, user: taskee) }
-  let(:skillset2) { create(:skillset, name: skillset.name, user: taskee2) }
+  let(:message) { "Your need has been created" }
+  let!(:user) do
+    create(:user, user_attr.merge(user_type: "tasker"))
+  end
+  let!(:skillset) { create(:skillset, user: user) }
 
   describe "creating task with valid data" do
     scenario "when creating a Task without location" do

@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe TaskManagementsController, type: :controller do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   let!(:ironing) { create(:task_management, task_desc: Faker::Lorem.sentence) }
   let!(:cleaning) { create(:task_management, task_desc: Faker::Lorem.sentence) }
   let!(:carpentry) do

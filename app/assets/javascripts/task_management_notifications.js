@@ -10,12 +10,26 @@
             "The tasker will be notified of your choice",
         swalType = obj.status === "active" ? "success" : "error",
         swalBtnColor = "#eb4d5c",
-        userAction;
+        userAction,
+        taskee_response;
+
+    function userActionData() {
+      if (obj.status === "active") {
+        taskee_response = "Taskee accepted your task"
+      } else {
+        taskee_response = "Taskee rejected your task"
+      }
+      return {
+        notifiable_attr_to_update: { status: obj.status },
+        reply_to_sender: true,
+        message: taskee_response
+      };
+    };
 
     userAction = $.ajax({
       url: ("/dashboard/notifications/" + urlParam),
       method: "PUT",
-      data: { status: obj.status }
+      data: userActionData()
     });
 
     userAction.done(function () {
@@ -45,26 +59,28 @@
     });
   }
 
-  $(".notification-feed").on("click", ".btn", function () {
+  $(".notification-feed").on("click", ".btn", function (e) {
     var requestId = $(this).data("id"),
-        title = $(this).prev(".title").text().trim()
+        messageTitle = $(this).prev(".title").text().trim()
         request = $.ajax({
           url: ("/dashboard/notifications/" + requestId),
-          method: "POST",
-          data: { title: title },
+          method: "GET",
           dataType: "json"
         });
 
     $(this).closest(".feed").addClass("viewed");
 
-    request.done(function (msg) {
+    request.done(function(notifiableObj) {
+      var endDate = new Date(notifiableObj.end_time).toDateString(),
+          startDate = new Date(notifiableObj.start_time).toDateString();
+
       var displayContext = $(".full_notification_message"),
-          title = $("<h5>").text(msg.title),
+          title = $("<h5>").text(messageTitle),
           content = $("<p>")
-                      .html(msg.description +
+                      .html(notifiableObj.task_desc +
                             ", I want this task to be done on <strong>" +
-                            msg.date + "</strong> by <strong>" + msg.time + "</strong> for the price of " +
-                            "<strong>" + msg.amount + "<strong>"
+                            startDate + "</strong> by <strong>" + endDate + "</strong> for the price of " +
+                            "<strong>" + notifiableObj.amount + "<strong>"
                             ),
           actions = $("<div class='actions'>"),
           accept = $("<button class='btn waves-effect waves-light teal' data-accept=" + requestId + ">")

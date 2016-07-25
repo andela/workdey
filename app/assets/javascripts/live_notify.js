@@ -1,13 +1,13 @@
 (function () {
   var dispatcher = new WebSocketRails(host_name());
 
-  function host_name() {
-    if (location.port.length === 0) {
-      return location.hostname + "/websocket";
+  function host_name () {
+    if ( location.port.length === 0 ) {
+      return location.hostname + '/websocket';
     } else {
-      return location.hostname + ":" + location.port + "/websocket";
+      return location.hostname + ':' + location.port + '/websocket';
     }
-  }
+  };
 
   dispatcher.on_open = function (data) {
     var notificationIndicator = $(".notification-badge span"),
@@ -15,23 +15,20 @@
         notificationElem = $("<li class='notification-badge'>"),
         notificationElemChild = $("<span>");
 
-    console.log("Hello websocket");
-
-     if (location.pathname === "/dashboard/notifications") {
-        console.log("Websocket open");
-        $(".notification-badge").remove();
+    if (location.pathname === "/dashboard/notifications") {
+      $(".notification-badge").remove();
     }
 
-    dispatcher.bind("new_task", function (msg) {
-      if (msg === 1) {
+    dispatcher.bind("new_task", showNotificationCount);
+    dispatcher.bind("broadcast_task", showNotificationCount);
+
+    function showNotificationCount (msg) {
+      if (msg >= 1) {
         notificationElemChild.text(msg);
         notificationWrapper.prepend( notificationElem.append(notificationElemChild) );
-        console.log("Websocket bind");
-      } else if (msg > 1) {
-        notificationIndicator.text(msg);
       } else {
         return;
       }
-    });
+    };
   };
-}());
+}())

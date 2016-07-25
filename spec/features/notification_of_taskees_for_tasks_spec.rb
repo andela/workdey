@@ -5,15 +5,15 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
   let(:skillset) { create(:skillset) }
+  let(:task) { create(:task, skillset_id: skillset.id, tasker_id: tasker.id) }
 
   before(:each) do
     create(
-      :task_management,
-      task_id: skillset.id,
-      taskee_id: taskee.id,
-      tasker_id: tasker.id,
-      status: "inactive",
-      paid: true
+      :notification,
+      notifiable_id: task.id,
+      receiver_id: taskee.id,
+      sender_id: tasker.id,
+      notifiable_type: "Task"
     )
     log_in_with taskee.email, taskee.password
     visit notifications_path

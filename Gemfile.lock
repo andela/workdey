@@ -1,3 +1,19 @@
+GIT
+  remote: git://github.com/moaa/websocket-rails.git
+  revision: cf5d59b671c5b72caa7d3de91444063152ac6bb1
+  branch: sync_fixes
+  specs:
+    websocket-rails (0.7.0)
+      connection_pool
+      em-synchrony
+      faye-websocket
+      hiredis
+      rack
+      rails
+      redis
+      redis-objects
+      thin
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,8 +122,8 @@ GEM
       thor (~> 0.14)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    hashie (3.4.4)
-    haversine (0.3.1)
+    hashie (3.4.3)
+    haversine (0.3.0)
     hiredis (0.6.1)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -125,7 +141,7 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
-    jwt (1.5.4)
+    jwt (1.5.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -187,7 +203,7 @@ GEM
       pry (>= 0.9.10, < 0.11.0)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.5.0)
+    puma (3.4.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -309,9 +325,8 @@ GEM
     tilt (2.0.5)
     tins (1.6.0)
     transactional_capybara (0.0.1)
-    turbolinks (5.0.0)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
+    turbolinks (2.5.3)
+      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -329,15 +344,6 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    websocket-rails (0.7.0)
-      em-synchrony
-      faye-websocket
-      hiredis
-      rack
-      rails
-      redis
-      redis-objects
-      thin
     will_paginate (3.0.7)
     will_paginate-materialize (0.1.2)
       will_paginate (~> 3.0.6)
@@ -394,11 +400,8 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-  websocket-rails
+  websocket-rails!
   will_paginate-materialize
-
-RUBY VERSION
-   ruby 2.3.0p0
 
 BUNDLED WITH
    1.12.5
