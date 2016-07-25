@@ -5,6 +5,7 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
   let(:skillset) { create(:skillset) }
+  let(:task) { create(:task, skillset_id: skillset.id, tasker_id: tasker.id) }
 
   before(:each) do
     create(
