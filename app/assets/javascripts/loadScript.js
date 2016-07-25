@@ -1,4 +1,4 @@
 function loadScript (src) {
-  $('#scripts').empty()
-  $('#scripts').append(src)
+  $('#google-maps-scripts').empty()
+  $('#google-maps-scripts').append(src)
 }

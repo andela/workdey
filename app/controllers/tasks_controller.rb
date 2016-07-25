@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 class TasksController < ApplicationController
   before_action :set_task, only: [:update, :show, :close_bid]
+  before_action :validate_pricerange, only: :update
 
   def new
     @task = Task.new
     @skillsets = Skillset.all.select(&:name)
+  end
+
+  def update
   end
 
   def create
@@ -14,20 +18,6 @@ class TasksController < ApplicationController
     else
       @skillsets = Skillset.all.select(&:name)
       render "new"
-    end
-  end
-
-  def update
-    price_range = [params[:min_price], params[:max_price]]
-    if price_range.first > price_range.last
-      redirect_to @task, notice: "Minimum price must be less than the maximum"
-    elsif (price_range.first.to_i || price_range.last.to_i) < 2000
-      redirect_to @task, notice: "Price must be more than 2000"
-    elsif @task.update(price_range: price_range, broadcasted: true)
-      create_task_notification(@task)
-      redirect_to @task, notice: "Available Taskees have been notified"
-    else
-      render "show"
     end
   end
 
@@ -81,5 +71,26 @@ class TasksController < ApplicationController
 
   def paginate_tasks(tasks)
     tasks.paginate(page: params[:page], per_page: 9)
+  end
+
+  def price_range
+    [params[:min_price], params[:max_price]]
+  end
+
+  def update_redirect(message)
+    redirect_to @task, notice: message
+  end
+
+  def validate_pricerange
+    if price_range.first > price_range.last
+      update_redirect("Minimum price must be less than the maximum")
+    elsif (price_range.first.to_i || price_range.last.to_i) < 2000
+      update_redirect("Prices must be more than 2000")
+    elsif @task.update(price_range: price_range, broadcasted: true)
+      create_task_notification(@task)
+      update_redirect("Available Taskees have been notified")
+    else
+      render "show"
+    end
   end
 end
