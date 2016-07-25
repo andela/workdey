@@ -21,8 +21,8 @@ class ChargesController < ApplicationController
     notify("taskee", @task.taskee_id)
     redirect_to dashboard_path, notice: "You have been charged successfully"\
       " and your taskee has been notified"
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to dashboard_path, notice: "There was an error, please try again"
+  rescue Stripe::CardError
+    redirect_to dashboard_path, danger: "There was a problem with your card"\
+      "\nTry and enter valid card details"
   end
 end

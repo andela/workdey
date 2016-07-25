@@ -4,7 +4,7 @@ require "rails_helper"
 RSpec.describe "Notification of taskees for new tasks", type: :feature do
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
-  let(:task) { create(:task, task_attr) }
+  let(:skillset) { create(:skillset) }
 
   before(:each) do
     create(

@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col m8 offset-m2">
-        <h3>Create Need</h3>
+        <h3>Create new Task</h3>
         <%= form_for @task do |f| %>
           <%= render "partials/error_msg", object:  @task%>
           <div class="row">
@@ -56,17 +56,17 @@
               <div id="location-map"></div>
             </div>
           </div>
-          <div class="row">
-            <div class="right">
-              <button class="btn waves-effect waves-light" id="post-need-submit" type="submit">Post Need
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
+        <div class="row">
+          <div class="text-center" style="text-align: center">
+            <button class="btn waves-effect waves-light" type="submit">Create Task
+              <i class="material-icons right">send</i>
+            </button>
           </div>
+        </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-<div id="scripts"></div>
+<div id="google-maps-scripts"></div>
 </main>
