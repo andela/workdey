@@ -4,4 +4,3 @@ Faker::Avatar.class_eval do
     "https://api.adorable.io/avatars/#{size}/#{slug}.#{format}"
   end
 end
-

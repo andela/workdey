@@ -9,14 +9,14 @@
             <% if @references.present? %>
               <%= render @references %>
             <% else %>
-              <li class="collection-item">You have no existing references</li>
+              <li class="collection-item">You have no existing references. Click on the plus button to add one.</li>
             <% end %>
           </ul>
         </div>
         <div class="col m3">
           <div class="fixed-action-btn">
             <%= link_to new_dashboard_reference_path, class: 'btn-floating btn-large waves-effect waves-light red tooltipped',
-              id: 'new-reference-btn', "data-position": "left", "data-delay": "50", "data-tooltip": "add a reference" do %>
+              id: 'new-reference-btn', "data-position": "left", "data-delay": "50", "data-tooltip": "Add a reference" do %>
               <i class="material-icons">add</i>
             <% end %>
           </div>

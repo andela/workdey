@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 class User < ActiveRecord::Base
-  include Utilities::User
-
   has_many :skillsets
   has_many :reviews
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
@@ -73,6 +71,10 @@ class User < ActiveRecord::Base
 
   def has_no_reviews?
     reviews.map(&:review).all? { |comment| comment == "" }
+  end
+
+  def fullname
+    "#{firstname} #{lastname}"
   end
 
   def review_comments
