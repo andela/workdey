@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Task < ActiveRecord::Base
   belongs_to :tasker, class_name: "User"
-
+  beelongs_to :taskee, class_name: "User"
   belongs_to :skillset
   has_many :task_management, foreign_key: :task_id
   has_many :notifications, as: :notifiable
