@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 FactoryGirl.define do
   factory :user do
     firstname { Faker::Name.first_name }
@@ -12,6 +11,7 @@ FactoryGirl.define do
     image_url { Faker::Avatar.image }
     has_taken_quiz true
     user_type "tasker"
+    street_address { Faker::Address.street_address }
 
     factory :user_with_tasks do
       transient do

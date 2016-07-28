@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require "rails_helper"
 include DashboardHelper
 
@@ -13,7 +12,7 @@ RSpec.describe DashboardController, type: :controller do
       end
 
       it "returns the percentage for a taskee with skillset" do
-        expect(assigns[:completion_percentage]).to eq 73
+        expect(assigns[:completion_percentage]).to eq 82
       end
       it "returns a status code of 200" do
         expect(response.status).to eq 200
@@ -32,7 +31,7 @@ RSpec.describe DashboardController, type: :controller do
         get :home
       end
       it "returns the percentage for a taskee with skillset" do
-        expect(assigns[:completion_percentage]).to eq 82
+        expect(assigns[:completion_percentage]).to eq 91
       end
       it "returns a status code of 200" do
         expect(response.status).to eq 200
