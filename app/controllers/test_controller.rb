@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class TestController < WebsocketRails::BaseController
   def foo
     # current_user.user_type == "tasker" ? notify_tasker : notify_taskee

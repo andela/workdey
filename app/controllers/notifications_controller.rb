@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class NotificationsController < ApplicationController
   before_action :show_notification_count, only: :index
   before_action :set_notification, only: [:show, :update]

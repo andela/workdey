@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class DashboardController < ApplicationController
   before_action :login_required
   before_action :show_notification_count,
