@@ -24,15 +24,8 @@ class TaskManagementsController < ApplicationController
     if @task.save
       session.delete(:searcher)
       flash.clear
-      flash[:notice] = "Your taskee has been notified"
-      tasker = User.find(@task.tasker_id).firstname
-      Notification.create(
-        message: "#{@task.task.name} task from #{tasker}",
-        sender_id: @task.tasker_id,
-        receiver_id: @task.taskee_id,
-        notifiable: @task
-      ).notify_receiver("new_task")
-      redirect_to dashboard_path
+      flash.now[:notice] = "Your task has been created"
+      render "show"
     else
       retain_form_values
       redirect_to assign_task_path(obfuscate(id: @task.taskee_id))
