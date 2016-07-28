@@ -1,8 +1,7 @@
-# frozen_string_literal: true
 class Task < ActiveRecord::Base
   belongs_to :tasker, class_name: "User"
-
   belongs_to :skillset
+
   has_many :task_management, foreign_key: :task_id
   has_many :notifications, as: :notifiable
   serialize :price_range, Array
@@ -17,8 +16,8 @@ class Task < ActiveRecord::Base
 
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_skillset(keyword)
-    current_user_city_street user_email
     return nil if taskees.nil? || taskees.empty?
+    current_user_city_street user_email
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
     other_taskees = taskees - taskees_nearby
     [taskees_nearby, other_taskees].flatten

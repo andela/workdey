@@ -57,7 +57,6 @@ RSpec.configure do |config|
   config.after(:each) { DatabaseCleaner.clean }
   config.include FactoryGirl::Syntax::Methods
   config.before(:each) { Capybara.default_driver = :selenium }
-
   config.after(:each, js: true) do
     TransactionalCapybara::AjaxHelpers.wait_for_ajax(page)
   end
