@@ -16,12 +16,17 @@
             <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
           <li>
-            <% if current_user.taskee? %>
             <div class="search-bar">
               <div class="input-field my-input" id="search-input">
+              <% if current_user.taskee? %>
                 <%= form_tag({controller: "tasks", action: "search"}, method: "post") do %>
                 <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
                 <% end %>
+              <% else %>
+                <%= form_tag(search_path, method: "post") do %>
+                  <%= text_field_tag :searcher, "", required: "required", placeholder: "Search taskees by skillset", id: "my-search-field" %>
+                <% end %>
+              <% end %>
               </div>
             </div>
           </li>
@@ -31,7 +36,6 @@
               <i class="material-icons search-i" id="search">search</i>
             </span>
           </li>
-          <% end %>
           <li class="notification-dropdown" data-activates="tasks">
             <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
           </li>

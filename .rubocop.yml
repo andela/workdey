@@ -235,3 +235,5 @@ Lint/LiteralInCondition:
 Lint/LiteralInInterpolation:
   Description: Checks for literals used in interpolation.
   Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false

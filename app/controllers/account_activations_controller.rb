@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class AccountActivationsController < ApplicationController
   def confirm_email
     user = User.find_by_email(confirmation_params[:email])

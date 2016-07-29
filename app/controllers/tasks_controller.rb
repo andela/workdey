@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class TasksController < ApplicationController
   before_action :set_task, only: [:update, :show, :close_bid]
   before_action :validate_pricerange, only: :update

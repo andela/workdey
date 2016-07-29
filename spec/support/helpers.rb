@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 module Helpers
   def log_in_with(email, password)
     visit signin_path
