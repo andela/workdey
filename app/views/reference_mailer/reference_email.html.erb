@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @reference.firstname %></h1>
+    <p>
+      Your contact <%= @reference.taskee.fullname %> listed you as a reference on our platform.
+    </p>
+    <p>
+      Does <%= @reference.taskee.firstname %> have these skills or expertise?
+    </p>
+    <ul>
+      <% JSON.parse(@reference.skillsets["skills"]).each do |skill| %>
+        <li> <%= skill %> </li>
+      <% end %>
+    </ul>
+    <p>
+      Please follow <a href="<%= @url %>">this link </a>to endorse <%= @reference.taskee.firstname %>.
+    </p>
+    <p>Thanks!</p>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+#new-reference-btn {
+  bottom: 45px;
+}
+
+#endorsement-collection {
+  margin-top: 3rem;
+}
+
+.bottom-secondary-content {
+  position: absolute;
+  right: 16px;
+  bottom: 1px;
+}
+
+.fixed-action-btn {
+  bottom: 105px;
+}
+
+label {
+  width: 100%;
+}
+
+label:after {
+  @include transition-property(all !important);
+  @include transform(none);
+  font-size: 0.8rem;
+}
+
+label:not(.active):after {
+  @include transform(translateY(-140%));
+}
