@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class UsersController < ApplicationController
   before_action :guest_only, only: [:new]
 

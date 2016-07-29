@@ -3,6 +3,23 @@ class Notification < ActiveRecord::Base
   belongs_to :receiver, class_name: "User"
   belongs_to :notifiable, polymorphic: true
 
+  def self.unnotified(user)
+    user.notifications.where(user_notified: false)
+  end
+
+  def self.unnotified_count(user_id)
+    where(receiver_id: user_id).where(user_notified: false).count
+  end
+
+  def self.unread(user)
+    user.notifications.where(read: false)
+  end
+
+  def self.update_as_notified(user)
+    user.notifications.where(user_notified: false).
+      update_all(user_notified: true)
+  end
+
   def update_as_read
     update_attribute(:read, true)
   end
@@ -22,23 +39,6 @@ class Notification < ActiveRecord::Base
 
   def notify_receiver(event_name)
     send_message(receiver_id, event_name)
-  end
-
-  def self.unnotified(user)
-    user.notifications.where(user_notified: false)
-  end
-
-  def self.unnotified_count(user_id)
-    where(receiver_id: user_id).where(user_notified: false).count
-  end
-
-  def self.unread(user)
-    user.notifications.where(read: false)
-  end
-
-  def self.update_as_notified(user)
-    user.notifications.where(user_notified: false).
-      update_all(user_notified: true)
   end
 
   def send_message(user_id, event_name)
