@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :sent_notifications,
            class_name: "Notification",
            foreign_key: :sender_id
+  has_many :references, foreign_key: :taskee_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?

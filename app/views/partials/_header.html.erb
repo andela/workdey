@@ -16,10 +16,10 @@
             <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
           <li>
+            <% if current_user && current_user.taskee? %>
             <div class="search-bar">
               <div class="input-field my-input" id="search-input">
-              <% if current_user.taskee? %>
-                <%= form_tag({controller: "tasks", action: "search"}, method: "post") do %>
+                <%= form_tag("/tasks/search", method: "post") do %>
                 <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
                 <% end %>
               <% else %>
