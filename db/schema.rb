@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721110318) do
+ActiveRecord::Schema.define(version: 20160801123104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20160721110318) do
     t.datetime "end_time"
     t.string   "status",     default: "inactive"
     t.boolean  "paid",       default: false
+    t.boolean  "shared",     default: false
   end
 
   create_table "tasks", force: :cascade do |t|
