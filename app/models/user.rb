@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class User < ActiveRecord::Base
-  has_many :skillsets
+  has_many :skillsets, foreign_key: :taskee_id, through: :taskee_skillsets
   has_many :reviews
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks, class_name: "Task", foreign_key: :tasker_id

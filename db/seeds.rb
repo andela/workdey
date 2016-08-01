@@ -103,6 +103,10 @@ class SeedData
     ]
   end
 
+  def skill_set
+    %w(Cleaning Carpentry Plumbing Electrician)
+  end
+
   def user_plan
     [
       { user_id: 3, name: "novice" },
@@ -127,7 +131,8 @@ class SeedData
     Bidding.destroy_all
     users_list.each { |user| User.create(user) }
     tasks_list.each { |task| Task.create(task) }
-    skillsets.each { |skill| Skillset.create(skill) }
+    # skillsets.each { |skill| Skillset.create(skill) }
+    skill_set.each { |skill|  Skillset.create(name: skill) }
     user_plan.each { |user| UserPlan.create(user) }
     10.times { biddings }
   end
@@ -142,4 +147,4 @@ class SeedData
 end
 workdey_data = SeedData.new
 workdey_data.create_all
-workdey_data.add_skillset_name
+# workdey_data.add_skillset_name
