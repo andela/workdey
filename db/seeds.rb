@@ -1,9 +1,8 @@
-# frozen_string_literal: true
 class SeedData
   def users_list
     cloudinary_img_url =
       "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/"\
-      "rxxvqznd6ayvqlmxoon2.png"
+    "rxxvqznd6ayvqlmxoon2.png"
     [
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
@@ -32,12 +31,6 @@ class SeedData
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url,
         latitude: "6.5275368", longitude: "3.367699" },
-      { firstname: "Chinedu", lastname: "Dan",
-        email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
-        city: "VI", state: "Lagos", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
-        latitude: "6.4377563", longitude: "3.4232642" },
       {
         firstname: "Hubert", lastname: "Nakitare",
         email: "hubert.nakitare@andela.com",
@@ -74,19 +67,13 @@ class SeedData
     ]
   end
 
-  def tasks_list
+  def skillsets
     [
       { name: "Carpentry" },
-      { name: "Plate Washing" },
-      { name: "Laundry" },
-      { name: "Ironing" },
-      { name: "Cleaning" },
-      { name: "Cook" }
+      { name: "Electrician" },
+      { name: "Plumbing" },
+      { name: "Cleaning" }
     ]
-  end
-
-  def skill_set
-    %w(Cleaning Carpentry Plumbing Electrician)
   end
 
   def user_plan
@@ -107,23 +94,28 @@ class SeedData
 
   def create_all
     User.destroy_all
-    Task.destroy_all
     Skillset.destroy_all
     UserPlan.destroy_all
     Bidding.destroy_all
+    TaskeeSkillset.destroy_all
     users_list.each { |user| User.create(user) }
-    tasks_list.each { |task| Task.create(task) }
-    skill_set.each { |skill| Skillset.create(name: skill) }
+    skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
+    taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
     10.times { biddings }
   end
 
-  def add_skillset_name
-    skillsets = %w(Carpentry Plumbing Electrician Cleaner)
-    Skillset.all[-4..-1].each_with_index do |skillset, index|
-      skillset.name = skillsets[index]
-      skillset.save
-    end
+  def taskee_skillsets
+    [
+      { taskee_id: 1, skillset_id: 1 },
+      { taskee_id: 1, skillset_id: 2 },
+      { taskee_id: 4, skillset_id: 4 },
+      { taskee_id: 1, skillset_id: 3 },
+      { taskee_id: 6, skillset_id: 1 },
+      { taskee_id: 7, skillset_id: 4 },
+      { taskee_id: 7, skillset_id: 3 },
+      { taskee_id: 8, skillset_id: 3 }
+    ]
   end
 end
 workdey_data = SeedData.new
