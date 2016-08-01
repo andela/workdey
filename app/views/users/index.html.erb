@@ -1,0 +1,15 @@
+
+<%= render 'partials/sidebar_dashboard' %>
+
+<section class="main container search-height">
+  <div class="row" style="margin-left: 50px">
+    <% if @users.empty? %>
+        <h5 class="text-center"> There are no currently no taskees on this page </h5>
+    <% else %>
+        <h3 id="center"> <b>Taskees and their skillsets </b></h3><br>
+        <%= render @users %>
+
+        <%= will_paginate %>
+    <%end %>
+  </div>
+</section>

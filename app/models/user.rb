@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
             presence: true,
             length: { minimum: 8 }
 
+  scope :taskees, -> { where(user_type: "taskee") }
+
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
       u.provider = auth.provider
