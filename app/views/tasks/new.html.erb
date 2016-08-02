@@ -9,41 +9,49 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">edit_mode</i>
+              <%= f.text_field :name, class: "validate", required: true %>
               <%= f.label :name, "Title" %>
-              <%= f.text_field :name, class: "form-control", required: true %>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">description</i>
+              <%= f.text_area "description", class: "materialize-textarea validate", required: true %>
               <%= f.label :description, "Description" %>
-              <%= f.text_area "description", class: "materialize-textarea", required: true %>
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s4">
+            <div class="input-field col s12 m6">
               <i class="material-icons prefix">perm_contact_calendar</i>
-              <%= f.label :start_date, "Start Date" %>
               <%= f.date_field :start_date, class: "datepicker start_date", required: true %>
+              <%= f.label :start_date, "Start Date" %>
             </div>
-            <div class="input-field col s4">
+            <div class="input-field col s12 m6">
               <i class="material-icons prefix">perm_contact_calendar</i>
-              <%= f.label :end_date, "End Date" %>
               <%= f.date_field :end_date, class: "datepicker end_date", required: true %>
-            </div>
-            <div class="input-field col s4">
-              <i class="material-icons prefix">schedule</i>
-              <%= f.label :time, "Start Time" %>
-              <%= f.text_field "time", class: "timepicker", id: "timepicker" %>
+              <%= f.label :end_date, "End Date" %>
             </div>
           </div>
           <div class="row">
-            <div class="input-field col m6 jiji">
-              <i class="material-icons prefix ji">work</i>
-              <%= f.collection_select :skillset_id, @skillsets, :id, :name, prompt: "Choose a skillset" %>
+            <div class="input-field col s12 m6">
+              <i class="material-icons prefix">schedule</i>
+              <%= f.text_field "time", class: "timepicker", id: "timepicker" %>
+              <%= f.label :time, "Start Time" %>
             </div>
-            <div class=" input-field col m6">
+            <div class="input-field col s12 m6 jiji">
+              <i class="material-icons prefix ji">work</i>
+              <%= f.collection_select :skillset_id, @skillsets, :id, :name, { prompt: "Choose a skillset" }, { required: true } %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 grey-text"><i>Enter a <b>Price Range</b> or just the Minimum Price</i></div>
+            <div class="input-field col s12 m6">
               <i class="material-icons prefix">credit_card</i>
-              <%= f.label :price %>
-              <%= f.text_field :price, pattern: "[0-9]+", class: "form-control", required: true %>
+              <input name="task[min_price]" id="min_price" type="text" class="validate" pattern="[0-9]+" required>
+              <label for="min_price">Minimum Price</label>
+            </div>
+            <div class="input-field col s12 m6">
+              <i class="material-icons prefix">credit_card</i>
+              <input name="task[max_price]" id="max_price" type="text" class="validate" pattern="[0-9]+">
+              <label for="max_price">Maximum Price</label>
             </div>
           </div>
           <div class="row">
@@ -56,13 +64,13 @@
               <div id="location-map"></div>
             </div>
           </div>
-        <div class="row">
-          <div class="text-center" style="text-align: center">
-            <button class="btn waves-effect waves-light" type="submit">Create Task
-              <i class="material-icons right">send</i>
-            </button>
+          <div class="row">
+            <div class="right">
+              <button class="btn waves-effect waves-light" type="submit">Create Task
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
           </div>
-        </div>
         <% end %>
       </div>
     </div>

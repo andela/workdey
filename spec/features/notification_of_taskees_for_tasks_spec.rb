@@ -4,7 +4,20 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
   let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
   let(:skillset) { create(:skillset) }
-  let(:task) { create(:task, skillset_id: skillset.id, tasker_id: tasker.id) }
+  let(:price_range) do
+    [
+      Faker::Commerce.price(2000..3000).to_s,
+      Faker::Commerce.price(3001..5000).to_s
+    ]
+  end
+  let(:task) do
+    create(
+      :task,
+      skillset_id: skillset.id,
+      tasker_id: tasker.id,
+      price_range: price_range
+    )
+  end
 
   before(:each) do
     create(

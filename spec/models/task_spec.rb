@@ -38,15 +38,30 @@ RSpec.describe Task, type: :model do
   end
 
   describe ".search_for_available_need" do
+    let(:price_range) do
+      [
+        Faker::Commerce.price(2000..3000).to_s,
+        Faker::Commerce.price(3001..5000).to_s
+      ]
+    end
     let(:skillset) { create(:skillset) }
     let(:skillset2) { create(:skillset) }
-    let!(:task1) { create(:task, task_attr.merge(skillset_id: skillset.id)) }
+    let!(:task1) do
+      create(
+        :task,
+        skillset_id: skillset.id,
+        tasker_id: @user.id,
+        price_range: price_range
+      )
+    end
     let!(:task2) do
-      create(:task,
-             task_attr.merge(
-               skillset_id: skillset.id,
-               start_date: Date.yesterday
-             ))
+      create(
+        :task,
+        skillset_id: skillset.id,
+        tasker_id: @user.id,
+        price_range: price_range,
+        start_date: Date.yesterday
+      )
     end
 
     context "when searching for a need that has a task" do

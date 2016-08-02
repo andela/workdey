@@ -8,10 +8,27 @@ RSpec.describe NotificationMailer, type: :mailer do
   describe "send_notifications" do
     before(:each) do
       @user = create(:user, user_attr.merge(user_type: "taskee"))
-      @task = create(:task, task_attr)
-      @category = create(:task, task_attr)
+      @skillset = create(:skillset)
       @tasker = create(:user, user_attr.merge(user_type: "tasker"))
       @taskee = create(:user, user_attr.merge(user_type: "taskee"))
+      @task = create(
+        :task,
+        skillset_id: @skillset.id,
+        tasker_id: @tasker.id,
+        price_range: [
+          Faker::Commerce.price(2000..3000).to_s,
+          Faker::Commerce.price(3001..5000).to_s
+        ]
+      )
+      @category = create(
+        :task,
+        skillset_id: @skillset.id,
+        tasker_id: @tasker.id,
+        price_range: [
+          Faker::Commerce.price(2000..3000).to_s,
+          Faker::Commerce.price(3001..5000).to_s
+        ]
+      )
       @mail = NotificationMailer.send_notifications(
         @user,
         @task,

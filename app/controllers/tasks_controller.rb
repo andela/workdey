@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
+  before_action :login_required
   before_action :set_task, only: [:update, :show, :close_bid]
-  before_action :validate_pricerange, only: :update
 
   def new
     @task = Task.new
@@ -8,6 +8,12 @@ class TasksController < ApplicationController
   end
 
   def update
+    if @task.update(broadcasted: true)
+      create_task_notification(@task)
+      update_redirect("Available Taskees have been notified")
+    else
+      render "show"
+    end
   end
 
   def create
@@ -46,7 +52,10 @@ class TasksController < ApplicationController
       :latitude,
       :min_price,
       :max_price
-    ).merge(tasker_id: current_user.id)
+    ).merge(
+      tasker_id: current_user.id,
+      price_range: [params[:task][:min_price], params[:task][:max_price]]
+    )
   end
 
   def set_task
@@ -72,24 +81,7 @@ class TasksController < ApplicationController
     tasks.paginate(page: params[:page], per_page: 9)
   end
 
-  def price_range
-    [params[:min_price], params[:max_price]]
-  end
-
   def update_redirect(message)
     redirect_to @task, notice: message
-  end
-
-  def validate_pricerange
-    if price_range.first > price_range.last
-      update_redirect("Minimum price must be less than the maximum")
-    elsif (price_range.first.to_i || price_range.last.to_i) < 2000
-      update_redirect("Prices must be more than 2000")
-    elsif @task.update(price_range: price_range, broadcasted: true)
-      create_task_notification(@task)
-      update_redirect("Available Taskees have been notified")
-    else
-      render "show"
-    end
   end
 end
