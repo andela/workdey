@@ -27,13 +27,28 @@ class DashboardController < ApplicationController
   end
 
   def set_role
-    current_user.update_attribute(:user_type, params[:role])
-    if current_user.user_type == "tasker"
+    if params[:role] == "tasker"
+      current_user.update_attribute(:user_type, params[:role])
       current_user.update_attribute(:has_taken_quiz, true)
       redirect_to dashboard_path
     else
-      redirect_to quiz_path
+      @skillsets = Skillset.all
+      respond_to :js
     end
+  end
+
+  def create_skillset
+    if params["skillsets"].blank?
+      redirect_to(role_path, notice: Message.choose_skill) && return
+    end
+    params["skillsets"].each do |skill_id|
+      Skillset.find_by!(id: skill_id)
+      current_user.taskee_skillsets.create(skillset_id: skill_id)
+    end
+    current_user.update_attribute(:user_type, "taskee")
+    redirect_to quiz_path
+  rescue ActiveRecord::RecordNotFound
+    redirect_to role_path, notice: Message.try_again
   end
 
   def quiz

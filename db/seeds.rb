@@ -85,24 +85,6 @@ class SeedData
     ]
   end
 
-  def skillsets
-    [
-      { user_id: 1, task_id: 1 },
-      { user_id: 1, task_id: 4 },
-      { user_id: 2, task_id: 5 },
-      { user_id: 3, task_id: 6 },
-      { user_id: 4, task_id: 5 },
-      { user_id: 5, task_id: 3 },
-      { user_id: 3, task_id: 1 },
-      { user_id: 2, task_id: 4 },
-      { user_id: 5, task_id: 2 },
-      { user_id: 1, task_id: 6 },
-      { user_id: 7, task_id: 5 },
-      { user_id: 8, task_id: 3 },
-      { user_id: 4, task_id: 2 }
-    ]
-  end
-
   def skill_set
     %w(Cleaning Carpentry Plumbing Electrician)
   end
@@ -131,8 +113,7 @@ class SeedData
     Bidding.destroy_all
     users_list.each { |user| User.create(user) }
     tasks_list.each { |task| Task.create(task) }
-    # skillsets.each { |skill| Skillset.create(skill) }
-    skill_set.each { |skill|  Skillset.create(name: skill) }
+    skill_set.each { |skill| Skillset.create(name: skill) }
     user_plan.each { |user| UserPlan.create(user) }
     10.times { biddings }
   end
@@ -147,4 +128,3 @@ class SeedData
 end
 workdey_data = SeedData.new
 workdey_data.create_all
-# workdey_data.add_skillset_name

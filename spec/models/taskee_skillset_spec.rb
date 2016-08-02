@@ -1,5 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe TaskeeSkillset, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:skillset) }
+  it { should belong_to(:taskee).class_name("User") }
 end

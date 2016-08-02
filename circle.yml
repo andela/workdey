@@ -6,8 +6,3 @@ deployment:
 machine:
   ruby:
     version: 2.3.0
-
-test:
-  pre:
-    - "npm install -g bower"
-    - "bower install"

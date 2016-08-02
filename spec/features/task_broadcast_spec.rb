@@ -5,7 +5,10 @@ RSpec.describe "Broadcast tasks", type: :feature do
   let!(:user) do
     create(:user, user_attr.merge(user_type: "tasker"))
   end
-  let!(:skillset) { create(:skillset, user: user) }
+  let(:skillsets) { create_list(:skillset, 4) }
+  let!(:skillset) do
+    create(:taskee_skillset, taskee: user, skillset: skillsets.first)
+  end
   let(:price_range) do
     [
       Faker::Commerce.price(2000..3000).to_s,
