@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-validation
+//= require jquery.validate
 //= require turbolinks
 //= require materialize-sprockets
 //= require smooth-scroll.min.js

@@ -16,8 +16,13 @@
             <% if @task.broadcasted %>
               <%= link_to "Close Bid", close_bid_path, method: :get, class: "waves-effect waves-light btn-large red close-btn" %>
             <% else %>
-              <a href="#broadcast_modal" class="waves-effect waves-light btn-large teal broadcast-btn">Broadcast Task</a>
-              <%= render 'tasks/partials/broadcast' %>
+              <%= form_for @task do |f| %>
+                <div class="right">
+                  <button class="waves-effect waves-light btn-large teal broadcast-btn" id="broadcast_submit" type="submit">Broadcast Task
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -33,9 +38,9 @@
                     <div class="status center-align">
                       <% if @task.status == "unassigned" %>
                         <i class="fa fa-ban text-red"></i> <span class="red-text">
-                      <% elsif @task.status == "started" %>
-                        <i class="fa fa-ban text-cyan"></i> <span class="cyan-text">
-                      <% end %><%= @task.status %></span>
+                        <% elsif @task.status == "started" %>
+                          <i class="fa fa-ban text-cyan"></i> <span class="cyan-text">
+                          <% end %><%= @task.status %></span>
                       </div>
                     </div>
                     <div class="col s12 task-description">
@@ -49,11 +54,7 @@
                 <div class="col s3 right">
                   <div class="row">
                     <div class="col s12 task-pricing">
-                      <% if @task.broadcasted %>
-                        <span><%= number_to_currency(@task.price_range.first, precision: 0) %> - <%= number_to_currency(@task.price_range.last, precision: 0) %></span>
-                      <% else %>
-                        <span><%= number_to_currency(@task.price, precision: 0) %></span>
-                      <% end %>
+                      <span><%= number_to_currency(@task.price_range.first, precision: 0) %> <% if @task.price_range.last.to_i > 0 %>- <%= number_to_currency(@task.price_range.last, precision: 0) %><% end %></span>
                     </div>
                     <div class="col s12 task-due-date">
                       <span>Due in <%= distance_of_time_in_words_to_now(@task.end_date) %></span>

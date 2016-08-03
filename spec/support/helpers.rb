@@ -54,7 +54,8 @@ module Helpers
     log_in_with(user.email, user.password)
     visit new_task_path
     fill_in "task[name]", with: Faker::Lorem.word
-    fill_in "task[price]", with: price
+    fill_in "min_price", with: price.to_s
+    fill_in "max_price", with: (price + 10).to_s
 
     end_date = Date.tomorrow.in_time_zone.to_i * 1000
     start_date = Date.today.in_time_zone.to_i * 1000

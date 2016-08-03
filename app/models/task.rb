@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  attr_accessor :min_price, :max_price
   belongs_to :tasker, class_name: "User"
   belongs_to :skillset
 
@@ -6,13 +7,11 @@ class Task < ActiveRecord::Base
   has_many :notifications, as: :notifiable
   serialize :price_range, Array
   validates :name, presence: true
-  validates :price,
-            numericality: { greater_than_or_equal_to: 2000 },
-            presence: true
   validates :tasker_id,
             :description,
             presence: true
   validate :end_time_must_be_greater_than_start_time
+  validate :price_range_validation
 
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_skillset(keyword)
@@ -66,6 +65,27 @@ class Task < ActiveRecord::Base
     same_day = start_date == end_date
     unless (end_date > start_date && end_date > Time.now) || same_day
       errors[:date] = "End date cannot be in the past"
+    end
+  end
+
+  private_class_method
+  def price_range_validation
+    if price_range.empty?
+      errors[:price_range] = "Please enter atleast the minimum price"
+    else
+      check_price_range
+    end
+  end
+
+  def check_price_range
+    min_price, max_price = price_range.map(&:to_i)
+    value_error_message = "Prices must be greater than $2000"
+    comparison_error_message = "Minimum price must be less than the maximum"
+
+    errors[:price_range] = value_error_message if min_price < 2000
+    if max_price > 0
+      errors[:price_range] = value_error_message if max_price < 2000
+      errors[:price_range] = comparison_error_message if min_price > max_price
     end
   end
 

@@ -1,6 +1,10 @@
 #new_task {
   padding: 1rem 0 0 1rem;
 
+  label.error {
+    color: #000;
+  }
+
   .jiji {
     .ji {
       float: left;
