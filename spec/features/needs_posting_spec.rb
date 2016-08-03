@@ -19,7 +19,7 @@ RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
     scenario "when creating a task with less than 2000" do
       new_task_helper(1599)
       click_button "Create Task"
-      expect(page).to have_content "Price must be greater than or equal to 2000"
+      expect(page).to have_content "Prices must be greater than $2000"
     end
   end
 end
