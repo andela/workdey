@@ -14,4 +14,11 @@ class NotificationMailer < ApplicationMailer
     @tasker = notification_tasker
     mail to: @taskee.email, subject: "You have notifications on Workdey"
   end
+
+  def send_contact_info(tasker, taskee)
+    @tasker = tasker
+    @taskee = taskee
+    @fullname = taskee.firstname.capitalize + " " + tasker.lastname.capitalize
+    mail to: tasker.email, subject: "#{ @fullname } has shared His contact with you"
+  end
 end

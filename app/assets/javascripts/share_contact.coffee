@@ -22,6 +22,7 @@ jQuery ->
           success: =>
             swal 'Success!', 'You have shared your contact with the tasker', 'success'
             # TODO: Also remove the item from the page
+            $("#share_contact").hide()
         )
 
       else

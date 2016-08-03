@@ -150,6 +150,7 @@ class TaskManagementsController < ApplicationController
   end
 
   def notify_tasker(task)
+    NotificationMailer.send_contact_info(task.tasker, task.taskee).deliver_now
     Notification.create(
       message: "#{task.taskee.firstname.capitalize} #{task.taskee.lastname.capitalize} has shared contact with you!",
       sender_id: task.taskee_id,
@@ -157,4 +158,5 @@ class TaskManagementsController < ApplicationController
       notifiable: task
     ).notify_receiver("broadcast_task")
   end
+
 end
