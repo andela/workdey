@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   get "dashboard/tasks/review" => "task_managements#show", as: :review_task
   post "tasks_managements/update" => "task_managements#update", as: :completed
   post "user/settings" => "users#update_notification_settings"
-
+  put "task_management/share/:id", to: "task_managements#share", as: :share_contact
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 

@@ -22,9 +22,8 @@
                 <% if task.status.downcase == "done" %>
                   <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
                 <% elsif task.status.downcase == "active" %>
-                  <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %></td>
-                  <a href="#share_contact_modal" class="">Share Contact</a>
-                  <%= render partial: "share_contact_modal" %>
+                  <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %>
+                  <p><a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="">Share Contact</a></p></td>
                 <% elsif task.status.downcase == "inactive" %>
                   <td class="red-text"><i class='tiny material-icons'>not_interested</i> <%= "#{status.downcase}" %></td>
                 <% elsif task.status.downcase == "rejected" %>
