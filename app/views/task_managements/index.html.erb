@@ -23,10 +23,12 @@
                   <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
                 <% elsif task.status.downcase == "active"%>
                   <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %>
-                    <% unless task.shared %>
-                  <p><a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="">Share Contact</a></p>
-                  <% end %>
                 </td>
+                <% unless task.shared %>
+                <td>
+                <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="">Share Contact</a>
+                </td>
+                <% end %>
                 <% elsif task.status.downcase == "inactive" %>
                   <td class="red-text"><i class='tiny material-icons'>not_interested</i> <%= "#{status.downcase}" %></td>
                 <% elsif task.status.downcase == "rejected" %>

@@ -70,13 +70,9 @@ class TaskManagementsController < ApplicationController
 
   def share
     task = TaskManagement.find(params[:id])
-    if task.update_attribute("shared", true)
-      # render json: {message: "success"}
-      notify_tasker(task)
-      render json: { message: "success" }
-    else
-      render json: { message: "error" }
-    end
+    task.update_attribute("shared", true)
+    notify_tasker(task)
+    render json: { message: "success" }
   end
 
   private
@@ -152,11 +148,10 @@ class TaskManagementsController < ApplicationController
   def notify_tasker(task)
     NotificationMailer.send_contact_info(task.tasker, task.taskee).deliver_now
     Notification.create(
-      message: "#{task.taskee.firstname.capitalize} #{task.taskee.lastname.capitalize} has shared contact with you!",
+      message: "#{task.taskee.fullname} has shared contact with you!",
       sender_id: task.taskee_id,
       receiver_id: task.tasker_id,
       notifiable: task
     ).notify_receiver("broadcast_task")
   end
-
 end

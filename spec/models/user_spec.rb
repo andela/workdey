@@ -156,4 +156,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "#fullname" do
+    let!(:user) { create(:user) }
+    it "returns the concatenated firstname and lastname" do
+      full_name = user.firstname.capitalize + " " + user.lastname.capitalize
+      expect(full_name).to eq user.fullname
+    end
+  end
 end
