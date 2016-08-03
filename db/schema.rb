@@ -121,9 +121,9 @@ ActiveRecord::Schema.define(version: 20160801082131) do
     t.string   "location"
     t.string   "status",                               default: "unassigned"
     t.integer  "skillset_id"
-    t.integer  "taskee_id"
     t.decimal  "latitude",    precision: 10, scale: 6
     t.decimal  "longitude",   precision: 10, scale: 6
+    t.integer  "taskee_id"
     t.text     "price_range"
     t.boolean  "broadcasted",                          default: false
   end
