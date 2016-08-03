@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class Seed
   def users_list
     [
@@ -28,7 +27,29 @@ class Seed
     ]
   end
 
+  def tasks_list
+    [
+      { name: "Capentry" },
+      { name: "Plate Washing" },
+      { name: "Laundry" },
+      { name: "Ironing" },
+      { name: "Cleaning" },
+      { name: "Cook" }
+    ]
+  end
+
+  def skillsets
+    [
+      { name: "Carpentry" },
+      { name: "Electrician" },
+      { name: "Plumbing" },
+      { name: "Cleaning" }
+    ]
+  end
+
   def create_all
     users_list.each { |user| User.create(user) }
+    tasks_list.each { |task| Task.create(task) }
+    skillsets.each { |skill| Skillset.create(skill) }
   end
 end
