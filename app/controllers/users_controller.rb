@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :guest_only, only: [:new]
 
   def index
-    @users = User.taskees.paginate(page: params[:page], per_page: 10)
+    @users = User.taskees.includes(:skillsets).paginate(page: params[:page], per_page: 10)
   end
 
   def new

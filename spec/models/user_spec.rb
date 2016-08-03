@@ -1,11 +1,15 @@
-# frozen_string_literal: true
 require "rails_helper"
 RSpec.describe User, type: :model do
-  it { should have_many(:taskee_skillsets).with_foreign_key("taskee_id") }
-  it { should have_many(:skillsets).through(:taskee_skillsets) }
-  it { is_expected.to have_many(:skillsets) }
+  it { is_expected.to have_many(:skillsets).through(:taskee_skillsets) }
+
+  it do
+    is_expected.to have_many(:taskee_skillsets).with_foreign_key(:taskee_id)
+  end
+
   it { is_expected.to have_many(:reviews) }
+
   it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
+
   it do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
       with_foreign_key(:taskee_id)
@@ -15,19 +19,6 @@ RSpec.describe User, type: :model do
     is_expected.to have_many(:tasks_created).class_name("TaskManagement").
       with_foreign_key(:tasker_id)
   end
-
-  describe "#skilllset_ids" do
-    let!(:skillsets) { create_list(:skillset, 4) }
-    let!(:user) { create(:user, user_type: "taskee") }
-    let!(:taskee_skillset) do
-      create(:taskee_skillset, taskee: user, skillset: skillsets.first)
-    end
-
-    it "returns array of taskee skilllset ids" do
-      expect(user.skillset_ids).to eq([skillsets.first.id])
-    end
-  end
-
   describe ".before_save" do
     it "converts all emails to lowercase" do
       user = create(:user, email: "MAYOWA.PITAN@ANDEla.COM")
@@ -124,10 +115,11 @@ RSpec.describe User, type: :model do
 
   describe ".get_taskee_by_skillset_name" do
     it "return users by their skillset name" do
+      skillset = create(:skillset)
       user = create(:user, user_attr.merge(user_type: "taskee"))
-      skillsets = create_list(:skillset, 2)
-      create(:taskee_skillset, taskee: user, skillset: skillsets.first)
-      expect(User.get_taskees_by_skillset(skillsets.first.name).count).to eq 1
+      user.skillsets << skillset
+      create_list(:skillset, 2)
+      expect(User.get_taskees_by_skillset(skillset.name).count).to eq 1
     end
   end
 
@@ -169,6 +161,14 @@ RSpec.describe User, type: :model do
       it "will return the user if found" do
         expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
       end
+    end
+  end
+
+  describe "#fullname" do
+    it "should concatenate the first and last names of users" do
+      user = build(:user)
+      expect(user).to be_truthy
+      expect(user.fullname).to eql user.firstname + " " + user.lastname
     end
   end
 end
