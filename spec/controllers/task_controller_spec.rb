@@ -18,17 +18,19 @@ RSpec.describe TasksController, type: :controller do
 
   describe "POST create" do
     let(:task_param) do
-      task_attr.merge(
+      {
         name: Faker::Lorem.word,
         location: "",
-        skillset_id: @skillset.id
-      )
+        skillset_id: @skillset.id,
+        min_price: price_range[0],
+        max_price: price_range[1]
+      }
     end
 
     context "when users try to create a task with valid data" do
       it "saves the task" do
         expect do
-          post :create, task: task_param
+          post :create, task: attributes_for(:task).merge(task_param)
         end.to change(Task, :count).by(1)
       end
     end
@@ -52,33 +54,14 @@ RSpec.describe TasksController, type: :controller do
     let!(:task) do
       create(:task, skillset_id: @skillset.id, tasker_id: @user.id)
     end
-    let!(:req) do
-      put :update,
-          id: task.id,
-          min_price: price_range[0],
-          max_price: price_range[1]
-    end
 
     context "when a user broadcasts a task" do
       let(:message) { "Available Taskees have been notified" }
 
       it "updates the task's price range and broadcasted status" do
-        expect(assigns[:task].price_range).to eql price_range
+        put :update, id: task.id
         expect(assigns[:task].broadcasted).to be_truthy
       end
-      it { should set_flash[:notice].to message }
-    end
-
-    context "when a task is update with erroneous price range" do
-      let(:price_range) do
-        [
-          Faker::Commerce.price(3000..5000).to_s,
-          Faker::Commerce.price(2001..2050).to_s
-        ]
-      end
-      let(:message) { "Minimum price must be less than the maximum" }
-
-      it { should set_flash[:notice].to message }
     end
   end
 
@@ -108,7 +91,9 @@ RSpec.describe TasksController, type: :controller do
       let!(:task) do
         create(
           :task,
-          task_attr.merge(tasker_id: @user.id, skillset_id: @skillset.id)
+          tasker_id: @user.id,
+          skillset_id: @skillset.id,
+          price_range: price_range
         )
       end
 

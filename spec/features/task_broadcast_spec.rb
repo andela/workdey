@@ -33,7 +33,7 @@ RSpec.describe "Broadcast tasks", type: :feature do
     visit "/tasks/#{task.id}"
   end
 
-  context "when a user broadcasts a task" do
+  pending "when a user broadcasts a task" do
     scenario "Tasker broadcasts task" do
       click_on "Broadcast Task"
       within ".modal-content" do
