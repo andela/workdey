@@ -8,8 +8,7 @@ RSpec.feature "GetTaskeesBySkillsets", type: :feature do
                            email: Faker::Internet.email,
                            user_type: "taskee")
     @skillset = create(:skillset)
-    @taskee_skillset =
-      create(:taskee_skillset, taskee: @taskee, skillset: @skillset)
+    @taskee.skillsets << @skillset
   end
 
   feature "search taskees by skillsets" do

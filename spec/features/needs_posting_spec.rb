@@ -2,12 +2,11 @@ require "rails_helper"
 
 RSpec.describe "Task Creation and Assignment", js: true, type: :feature do
   let(:message) { "Your need has been created" }
-  let!(:user) do
-    create(:user, user_attr.merge(user_type: "tasker"))
-  end
-  let!(:skillset) { create(:skillset) }
-  let!(:taskee_skillset) do
-    create(:taskee_skillset, taskee: user, skillset: skillset)
+
+  before(:each) do
+    @user = create(:user, user_attr.merge(user_type: "tasker"))
+    @skillset = create(:skillset)
+    @user.skillsets << @skillset
   end
 
   describe "creating task with valid data" do

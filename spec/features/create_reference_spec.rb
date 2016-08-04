@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.feature "Create a reference", type: :feature do
-  let(:user) { create(:user, user_attr.merge(user_type: "taskee")) }
-  let!(:skill) { create(:skillset) }
-  let!(:skillset) do
-    create(:taskee_skillset, taskee: user, skillset: skill)
+  before(:each) do
+    @user = create(:user, user_attr.merge(user_type: "taskee"))
+    @skill = create(:skillset)
+    @user.skillsets << @skill
   end
 
   before(:all) do
@@ -12,7 +12,7 @@ RSpec.feature "Create a reference", type: :feature do
     Capybara.ignore_hidden_elements = false
   end
 
-  before { log_in_with(user.email, user.password) }
+  before { log_in_with(@user.email, @user.password) }
 
   scenario "clicks 'My Refereces' click" do
     click_link "My References"
@@ -34,7 +34,7 @@ RSpec.feature "Create a reference", type: :feature do
         fill_in "reference_lastname", with: Faker::Name.last_name
         fill_in "reference_email", with: "marquis.carroll@wilder.io"
         fill_in "reference_relationship", with: "Professional"
-        find("label", text: skill.name.to_s).click
+        find("label", text: @skill.name.to_s).click
         click_button "Send Email"
         expect(page).
           to have_content("An email will be sent to marquis.carroll@wilder.io")
