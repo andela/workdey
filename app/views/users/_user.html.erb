@@ -1,3 +1,7 @@
-<li class="taskee col s6 offset-s2">
-  <%= user.fullname %>
-</li>
+<tr>
+  <td><%= user.fullname %></td>
+  <td><b><%= skillsets(user) %></b></td>
+  <td>
+    <a class="btn user-map-trigger" data-longitude="<%= user.longitude %>" data-latitude="<%= user.latitude %>" href="#user-location-modal">View</a>
+  </td>
+</tr>
