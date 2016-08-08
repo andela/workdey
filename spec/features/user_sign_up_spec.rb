@@ -8,13 +8,13 @@ RSpec.describe "User Signup", type: :feature do
     @password = Faker::Internet.password
   end
 
-  pending "when user tries to sign up with valid data" do
+  scenario "when user tries to sign up with valid data" do
     sign_up(@firstname, @lastname, @email, @password)
 
     expect(page).to have_content "Hi, #{@firstname} #{@lastname}"
   end
 
-  pending "when user tries to sign up with an email that has been taken" do
+  scenario "when user tries to sign up with an email that has been taken" do
     sign_up(@firstname, @lastname, @email, @password)
     Capybara.reset_sessions!
     visit root_path
@@ -23,13 +23,12 @@ RSpec.describe "User Signup", type: :feature do
       Faker::Name.last_name,
       @email, Faker::Internet.password
     )
-
     within("div.error-explanation") do
       expect(page).to have_content "Email has already been taken"
     end
   end
 
-  pending "when user tries to sign up with names less than 2" do
+  scenario "when user tries to sign up with names less than 2" do
     sign_up("a", "b", Faker::Internet.free_email, @password)
 
     within("div.error-explanation") do
@@ -40,7 +39,7 @@ RSpec.describe "User Signup", type: :feature do
     end
   end
 
-  pending "when user tries to sign up with password less than 8" do
+  scenario "when user tries to sign up with password less than 8" do
     sign_up(@firstname, @lastname, Faker::Internet.free_email, "0123456")
 
     within("div.error-explanation") do

@@ -3,6 +3,7 @@
     <div class="row">
       <div class="auth signup card" class="col s12">
         <%= form_for @user do |f| %>
+          <%= render "partials/error_msg", object: @user %>
           <div class="row">
             <div class="input-field col s12">
               <%= f.text_field :firstname %>
@@ -20,7 +21,9 @@
               <%= f.password_field :password %>
               <%= f.label :password %>
             </div>
-            <%= f.submit %>
+            <div class="col s12">
+              <%= f.button raw("Create my account <i class='material-icons right'>send</i>"), class: "submit btn waves-effect" %>
+            </div>
           </div>
         <% end %>
         <div class="col s12">
