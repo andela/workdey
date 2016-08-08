@@ -12,45 +12,35 @@
       </a>
       <ul class="right dashboard-navlinks">
         <li>
-          <% if current_user && current_user.taskee? %>
           <div class="search-bar">
+            <% if current_user && current_user.taskee? %>
             <div class="input-field my-input" id="search-input">
               <%= form_tag("/tasks/search", method: "post") do %>
               <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
-              <% end %>
             </div>
+            <% end %>
+            <% else %>
+            <div>
+              <%= form_tag("/tasks/search", method: "post") do %>
+              <%= text_field_tag :searcher, "", required: "required", placeholder: "Search taskees by skillset", id: "my-search-field" %>
+            </div>
+            <% end %>
           </div>
+          <% end %>
         </li>
         <li class="">
           <span class="search-icon-span left">
             <i class="material-icons search-i" id="search">search</i>
           </span>
         </li>
-        <% end %>
-        <li>
-          <% if current_user && current_user.tasker? %>
-          <div class="search-bar">
-            <div class="input-field my-input" id="search-input">
-              <%= form_tag("/tasks/search", method: "post") do %>
-              <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
-              <% end %>
-            </div>
-          </div>
-        </li>
-        <li class="">
-          <span class="search-icon-span left">
-            <i class="material-icons search-i" id="search">search</i>
-          </span>
-        </li>
-        <% end %>
         <% if @count && @count > 0 %>
         <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
         <% end %>
         <li class="notification-dropdown" data-activates="tasks">
           <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
         </li>
-        <li>
           <% if current_user.tasker? %>
+        <li>
           <a href="<%= new_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
             <i class="material-icons">rate_review</i>
           </a>
@@ -58,8 +48,8 @@
           <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Tasks">
             <i class="material-icons">rate_review</i>
           </a>
-          <% end %>
         </li>
+          <% end %>
       </ul>
       <ul id="options" class="dropdown-content">
         <% if current_user.confirmed %>
