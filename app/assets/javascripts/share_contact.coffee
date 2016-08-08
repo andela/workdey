@@ -1,6 +1,6 @@
 
 jQuery ->
-  $("#share_contact").on "click", (e) ->
+  $(".share_contact").on "click", (e) ->
     e.preventDefault()
 
     swal {
@@ -8,7 +8,7 @@ jQuery ->
       text: 'Share contact with tasker for easy communication'
       type: 'warning'
       showCancelButton: true
-      confirmButtonColor: '#DD6B55'
+      confirmButtonColor: '#33cc33'
       confirmButtonText: 'Yes, share it'
       cancelButtonText: 'No, dont share'
       closeOnConfirm: false
@@ -22,7 +22,7 @@ jQuery ->
           success: =>
             swal 'Success!', 'You have shared your contact with the tasker', 'success'
             # TODO: Also remove the item from the page
-            $("#share_contact").hide()
+            $(this).hide()
         )
 
       else

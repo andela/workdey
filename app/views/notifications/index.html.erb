@@ -19,10 +19,17 @@
 
       <% elsif @notifications.present? && current_user.user_type == "tasker" %>
         <div class="notification-feed col s8">
-          <div class="feed">
-            <p>Hello</p>
-          </div>
+          <% @notifications.each do |object| %>
+            <div class="viewed feed">
+              <img src="<%= object.sender.image_url %>" alt="" />
+              <p class="title"> <%= object.message %> </p>
+              <a href="#modal1" onclick="modal_object(<%= object.sender.to_json %>, <%= object.id %>)" class="btn info_btn"> view information</a>
+
+            </div>
+          <% end %>
+          <%= render partial: "show_information" %>
         </div>
+
       <% else  %>
         <div class="col s6 full_notification_message center-align card-panel">
           <p>No new notifications available</p>
