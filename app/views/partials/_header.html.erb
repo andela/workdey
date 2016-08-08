@@ -1,83 +1,85 @@
 <% if logged_in? %>
-<header>
-  <nav class="nav-wrapper">
-    <div class="container">
-      <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
-      <a href="#" class="right dropdown" data-activates="options">
-        <%= cl_image_tag current_user.image_url, class: "user-profile-image" %>
-        <span class="username">
-          <%= "#{current_user.firstname} #{current_user.lastname}" %>
-          <i class="fa fa-caret-down"></i>
-        </span>
-      </a>
-      <ul class="right dashboard-navlinks">
-        <li>
-          <div class="search-bar">
-            <% if current_user && current_user.taskee? %>
-            <div class="input-field my-input" id="search-input">
-              <%= form_tag("/tasks/search", method: "post") do %>
-              <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
-            </div>
-            <% end %>
-            <% else %>
-            <div>
-              <%= form_tag("/tasks/search", method: "post") do %>
-              <%= text_field_tag :searcher, "", required: "required", placeholder: "Search taskees by skillset", id: "my-search-field" %>
-            </div>
-            <% end %>
-          </div>
-          <% end %>
-        </li>
-        <li class="">
-          <span class="search-icon-span left">
-            <i class="material-icons search-i" id="search">search</i>
+  <header>
+    <nav class="nav-wrapper">
+      <div class="container">
+        <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
+        <a href="#" class="right dropdown" data-activates="options">
+          <%= cl_image_tag current_user.image_url, class: "user-profile-image" %>
+          <span class="username">
+            <%= "#{current_user.firstname} #{current_user.lastname}" %>
+            <i class="fa fa-caret-down"></i>
           </span>
-        </li>
-        <% if @count && @count > 0 %>
-        <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
-        <% end %>
-        <li class="notification-dropdown" data-activates="tasks">
-          <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
-        </li>
-          <% if current_user.tasker? %>
-        <li>
-          <a href="<%= new_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
-            <i class="material-icons">rate_review</i>
-          </a>
-          <% else %>
-          <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Tasks">
-            <i class="material-icons">rate_review</i>
-          </a>
-        </li>
+        </a>
+
+        <ul class="right dashboard-navlinks">
+          <% if @count && @count > 0 %>
+            <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
-      </ul>
-      <ul id="options" class="dropdown-content">
-        <% if current_user.confirmed %>
-        <li>
-          <%= link_to "Update Profile", profile_path, class: "waves-effect waves-light" %>
-        </li>
-        <% end %>
-        <li>
-          <%= link_to "Sign Out", signout_path, method: :delete, class: "waves-effect waves-light" %>
-        </li>
-      </ul>
-    </div>
-  </nav>
+          <li>
+            <div class="search-bar">
+            <% if current_user && current_user.taskee? %>
+              <div class="input-field my-input" id="search-input">
+                <%= form_tag("/tasks/search", method: "post") do %>
+                <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
+                <% end %>
+              </div>
+              <% else %>
+                <%= form_tag(search_path, method: "post") do %>
+                  <%= text_field_tag :searcher, "", required: "required", placeholder: "Search taskees by skillset", id: "my-search-field" %>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+          <li class="">
+
+            <span class="search-icon-span left">
+              <i class="material-icons search-i" id="search">search</i>
+            </span>
+          </li>
+          <li class="notification-dropdown" data-activates="tasks">
+            <%= link_to raw("<i class='material-icons'>notifications_active</i>"), notifications_path, class: "tooltipped", data: { position: "left", delay: "50", tooltip: "Notifications" } %>
+          </li>
+
+          <li>
+            <% if current_user.tasker? %>
+            <a href="<%= new_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
+                 <i class="material-icons">rate_review</i>
+            </a>
+            <% else %>
+            <!-- <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Tasks">
+              <i class="material-icons">rate_review</i>
+            </a> -->
+            <% end %>
+          </li>
+        </ul>
+
+        <ul id="options" class="dropdown-content">
+          <% if current_user.confirmed %>
+            <li>
+              <%= link_to "Update Profile", profile_path, class: "waves-effect waves-light" %>
+            </li>
+          <% end %>
+          <li>
+            <%= link_to "Sign Out", signout_path, method: :delete, class: "waves-effect waves-light" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
 </header>
 <% else %>
-<header>
-  <nav class="nav-wrapper">
-    <div class="container">
-      <%= link_to "Workdey", root_path, class: "brand-logo" %>
-      <ul class="right">
-        <li>
-          <%= link_to "BECOME A TASKEE", "#", class: "waves-effect waves-light" %>
-        </li>
-        <li>
-          <%= link_to "SIGN IN", signin_path, class: "waves-effect waves-light" %>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+  <header>
+    <nav class="nav-wrapper">
+      <div class="container">
+        <%= link_to "Workdey", root_path, class: "brand-logo" %>
+        <ul class="right">
+          <li>
+            <%= link_to "BECOME A TASKEE", "#", class: "waves-effect waves-light" %>
+          </li>
+          <li>
+            <%= link_to "SIGN IN", signin_path, class: "waves-effect waves-light" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 <% end %>
