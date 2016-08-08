@@ -1,0 +1,29 @@
+
+<%= render 'partials/sidebar_dashboard' %>
+
+<section class="main container search-height">
+  <div class="row" style="margin-left: 50px">
+    <% if @taskees.empty? %>
+        <h5 class="text-center"> There are currently no taskees here </h5>
+    <% else %>
+        <h3 id="center"> <b>Taskees and their skillsets </b></h3><br>
+        <table>
+          <thead>
+            <th><b>Taskee</b></th><th><b>Skillsets</b></th><th><b>Location</b></th>
+          </thead>
+          <tbody>
+            <%= render @taskees %>
+          </tbody>
+        </table>
+        <div id="user-location-modal" class="modal">
+          <div class="modal-content">
+            <h4><b></b></h4>
+            <div id="user-map" style="height: 300px; width: 100%"></div>
+          </div>
+        </div>
+        <div id="google-maps-scripts"></div>
+
+        <%= will_paginate %>
+    <% end %>
+  </div>
+</section>
