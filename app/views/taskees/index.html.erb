@@ -15,7 +15,7 @@
             <%= render @taskees %>
           </tbody>
         </table>
-        <div id="user-location-modal" class="modal">
+        <div id="user-location-modal" class="modal" data-name="<%=ENV['geoKeyBrowser']%>">
           <div class="modal-content">
             <h4><b></b></h4>
             <div id="user-map" style="height: 300px; width: 100%"></div>

@@ -1,7 +1,8 @@
 $('.user-map-trigger').leanModal();
 
 var map,
-    geoKeyBrowser = 'AIzaSyAciD9tqawo-_mno8ALOgvRHlFLx9o_i3c';
+    geoKeyBrowser = ($('#user-location-modal').data('name'));
+
 
 function initUserMap() {
   var latitude, longitude;
