@@ -19,17 +19,29 @@ RSpec.feature "GetTaskeesBySkillsets", type: :feature do
     end
 
     scenario "tasker searches with skillsets that have taskees" do
+    within :xpath, "/html/body/header/nav" do
       find("#search").click
       fill_in "my-search-field", with: @skillset.name
       find("#my-search-field").native.send_keys(:return)
-      expect(page).to have_content @taskee.fullname
+     end
+
+      expect(page).to have_css("i#search", "search")
+      expect(page).to have_css("i.material-icons", "notifications_active")
+
       expect(page).to have_no_content @other_taskee.fullname
+      expect(page).to have_content @taskee.fullname
     end
 
     scenario "search for with skillsets that have no taskees" do
+    within :xpath, "/html/body/header/nav" do
       find("#search").click
       fill_in "my-search-field", with: "cleaning"
       find("#my-search-field").native.send_keys(:return)
+    end
+
+      expect(page).to have_css("i#search", "search")
+      expect(page).to have_css("i.material-icons", "notifications_active")
+
       expect(page).to have_no_content @other_taskee.fullname
       expect(page).to have_no_content @taskee.fullname
       expect(page).to have_content "We could not find any result matching your"\
