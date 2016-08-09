@@ -8,7 +8,7 @@ RSpec.describe "Share contact" do
       :task_management,
       taskee_id: taskee.id,
       tasker_id: tasker.id,
-      paid_for: true
+      paid: true
     )
   end
 
