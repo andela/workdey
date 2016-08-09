@@ -2,7 +2,10 @@ require "rails_helper"
 
 RSpec.feature "Create a reference", type: :feature do
   let(:user) { create(:user, user_attr.merge(user_type: "taskee")) }
-  let!(:skill) { create(:skillset, user: user) }
+  let!(:skill) { create(:skillset) }
+  let!(:skillset) do
+    create(:taskee_skillset, taskee: user, skillset: skill)
+  end
 
   before(:all) do
     Capybara.default_driver = :selenium

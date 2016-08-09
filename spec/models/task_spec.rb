@@ -5,7 +5,9 @@ RSpec.describe Task, type: :model do
   before :each do
     @user = create(:user, user_attr.merge(user_type: "taskee"))
     create(:user, user_attr.merge(user_type: "taskee"))
-    @skillset = create(:skillset, user: @user)
+    @skillset = create(:skillset)
+    @taskee_skillset =
+      create(:taskee_skillset, taskee: @user, skillset: @skillset)
   end
 
   describe ".current_user_city_street" do

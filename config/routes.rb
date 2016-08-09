@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post "quiz" => "dashboard#quiz"
   get "dashboard" => "dashboard#home"
   match "dashboard/profile" => "dashboard#user_profile", as: :profile, via: [:post, :get]
+  post "/dashboard/choose_skillset" => "dashboard#create_skillset"
 
   get "dashboard/assign" => "task_managements#new", as: :assign_task
   post "dashboard/assign" => "task_managements#create", as: :create_task
@@ -53,9 +54,8 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
-  get "/skillsets" => "skillsets#index"
-  post "/skillsets" => "skillsets#create"
-  delete "/skillsets" => "skillsets#destroy"
+  get "/my_skillsets" => "taskee_skillsets#index", as: :my_skillsets
+  put "/taskee_skillsets" => "taskee_skillsets#update"
 
   get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
 

@@ -1,0 +1,20 @@
+<div class="row">
+  <%= form_tag "/dashboard/choose_skillset", class: "col s8 offset-s2",
+    method: "post", id: "taskee_skillset" do %>
+    <h4 class="row">What are you skilled in?</h4>
+      <div class="row">
+        <% @skillsets.each do |skillset| %>
+        <p>
+          <%= check_box_tag 'skillsets[]', skillset.id, false,
+            id: "skillset_#{skillset.name}" %>
+          <%= label_tag "skillset_#{skillset.name}", skillset.name %>
+        </p>
+        <% end %>
+      </div>
+      <div class="input-field row">
+        <button id="choose_skillset" class="btn waves-effect waves-light"submit">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+  <% end %>
+</div>

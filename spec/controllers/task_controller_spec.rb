@@ -5,7 +5,10 @@ RSpec.describe TasksController, type: :controller do
   let!(:user) do
     create(:user, user_attr.merge(user_type: "tasker"))
   end
-  let!(:skillset) { create(:skillset, user: user) }
+  let!(:skillset) { create(:skillset) }
+  let!(:taskee_skillset) do
+    create(:taskee_skillset, taskee: user, skillset: skillset)
+  end
   let(:task) do
     attributes_for(:task, skillset_id: skillset.id, tasker_id: user.id)
   end

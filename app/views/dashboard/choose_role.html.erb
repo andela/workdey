@@ -4,6 +4,7 @@
 
 <main class="center-align">
   <section class="intro container">
+    <%= render partial: "partials/flash" %>
     <header>
       <h1>
         Hi, <%= "#{current_user.firstname} #{current_user.lastname}" %>

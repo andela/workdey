@@ -75,4 +75,8 @@ module Helpers
     fill_in "need", with: skillset.name
     find("#my-input-field").native.send_keys(:return)
   end
+
+  def parsed_response
+    JSON.parse(response.body)
+  end
 end
