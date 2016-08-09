@@ -10,9 +10,7 @@ RSpec.describe "Broadcast tasks", type: :feature do
   end
 
   let(:skillsets) { create_list(:skillset, 4) }
-  let!(:skillset) do
-    create(:taskee_skillset, taskee: user, skillset: skillsets.first)
-  end
+
   let(:price_range) do
     [
       Faker::Commerce.price(2000..3000).to_s,
