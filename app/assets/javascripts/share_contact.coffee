@@ -10,7 +10,7 @@ jQuery ->
       showCancelButton: true
       confirmButtonColor: '#33cc33'
       confirmButtonText: 'Yes, share it'
-      cancelButtonText: 'No, dont share'
+      cancelButtonText: "No, don't share"
       closeOnConfirm: false
       closeOnCancel: false
     }, (confirmed) =>

@@ -1,14 +1,15 @@
 require "rails_helper"
 
-RSpec.describe "Share contact" do
-  let(:taskee) { create(:user, user_type: "taskee") }
-  let(:tasker) { create(:user) }
+RSpec.describe "Share contact", js: true do
+  let(:taskee) { create(:user, user_type: "taskee", confirmed: true) }
+  let(:tasker) { create(:user, confirmed: true) }
   let!(:task) do
     create(
       :task_management,
       taskee_id: taskee.id,
       tasker_id: tasker.id,
-      paid: true
+      paid: true,
+      status: "active"
     )
   end
 
@@ -27,6 +28,7 @@ RSpec.describe "Share contact" do
 
     scenario "When taskee doesn't share contact with tasker" do
       visit my_tasks_path
+      click_on "Share Contact"
       click_on "No, don't share"
       click_on "OK"
 
@@ -50,6 +52,7 @@ RSpec.describe "Share contact" do
 
   def share_contact
     visit my_tasks_path
+    click_on "Share Contact"
     click_on "Yes, share it"
     click_on "OK"
   end
