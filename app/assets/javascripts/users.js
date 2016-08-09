@@ -13,6 +13,10 @@ function initUserMap() {
           latitude: latitude,
           longitude: longitude
       })
+      theMarker({
+        latitude: latitude,
+        longitude: longitude
+      })
   });
 
   function theMap(coords) {
@@ -22,6 +26,14 @@ function initUserMap() {
             lng: coords.longitude
         },
         zoom: 8
+    });
+  }
+  function theMarker(coords) {
+    var myLatLng = {lat: coords.latitude, lng: coords.longitude};
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: 'Hello World!'
     });
   }
 }
