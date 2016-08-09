@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160801123104) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
@@ -79,8 +80,6 @@ ActiveRecord::Schema.define(version: 20160801123104) do
   end
 
   create_table "skillsets", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
@@ -100,6 +99,16 @@ ActiveRecord::Schema.define(version: 20160801123104) do
     t.boolean  "paid",       default: false
     t.boolean  "shared",     default: false
   end
+
+  create_table "taskee_skillsets", force: :cascade do |t|
+    t.integer  "skillset_id"
+    t.integer  "taskee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "taskee_skillsets", ["skillset_id"], name: "index_taskee_skillsets_on_skillset_id", using: :btree
+  add_index "taskee_skillsets", ["taskee_id"], name: "index_taskee_skillsets_on_taskee_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -161,5 +170,6 @@ ActiveRecord::Schema.define(version: 20160801123104) do
 
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
+  add_foreign_key "taskee_skillsets", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

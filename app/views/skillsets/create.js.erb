@@ -1,7 +1,0 @@
-<% if @skillset.was_created %>
-  $('ul.collection').append("<%= j(render partial: 'skillset', object: @skillset) %>");
-  $('input#task_name').val('').removeClass('invalid');
-<% else %>
-  $('input#task_name').val('').addClass('invalid');
-  Materialize.toast( "<%= @skillset.name %> already exists.", 2000);
-<% end %>

@@ -28,35 +28,7 @@ class Seed
     ]
   end
 
-  def tasks_list
-    [
-      { name: "Capentry" },
-      { name: "Plate Washing" },
-      { name: "Laundry" },
-      { name: "Ironing" },
-      { name: "Cleaning" },
-      { name: "Cook" }
-    ]
-  end
-
-  def skillsets
-    [
-      { user_id: 1, task_id: 1 },
-      { user_id: 1, task_id: 4 },
-      { user_id: 2, task_id: 5 },
-      { user_id: 3, task_id: 6 },
-      { user_id: 4, task_id: 5 },
-      { user_id: 5, task_id: 3 },
-      { user_id: 3, task_id: 1 },
-      { user_id: 2, task_id: 4 },
-      { user_id: 5, task_id: 2 },
-      { user_id: 1, task_id: 1 }
-    ]
-  end
-
   def create_all
     users_list.each { |user| User.create(user) }
-    tasks_list.each { |task| Task.create(task) }
-    skillsets.each { |skill| Skillset.create(skill) }
   end
 end

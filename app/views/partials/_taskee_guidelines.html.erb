@@ -1,4 +1,4 @@
-<section class="container taskee-guidelines">
+<section id="taskee-guidelines" class="container taskee-guidelines">
     <h3 class="center-align">Guidelines for taskees</h3>
     <div class="row">
       <div class="col s8 offset-s2">
@@ -150,7 +150,7 @@
           </li>
         </ul>
         <% if current_page?(role_path) %>
-          <%= link_to raw("I understand <i class='material-icons left'>send</i>"), role_path(role: "taskee"), method: :post, class: "btn" %>
+          <%= link_to raw("I understand <i class='material-icons left'>send</i>"), role_path(role: "taskee"), method: :post, remote: true, class: "btn", id: "accept-taskee-guidlines" %>
         <% end %>
       </div>
     </div>
