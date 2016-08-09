@@ -31,7 +31,7 @@ RSpec.describe DashboardController, type: :controller do
         get :home
       end
 
-      before { stub_current_user(user) }
+      before { stub_current_user(@user) }
 
       let!(:req) { get :home }
 
