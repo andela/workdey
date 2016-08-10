@@ -27,6 +27,11 @@ RSpec.feature "GetTaskeesBySkillsets", type: :feature do
         expect(page).to have_css("i#search")
         expect(page).to have_css("i.material-icons")
       end
+
+      within :xpath, '//*[@id="nav-wrapper"]/div/ul[2]' do
+        expect(page).to have_css("i#search")
+        expect(page).to have_css("i.material-icons")
+      end
       expect(page).to have_no_content @other_taskee.fullname
       expect(page).to have_content @taskee.fullname
     end
@@ -40,6 +45,12 @@ RSpec.feature "GetTaskeesBySkillsets", type: :feature do
         expect(page).to have_css("i#search")
         expect(page).to have_css("i.material-icons")
       end
+
+      within :xpath, '//*[@id="nav-wrapper"]/div/ul[2]' do
+        expect(page).to have_css("i#search")
+        expect(page).to have_css("i.material-icons")
+      end
+
       expect(page).to have_no_content @other_taskee.fullname
       expect(page).to have_no_content @taskee.fullname
       expect(page).to have_content "We could not find any result matching your"\
