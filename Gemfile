@@ -41,6 +41,7 @@ group :development, :test do
   gem "pry-nav"
   gem "rspec-rails"
   gem "selenium-webdriver"
+  gem "chromedriver-helper"
   gem "transactional_capybara"
 end
 

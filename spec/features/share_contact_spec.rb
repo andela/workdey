@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Share contact", js: true do
+  before do
+    page.driver.browser.manage.window.maximize
+  end
   let(:taskee) { create(:user, user_type: "taskee", confirmed: true) }
   let(:tasker) { create(:user, confirmed: true) }
   let!(:task) do
@@ -18,22 +21,23 @@ RSpec.describe "Share contact", js: true do
   end
 
   describe "taskee" do
-    scenario "When taskee shares contact with tasker" do
+    scenario "When taskee shares contact with tasker", js: true do
       share_contact
 
       expect(page).to have_content("You have shared "\
       "your contact with the tasker")
-      expect(task.reload.shared).to be eq true
+      expect(task.reload.shared).to be_truthy
     end
 
     scenario "When taskee doesn't share contact with tasker" do
       visit my_tasks_path
       click_on "Share Contact"
+      sleep 1.5
       click_on "No, don't share"
       click_on "OK"
 
       expect(page).to have_content("You can share your contact later")
-      expect(task.reload.shared).to be eq false
+      expect(task.shared).to be_falsy
     end
   end
 
@@ -53,6 +57,7 @@ RSpec.describe "Share contact", js: true do
   def share_contact
     visit my_tasks_path
     click_on "Share Contact"
+    sleep 1.5
     click_on "Yes, share it"
     click_on "OK"
   end
