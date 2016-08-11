@@ -12,5 +12,15 @@ FactoryGirl.define do
     has_taken_quiz true
     user_type "tasker"
     street_address { Faker::Address.street_address }
+
+    factory :user_with_tasks do
+      transient do
+        task_count 1
+      end
+
+      after(:create) do |evaluator|
+        create_list(:skillset, evaluator.task_count)
+      end
+    end
   end
 end

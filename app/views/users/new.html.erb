@@ -12,40 +12,40 @@
       <div class="auth signup card" class="col s12">
         <div class="row">
           <%= form_for @user, html: {class: "col s12"} do |f| %>
-            <%= render "partials/error_msg", object: @user %>
-            <div class="row">
-              <div class="input-field col s6">
-                <%= f.text_field :firstname, required: true, placeholder: "First Name" %>
-                <i class="material-icons">assignment_ind</i>
+              <%= render "partials/error_msg", object: @user %>
+              <div class="row">
+                <div class="input-field col s6">
+                  <%= f.text_field :firstname, required: true, placeholder: "First Name" %>
+                  <i class="material-icons">assignment_ind</i>
+                </div>
+
+                <div class="input-field col s6">
+                  <%= f.text_field :lastname, required: true, placeholder: "Last Name" %>
+                  <i class="material-icons">assignment_ind</i>
+                </div>
+
+                <div class="input-field col s12">
+                  <%= f.email_field :email, required: true, placeholder: "Email Address" %>
+                  <i class="material-icons">mail</i>
+                </div>
+
+                <div class="input-field col s12">
+                  <%= f.password_field :password, required: true, placeholder: "Password" %>
+                  <i class="material-icons">lock</i>
+                </div>
+
+
+                <div class="col s12">
+
+                  <%= f.button raw("Create my account <i class='material-icons right'>send</i>"), class: "submit btn waves-effect" %>
+                </div>
+
+                <div class="col s12 login-path">
+                  <p>Already have an account?
+                    <%= link_to "Log in", signin_path %>
+                  </p>
+                </div>
               </div>
-
-              <div class="input-field col s6">
-                <%= f.text_field :lastname, required: true, placeholder: "Last Name" %>
-                <i class="material-icons">assignment_ind</i>
-              </div>
-
-              <div class="input-field col s12">
-                <%= f.email_field :email, required: true, placeholder: "Email Address" %>
-                <i class="material-icons">mail</i>
-              </div>
-
-              <div class="input-field col s12">
-                <%= f.password_field :password, required: true, placeholder: "Password" %>
-                <i class="material-icons">lock</i>
-              </div>
-
-
-              <div class="col s12">
-
-                <%= f.button raw("Create my account <i class='material-icons right'>send</i>"), class: "submit btn waves-effect" %>
-              </div>
-
-              <div class="col s12 login-path">
-                <p>Already have an account?
-                  <%= link_to "Log in", signin_path %>
-                </p>
-              </div>
-            </div>
           <% end %>
         </div>
       </div>
@@ -63,7 +63,7 @@
         </p>
 
         <p>
-           <%= link_to raw("<i class='fa fa-google-plus-square'></i> Google"), "/auth/google_oauth2", class: "btn btn-goog" %>
+          <%= link_to raw("<i class='fa fa-google-plus-square'></i> Google"), "/auth/google_oauth2", class: "btn btn-goog" %>
         </p>
       </div>
     </div>

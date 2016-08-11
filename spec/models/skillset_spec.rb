@@ -1,11 +1,16 @@
-# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe Skillset, type: :model do
-  it { should have_many(:tasks) }
   it do
-    should have_many(:taskees).with_foreign_key("taskee_id").
-      class_name("User").through(:taskee_skillsets)
+    is_expected.to have_many(:taskees).class_name("User").
+      through(:taskee_skillsets)
   end
-  it { should validate_presence_of(:name) }
+
+  it { is_expected.to have_many(:tasks) }
+
+  it do
+    is_expected.to have_many(:taskee_skillsets).with_foreign_key(:skillset_id)
+  end
+
+  it { is_expected.to validate_presence_of(:name) }
 end
