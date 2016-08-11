@@ -30,7 +30,6 @@ RSpec.describe "Share contact", js: true do
     end
 
     scenario "When taskee doesn't share contact with tasker" do
-      visit my_tasks_path
       share_contact(false)
 
       expect(page).to have_content("You can share your contact later")
