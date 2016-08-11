@@ -31,10 +31,7 @@ RSpec.describe "Share contact", js: true do
 
     scenario "When taskee doesn't share contact with tasker" do
       visit my_tasks_path
-      click_on "Share Contact"
-      sleep 1.5
-      click_on "No, don't share"
-      click_on "OK"
+      share_contact(false)
 
       expect(page).to have_content("You can share your contact later")
       expect(task.shared).to be_falsy
@@ -54,11 +51,11 @@ RSpec.describe "Share contact", js: true do
     end
   end
 
-  def share_contact
+  def share_contact(share = true)
     visit my_tasks_path
     click_on "Share Contact"
     sleep 1.5
-    click_on "Yes, share it"
+    share ? click_on("Yes, share it") : click_on("No, don't share")
     click_on "OK"
   end
 end
