@@ -23,7 +23,6 @@ RSpec.describe "User Signup", type: :feature do
       Faker::Name.last_name,
       @email, Faker::Internet.password
     )
-
     within("div.error-explanation") do
       expect(page).to have_content "Email has already been taken"
     end

@@ -1,5 +1,6 @@
-# frozen_string_literal: true
 class User < ActiveRecord::Base
+  has_many :taskee_skillsets, foreign_key: :taskee_id
+  has_many :skillsets, through: :taskee_skillsets
   has_many :reviews
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks, class_name: "Task", foreign_key: :tasker_id
@@ -44,6 +45,8 @@ class User < ActiveRecord::Base
   validates :password,
             presence: true,
             length: { minimum: 8 }
+
+  scope :taskees, -> { where(user_type: "taskee") }
 
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|

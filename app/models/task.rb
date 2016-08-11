@@ -84,7 +84,7 @@ class Task < ActiveRecord::Base
     comparison_error_message = "Minimum price must be less than the maximum"
 
     errors[:price_range] = value_error_message if min_price < 2000
-    if max_price > 0
+    if max_price.positive?
       errors[:price_range] = value_error_message if max_price < 2000
       errors[:price_range] = comparison_error_message if min_price > max_price
     end

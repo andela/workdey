@@ -1,6 +1,6 @@
 <% if logged_in? %>
   <header>
-    <nav class="nav-wrapper">
+    <nav class="nav-wrapper" id="nav-wrapper">
       <div class="container">
         <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
         <a href="#" class="right dropdown" data-activates="options">
@@ -16,18 +16,18 @@
             <%= content_tag :li, content_tag(:span, @count), class: "notification-badge"  %>
           <% end %>
           <li>
-            <% if current_user && current_user.taskee? %>
             <div class="search-bar">
+            <% if current_user && current_user.taskee? %>
               <div class="input-field my-input" id="search-input">
                 <%= form_tag("/tasks/search", method: "post") do %>
                 <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
                 <% end %>
+              </div>
               <% else %>
                 <%= form_tag(search_path, method: "post") do %>
                   <%= text_field_tag :searcher, "", required: "required", placeholder: "Search taskees by skillset", id: "my-search-field" %>
                 <% end %>
               <% end %>
-              </div>
             </div>
           </li>
           <li class="">

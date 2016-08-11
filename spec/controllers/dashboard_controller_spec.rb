@@ -23,13 +23,15 @@ RSpec.describe DashboardController, type: :controller do
     end
 
     context "when a taskee with skillset visits the dashboard" do
-      let!(:skillset) { create(:skillset) }
-      let(:user) { create(:user, user_type: "taskee") }
-      let(:taskee_skillset) do
-        create(:taskee_skillset, taskee: user, skillset: skillset)
+      before(:each) do
+        @user = create(:user, user_type: "taskee", has_taken_quiz: true)
+        @user.skillsets << create(:skillset)
+        allow_any_instance_of(ApplicationController).
+          to receive(:current_user).and_return(@user)
+        get :home
       end
 
-      before { stub_current_user(user) }
+      before { stub_current_user(@user) }
 
       let!(:req) { get :home }
 
