@@ -3,7 +3,10 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :update]
 
   def index
-    @notifications = Notification.unread(current_user)
+    @notifications = Notification.
+      unread(current_user).
+      order("updated_at DESC").
+      map(&NotificationsDecorator.method(:new))
     Notification.update_as_notified(current_user)
   end
 
@@ -23,14 +26,15 @@ class NotificationsController < ApplicationController
     else
       set_notification_attr(notification_params)
     end
-    record = @notification.notifiable
-    if record.update_attributes(@notifiable_attr_to_update.symbolize_keys)
-      if @reply_to_sender == true
+    if update_notifiable?
+      record = @notification.notifiable
+      if record.update_attributes(@notifiable_attr_to_update.symbolize_keys) &&
+          @reply_to_sender == true
         @notification.reply_to_sender(@message, "new_task")
-        @notification.update_as_read
       end
-      render json: { message: "success" }
     end
+    @notification.update_as_read
+    render json: { message: "success" }
   end
 
   private
@@ -49,5 +53,9 @@ class NotificationsController < ApplicationController
     @notifiable_attr_to_update = params[:notifiable_attr_to_update]
     @message = params[:message]
     @reply_to_sender = params[:reply_to_sender]
+  end
+
+  def update_notifiable?
+    !params[:notifiable_attr_to_update].blank?
   end
 end

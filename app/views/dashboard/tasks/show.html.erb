@@ -1,0 +1,56 @@
+<%= render 'partials/sidebar_dashboard' %>
+<% if flash.present?  %>
+  <% flash.each do | name | %>
+    <div class="flash-mail">
+      <i class="material-icons close-flash">close</i>
+      <p><%= name.last %></p>
+    </div>
+  <% end %>
+<% end %>
+<main>
+  <section class="container">
+    <div class="row">
+      <div class="col s10 offset-s2 broadcast-container">
+        <div class="row">
+          <% if current_user.tasker? %>
+            <%= render "dashboard/tasks/partials/broadcast_btn" %>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <%= render "dashboard/tasks/partials/task_details" %>
+            <div class="row">
+              <div class="col s12 m9 task-tags">
+                <span><%= @task.skillset.name %></span>
+              </div>
+              <% if current_user.taskee? && !@task.bids.pluck(:user_id).include?(current_user.id) %>
+                <div class="col s12 m3 right bid-button">
+                  <a href="/dashboard/bids/new?task_id=<%= @task.id %>" class="waves-effect waves-light btn-large red-btn broadcast-btn col s12">Make a bid</a>
+                </div>
+              <% end %>
+            </div>
+            <hr>
+            <div class="task-details-more">
+              <% if current_user.taskee? %>
+                <%= render "dashboard/tasks/partials/location" %>
+                <%= render "dashboard/bids/partials/bids_list" %>
+              <% else %>
+                <% if @task.broadcasted %>
+                  <% if @task.status === "started" %>
+                    <%= render "dashboard/bids/partials/chosen_bidder" %>
+                  <% elsif @task.status === "finished" %>
+                  <% else %>
+                    <%= render "dashboard/bids/partials/bids_list" %>
+                  <% end %>
+                <% else %>
+                  <%= render "dashboard/tasks/partials/location" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

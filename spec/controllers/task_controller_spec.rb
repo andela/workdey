@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "rails_helper"
 
-RSpec.describe TasksController, type: :controller do
+RSpec.describe Dashboard::TasksController, type: :controller do
   let!(:user) do
     create(:user, user_attr.merge(user_type: "tasker"))
   end

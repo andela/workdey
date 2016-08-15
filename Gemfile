@@ -4,6 +4,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "bourbon"
 gem "cloudinary", "1.1.0"
 gem "coveralls", require: false
+gem "draper"
 gem "em-rspec", require: false
 gem "eventmachine"
 gem "faker"

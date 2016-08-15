@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col s12 m8">
+    <div class="row">
+      <div class="col s8 task-title">
+        <h3 class="task-title-h3" data-id="<%= @task.id %>"><%= @task.name %></h3>
+      </div>
+      <div class="col s12 m4 task-status">
+        <% if @task.status == "unassigned" %>
+          <div class="status center-align red-status">
+            <i class="fa fa-ban"></i> <span><%= @task.status %></span>
+          </div>
+        <% elsif @task.status == "started" %>
+          <div class="status center-align cyan-status">
+            <i class="fa fa-arrow-right text-cyan"></i> <span class="cyan-text"><%= @task.status %></span>
+          </div>
+        <% elsif @task.status == "finished" %>
+          <div class="status center-align green-status">
+            <i class="fa fa-check text-green"></i> <span class="green-text"><%= @task.status %></span>
+          </div>
+        <% end %>
+      </div>
+      <div class="col s12 task-description">
+        <%= @task.description %>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3 right">
+    <div class="row">
+      <div class="col s12 task-pricing">
+        <span><%= number_to_currency(@task.price_range.first, precision: 0) %> <% if @task.price_range.last.to_i > 0 %>- <%= number_to_currency(@task.price_range.last, precision: 0) %><% end %></span>
+      </div>
+      <div class="col s12 task-due-date">
+        <span>Due in <%= distance_of_time_in_words_to_now(@task.end_date) %></span>
+      </div>
+      <% if @task.broadcasted %>
+        <div class="col s12 task-location-sm">
+          <span><i class="material-icons">my_location</i> <%= @task.location %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

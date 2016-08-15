@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   "dashboard#update_location", as: :location_update
 
   get "/dashboard/map_search" =>
-    "dashboard#search_with_map", as: :map_search
+  "dashboard#search_with_map", as: :map_search
 
   post "account_activations" =>
   "account_activations#resend_activation_mail", as: :resend_mail
@@ -57,15 +57,18 @@ Rails.application.routes.draw do
   post "/skillsets" => "skillsets#create"
   delete "/skillsets" => "skillsets#destroy"
 
-  get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
-
   resources :biddings
-  resources :tasks
-  post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: [:create]
   resources :charges, only: [:new, :create]
 
   namespace :dashboard do
+    resources :bids
+    resources :tasks
+    post "/tasks/search", to: "tasks#search", as: :tasks_search
+    get "/tasks/:id/choose_bidder", to: "tasks#choose_bidder", as: :choose_bidder
+    get "/tasks/:id/close_bid", to: "tasks#close_bid", as: :close_bid
+    get "/tasks/:id/accept_task", to: "tasks#accept_task", as: :accept_task
+    get "/tasks/:id/decline_task", to: "tasks#decline_task", as: :decline_task
     resources :references, only: [:index, :new, :create]
     resources :endorsements, only: [:new, :create]
   end

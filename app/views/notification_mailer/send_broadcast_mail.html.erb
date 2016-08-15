@@ -1,0 +1,23 @@
+<div class="mail-wrapper">
+  <h1>New Task available</h1>
+  <p>
+  <%= "Hi #{@taskee.firstname}, " %><br/>
+  New Task available that matches your skillset.
+  <p>
+  </p>
+  <table border="0" cellspacing="5" cellpadding="5" align="center" style="border-collapse: collapse;">
+    <tr><th align="center" colspan="3" style="border: 1px solid grey;">Task Details</th></tr>
+    <tr>
+      <th style="border: 1px solid grey;">Title</th>
+      <th style="border: 1px solid grey;">Location</th>
+      <th style="border: 1px solid grey">Price</th>
+    </tr>
+    <tr>
+      <td style="border: 1px solid grey"><%= @task.name %></td>
+      <td style="border: 1px solid grey"><%= @task.location %></td>
+      <td style="border: 1px solid grey"><%= number_to_currency(@task.price_range.first, precision: 0) %></td>
+    </tr>
+  </table>
+  </p>
+  <p><a href="https://workdey-staging.herokuapp.com/signin">Log in</a> to your workdey account to view your notifications</p>
+</div>

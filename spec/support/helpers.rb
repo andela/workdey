@@ -52,7 +52,7 @@ module Helpers
 
   def new_task_helper(price)
     log_in_with(user.email, user.password)
-    visit new_task_path
+    visit new_dashboard_task_path
     fill_in "task[name]", with: Faker::Lorem.word
     fill_in "min_price", with: price.to_s
     fill_in "max_price", with: (price + 10).to_s
@@ -67,6 +67,29 @@ module Helpers
     sleep(0.2)
     find("div.select-wrapper li", text: skillset.name).click
     fill_in "task[description]", with: Faker::Lorem.sentence
+  end
+
+  def taskee_make_bid
+    end_date = Date.tomorrow.in_time_zone.to_i * 1000
+    start_date = Date.today.in_time_zone.to_i * 1000
+
+    visit "/dashboard/tasks/#{task.id}"
+    click_link "Make a bid"
+
+    within ".new_bid" do
+      fill_in "bid[price]", with: Faker::Commerce.price(2000..3000)
+      page.execute_script("$('#bid_start_date')\
+                        .pickadate('picker').set('select', #{start_date})")
+      page.execute_script("$('#bid_end_date')\
+                        .pickadate('picker').set('select', #{end_date})")
+      fill_in "bid[description]", with: Faker::Lorem.paragraph
+      find('input[type=submit]').click
+    end
+  end
+
+  def tasker_choose_bidder
+    visit "/dashboard/tasks/#{task.id}"
+    click_link "Choose Bidder"
   end
 
   def search_helper(taskee, skillset)

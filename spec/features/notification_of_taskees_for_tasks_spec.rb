@@ -15,7 +15,8 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
       :task,
       skillset_id: skillset.id,
       tasker_id: tasker.id,
-      price_range: price_range
+      price_range: price_range,
+      broadcasted: true
     )
   end
 
@@ -32,13 +33,7 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
     page.all(".btn")[0].click
   end
 
-  scenario "taskee rejects a task" do
-    click_on "Reject"
-    expect(page).to have_content "Task rejected"
-  end
-
-  scenario "taskee accepts a task" do
-    click_on "Accept"
-    expect(page).to have_content "Task accepted"
+  scenario "taskee gets a new task notification" do
+    expect(page).to have_content task.name
   end
 end

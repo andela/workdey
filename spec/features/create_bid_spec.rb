@@ -1,67 +1,46 @@
 require "rails_helper"
 
-RSpec.feature "Create Task for bidding", type: :feature do
-  let(:user) { create(:user, user_attr) }
-  let(:user_attr) do
-    {
-      user_type: "tasker",
-      has_taken_quiz: true,
-      confirmed: true,
-      phone: nil
-    }
+RSpec.feature "Taskee Bid", type: :feature do
+  let(:taskee) do
+    create(:user, user_type: "taskee", confirmed: true, has_taken_quiz: true)
   end
+  let(:skillset) { create(:skillset, user_id: taskee.id) }
+  let(:tasker) { create(:user) }
+  let(:task) do
+    create(
+      :task,
+      tasker_id: tasker.id,
+      broadcasted: true,
+      skillset_id: skillset.id
+    )
+  end
+
   before(:each) do
-    log_in_with(user.email, user.password)
+    log_in_with(taskee.email, taskee.password)
   end
 
-  scenario "tasker can see a link to the biddings page" do
-    within("div.sidebar-dash") { expect(page).to have_content("Biddings") }
+  scenario "taskee can make a bid" do
+    taskee_make_bid
+    expect(page).to have_content "You have successfully made a bid"
   end
 
-  scenario "tasker can click on biddings link and be directed to biddings\
-   page" do
-    click_link "Biddings"
-    expect(page).to have_selector("h1", text: "Bids")
-    expect(page).to have_selector("a", text: "add")
+  scenario "taskee can revise their bid" do
+    price_change = Faker::Commerce.price(3000..4000)
+
+    taskee_make_bid
+    click_link "Revise"
+    within "form" do
+      fill_in "bid[price]", with: price_change
+      find('input[type=submit]').click
+    end
+
+    expect(page).to have_content "Bid successfully updated"
   end
 
-  scenario "tasker can click on add button and be redirected to an add bid\
-   form" do
-    click_link "Biddings"
-    click_link "add"
-    expect(page).to have_selector("h2", text: "New Bid")
-    expect(page).to have_css("form.new_bidding")
-  end
+  scenario "taskee can delete their bid" do
+    taskee_make_bid
+    click_link "Destroy"
 
-  scenario "tasker can add a new bid" do
-    create_a_bid("House Cleaning", "I'd like my kitchen cleaned.", "2000")
-    expect(current_path).to eq(biddings_path)
-    expect(page).to have_content("House Cleaning")
-  end
-
-  scenario "tasker can edit a bid" do
-    create(:bidding, tasker_id: user.id)
-    visit biddings_path
-    click_link "mode_edit"
-    fill_in "bidding_name", with: "Washing"
-    click_button "Update Bidding"
-    expect(page).to have_content("Washing")
-  end
-
-  scenario "tasker can delete a bid" do
-    create(:bidding, tasker_id: user.id)
-    visit biddings_path
-    click_link "delete"
-    page.driver.browser.switch_to.alert.accept
-    expect(page).to have_no_content("Cleaning")
-  end
-
-  def create_a_bid(task_name, description, price_range)
-    click_link "Biddings"
-    click_link "add"
-    fill_in "bidding_name", with: task_name
-    fill_in "bidding_description", with: description
-    fill_in "bidding_price_range", with: price_range
-    click_button "Create Bidding"
+    expect(page).to have_content "Bid successfully deleted"
   end
 end

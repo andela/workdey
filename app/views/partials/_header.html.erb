@@ -19,7 +19,7 @@
             <% if current_user && current_user.taskee? %>
             <div class="search-bar">
               <div class="input-field my-input" id="search-input">
-                <%= form_tag("/tasks/search", method: "post") do %>
+                <%= form_tag("/dashboard/tasks/search", method: "post") do %>
                 <%= text_field_tag :need, "", required: "required", placeholder: "Search by any skill", class: "", id: "my-input-field" %>
                 <% end %>
               <% else %>
@@ -42,7 +42,7 @@
 
           <li>
             <% if current_user.tasker? %>
-            <a href="<%= new_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
+            <a href="<%= new_dashboard_task_path %>" class="tooltipped" data-position="left" data-delay="50" data-tooltip="Task Creation">
                  <i class="material-icons">rate_review</i>
             </a>
             <% else %>

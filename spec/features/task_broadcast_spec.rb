@@ -23,7 +23,7 @@ RSpec.describe "Broadcast tasks", type: :feature do
 
   before do
     log_in_with user.email, user.password
-    visit "/tasks/#{task.id}"
+    visit "dashboard/tasks/#{task.id}"
   end
 
   context "when a user broadcasts a task" do

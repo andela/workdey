@@ -1,0 +1,72 @@
+<div class="row bid-list">
+  <div class="col s12">
+    <h3>Bids</h3>
+
+    <% @bids.order("updated_at DESC").each do |bid|  %>
+      <% bid_user = User.find(bid.user_id) %>
+      <div class="row">
+        <div class="col s12">
+          <div class="col s3">
+            <div class="col s12 taskee_img">
+              <%= image_tag bid_user.image_url, size: "100x100", alt: "Taskee profile image" %>
+            </div>
+            <div class="col s12 taskee_name">
+              <h5><%= bid_user.fullname %></h5>
+            </div>
+            <div class="col s12 taskee_reviews">
+              <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="col s12 reviews_count">
+                <% reviews = bid_user.reviews %>
+                <span data-rating="<%= bid_user.get_rating %>">
+                  ( <%= "#{reviews.count} #{ 'review'.pluralize(reviews.count) }" %> )
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col s9">
+            <div class="row">
+              <div class="col s6 grey-text"><i><%= distance_of_time_in_words_to_now(bid.updated_at) %> ago</i></div>
+              <% if current_user.id == bid_user.id && bid.task.status != "started" %>
+                <div class="col s6">
+                  <div class="row">
+                    <div class="col s6">
+                      <%= link_to "Revise", edit_dashboard_bid_path(bid), class: "waves-effect waves-light revise-btn btn teal" %>
+                    </div>
+                    <div class="col s6">
+                      <%= link_to "Destroy", dashboard_bid_path(bid), method: :delete, class: "waves-effect waves-light revise-btn btn" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="row <% if current_user.taskee? %>hide<% end %>">
+              <div class="col s12 bid-desc">
+                <%= bid.description %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s4"><b>Bid price:</b> <%= number_to_currency(bid.price, precision: 0) %></div>
+              <div class="col s4"><b>Timeline:</b> <%= distance_of_time_in_words(bid.start_date, bid.end_date) %></div>
+              <div class="col s4"><b>Start date:</b> <%= bid.start_date.to_formatted_s(:rfc822) %></div>
+            </div>
+            <% if current_user.tasker? %>
+              <div class="row">
+                <div class="col m4 offset-m8">
+                  <%= link_to "Choose Bidder", "/dashboard/tasks/#{bid.task_id}/choose_bidder?taskee_id=#{bid_user.id}", class: "waves-effect waves-light btn teal" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+    <%= will_paginate @bids %>
+  </div>
+</div>

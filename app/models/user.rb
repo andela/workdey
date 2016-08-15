@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
            class_name: "Notification",
            foreign_key: :sender_id
   has_many :references, foreign_key: :taskee_id
+  has_many :bids
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -89,6 +90,13 @@ class User < ActiveRecord::Base
     User.joins(:skillsets).where(
       "name ILIKE ?", "%#{skillset}%"
     )
+  end
+
+  def get_rating
+    ratings = reviews.pluck(:rating)
+    ratings.inject(:+) / ratings.size
+  rescue NoMethodError
+    0
   end
 
   def novice?
