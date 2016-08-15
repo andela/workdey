@@ -1,9 +1,5 @@
-# frozen_string_literal: true
 class SeedData
   def users_list
-    cloudinary_img_url =
-      "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/"\
-      "rxxvqznd6ayvqlmxoon2.png"
     [
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
@@ -74,32 +70,12 @@ class SeedData
     ]
   end
 
-  def tasks_list
-    [
-      { name: "Carpentry" },
-      { name: "Plate Washing" },
-      { name: "Laundry" },
-      { name: "Ironing" },
-      { name: "Cleaning" },
-      { name: "Cook" }
-    ]
-  end
-
   def skillsets
     [
-      { user_id: 1, task_id: 1 },
-      { user_id: 1, task_id: 4 },
-      { user_id: 2, task_id: 5 },
-      { user_id: 3, task_id: 6 },
-      { user_id: 4, task_id: 5 },
-      { user_id: 5, task_id: 3 },
-      { user_id: 3, task_id: 1 },
-      { user_id: 2, task_id: 4 },
-      { user_id: 5, task_id: 2 },
-      { user_id: 1, task_id: 6 },
-      { user_id: 7, task_id: 5 },
-      { user_id: 8, task_id: 3 },
-      { user_id: 4, task_id: 2 }
+      { name: "Carpentry" },
+      { name: "Electrician" },
+      { name: "Plumbing" },
+      { name: "Cleaning" }
     ]
   end
 
@@ -121,25 +97,29 @@ class SeedData
 
   def create_all
     User.destroy_all
-    Task.destroy_all
     Skillset.destroy_all
     UserPlan.destroy_all
     Bidding.destroy_all
+    TaskeeSkillset.destroy_all
     users_list.each { |user| User.create(user) }
-    tasks_list.each { |task| Task.create(task) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
+    taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
     10.times { biddings }
   end
 
-  def add_skillset_name
-    skillsets = %w(Carpentry Plumbing Electrician Cleaner)
-    Skillset.all[-4..-1].each_with_index do |skillset, index|
-      skillset.name = skillsets[index]
-      skillset.save
-    end
+  def taskee_skillsets
+    [
+      { taskee_id: 1, skillset_id: 1 },
+      { taskee_id: 1, skillset_id: 2 },
+      { taskee_id: 4, skillset_id: 4 },
+      { taskee_id: 1, skillset_id: 3 },
+      { taskee_id: 6, skillset_id: 1 },
+      { taskee_id: 7, skillset_id: 4 },
+      { taskee_id: 7, skillset_id: 3 },
+      { taskee_id: 8, skillset_id: 3 }
+    ]
   end
 end
 workdey_data = SeedData.new
 workdey_data.create_all
-workdey_data.add_skillset_name

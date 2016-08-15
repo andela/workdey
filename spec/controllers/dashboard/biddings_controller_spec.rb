@@ -46,8 +46,8 @@ RSpec.describe Dashboard::BidsController, type: :controller do
     context "when parameters are invalid" do
       it "should render the new page if bid fails to save" do
         get :create,
-          bid: { price: 1000 },
-          task_id: task.id
+            bid: { price: 1000 },
+            task_id: task.id
         expect(response).to render_template :new
       end
     end
@@ -63,9 +63,9 @@ RSpec.describe Dashboard::BidsController, type: :controller do
     context "when parameters are invalid" do
       it "should render the new page if bid fails to update" do
         get :update,
-          id: Bid.last.id,
-          bid: { price: 1000 },
-          task_id: task.id
+            id: Bid.last.id,
+            bid: { price: 1000 },
+            task_id: task.id
         expect(response).to render_template :edit
       end
     end

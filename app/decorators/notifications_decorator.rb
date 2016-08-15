@@ -22,9 +22,9 @@ class NotificationsDecorator < Draper::Decorator
         #{broadcast_price}
         </span>
         #{h.link_to 'View Task',
-        h.dashboard_task_path(notifiable),
-        class: 'waves-effect waves-light btn notify-btn',
-        data: {id: id}}
+                    h.dashboard_task_path(notifiable),
+                    class: 'waves-effect waves-light btn notify-btn',
+                    data: { id: id }}
       </div>
     </div>
     "
@@ -49,9 +49,9 @@ class NotificationsDecorator < Draper::Decorator
         #{h.number_to_currency(notifiable.price, precision: 0)}
         </span>
         #{h.link_to 'View Task',
-        h.dashboard_task_path(notifiable.task),
-        class: 'waves-effect waves-light btn notify-btn',
-        data: {id: id}}
+                    h.dashboard_task_path(notifiable.task),
+                    class: 'waves-effect waves-light btn notify-btn',
+                    data: { id: id }}
       </div>
     </div>
     "
@@ -68,7 +68,7 @@ class NotificationsDecorator < Draper::Decorator
   end
 
   def broadcast_price
-    if notifiable.price_range.last.to_i > 0
+    if notifiable.price_range.last.to_i.positive?
       "- #{h.number_to_currency(notifiable.price_range.last, precision: 0)}"
     end
   end
@@ -77,7 +77,7 @@ class NotificationsDecorator < Draper::Decorator
     if message.downcase.include?("assign")
       message
     else
-      "#{notifiable.name}"
+      notifiable.name.to_s
     end
   end
 end

@@ -106,6 +106,8 @@ button.btn[disabled] {
 }
 #my-search-field {
   width: 220px;
+  border-bottom: none;
+  box-shadow: none;
 }
 .apply{
   color: $primary-color !important;

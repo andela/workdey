@@ -1,53 +1,49 @@
-# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe Dashboard::TasksController, type: :controller do
   let!(:user) do
     create(:user, user_attr.merge(user_type: "tasker"))
   end
-  let!(:skillset) { create(:skillset, user: user) }
   let(:task) do
     attributes_for(:task, skillset_id: skillset.id, tasker_id: user.id)
   end
+  before(:each) do
+    @user = create(:user, user_attr.merge(user_type: "tasker"))
+    @skillset = create(:skillset)
+    @user.skillsets << @skillset
+    allow_any_instance_of(ApplicationController).
+      to receive(:current_user).and_return(@user)
+  end
+
   let(:price_range) do
     [
       Faker::Commerce.price(2000..3000).to_s,
-      Faker::Commerce.price(3001..4050).to_s
+      Faker::Commerce.price(3001..5000).to_s
     ]
   end
 
-  before(:each) do
-    allow_any_instance_of(ApplicationController).
-      to receive(:current_user).and_return(user)
-  end
-
   describe "POST create" do
-    let(:task_params) do
-      task.merge(min_price: price_range[0], max_price: price_range[1])
+    let(:task_param) do
+      {
+        name: Faker::Lorem.word,
+        location: "",
+        skillset_id: @skillset.id,
+        min_price: price_range[0],
+        max_price: price_range[1]
+      }
     end
 
     context "when users try to create a task with valid data" do
       it "saves the task" do
         expect do
-          post :create, task: task_params
+          post :create, task: attributes_for(:task).merge(task_param)
         end.to change(Task, :count).by(1)
-      end
-    end
-
-    context "when a task is created with erroneous price range" do
-      let(:task_params) do
-        task.merge(min_price: price_range[1], max_price: price_range[0])
-      end
-
-      it "returns error message when price range is incorrect" do
-        post :create, task: task_params
-        expect(assigns[:task].errors[:price_range]).to be_truthy
       end
     end
 
     context "when users try to create a task with invalid data" do
       before(:each) do
-        post :create, task: task_params.except(:name)
+        post :create, task: task_param.except(:name)
       end
 
       it "renders the new page" do
@@ -62,24 +58,16 @@ RSpec.describe Dashboard::TasksController, type: :controller do
 
   describe "POST update" do
     let!(:task) do
-      create(
-        :task,
-        skillset_id: skillset.id,
-        tasker_id: user.id,
-        price_range: price_range
-      )
-    end
-    let!(:req) do
-      put :update, id: task.id
+      create(:task, skillset_id: @skillset.id, tasker_id: @user.id)
     end
 
     context "when a user broadcasts a task" do
       let(:message) { "Available Taskees have been notified" }
 
       it "updates the task's price range and broadcasted status" do
+        put :update, id: task.id
         expect(assigns[:task].broadcasted).to be_truthy
       end
-      it { should set_flash[:notice].to message }
     end
   end
 
@@ -87,8 +75,8 @@ RSpec.describe Dashboard::TasksController, type: :controller do
     let!(:task) do
       create(
         :task,
-        skillset_id: skillset.id,
-        tasker_id: user.id,
+        skillset_id: @skillset.id,
+        tasker_id: @user.id,
         price_range: price_range,
         broadcasted: true
       )
@@ -106,18 +94,17 @@ RSpec.describe Dashboard::TasksController, type: :controller do
 
   describe "POST search" do
     context "when a skillset with a task is supplied as search params" do
-      let!(:skillset) { create(:skillset) }
       let!(:task) do
         create(
           :task,
-          skillset_id: skillset.id,
-          tasker_id: user.id,
+          tasker_id: @user.id,
+          skillset_id: @skillset.id,
           price_range: price_range
         )
       end
 
       before(:each) do
-        post :search, need: skillset.name
+        post :search, need: @skillset.name
       end
 
       it "returns the task object that has the skillset" do

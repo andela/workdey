@@ -40,18 +40,8 @@ module Helpers
     }
   end
 
-  def task_attr
-    {
-      start_date: Date.today,
-      end_date: 1.day.from_now,
-      price: 5000,
-      description: Faker::Lorem.sentence,
-      tasker_id: 3
-    }
-  end
-
   def new_task_helper(price)
-    log_in_with(user.email, user.password)
+    log_in_with(@user.email, @user.password)
     visit new_dashboard_task_path
     fill_in "task[name]", with: Faker::Lorem.word
     fill_in "min_price", with: price.to_s
@@ -65,7 +55,7 @@ module Helpers
                         .pickadate('picker').set('select', #{end_date})")
     find("div.select-wrapper input").click
     sleep(0.2)
-    find("div.select-wrapper li", text: skillset.name).click
+    find("div.select-wrapper li", text: @skillset.name).click
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
 
@@ -83,7 +73,7 @@ module Helpers
       page.execute_script("$('#bid_end_date')\
                         .pickadate('picker').set('select', #{end_date})")
       fill_in "bid[description]", with: Faker::Lorem.paragraph
-      find('input[type=submit]').click
+      find("input[type=submit]").click
     end
   end
 
@@ -97,5 +87,9 @@ module Helpers
     find("#search").click
     fill_in "need", with: skillset.name
     find("#my-input-field").native.send_keys(:return)
+  end
+
+  def parsed_response
+    JSON.parse(response.body)
   end
 end

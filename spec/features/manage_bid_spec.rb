@@ -4,9 +4,10 @@ RSpec.feature "Tasker bids", type: :feature do
   let(:taskee) do
     create(:user, user_type: "taskee", confirmed: true, has_taken_quiz: true)
   end
-  let(:skillset) { create(:skillset, user_id: taskee.id) }
+  let(:skillset) { create(:skillset) }
   let(:tasker) { create(:user) }
   let(:task) do
+    taskee.skillsets << skillset
     create(
       :task,
       tasker_id: tasker.id,

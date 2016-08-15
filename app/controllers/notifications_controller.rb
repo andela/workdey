@@ -4,9 +4,9 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = Notification.
-      unread(current_user).
-      order("updated_at DESC").
-      map(&NotificationsDecorator.method(:new))
+                     unread(current_user).
+                     order("updated_at DESC").
+                     map(&NotificationsDecorator.method(:new))
     Notification.update_as_notified(current_user)
   end
 
@@ -29,7 +29,7 @@ class NotificationsController < ApplicationController
     if update_notifiable?
       record = @notification.notifiable
       if record.update_attributes(@notifiable_attr_to_update.symbolize_keys) &&
-          @reply_to_sender == true
+         @reply_to_sender == true
         @notification.reply_to_sender(@message, "new_task")
       end
     end

@@ -1,9 +1,15 @@
-# frozen_string_literal: true
 require "rails_helper"
 RSpec.describe User, type: :model do
-  it { is_expected.to have_many(:skillsets) }
+  it { is_expected.to have_many(:skillsets).through(:taskee_skillsets) }
+
+  it do
+    is_expected.to have_many(:taskee_skillsets).with_foreign_key(:taskee_id)
+  end
+
   it { is_expected.to have_many(:reviews) }
+
   it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
+
   it do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
       with_foreign_key(:taskee_id)
@@ -109,8 +115,9 @@ RSpec.describe User, type: :model do
 
   describe ".get_taskee_by_skillset_name" do
     it "return users by their skillset name" do
+      skillset = create(:skillset)
       user = create(:user, user_attr.merge(user_type: "taskee"))
-      skillset = create(:skillset, user: user)
+      user.skillsets << skillset
       create_list(:skillset, 2)
       expect(User.get_taskees_by_skillset(skillset.name).count).to eq 1
     end
@@ -154,6 +161,14 @@ RSpec.describe User, type: :model do
       it "will return the user if found" do
         expect(User.first_or_create_from_oauth(@user_attributes)).to eql @user
       end
+    end
+  end
+
+  describe "#fullname" do
+    it "should concatenate the first and last names of users" do
+      user = build(:user)
+      expect(user).to be_truthy
+      expect(user.fullname).to eql user.firstname + " " + user.lastname
     end
   end
 end

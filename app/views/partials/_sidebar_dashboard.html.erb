@@ -4,11 +4,12 @@
     <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Biddings</li>"), biddings_path %><hr>
     <% if current_user.taskee? %>
-      <%= link_to raw("<li class='side-nav-button'>My Skillset</li>"), skillsets_path %> <hr>
+      <%= link_to raw("<li class='side-nav-button'>My Skillset</li>"), my_skillsets_path %> <hr>
       <%= link_to raw("<li class='side-nav-button'>My References</li>"), dashboard_references_path %> <hr>
     <% end %>
     <% if current_user.tasker? %>
       <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), map_search_path %><hr>
+      <%= link_to raw("<li class='side-nav-button'>Taskee Skillsets</li>"), "/taskees/index" %><hr>
     <% end %>
     <%= link_to raw("<li class='side-nav-button'>Task logs</li>"), my_tasks_path %><hr>
     <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), user_plans_path %><hr>

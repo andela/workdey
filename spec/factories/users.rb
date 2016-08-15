@@ -14,12 +14,8 @@ FactoryGirl.define do
     street_address { Faker::Address.street_address }
 
     factory :user_with_tasks do
-      transient do
-        task_count 1
-      end
-
-      after(:create) do |user, evaluator|
-        create_list(:skillset, evaluator.task_count, user: user)
+      after(:create) do |tasker|
+        FactoryGirl.create(:task, tasker: tasker)
       end
     end
   end

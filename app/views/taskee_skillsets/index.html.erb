@@ -8,13 +8,15 @@
             <p>You don't have any skillsets</p>
           <% else %>
             <ul class="collection with-header">
-              <li class="collection-header"><h4>My Skillsets</h4></li>
+              <li class="collection-header"><h4>My Skill Set</h4></li>
+              <%= form_tag "/skillsets/update_skillset", method: "post", id: "update_skillset" do %>
               <%= render partial: 'skillset', collection: @skillsets %>
             </ul>
+              <button id="update_skillset" class="btn waves-effect waves-light" type="submit">
+                Update My Skill Set<i class="material-icons left">directions_bike</i>
+              </button>
+              <% end %>
           <% end %>
-        </div>
-        <div class="col m5">
-            <%= render 'form' %>
         </div>
       </div>
     </div>

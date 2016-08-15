@@ -93,8 +93,6 @@ ActiveRecord::Schema.define(version: 20160809141551) do
   end
 
   create_table "skillsets", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
@@ -113,6 +111,16 @@ ActiveRecord::Schema.define(version: 20160809141551) do
     t.string   "status",     default: "inactive"
     t.boolean  "paid",       default: false
   end
+
+  create_table "taskee_skillsets", force: :cascade do |t|
+    t.integer  "skillset_id"
+    t.integer  "taskee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "taskee_skillsets", ["skillset_id"], name: "index_taskee_skillsets_on_skillset_id", using: :btree
+  add_index "taskee_skillsets", ["taskee_id"], name: "index_taskee_skillsets_on_taskee_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -176,5 +184,6 @@ ActiveRecord::Schema.define(version: 20160809141551) do
   add_foreign_key "biddings", "tasks"
   add_foreign_key "bids", "tasks"
   add_foreign_key "bids", "users"
+  add_foreign_key "taskee_skillsets", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

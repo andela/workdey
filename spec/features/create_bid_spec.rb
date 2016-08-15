@@ -4,9 +4,10 @@ RSpec.feature "Taskee Bid", type: :feature do
   let(:taskee) do
     create(:user, user_type: "taskee", confirmed: true, has_taken_quiz: true)
   end
-  let(:skillset) { create(:skillset, user_id: taskee.id) }
+  let(:skillset) { create(:skillset) }
   let(:tasker) { create(:user) }
   let(:task) do
+    taskee.skillsets << skillset
     create(
       :task,
       tasker_id: tasker.id,
@@ -29,10 +30,8 @@ RSpec.feature "Taskee Bid", type: :feature do
 
     taskee_make_bid
     click_link "Revise"
-    within "form" do
-      fill_in "bid[price]", with: price_change
-      find('input[type=submit]').click
-    end
+    fill_in "bid_price", with: price_change
+    find("input[type=submit]").click
 
     expect(page).to have_content "Bid successfully updated"
   end

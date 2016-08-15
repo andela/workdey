@@ -7,17 +7,20 @@ class SkillsetsController < ApplicationController
 
   def create
     @skillset = Skillset.find_or_create_by(
-      user_id: current_user.id,
       name: skillset_params[:name]
-    ) { |skillset| skillset.was_created = true }
+    ) do |skillset|
+      skillset.was_created = true
+    end
+    unless current_user.skillsets.include? @skillset
+      current_user.skillsets << @skillset
+    end
     respond_to :js
     @skillset.was_created = false
   end
 
   def destroy
-    @skillset = current_user.skillsets.detect do |skillset|
-      skillset.id == params[:skillset_id].to_i
-    end.destroy
+    @skillset = Skillset.find(params[:skillset_id])
+    current_user.skillsets.delete @skillset
     respond_to :js
   end
 

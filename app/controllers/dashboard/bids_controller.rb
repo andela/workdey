@@ -56,7 +56,7 @@ module Dashboard
       @task = Task.find(params[:task_id])
     end
 
-    def create_bid_notification(bid, action="made")
+    def create_bid_notification(bid, action = "made")
       Notification.create(
         message: "#{bid.user.fullname} #{action} a bid",
         sender_id: bid.user_id,
