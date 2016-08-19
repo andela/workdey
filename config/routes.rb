@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
+  put "broadcast" => "tasks#broadcast_task"
   get "signup" => "users#new"
   get "signin" => "sessions#new"
   post "signin" => "sessions#create"

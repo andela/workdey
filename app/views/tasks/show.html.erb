@@ -1,4 +1,3 @@
-<%= render 'partials/sidebar_dashboard' %>
 <% if flash.present?  %>
   <% flash.each do | name | %>
     <div class="flash-mail">
@@ -8,6 +7,7 @@
   <% end %>
 <% end %>
 <main>
+  <%= render 'partials/sidebar_dashboard' %>
   <section class="container">
     <div class="row">
       <div class="col s10 offset-s2 broadcast-container">
@@ -16,7 +16,7 @@
             <% if @task.broadcasted %>
               <%= link_to "Close Bid", close_bid_path, method: :get, class: "waves-effect waves-light btn-large red close-btn" %>
             <% else %>
-              <%= form_for @task do |f| %>
+              <%= form_tag broadcast_path(id: @task), method: :put do |f| %>
                 <div class="right">
                   <button class="waves-effect waves-light btn-large teal broadcast-btn" id="broadcast_submit" type="submit">Broadcast Task
                     <i class="material-icons right">send</i>
@@ -78,5 +78,4 @@
         </div>
       </div>
     </section>
-
   </main>
