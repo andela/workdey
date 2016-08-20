@@ -79,7 +79,7 @@ class TaskManagementsController < ApplicationController
 
   def task_details
     params.require(:task_management).
-      permit(:task_name, :tasker_id, :taskee_id, :amount, :task_desc)
+      permit(:task_name, :tasker_id, :taskee_id, :amount, :description)
   end
 
   def task_date
@@ -119,7 +119,7 @@ class TaskManagementsController < ApplicationController
   def retain_form_values
     flash[:errors] = @task.errors.full_messages
     flash[:amount] = task_details[:amount]
-    flash[:task_desc] = task_details[:task_desc]
+    flash[:description] = task_details[:description]
     flash[:month] = task_date[:month]
     flash[:day] = task_date[:day]
     flash[:time] = task_time[:task]

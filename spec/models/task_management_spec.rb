@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe TaskManagement, type: :model do
@@ -10,7 +9,7 @@ RSpec.describe TaskManagement, type: :model do
     task_management.taskee_id = 1
     task_management.start_time = Time.now
     task_management.end_time = 2.hours.from_now
-    task_management.task_desc = "Run tests"
+    task_management.description = "Run tests"
     task_management.amount = 3000
   end
 
@@ -69,9 +68,9 @@ RSpec.describe TaskManagement, type: :model do
     end
   end
 
-  describe ".validate_task_desc" do
+  describe ".validate_description" do
     it "must have a task description" do
-      task_management.task_desc = nil
+      task_management.description = nil
       expect(task_management.save).to be false
     end
   end

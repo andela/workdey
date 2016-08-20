@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class TaskManagement < ActiveRecord::Base
   belongs_to :taskee, class_name: "User"
   belongs_to :tasker, class_name: "User"
@@ -13,7 +12,7 @@ class TaskManagement < ActiveRecord::Base
   validates :task_id,
             :tasker_id,
             :taskee_id,
-            :task_desc,
+            :description,
             presence: true
   scope :paid_for, -> { where(paid: true) }
 

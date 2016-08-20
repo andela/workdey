@@ -18,7 +18,7 @@
               <tr>
                 <% tasker = User.find(task.tasker_id) %>
                 <td><%= "#{tasker.firstname} #{tasker.lastname}" %></td>
-                <td><%= task.task_desc %></td>
+                <td><%= task.description %></td>
                 <% status = task.status %>
                 <% if task.status.downcase == "done" %>
                   <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
@@ -60,7 +60,7 @@
                 <td><%= serial_no %></td>
                 <% user = User.find(task.taskee_id) %>
                 <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
-                <td><%= desc = task.task_desc %></td>
+                <td><%= desc = task.description %></td>
                 <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id, id: task.id } %>
                   <% if task.status.downcase == "done" %>
                     <td><span>Done</span></td>

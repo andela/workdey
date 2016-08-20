@@ -1,14 +1,13 @@
-# frozen_string_literal: true
 require "rails_helper"
 
 RSpec.describe TaskManagementsController, type: :controller do
   let!(:user) { create(:user) }
-  let!(:ironing) { create(:task_management, task_desc: Faker::Lorem.sentence) }
-  let!(:cleaning) { create(:task_management, task_desc: Faker::Lorem.sentence) }
+  let!(:ironing) { create(:task_management, description: Faker::Lorem.sentence) }
+  let!(:cleaning) { create(:task_management, description: Faker::Lorem.sentence) }
   let!(:carpentry) do
-    create(:task_management, task_desc: Faker::Lorem.sentence)
+    create(:task_management, description: Faker::Lorem.sentence)
   end
-  let!(:washing) { create(:task_management, task_desc: Faker::Lorem.sentence) }
+  let!(:washing) { create(:task_management, description: Faker::Lorem.sentence) }
 
   describe "GET #index" do
     context "when no user is logged in" do
