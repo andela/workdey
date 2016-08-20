@@ -36,7 +36,9 @@ class TaskManagementsController < ApplicationController
     @tasks = if current_user.taskee?
                sort_status(current_user.tasks_given.paid_for)
              elsif current_user.tasker?
-               sort_status(current_user.tasks_created)
+               sort_status(
+                 current_user.tasks_created + current_user.tasks.unassigned
+               ).paginate(page: params[:page], per_page: 10)
              end
   end
 
@@ -142,7 +144,7 @@ class TaskManagementsController < ApplicationController
     tasks.each do |task|
       task.status == "done" ? complete_tasks << task : incomplete_tasks << task
     end
-    complete_tasks + incomplete_tasks.sort
+    complete_tasks + incomplete_tasks
   end
 
   def notify_tasker(task)
