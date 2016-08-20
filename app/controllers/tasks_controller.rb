@@ -1,18 +1,21 @@
 class TasksController < ApplicationController
   before_action :login_required
-  before_action :set_task, only: [:update, :show, :close_bid]
+  before_action :set_task, except: [:new, :create, :search]
+  before_action :set_skillsets, only: [:new, :edit, :update, :create]
 
   def new
     @task = Task.new
-    @skillsets = Skillset.all.select(&:name)
+  end
+
+  def edit
+    render "new"
   end
 
   def update
-    if @task.update(broadcasted: true)
-      create_task_notification(@task)
-      update_redirect("Available Taskees have been notified")
+    if @task.update(task_params)
+      redirect_to @task, notice: "Your task has been successfully updated"
     else
-      render "show"
+      render "new"
     end
   end
 
@@ -21,7 +24,6 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task, notice: "Your task has been created"
     else
-      @skillsets = Skillset.all.select(&:name)
       render "new"
     end
   end
@@ -34,6 +36,15 @@ class TasksController < ApplicationController
   def search
     search_tasks = Task.search_for_available_need(params[:need])
     @tasks = search_tasks ? paginate_tasks(search_tasks) : []
+  end
+
+  def broadcast_task
+     if @task.update(broadcasted: true)
+      create_task_notification(@task)
+      update_redirect("Available Taskees have been notified")
+    else
+      render "show"
+    end
   end
 
   private
@@ -60,6 +71,10 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def set_skillsets
+    @skillsets = Skillset.all.select(&:name)
   end
 
   def available_taskees(skillset)

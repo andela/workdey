@@ -50,7 +50,7 @@
               <td><strong>Serial No</strong></td>
               <td><strong>Taskee Name</strong></td>
               <td><strong>Task Description</strong></td>
-              <td><strong>Status</strong></td>
+              <td colspan="2"><strong>Status</strong></td>
             </tr>
           </thead>
           <tbody>
@@ -58,27 +58,36 @@
             <% @tasks.each do |task| %>
               <tr>
                 <td><%= serial_no %></td>
-                <% user = User.find(task.taskee_id) %>
-                <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
-                <td><%= desc = task.description %></td>
-                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id, id: task.id } %>
+                <% if task.taskee_id %>
+                  <% user = User.find(task.taskee_id) %>
+                  <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
+                <% else %>
+                    <td><span class="red-text"><i class="tiny material-icons">not_interested</i> Not yet assigned</span></td>
+                <% end %>
+                <td>
+                  <%= description_string(task) %>
+                </td>
                   <% if task.status.downcase == "done" %>
                     <td><span>Done</span></td>
                   <% elsif task.status.downcase == "active" %>
                       <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
-                      <% unless task.paid? %>
-                        <%= link_to "Pay for this task", review_task_path(details) %>
-                        <% end %></td>
                   <% elsif task.status.downcase == "inactive" %>
                       <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
                       <% unless task.paid? %>
+                        <% details = { num: task.id, task: task.description, taskee: taskee, user_id: user.id, id: task.id } %>
                         <%= link_to "Pay for this task", review_task_path(details) %>
                         <% end %></td>
+                  <% elsif task.status.downcase == "unassigned" %>
+                    <td>
+                      <span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span></td>
+                    <td><a href="<%= edit_task_path(task) %>" class="btn waves-effect waves-light">Edit </a>
+                    </td>
                   <% end %>
               </tr>
               <% serial_no += 1 %>
             <% end %>
           </tbody>
+          <%= will_paginate @tasks %>
       </table>
       <% end %>
     </section>
