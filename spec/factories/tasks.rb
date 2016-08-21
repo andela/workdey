@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :task do
-    name Faker::Company.name
+    name { Faker::Company.name }
     description Faker::Lorem.paragraph(3)
     start_date Date.today
     end_date 1.day.from_now

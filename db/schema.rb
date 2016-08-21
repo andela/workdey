@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 20160820060921) do
     t.datetime "end_time"
     t.string   "status",      default: "inactive"
     t.boolean  "paid",        default: false
-    t.boolean  "shared",      default: false
   end
 
   create_table "taskee_skillsets", force: :cascade do |t|
