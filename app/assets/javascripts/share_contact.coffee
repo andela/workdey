@@ -21,8 +21,7 @@ jQuery ->
           method: "PUT"
           success: =>
             swal 'Success!', 'You have shared your contact with the tasker', 'success'
-            # TODO: Also remove the item from the page
-            $(this).hide()
+            $(this).replaceWith("<p class='green-text info_status'> Shared </p>")
         )
 
       else

@@ -25,9 +25,13 @@
                   <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %>
                 </td>
                 <% unless task.shared %>
-                <td>
-                <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact</a>
-                </td>
+                  <td>
+                    <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact</a>
+                  </td>
+                <% else %>
+                  <td>
+                    <span class="green-text info_status"> Shared </span>
+                  </td>
                 <% end %>
                 <% elsif task.status.downcase == "inactive" %>
                   <td class="red-text"><i class='tiny material-icons'>not_interested</i> <%= "#{status.downcase}" %></td>
