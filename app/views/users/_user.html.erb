@@ -1,5 +1,5 @@
 <tr>
-  <td><%= user.fullname %></td>
+  <td><%= link_to user.fullname, user_profile_path({ taskee_view: true }.merge(obfuscate("taskee_id" => user.id))) %></td>
   <td><b><%= skillsets(user) %></b></td>
   <td>
     <a class="btn user-map-trigger" data-longitude="<%= user.longitude %>" data-latitude="<%= user.latitude %>" href="#user-location-modal">View</a>

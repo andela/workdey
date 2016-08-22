@@ -13,8 +13,8 @@
           <p>
             <span> Average Rating: </span> <%= @user.average_rating(@user.id) %>
           </p>
-          <% unless current_user.user_type == "taskee" %>
-            <% id = "WKDY#{@user.id}"%>
+          <% if current_user.tasker? && !params[:taskee_view] %>
+            <% id = "WKDY#{@user.id}" %>
             <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)), class: "btn waves-effect" %>
           <% end %>
         </div>
