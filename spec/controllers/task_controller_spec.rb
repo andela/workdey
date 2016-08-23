@@ -72,12 +72,12 @@ RSpec.describe TasksController, type: :controller do
     end
 
     context "when parameters are valid" do
-      let(:task_parameters) {
-        attributes_for(:task).merge({
+      let(:task_parameters) do
+        attributes_for(:task).merge(
           min_price: Faker::Commerce.price(2000..3000).to_s,
           max_price: Faker::Commerce.price(3002..5000).to_s
-        })
-      }
+        )
+      end
       let(:message) { "Your task has been successfully updated" }
 
       it { expect(@task.name).to_not eql task_parameters[:name] }
@@ -110,7 +110,6 @@ RSpec.describe TasksController, type: :controller do
         expect(response).to render_template :new
       end
     end
-
   end
 
   describe "#broadcast_task" do

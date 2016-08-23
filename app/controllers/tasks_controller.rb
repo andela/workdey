@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   end
 
   def broadcast_task
-     if @task.update(broadcasted: true)
+    if @task.update(broadcasted: true)
       create_task_notification(@task)
       update_redirect("Available Taskees have been notified")
     else
