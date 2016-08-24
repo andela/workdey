@@ -37,7 +37,7 @@
               <%= f.label :time, "Start Time" %>
             </div>
             <div class="input-field col s12 m6 jiji">
-              <i class="material-icons prefix ji">work</i>
+              <i class="material-icons prefix">work</i>
               <%= f.collection_select :skillset_id, @skillsets, :id, :name, { prompt: "Choose a skillset" }, { required: true } %>
             </div>
           </div>
@@ -45,12 +45,14 @@
             <div class="col s12 grey-text"><i>Enter a <b>Price Range</b> or just the Minimum Price</i></div>
             <div class="input-field col s12 m6">
               <i class="material-icons prefix">credit_card</i>
-              <input name="task[min_price]" id="min_price" type="text" class="validate" pattern="[0-9]+" required>
+              <%= f.text_field :min_price, value: f.object.price_range.first, id: "min_price", class: "validate",
+                pattern: "[0-9]+", required: true %>
               <label for="min_price">Minimum Price</label>
             </div>
             <div class="input-field col s12 m6">
               <i class="material-icons prefix">credit_card</i>
-              <input name="task[max_price]" id="max_price" type="text" class="validate" pattern="[0-9]+">
+              <%= f.text_field :max_price, value: f.object.price_range.last, id: "max_price",
+                class: "validate", pattern: "[0-9]+" %>
               <label for="max_price">Maximum Price</label>
             </div>
           </div>
