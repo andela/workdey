@@ -27,10 +27,21 @@
 .side-nav a{
   color: white !important;
 }
-.sinav{
-  background-color: #767373;
 
+.sinav{
+  background-color: #444;
 }
+
+.side-nav li:hover, .side-nav li.active, .side-nav li.focus {
+  background-color: #ddd;
+  color: #000;
+}
+
+ul#slide-out {
+  width: 180px !important;
+  left: 0;
+}
+
 .sidenav-tog{
   display: inline !important;
 }

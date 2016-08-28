@@ -1,24 +1,15 @@
-
 <ul id="slide-out" class="side-nav sinav">
 <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %>
-<li><div class="divider"></div></li>
 <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %>
-<li><div class="divider"></div></li>
 <%= link_to raw("<li class='side-nav-button'>Biddings</li>"), biddings_path %>
-<li><div class="divider"></div></li>
+
 <% if current_user.taskee? %>
 <%= link_to raw("<li class='side-nav-button'>My Skillset</li>"), my_skillsets_path %>
-<li><div class="divider"></div></li>
 <%= link_to raw("<li class='side-nav-button'>My References</li>"), dashboard_references_path %>
-<li><div class="divider"></div></li>
-<% end %>
-<% if current_user.tasker? %>
+<% else %>
 <%= link_to raw("<li class='side-nav-button'>Map Search</li>"), map_search_path %>
-<li><div class="divider"></div></li>
 <%= link_to raw("<li class='side-nav-button'>Taskee Skillsets</li>"), "/taskees/index" %>
-<li><div class="divider"></div></li>
 <% end %>
 <%= link_to raw("<li class='side-nav-button'>Task logs</li>"), my_tasks_path %>
-<li><div class="divider"></div></li>
 <%= link_to raw("<li class='side-nav-button'>Account Upgrade</li>"), user_plans_path %>
 </ul>
