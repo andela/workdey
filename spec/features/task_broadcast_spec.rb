@@ -31,15 +31,9 @@ RSpec.describe "Broadcast tasks", type: :feature do
     visit "/tasks/#{task.id}"
   end
 
-  pending "when a user broadcasts a task" do
+  feature "when a user broadcasts a task" do
     scenario "Tasker broadcasts task" do
       click_on "Broadcast Task"
-      within ".modal-content" do
-        fill_in "min_price", with: "2000"
-        fill_in "max_price", with: "3000"
-      end
-      find_button("Broadcast Task").click
-
       expect(page).to have_content message
     end
   end

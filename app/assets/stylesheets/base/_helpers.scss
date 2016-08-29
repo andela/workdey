@@ -32,14 +32,19 @@
   background-color: #444;
 }
 
-.side-nav li:hover, .side-nav li.active, .side-nav li.focus {
+.side-nav a:hover {
   background-color: #ddd;
-  color: #000;
+  color: #000 !important;
 }
 
 ul#slide-out {
   width: 180px !important;
   left: 0;
+}
+
+.side-nav li {
+  float: none;
+  padding: 0;
 }
 
 .sidenav-tog{

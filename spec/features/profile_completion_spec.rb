@@ -32,7 +32,9 @@ RSpec.describe "Profile completion meter" do
     fill_in "phone", with: Faker::PhoneNumber.phone_number
     fill_in "street_address", with: Faker::Address.street_name
     click_button "UPDATE PROFILE"
-    click_on "Home"
+    find(:xpath, '//*[@id="nav-wrapper"]/a').click
+    click_link "Home"
+
 
     within("div.profile-meter") do
       expect(page).to have_content "82%"

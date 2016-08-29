@@ -8,7 +8,6 @@ Rails.application.configure do
   config.action_dispatch.show_exceptions = false
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.delivery_method = :test
-  config.active_record.maintain_test_schema = false
   host = "http://localhost:3000"
   config.action_mailer.default_url_options = { host: host }
   config.active_support.test_order = :random

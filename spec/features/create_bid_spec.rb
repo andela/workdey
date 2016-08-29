@@ -15,11 +15,13 @@ RSpec.feature "Create Task for bidding", type: :feature do
   end
 
   scenario "tasker can see a link to the biddings page" do
-    within("div.sidebar-dash") { expect(page).to have_content("Biddings") }
+    find(:xpath, '//*[@id="nav-wrapper"]/a').click
+    expect(page).to have_content "Biddings"
   end
 
   scenario "tasker can click on biddings link and be directed to biddings\
    page" do
+    find(:xpath, '//*[@id="nav-wrapper"]/a').click
     click_link "Biddings"
     expect(page).to have_selector("h1", text: "Bids")
     expect(page).to have_selector("a", text: "add")
@@ -27,6 +29,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
 
   scenario "tasker can click on add button and be redirected to an add bid\
    form" do
+    find(:xpath, '//*[@id="nav-wrapper"]/a').click
     click_link "Biddings"
     click_link "add"
     expect(page).to have_selector("h2", text: "New Bid")
@@ -57,6 +60,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   end
 
   def create_a_bid(task_name, description, price_range)
+    find(:xpath, '//*[@id="nav-wrapper"]/a').click
     click_link "Biddings"
     click_link "add"
     fill_in "bidding_name", with: task_name

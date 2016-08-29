@@ -43,7 +43,7 @@ module Helpers
   def new_task_helper(price)
     log_in_with(@user.email, @user.password)
     visit new_task_path
-    fill_in "task[name]", with: Faker::Lorem.word
+    fill_in "task_name", with: Faker::Lorem.word
     fill_in "min_price", with: price.to_s
     fill_in "max_price", with: (price + 10).to_s
 
