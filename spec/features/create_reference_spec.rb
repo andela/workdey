@@ -15,8 +15,7 @@ RSpec.feature "Create a reference", type: :feature do
   before { log_in_with(@user.email, @user.password) }
   context "when a taskee has no skill set" do
     scenario "clicks 'My Refereces' link" do
-      find(:xpath, '//*[@id="nav-wrapper"]/a').click
-      click_link "My References"
+      visit dashboard_references_path
 
       expect(page).to have_content "My References"
       expect(page).to have_content "You have no existing references"

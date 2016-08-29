@@ -55,6 +55,6 @@ RSpec.describe "Share contact", js: true do
     click_on "Share Contact"
     sleep 1.5
     share ? click_on("Yes, share it") : click_on("No, don't share")
-    click_on "OK"
+    # click_on "OK"
   end
 end

@@ -31,7 +31,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
    form" do
     find(:xpath, '//*[@id="nav-wrapper"]/a').click
     click_link "Biddings"
-    click_link "add"
+    find(:xpath, '//*[@id="new-bid-btn"]/i').click
     expect(page).to have_selector("h2", text: "New Bid")
     expect(page).to have_css("form.new_bidding")
   end
@@ -60,9 +60,8 @@ RSpec.feature "Create Task for bidding", type: :feature do
   end
 
   def create_a_bid(task_name, description, price_range)
-    find(:xpath, '//*[@id="nav-wrapper"]/a').click
-    click_link "Biddings"
-    click_link "add"
+    visit new_bidding_path
+
     fill_in "bidding_name", with: task_name
     fill_in "bidding_description", with: description
     fill_in "bidding_price_range", with: price_range
