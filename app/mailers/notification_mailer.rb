@@ -24,4 +24,11 @@ class NotificationMailer < ApplicationMailer
       subject: "Available Tasks that matches your skillset"
     )
   end
+
+  def send_contact_info(tasker, taskee)
+    @tasker = tasker
+    @taskee = taskee
+    @fullname = taskee.fullname
+    mail to: tasker.email, subject: "#{@fullname} has shared contact with you"
+  end
 end

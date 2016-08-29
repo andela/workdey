@@ -2,6 +2,7 @@ class Task < ActiveRecord::Base
   include PriceRangeValidation
   attr_accessor :min_price, :max_price
   belongs_to :tasker, class_name: "User"
+  belongs_to :taskee, class_name: "User"
   belongs_to :skillset
 
   has_many :task_management, foreign_key: :task_id

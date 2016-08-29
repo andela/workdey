@@ -48,4 +48,24 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(@mail.body.encoded).to match("Hi")
     end
   end
+
+  describe "send_contact_info" do
+    let(:taskee) do
+      create(:user, user_type: "taskee", phone: Faker::PhoneNumber.cell_phone)
+    end
+    let(:tasker) { create(:user) }
+    let(:mail) do
+      NotificationMailer.send_contact_info(tasker, taskee).deliver_now
+    end
+
+    it "renders the subject" do
+      expect(mail.subject).to eq(
+        "#{taskee.fullname} has shared contact with you"
+      )
+    end
+
+    it "sends to the tasker" do
+      expect(mail.to).to eq [tasker.email]
+    end
+  end
 end

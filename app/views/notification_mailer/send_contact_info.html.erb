@@ -1,0 +1,20 @@
+<div class="mail-wrapper">
+  <h1>Your Workdey Notification</h1>
+  <p>
+  <%= "Hi #{@tasker.firstname}, " %><br/>
+    You have one available notification on workdey
+    check it out below:<br/>
+  </p>
+  <p>
+   <%= "#{@fullname} has shared contact with you." %>
+  </p><br/>
+  <p> Below is  <%= @fullname %>'s contact info:
+    <ul>
+      <li> Phone Number: <%= @taskee.phone %></li>
+      <li> Contact Address: <%= @taskee.street_address%>,<%= @taskee.city %>, <%= @taskee.state %> </li>
+    </ul>
+    <p>
+      Thanks.
+    </p>
+  <p><a href="https://workdey-staging.herokuapp.com"> log in </a>to your workdey account to address this notification</p>
+</div>

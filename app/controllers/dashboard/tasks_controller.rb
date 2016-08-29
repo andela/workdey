@@ -104,9 +104,9 @@ module Dashboard
     def dashboard_redirect?
       task = Task.find(params[:id])
       if (current_user.tasker? && current_user.id != task.tasker_id) ||
-          (current_user.taskee? && !task.broadcasted) ||
-          (current_user.taskee? && task.status === "started" &&
-           task.taskee_id != current_user.id)
+         (current_user.taskee? && !task.broadcasted) ||
+         (current_user.taskee? && task.status == "started" &&
+          task.taskee_id != current_user.id)
       end
     end
 

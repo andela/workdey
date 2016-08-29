@@ -46,4 +46,32 @@ RSpec.describe TaskManagementsController, type: :controller do
       end
     end
   end
+
+  describe "#share" do
+    let(:taskee) { create(:user, user_type: "taskee") }
+    let(:tasker) { create(:user) }
+    let(:task) do
+      create(:task_management, taskee_id: taskee.id, tasker_id: tasker.id)
+    end
+
+    it "updates the shared atrribute to true" do
+      expect(task.shared).to be false
+
+      put :share, id: task.id
+      expect(task.reload.shared).to be true
+    end
+
+    it "renders json success message" do
+      put :share, id: task.id
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["message"]).to eq "success"
+    end
+
+    it "increases the count of Notification table by creting a new "\
+    "notification" do
+      expect do
+        put :share, id: task.id
+      end.to change(Notification, :count).by 1
+    end
+  end
 end

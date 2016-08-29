@@ -10,6 +10,7 @@
               <td>Tasker</td>
               <td>Description</td>
               <td>Status</td>
+              <td>Share Contact</td>
             </tr>
           </thead>
           <tbody>
@@ -21,8 +22,18 @@
                 <% status = task.status %>
                 <% if task.status.downcase == "done" %>
                   <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
-                <% elsif task.status.downcase == "active" %>
-                  <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %></td>
+                <% elsif task.status.downcase == "active"%>
+                  <td class="cyan-text"><i class='tiny material-icons'>trending_flat</i> <%= "#{status.downcase}" %>
+                </td>
+                <% unless task.shared %>
+                  <td>
+                    <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact</a>
+                  </td>
+                <% else %>
+                  <td>
+                    <span class="green-text info_status"> Shared </span>
+                  </td>
+                <% end %>
                 <% elsif task.status.downcase == "inactive" %>
                   <td class="red-text"><i class='tiny material-icons'>not_interested</i> <%= "#{status.downcase}" %></td>
                 <% elsif task.status.downcase == "rejected" %>

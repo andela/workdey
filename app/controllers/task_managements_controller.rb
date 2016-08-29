@@ -68,6 +68,13 @@ class TaskManagementsController < ApplicationController
     ).deliver_now
   end
 
+  def share
+    task = TaskManagement.find(params[:id])
+    task.update_attribute("shared", true)
+    notify_tasker(task)
+    render json: { message: "success" }
+  end
+
   private
 
   def task_details
@@ -136,5 +143,15 @@ class TaskManagementsController < ApplicationController
       task.status == "done" ? complete_tasks << task : incomplete_tasks << task
     end
     complete_tasks + incomplete_tasks.sort
+  end
+
+  def notify_tasker(task)
+    NotificationMailer.send_contact_info(task.tasker, task.taskee).deliver_now
+    Notification.create(
+      message: "#{task.taskee.fullname} has shared contact with you!",
+      sender_id: task.taskee_id,
+      receiver_id: task.tasker_id,
+      notifiable: task
+    ).notify_receiver("broadcast_task")
   end
 end
