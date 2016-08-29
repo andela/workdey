@@ -15,34 +15,12 @@
           <p> You will have to pay before your taskee will be notified</p>
           <p>You may pay below</p>
           <% @taskee = @task.taskee.fullname %>
-          <% @description = @task.task_desc %>
+          <% @description = @task.description %>
           <% @amount = @task.amount %>
           <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", @taskee, disabled: true) %></li>
           <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", @description, disabled: true ) %></li>
             <% unless @task.paid? %>
               <%= render "pay" %>
-            <% end %>
-        <% else %>
-          <p>You can review and/or rate the taskee before you click on " complete" button.</p>
-          <p><strong>NB:</strong> Clicking on the complete button means that the task has been completed by the taskee.</p>
-          <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", params[:taskee], disabled: true) %></li>
-          <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", params[:task], disabled: true ) %></li>
-            <%= form_tag completed_path do %>
-            <li><strong><%= label_tag "Add a comment about the taskee or their job:" %></strong></li>
-              <input type="hidden" name= "task_id" value= "<%= params[:num] %>" >
-              <input type="hidden" name= "user_id" value= "<%= params[:user_id] %>" >
-            <li><%= text_area_tag "comment" %></li>
-            <li><strong><%= label_tag "Rate taskee" %></strong>
-              <div>&nbsp;</div>
-                <% 1.upto(5) do |n| %>
-                  <div class="group">
-                    <i class="fa fa-star-o"></i>
-                    <input type="radio" name="rating" value="<%= n %>">
-                  </div>
-                <% end %>
-              <div>&nbsp;</div>
-            </li>
-            <li><button class="btn waves-effect" type="submit">Completed</button></li>
             <% end %>
         <% end %>
       </ul>
