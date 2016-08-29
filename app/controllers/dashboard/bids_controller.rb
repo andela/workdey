@@ -14,18 +14,18 @@ module Dashboard
         create_bid_notification(@bid)
         redirect_to [:dashboard, @task], notice: "You have successfully made"\
           " a bid"
-      else
-        render :new
+        return
       end
+      render :new
     end
 
     def update
       if @bid.update(bid_params)
         create_bid_notification(@bid, "updated")
         redirect_to [:dashboard, @task], notice: "Bid successfully updated"
-      else
-        render :edit
+        return
       end
+      render :edit
     end
 
     def destroy

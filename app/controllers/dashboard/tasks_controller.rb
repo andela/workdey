@@ -91,12 +91,7 @@ module Dashboard
 
     def set_task
       task = Task.find(params[:id])
-      if current_user.tasker? && current_user.id != task.tasker_id
-        dashboard_redirect
-      elsif current_user.taskee? && !task.broadcasted
-        dashboard_redirect
-      elsif current_user.taskee? &&
-            task.status == "started" && task.taskee_id != current_user.id
+      if dashboard_redirect?
         dashboard_redirect
       elsif task.status == "finished" && current_user.taskee?
         dashboard_redirect("Task was marked as finished by owner")
@@ -104,6 +99,15 @@ module Dashboard
         @task = task
       end
       @bids = Bid.where(task_id: task.id).paginate(page: params[:page])
+    end
+
+    def dashboard_redirect?
+      task = Task.find(params[:id])
+      if (current_user.tasker? && current_user.id != task.tasker_id) ||
+          (current_user.taskee? && !task.broadcasted) ||
+          (current_user.taskee? && task.status === "started" &&
+           task.taskee_id != current_user.id)
+      end
     end
 
     def available_taskees(skillset)

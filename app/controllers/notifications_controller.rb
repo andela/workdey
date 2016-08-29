@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
     if request.xhr?
       render json: record
     else
-      redirect_to record
+      redirect_to [:dashboard, record]
     end
   end
 
@@ -56,6 +56,6 @@ class NotificationsController < ApplicationController
   end
 
   def update_notifiable?
-    !params[:notifiable_attr_to_update].blank?
+    params[:notifiable_attr_to_update].present?
   end
 end

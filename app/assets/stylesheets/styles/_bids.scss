@@ -17,9 +17,7 @@
       color: #fff;
     }
   }
-}
 
-.pagination {
   .waves-effect {
     vertical-align: inherit !important;
   }
@@ -36,16 +34,12 @@
   }
 }
 
-.taskee_reviews {
-  .ratings {
-    .fa {
-      cursor: default;
-      color: transparentize(grey, .7);
+.taskee_reviews > .ratings > .fa {
+  cursor: default;
+  color: transparentize(grey, .7);
 
-      &.yellow-star {
-        color: darken(yellow, 5%);
-      }
-    }
+  &.yellow-star {
+    color: darken(yellow, 5%);
   }
 }
 

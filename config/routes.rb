@@ -59,7 +59,6 @@ Rails.application.routes.draw do
   get "/my_skillsets" => "taskee_skillsets#index", as: :my_skillsets
   put "/taskee_skillsets" => "taskee_skillsets#update"
 
-  resources :biddings
   resources :users, only: [:create]
   resources :charges, only: [:new, :create]
 
