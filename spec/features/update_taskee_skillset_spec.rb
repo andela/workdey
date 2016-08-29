@@ -9,11 +9,6 @@ RSpec.feature "Update Taskee Skill Set" do
 
   before { log_in_with(user.email, user.password) }
 
-  scenario "visits dashboard" do
-    find(:xpath, '//*[@id="nav-wrapper"]/a').click
-    expect(page).to have_content("My Skillset")
-  end
-
   scenario "clicks 'My Skillset' link" do
     visit my_skillsets_path
 

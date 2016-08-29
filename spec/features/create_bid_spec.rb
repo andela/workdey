@@ -14,11 +14,6 @@ RSpec.feature "Create Task for bidding", type: :feature do
     log_in_with(user.email, user.password)
   end
 
-  scenario "tasker can see a link to the biddings page" do
-    find(:xpath, '//*[@id="nav-wrapper"]/a').click
-    expect(page).to have_content "Biddings"
-  end
-
   scenario "tasker visits biddings page" do
     visit biddings_path
 
