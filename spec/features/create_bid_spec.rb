@@ -21,17 +21,18 @@ RSpec.feature "Create Task for bidding", type: :feature do
 
   scenario "tasker can click on biddings link and be directed to biddings\
    page" do
-    find(:xpath, '//*[@id="nav-wrapper"]/a').click
-    click_link "Biddings"
+    visit biddings_path
+
     expect(page).to have_selector("h1", text: "Bids")
     expect(page).to have_selector("a", text: "add")
   end
 
   scenario "tasker can click on add button and be redirected to an add bid\
    form" do
-    find(:xpath, '//*[@id="nav-wrapper"]/a').click
-    click_link "Biddings"
-    find(:xpath, '//*[@id="new-bid-btn"]/i').click
+    visit biddings_path
+
+    click_link "add"
+
     expect(page).to have_selector("h2", text: "New Bid")
     expect(page).to have_css("form.new_bidding")
   end
@@ -45,6 +46,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   scenario "tasker can edit a bid" do
     create(:bidding, tasker_id: user.id)
     visit biddings_path
+
     click_link "mode_edit"
     fill_in "bidding_name", with: "Washing"
     click_button "Update Bidding"

@@ -24,8 +24,7 @@ RSpec.describe "Share contact", js: true do
     scenario "When taskee shares contact with tasker", js: true do
       share_contact
 
-      expect(page).to have_content("You have shared "\
-      "your contact with the tasker")
+      expect(page).to have_content "Success!"
       expect(task.reload.shared).to be_truthy
     end
 
@@ -55,6 +54,5 @@ RSpec.describe "Share contact", js: true do
     click_on "Share Contact"
     sleep 1.5
     share ? click_on("Yes, share it") : click_on("No, don't share")
-    # click_on "OK"
   end
 end

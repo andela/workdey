@@ -9,9 +9,10 @@ RSpec.feature "ListTaskeesAndSkillsets", type: :feature do
     scenario "when there are available taskees" do
       create_list(:user, 4, confirmed: true, user_type: "taskee")
       log_in_with @tasker.email, @tasker.password
-      find(:xpath, '//*[@id="nav-wrapper"]/a').click
-      click_on "Taskee Skillsets"
+      visit taskees_path
+
       expect(page).to have_css("table")
+
       within "table" do
         expect(page).to have_text "Taskee"
         expect(page).to have_content "Skillsets"
@@ -22,8 +23,8 @@ RSpec.feature "ListTaskeesAndSkillsets", type: :feature do
 
     scenario "when there are no available taskees" do
       log_in_with @tasker.email, @tasker.password
-      find(:xpath, '//*[@id="nav-wrapper"]/a').click
-      click_on "Taskee Skillsets"
+      visit taskees_path
+
       expect(page).to have_no_css "table"
       expect(page).to have_content "There are currently no taskees here"
     end

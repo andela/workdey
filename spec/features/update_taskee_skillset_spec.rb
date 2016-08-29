@@ -15,8 +15,8 @@ RSpec.feature "Update Taskee Skill Set" do
   end
 
   scenario "clicks 'My Skillset' link" do
-    find(:xpath, '//*[@id="nav-wrapper"]/a').click
-    click_link "My Skillset"
+    visit my_skillsets_path
+
     expect(page).
       to have_selector("li.collection-item", text: skillsets.first.name)
   end
