@@ -21,7 +21,7 @@ jQuery ->
           method: "PUT"
           success: =>
             swal 'Success!', 'You have shared your contact with the tasker', 'success'
-            $(this).replaceWith("<p class='green-text info_status'> Shared </p>")
+            $(this).replaceWith("<span class='green-text info_status'> Shared </span>")
         )
 
       else
