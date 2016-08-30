@@ -179,4 +179,14 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let!(:task) { create(:task, tasker_id: @user.id) }
+
+    it "deletes a task" do
+      expect do
+        delete :destroy, id: task.id
+      end.to change(Task, :count).by(-1)
+    end
+  end
 end

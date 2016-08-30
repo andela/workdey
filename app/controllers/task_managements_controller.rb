@@ -37,7 +37,8 @@ class TaskManagementsController < ApplicationController
                sort_status(current_user.tasks_given.paid_for)
              elsif current_user.tasker?
                sort_status(
-                 current_user.tasks_created + current_user.tasks.unassigned
+                 current_user.tasks_created +
+                 current_user.tasks_assigned.unassigned
                ).paginate(page: params[:page], per_page: 10)
              end
   end
