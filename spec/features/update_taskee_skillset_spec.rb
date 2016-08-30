@@ -9,12 +9,9 @@ RSpec.feature "Update Taskee Skill Set" do
 
   before { log_in_with(user.email, user.password) }
 
-  scenario "visits dashboard" do
-    within("div.sidebar-dash") { expect(page).to have_content("My Skillset") }
-  end
-
   scenario "clicks 'My Skillset' link" do
-    click_link "My Skillset"
+    visit my_skillsets_path
+
     expect(page).
       to have_selector("li.collection-item", text: skillsets.first.name)
   end

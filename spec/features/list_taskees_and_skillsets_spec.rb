@@ -10,9 +10,10 @@ RSpec.feature "ListTaskeesAndSkillsets", type: :feature do
       create(:user, confirmed: true, user_type: "taskee")
       taskee = User.last
       log_in_with @tasker.email, @tasker.password
-      expect(page).to have_link "Taskee Skillsets"
-      click_on "Taskee Skillsets"
+      visit taskees_path
+
       expect(page).to have_css("table")
+
       within "table" do
         expect(page).to have_text "Taskee"
         expect(page).to have_content "Skillsets"
@@ -27,7 +28,8 @@ RSpec.feature "ListTaskeesAndSkillsets", type: :feature do
 
     scenario "when there are no available taskees" do
       log_in_with @tasker.email, @tasker.password
-      click_on "Taskee Skillsets"
+      visit taskees_path
+
       expect(page).to have_no_css "table"
       expect(page).to have_content "There are currently no taskees here"
     end

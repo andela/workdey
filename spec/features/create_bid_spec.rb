@@ -14,21 +14,18 @@ RSpec.feature "Create Task for bidding", type: :feature do
     log_in_with(user.email, user.password)
   end
 
-  scenario "tasker can see a link to the biddings page" do
-    within("div.sidebar-dash") { expect(page).to have_content("Biddings") }
-  end
+  scenario "tasker visits biddings page" do
+    visit biddings_path
 
-  scenario "tasker can click on biddings link and be directed to biddings\
-   page" do
-    click_link "Biddings"
     expect(page).to have_selector("h1", text: "Bids")
     expect(page).to have_selector("a", text: "add")
   end
 
-  scenario "tasker can click on add button and be redirected to an add bid\
-   form" do
-    click_link "Biddings"
+  scenario "tasker clicks on add button to view new bidding form" do
+    visit biddings_path
+
     click_link "add"
+
     expect(page).to have_selector("h2", text: "New Bid")
     expect(page).to have_css("form.new_bidding")
   end
@@ -42,6 +39,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   scenario "tasker can edit a bid" do
     create(:bidding, tasker_id: user.id)
     visit biddings_path
+
     click_link "mode_edit"
     fill_in "bidding_name", with: "Washing"
     click_button "Update Bidding"
@@ -57,8 +55,8 @@ RSpec.feature "Create Task for bidding", type: :feature do
   end
 
   def create_a_bid(task_name, description, price_range)
-    click_link "Biddings"
-    click_link "add"
+    visit new_bidding_path
+
     fill_in "bidding_name", with: task_name
     fill_in "bidding_description", with: description
     fill_in "bidding_price_range", with: price_range

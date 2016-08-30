@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'taskees/index'
+  get "taskees/index"  => "taskees#index", as: :taskees
 
   root "pages#index"
 
