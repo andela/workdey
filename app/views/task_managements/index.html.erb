@@ -9,7 +9,7 @@
               <td>Tasker</td>
               <td>Description</td>
               <td>Status</td>
-              <td>Share Contact</td>
+              <td>Share Contact Information</td>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +26,7 @@
                 </td>
                 <% unless task.shared %>
                   <td>
-                    <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact</a>
+                    <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact Information</a>
                   </td>
                 <% else %>
                   <td>
