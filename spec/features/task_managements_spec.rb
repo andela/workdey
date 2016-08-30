@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.feature "TaskLogs", type: :feature do
   before do
-    task1_desc = "Lorem ipsum dolor sit amet"
-    task2_desc = "consectetur adipisicing elit"
+    task1_desc = Faker::Lorem.characters(45)
+    task2_desc = Faker::Lorem.characters(45)
     @task1 = create(:task_management, description: task1_desc, paid: true)
     @task2 = create(:task_management, description: task2_desc,
                                       tasker_id: 2, taskee_id: 3)
