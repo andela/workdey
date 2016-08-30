@@ -5,7 +5,7 @@ RSpec.describe "Share contact", js: true do
     page.driver.browser.manage.window.maximize
   end
   let(:taskee) { create(:user, user_type: "taskee", confirmed: true) }
-  let(:tasker) { create(:user, confirmed: true) }
+  let(:tasker) { create(:user, user_type: "tasker", confirmed: true) }
   let!(:task) do
     create(
       :task_management,
