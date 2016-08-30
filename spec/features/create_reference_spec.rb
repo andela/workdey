@@ -13,42 +13,35 @@ RSpec.feature "Create a reference", type: :feature do
   end
 
   before { log_in_with(@user.email, @user.password) }
+  context "when a taskee has no skill set" do
+    scenario "clicks 'My Refereces' link" do
+      visit dashboard_references_path
 
-  scenario "clicks 'My Refereces' click" do
-    click_link "My References"
-    expect(page).to have_content("My References")
-    expect(page).to have_css("a#new-reference-btn")
+      expect(page).to have_content "My References"
+      expect(page).to have_content "You have no existing references"
+      expect(page).not_to have_content "Input details of your reference"
+    end
   end
 
-  context "when taskee has a skill set" do
-    scenario "clicks plus button" do
-      click_link "My References"
-      click_link "new-reference-btn"
-      expect(page).to have_content(" Input details of your reference")
+  feature "reference" do
+    scenario "when taskee fills reference form" do
+      visit new_dashboard_reference_path
+      fill_in "reference_firstname", with: Faker::Name.first_name
+      fill_in "reference_lastname", with: Faker::Name.last_name
+      fill_in "reference_email", with: "marquis.carroll@wilder.io"
+      fill_in "reference_relationship", with: "Professional"
+      find("label", text: @skill.name.to_s).click
+      click_button "Send Email"
+      expect(page).
+        to have_content("An email will be sent to marquis.carroll@wilder.io")
+      expect(current_path).to eq(new_dashboard_reference_path)
     end
 
-    context "when all fields are filled" do
-      scenario "fills reference form" do
-        visit new_dashboard_reference_path
-        fill_in "reference_firstname", with: Faker::Name.first_name
-        fill_in "reference_lastname", with: Faker::Name.last_name
-        fill_in "reference_email", with: "marquis.carroll@wilder.io"
-        fill_in "reference_relationship", with: "Professional"
-        find("label", text: @skill.name.to_s).click
-        click_button "Send Email"
-        expect(page).
-          to have_content("An email will be sent to marquis.carroll@wilder.io")
-        expect(current_path).to eq(new_dashboard_reference_path)
-      end
-    end
-
-    context "when all fields are not filled" do
-      scenario "clicks submit" do
-        visit new_dashboard_reference_path
-        click_button "Send Email"
-        expect(page).to have_css("input.invalid")
-        expect(page).to have_content("Please choose at least one skill")
-      end
+    scenario "when taskee does not fill reference form" do
+      visit new_dashboard_reference_path
+      click_button "Send Email"
+      expect(page).to have_css("input.invalid")
+      expect(page).to have_content("Please choose at least one skill")
     end
   end
 end

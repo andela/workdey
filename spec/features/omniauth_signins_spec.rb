@@ -31,14 +31,14 @@ RSpec.feature "OmniauthSignins", type: :feature do
       user = User.first_or_create_from_oauth(user_attributes)
       user.user_type = "tasker"
       user.save
-      expect(page).to have_no_link "Edit Profile"
+      expect(page).to have_no_link "Update Profile"
       click_link "Facebook"
       expect(Rails.application.env_config["omniauth.auth"]).
         to eql OmniAuth.config.mock_auth[:facebook]
       expect(page).to have_link user_attributes.info.name
       click_on user_attributes.info.name
       expect(page).to have_link "Sign Out"
-      expect(page).to have_link "Edit Profile"
+      expect(page).to have_link "Update Profile"
     end
   end
 end

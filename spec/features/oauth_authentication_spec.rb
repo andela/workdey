@@ -33,7 +33,7 @@ RSpec.feature "Oauth Authentication" do
       expect(page).to have_link user_attr.info.name
       click_on user_attr.info.name
       expect(page).to have_link "Sign Out"
-      expect(page).to have_link "Edit Profile"
+      expect(page).to have_link "Update Profile"
     end
   end
 end
