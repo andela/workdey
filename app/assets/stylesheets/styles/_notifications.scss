@@ -27,12 +27,10 @@
     border: 0;
   }
 
-  .tasker-image {
-    img {
-      width: em(100px);
-      height: em(100px);
-      border-radius: 100%;
-    }
+  img {
+    width: em(100px);
+    height: em(100px);
+    border-radius: 100%;
   }
 
   .task_desc {

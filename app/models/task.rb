@@ -15,6 +15,8 @@ class Task < ActiveRecord::Base
             presence: true
   validate :end_time_must_be_greater_than_start_time
 
+  scope :unassigned, -> { where(status: "unassigned") }
+
   def self.get_taskees(keyword, user_email)
     taskees = User.get_taskees_by_skillset(keyword)
     return nil if taskees.nil? || taskees.empty?

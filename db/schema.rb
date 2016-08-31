@@ -81,15 +81,15 @@ ActiveRecord::Schema.define(version: 20160829083323) do
     t.integer  "task_id"
     t.integer  "tasker_id"
     t.integer  "taskee_id"
-    t.string   "task_desc"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "description"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "amount"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "status",     default: "inactive"
-    t.boolean  "paid",       default: false
-    t.boolean  "shared",     default: false
+    t.string   "status",      default: "inactive"
+    t.boolean  "paid",        default: false
+    t.boolean  "shared",      default: false
   end
 
   create_table "taskee_skillsets", force: :cascade do |t|

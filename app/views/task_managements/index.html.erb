@@ -1,5 +1,4 @@
 <main>
-  <%= render "partials/sidebar_dashboard" %>
   <div class="row">
     <section class="col m9 offset-m2">
       <h2>Task logs</h2>
@@ -10,7 +9,7 @@
               <td>Tasker</td>
               <td>Description</td>
               <td>Status</td>
-              <td>Share Contact</td>
+              <td>Share Contact Information</td>
             </tr>
           </thead>
           <tbody>
@@ -18,7 +17,7 @@
               <tr>
                 <% tasker = User.find(task.tasker_id) %>
                 <td><%= "#{tasker.firstname} #{tasker.lastname}" %></td>
-                <td><%= task.task_desc %></td>
+                <td><%= task.description %></td>
                 <% status = task.status %>
                 <% if task.status.downcase == "done" %>
                   <td class="teal-text text-darken-2"><i class='tiny material-icons'>done</i> <%= "#{status.downcase}" %></td>
@@ -27,7 +26,7 @@
                 </td>
                 <% unless task.shared %>
                   <td>
-                    <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact</a>
+                    <a href="<%= share_contact_path(task) %>" data-id="<%= task.id %>" id="share_contact" class="share_contact">Share Contact Information</a>
                   </td>
                 <% else %>
                   <td>
@@ -47,38 +46,54 @@
         <table>
           <thead>
             <tr>
-              <td><strong>Serial No</strong></td>
-              <td><strong>Taskee Name</strong></td>
-              <td><strong>Task Description</strong></td>
+              <td></td>
+              <td><strong>Description</strong></td>
+              <td><strong>Taskee</strong></td>
               <td><strong>Status</strong></td>
             </tr>
           </thead>
           <tbody>
-            <% serial_no = 1 %>
-            <% @tasks.each do |task| %>
+            <% @tasks.each.with_index(1) do |task, idx| %>
               <tr>
-                <td><%= serial_no %></td>
-                <% user = User.find(task.taskee_id) %>
-                <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
-                <td><%= desc = task.task_desc %></td>
-                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id, id: task.id } %>
+                <td><%= idx %></td>
+                <td><%= description_string(task) %></td>
+                <!-- Taskee name or unassigned -->
+                <% if task.taskee_id %>
+                  <% user = User.find(task.taskee_id) %>
+                  <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
+                <% else %>
+                    <td><span class="red-text"><i class="tiny material-icons">not_interested</i> Not yet assigned</span></td>
+                <% end %>
+                <!-- Status -->
                   <% if task.status.downcase == "done" %>
                     <td><span>Done</span></td>
                   <% elsif task.status.downcase == "active" %>
-                      <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br>
-                      <% unless task.paid? %>
-                        <%= link_to "Pay for this task", review_task_path(details) %>
-                        <% end %></td>
+                      <td><span class="cyan-text"><i class="tiny material-icons">trending_flat</i> <%= task.status.downcase %></span><br></td>
                   <% elsif task.status.downcase == "inactive" %>
                       <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
                       <% unless task.paid? %>
+                        <% details = { num: task.id, task: task.description, taskee: taskee, user_id: user.id, id: task.id } %>
                         <%= link_to "Pay for this task", review_task_path(details) %>
                         <% end %></td>
+                  <% elsif task.status.downcase == "unassigned" %>
+                    <td>
+                      <span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span>
+                    </td>
+                    <td>
+                      <%= link_to edit_dashboard_task_path(task), class: "black-text", id: "edit_task_#{task.id}" do %>
+                        <i class="material-icons">mode_edit</i>
+                      <% end %>
+                      <%= link_to [:dashboard, task], method: :delete, data: { confirm: 'Are you sure?' },
+                        class: "black-text", id: "delete_task_#{task.id}" do %>
+                        <i class="material-icons">delete</i>
+                      <% end %>
+                    </td>
+
                   <% end %>
               </tr>
-              <% serial_no += 1 %>
             <% end %>
           </tbody>
+          <%= will_paginate @tasks %>
       </table>
       <% end %>
     </section>

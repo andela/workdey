@@ -4,12 +4,8 @@
       <%= link_to "Close Bid", dashboard_close_bid_path, method: :get, class: "waves-effect waves-light btn-large red-btn close-btn" %>
     <% end %>
   <% else %>
-    <%= form_for [:dashboard, @task] do |f| %>
-      <div class="right">
-        <button class="waves-effect waves-light btn-large teal broadcast-btn" id="broadcast_submit" type="submit">Broadcast Task
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
+    <%= link_to broadcast_path(id: @task), method: :get, class: "waves-effect waves-light btn-large teal broadcast-btn" do %>
+      Broadcast Task <i class="material-icons right">send</i>
     <% end %>
-  <% end %>
+<% end %>
 </div>

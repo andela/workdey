@@ -1,5 +1,4 @@
 <main>
-  <%= render "partials/sidebar_dashboard" %>
   <div class="row">
     <h3 class="center-align">Assign Task</h3>
       <div class= "col s8 offset-s2" >
@@ -45,8 +44,8 @@
               </div>
 
               <div class="group">
-                <%= f.label :task_desc, "Give a little bit more info about this task:" %>
-                <%= f.text_area :task_desc, placeholder: "EXAMPLE: I have 3 bedrooms and it really needs deep cleaning.", required: true %>
+                <%= f.label :description, "Give a little bit more info about this task:" %>
+                <%= f.text_area :description, placeholder: "EXAMPLE: I have 3 bedrooms and it really needs deep cleaning.", required: true %>
               </div>
             </div>
 

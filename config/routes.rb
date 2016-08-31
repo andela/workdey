@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'taskees/index'
+  get "taskees/index"  => "taskees#index", as: :taskees
 
   root "pages#index"
 
+  get "broadcast" => "dashboard/tasks#broadcast_task"
   get "signup" => "users#new"
   get "signin" => "sessions#new"
   post "signin" => "sessions#create"

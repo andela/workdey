@@ -56,7 +56,68 @@ RSpec.describe Dashboard::TasksController, type: :controller do
     end
   end
 
-  describe "POST update" do
+  describe "#edit" do
+    let(:task) { create(:task, tasker_id: @user.id) }
+
+    before(:each) do
+      get :edit, id: task.id
+    end
+
+    it "should render the new template" do
+      expect(response).to render_template :new
+    end
+
+    it "should have a status code of 200" do
+      expect(response).to have_http_status :success
+    end
+  end
+
+  describe "#update" do
+    before(:each) do
+      @task = create(:task, skillset_id: @skillset.id, tasker_id: @user.id)
+    end
+
+    context "when parameters are valid" do
+      let(:task_parameters) do
+        attributes_for(:task).merge(
+          min_price: Faker::Commerce.price(2000..3000).to_s,
+          max_price: Faker::Commerce.price(3002..5000).to_s
+        )
+      end
+      let(:message) { "Your task has been successfully updated" }
+
+
+      before(:each) { put :update, id: @task.id, task: task_parameters }
+
+      it { is_expected.to set_flash[:notice].to message }
+
+      it "should redirect to the show page" do
+        expect(response).to redirect_to dashboard_task_path(@task)
+      end
+
+      it "should update the task successfully" do
+        expect(@task.reload.name).to eql task_parameters[:name]
+      end
+    end
+
+    context "when parameters are invalid" do
+      let(:task_parameters) { attributes_for(:task) }
+
+      before(:each) { put :update, id: @task.id, task: task_parameters }
+
+      it "should not update the task" do
+        expect(@task.name).to eql task_parameters[:name]
+      end
+
+      it { is_expected.to_not set_flash }
+
+      it "should render the new page" do
+        expect(response).to render_template :new
+      end
+    end
+  end
+
+  describe "#broadcast_task" do
     let!(:task) do
       create(:task, skillset_id: @skillset.id, tasker_id: @user.id)
     end
@@ -65,7 +126,7 @@ RSpec.describe Dashboard::TasksController, type: :controller do
       let(:message) { "Available Taskees have been notified" }
 
       it "updates the task's price range and broadcasted status" do
-        put :update, id: task.id
+        put :broadcast_task, id: task.id
         expect(assigns[:task].broadcasted).to be_truthy
       end
     end
@@ -121,6 +182,16 @@ RSpec.describe Dashboard::TasksController, type: :controller do
         post :search, need: Faker::Lorem.word
         expect(assigns[:tasks]).to eq []
       end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    let!(:task) { create(:task, tasker_id: @user.id) }
+
+    it "deletes a task" do
+      expect do
+        delete :destroy, id: task.id
+      end.to change(Task, :count).by(-1)
     end
   end
 end

@@ -77,7 +77,7 @@
       var displayContext = $(".full_notification_message"),
           title = $("<h5>").text(messageTitle),
           content = $("<p>")
-                      .html(notifiableObj.task_desc +
+                      .html(notifiableObj.description +
                             ", I want this task to be done on <strong>" +
                             startDate + "</strong> by <strong>" + endDate + "</strong> for the price of " +
                             "<strong>" + notifiableObj.amount + "<strong>"

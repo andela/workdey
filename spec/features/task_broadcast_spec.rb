@@ -31,10 +31,9 @@ RSpec.describe "Broadcast tasks", type: :feature do
     visit "/dashboard/tasks/#{task.id}"
   end
 
-  context "when a user broadcasts a task" do
+  feature "when a user broadcasts a task" do
     scenario "Tasker broadcasts task" do
-      find_button("Broadcast Task").click
-
+      click_link "Broadcast Task"
       expect(page).to have_content message
     end
   end

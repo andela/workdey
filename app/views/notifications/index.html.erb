@@ -13,9 +13,7 @@
       <% elsif @notifications.present? && current_user.tasker? %>
         <div class="notifications-feed col s12 m8 offset-m2">
           <% @notifications.each do |object| %>
-            <% if object.notifiable == 'task' %>
-              <%= object.broadcast_tasker_notifications %>
-            <% else %>
+            <% if object.notifiable_type == 'TaskManagement' %>
               <%= object.share_contact_notifications %>
               <div id='modal1' class="modal info_modal">
                 <div class='modal-content'>
@@ -25,6 +23,8 @@
                   <p class='taskee_email'>Email: <span id='email'></span></p>
                 </div>
               </div>
+            <% else %>
+              <%= object.broadcast_tasker_notifications %>
             <% end %>
           <% end %>
         <% else  %>

@@ -77,11 +77,11 @@
               </div>
 
               <div class="group">
-                <%= f.label :task_desc, "Give a little bit more info about this task:" %>
-                <% if flash[:task_desc].present? %>
-                  <%= f.text_area :task_desc, value: flash[:task_desc], required: true %>
+                <%= f.label :description, "Give a little bit more info about this task:" %>
+                <% if flash[:description].present? %>
+                  <%= f.text_area :description, value: flash[:description], required: true %>
                 <% else %>
-                  <%= f.text_area :task_desc, placeholder: "EXAMPLE: I have 3 bedrooms and they really need deep cleaning.", required: true %>
+                  <%= f.text_area :description, placeholder: "EXAMPLE: I have 3 bedrooms and they really need deep cleaning.", required: true %>
                 <% end %>
               </div>
             </div>
