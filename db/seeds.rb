@@ -86,7 +86,6 @@ class SeedData
     ]
   end
 
-
   def create_all
     User.destroy_all
     Skillset.destroy_all

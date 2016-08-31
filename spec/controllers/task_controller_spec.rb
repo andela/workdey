@@ -86,7 +86,6 @@ RSpec.describe Dashboard::TasksController, type: :controller do
       end
       let(:message) { "Your task has been successfully updated" }
 
-
       before(:each) { put :update, id: @task.id, task: task_parameters }
 
       it { is_expected.to set_flash[:notice].to message }
