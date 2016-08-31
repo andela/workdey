@@ -57,6 +57,16 @@ class NotificationsDecorator < Draper::Decorator
     "
   end
 
+  def share_contact_notifications
+    h.raw "
+    <div class='viewed feed'>
+      <img src='#{ sender.image_url }' alt='' />
+      <p class='title'>#{ message }</p>
+      <a href='#modal1' onclick='modal_object(#{ sender.to_json }, #{ id })' class='btn info_btn modal-trigger'> view information</a>
+    </div>
+    "
+  end
+
   private
 
   def task

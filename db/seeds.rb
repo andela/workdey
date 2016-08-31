@@ -86,26 +86,16 @@ class SeedData
     ]
   end
 
-  def biddings
-    Bidding.create(
-      tasker_id: User.where(firstname: "Olaide").first.id,
-      name: Faker::Lorem.word,
-      description: Faker::Lorem.sentence(5),
-      price_range: Faker::Number.number(4)
-    )
-  end
 
   def create_all
     User.destroy_all
     Skillset.destroy_all
     UserPlan.destroy_all
-    Bidding.destroy_all
     TaskeeSkillset.destroy_all
     users_list.each { |user| User.create(user) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
     taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
-    10.times { biddings }
   end
 
   def taskee_skillsets

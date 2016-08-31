@@ -25,8 +25,32 @@ RSpec.describe "Share contact", js: true do
       share_contact
 
       expect(page).to have_content("You have shared "\
-      "your contact with the tasker")
+                                   "your contact with the tasker")
       expect(task.reload.shared).to be_truthy
+      click_on "OK"
+    end
+
+    scenario "When taskee doesn't share contact with tasker" do
+      share_contact(false)
+
+      expect(page).to have_content("You can share your contact later")
+      expect(task.shared).to be_falsy
+      click_on "OK"
+    end
+  end
+
+  describe "tasker" do
+    scenario "when tasker views the taskee details " do
+      share_contact
+      click_on "OK"
+      Capybara.reset_sessions!
+
+      log_in_with(tasker.email, tasker.password)
+      visit notifications_path
+      click_on "view information"
+
+      expect(page).to have_content(taskee.firstname)
+      expect(page).to have_content(taskee.email)
     end
   end
 
@@ -35,6 +59,5 @@ RSpec.describe "Share contact", js: true do
     click_on "Share Contact"
     sleep 1.5
     share ? click_on("Yes, share it") : click_on("No, don't share")
-    click_on "OK"
   end
 end

@@ -13,14 +13,26 @@
       <% elsif @notifications.present? && current_user.tasker? %>
         <div class="notifications-feed col s12 m8 offset-m2">
           <% @notifications.each do |object| %>
-            <%= object.broadcast_tasker_notifications %>
+            <% if object.notifiable == 'task' %>
+              <%= object.broadcast_tasker_notifications %>
+            <% else %>
+              <%= object.share_contact_notifications %>
+              <div id='modal1' class="modal info_modal">
+                <div class='modal-content'>
+                  <h4>Tasker Information</h4>
+                  <p class='taskee_name'>Name: <span id='name'></span></p>
+                  <p class='taskee_phone'>Phone: <span id='phone'></span></p>
+                  <p class='taskee_email'>Email: <span id='email'></span></p>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-      <% else  %>
-        <div class="col s12 m8 offset-m2 center-align">
-          <i class="large material-icons">highlight_off</i>
-          <p>No new notifications available</p>
-        </div>
-      <% end  %>
-    </div>
-  </section>
-</main>
+        <% else  %>
+          <div class="col s12 m8 offset-m2 center-align">
+            <i class="large material-icons">highlight_off</i>
+            <p>No new notifications available</p>
+          </div>
+        <% end  %>
+      </div>
+    </section>
+  </main>
