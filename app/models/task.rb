@@ -11,8 +11,8 @@ class Task < ActiveRecord::Base
   serialize :price_range, Array
   validates :name, presence: true
   validates :tasker_id,
-            :description,
-            presence: true
+    :description,
+    presence: true
   validate :end_time_must_be_greater_than_start_time
 
   scope :unassigned, -> { where(status: "unassigned") }
@@ -54,6 +54,28 @@ class Task < ActiveRecord::Base
       "taskee_id IS NULL AND start_date >= ?",
       Time.now
     )
+  end
+
+  def self.send_notification(task, message = "You have been assigned")
+    Notification.create(
+      message: message,
+      sender_id: task.tasker_id,
+      receiver_id: task.taskee_id,
+      notifiable: task
+    ).notify_receiver("broadcast_task")
+  end
+
+  def self.create_task_notification(task)
+    User.get_taskees_by_skillset(task.skillset.name).map do |taskee|
+      NotificationMailer.send_broadcast_mail(task.tasker, taskee, task).
+        deliver_now
+      Notification.create(
+        message: "New Task available that matches your skillset.",
+        sender_id: task.tasker_id,
+        receiver_id: taskee.id,
+        notifiable: task
+      ).notify_receiver("broadcast_task")
+    end
   end
 
   private_class_method

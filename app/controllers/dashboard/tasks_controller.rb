@@ -1,18 +1,18 @@
 module Dashboard
   class TasksController < ApplicationController
+    include TaskNotifications
     before_action :login_required
-    before_action :set_task,
-                  only: [
-                    :update,
-                    :edit,
-                    :show,
-                    :destroy,
-                    :broadcast_task,
-                    :close_bid,
-                    :choose_bidder,
-                    :accept_task,
-                    :decline_task
-                  ]
+    before_action :set_task, only: [
+      :update,
+      :edit,
+      :show,
+      :destroy,
+      :broadcast_task,
+      :close_bid,
+      :choose_bidder,
+      :accept_task,
+      :decline_task
+    ]
 
     def new
       @task = Task.new
@@ -29,7 +29,7 @@ module Dashboard
     def update
       if @task.update(task_params)
         redirect_to [:dashboard, @task],
-                    notice: "Your task has been successfully updated"
+          notice: "Your task has been successfully updated"
       else
         render "new"
       end
@@ -37,8 +37,9 @@ module Dashboard
 
     def broadcast_task
       if @task.update(broadcasted: true)
-        create_task_notification(@task)
-        update_redirect("Available Taskees have been notified")
+        Task.create_task_notification(@task)
+        message = "Available Taskees have been notified"
+        redirect_to [:dashboard, @task], notice: message
       else
         render "show"
       end
@@ -61,31 +62,33 @@ module Dashboard
 
     def close_bid
       @task.update(broadcasted: false)
-      create_chosen_notification(@task, "Assigned task has been closed")
+      Task.send_notification(@task)
       redirect_to [:dashboard, @task], notice: "Bids successfully closed"
     end
 
     def choose_bidder
       @task.update(status: :started, taskee_id: params[:taskee_id])
-      create_chosen_notification(@task)
+      Task.send_notification(@task)
       redirect_to [:dashboard, @task], notice: "Bid successfully assigned"
     end
 
     def accept_task
       @task.update(status: :finished)
-      create_chosen_notification(@task, "Assigned task marked as finished")
+      Task.send_notification(@task, "Assigned task marked as finished")
       redirect_to [:dashboard, @task], notice: "Task accepted"
     end
 
     def decline_task
       @task.update(status: :unassigned)
-      create_chosen_notification(@task, "Assigned task been declined")
+      Task.send_notification(@task, "Assigned task has been declined")
       redirect_to [:dashboard, @task], notice: "Task declined!"
     end
 
     def search
       search_tasks = Task.search_for_available_need(params[:need])
-      @tasks = search_tasks ? paginate_tasks(search_tasks) : []
+      @tasks = search_tasks ?
+        search_tasks.paginate(page: params[:page], per_page: 9) :
+        []
     end
 
     private
@@ -112,9 +115,8 @@ module Dashboard
 
     def set_task
       task = Task.find(params[:id])
-      if dashboard_redirect?
-        dashboard_redirect
-      elsif task.status == "finished" && current_user.taskee?
+      dashboard_redirect if dashboard_redirect?
+      if task.status == "finished" && current_user.taskee?
         dashboard_redirect("Task was marked as finished by owner")
       else
         @task = task
@@ -125,49 +127,14 @@ module Dashboard
 
     def dashboard_redirect?
       task = Task.find(params[:id])
-      if (current_user.tasker? && current_user.id != task.tasker_id) ||
-         (current_user.taskee? && !task.broadcasted) ||
-         (current_user.taskee? && task.status == "started" &&
+      return (current_user.tasker? && current_user.id != task.tasker_id) ||
+          (current_user.taskee? && !task.broadcasted) ||
+          (current_user.taskee? && task.status == "started" &&
            task.taskee_id != current_user.id)
-      end
-    end
-
-    def available_taskees(skillset)
-      User.get_taskees_by_skillset(skillset)
-    end
-
-    def create_chosen_notification(task, message = "You have been assigned")
-      Notification.create(
-        message: message,
-        sender_id: task.tasker_id,
-        receiver_id: task.taskee_id,
-        notifiable: task
-      ).notify_receiver("broadcast_task")
-    end
-
-    def create_task_notification(task)
-      available_taskees(task.skillset.name).map do |taskee|
-        NotificationMailer.send_broadcast_mail(task.tasker, taskee, task).
-          deliver_now
-        Notification.create(
-          message: "New Task available that matches your skillset.",
-          sender_id: task.tasker_id,
-          receiver_id: taskee.id,
-          notifiable: task
-        ).notify_receiver("broadcast_task")
-      end
-    end
-
-    def paginate_tasks(tasks)
-      tasks.paginate(page: params[:page], per_page: 9)
-    end
-
-    def update_redirect(message)
-      redirect_to [:dashboard, @task], notice: message
     end
 
     def dashboard_redirect(message = "Task not found!")
-      redirect_to dashboard_path, notice: message
+      redirect_to dashboard_path, notice: message && return
     end
   end
 end

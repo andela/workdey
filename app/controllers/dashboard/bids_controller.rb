@@ -12,8 +12,8 @@ module Dashboard
       @bid = Bid.new(bid_params)
       if @bid.save
         create_bid_notification(@bid)
-        redirect_to [:dashboard, @task], notice: "You have successfully made"\
-          " a bid"
+        message = "You have successfully made a bid"
+        redirect_to [:dashboard, @task], notice: message
         return
       end
       render :new

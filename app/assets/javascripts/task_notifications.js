@@ -1,7 +1,7 @@
 (function () {
-  var notifyBtn = $('.notify-btn')
+  var notifyButton = $('.notify-btn')
 
-  notifyBtn.click(function (event) {
+  notifyButton.click(function (event) {
     event.preventDefault()
     var notificationId = $(this).data('id'),
       taskUrl = $(this).attr('href')
