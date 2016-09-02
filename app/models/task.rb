@@ -11,8 +11,8 @@ class Task < ActiveRecord::Base
   serialize :price_range, Array
   validates :name, presence: true
   validates :tasker_id,
-    :description,
-    presence: true
+            :description,
+            presence: true
   validate :end_time_must_be_greater_than_start_time
 
   scope :unassigned, -> { where(status: "unassigned") }

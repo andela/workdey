@@ -1,6 +1,5 @@
 module Dashboard
   class TasksController < ApplicationController
-    include TaskNotifications
     before_action :login_required
     before_action :set_task, only: [
       :update,
@@ -29,7 +28,7 @@ module Dashboard
     def update
       if @task.update(task_params)
         redirect_to [:dashboard, @task],
-          notice: "Your task has been successfully updated"
+                    notice: "Your task has been successfully updated"
       else
         render "new"
       end
@@ -127,10 +126,10 @@ module Dashboard
 
     def dashboard_redirect?
       task = Task.find(params[:id])
-      return (current_user.tasker? && current_user.id != task.tasker_id) ||
-          (current_user.taskee? && !task.broadcasted) ||
-          (current_user.taskee? && task.status == "started" &&
-           task.taskee_id != current_user.id)
+      (current_user.tasker? && current_user.id != task.tasker_id) ||
+        (current_user.taskee? && !task.broadcasted) ||
+        (current_user.taskee? && task.status == "started" &&
+         task.taskee_id != current_user.id)
     end
 
     def dashboard_redirect(message = "Task not found!")
