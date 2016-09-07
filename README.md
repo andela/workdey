@@ -5,7 +5,7 @@
 
 Workdey helps people find simple tasks that they can do and earn cash.
 
-[Live application](http://workdey.herokuapp.com)
+[Live application](https://workdey-staging.herokuapp.com)
 
 ## Getting Started
 
