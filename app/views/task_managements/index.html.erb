@@ -80,10 +80,10 @@
                       <span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span>
                     </td>
                     <td>
-                      <%= link_to edit_task_path(task), class: "black-text", id: "edit_task_#{task.id}" do %>
+                      <%= link_to edit_dashboard_task_path(task), class: "black-text", id: "edit_task_#{task.id}" do %>
                         <i class="material-icons">mode_edit</i>
                       <% end %>
-                      <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' },
+                      <%= link_to [:dashboard, task], method: :delete, data: { confirm: 'Are you sure?' },
                         class: "black-text", id: "delete_task_#{task.id}" do %>
                         <i class="material-icons">delete</i>
                       <% end %>

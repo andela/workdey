@@ -1,0 +1,60 @@
+<div class="row">
+  <% bid_user = User.find(@task.taskee_id) %>
+  <% bid = Bid.find_by(task_id: @task.id, user_id: bid_user.id) %>
+  <div class="col s12">
+    <div class="row">
+      <div class="col s3">
+        <div class="col s12 taskee_img">
+          <%= image_tag bid_user.image_url, size: "100x100", alt: "Taskee profile image" %>
+        </div>
+        <div class="col s12 taskee_name">
+          <h5><%= bid_user.fullname %></h5>
+        </div>
+        <div class="col s12 taskee_reviews">
+          <div class="ratings">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <div class="col s12 reviews_count">
+            <% reviews = bid_user.reviews %>
+            <span data-rating="<%= bid_user.get_rating %>">
+              ( <%= "#{reviews.count} #{ 'review'.pluralize(reviews.count) }" %> )
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col s9">
+        <div class="row">
+          <div class="col s12">
+            <h3>Due in <%= distance_of_time_in_words_to_now(@task.end_date) %></h3>
+          </div>
+          <div class="row">
+            <div class="col s4">
+              <b>Start date:</b> <%= bid.start_date.to_formatted_s(:rfc822) %>
+          </div>
+          <div class="col s4">
+            <b>End date:</b> <%= bid.end_date.to_formatted_s(:rfc822) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m6 offset-m6">
+          <div class="col s6">
+            <%= link_to "/dashboard/tasks/#{@task.id}/accept_task", class: "waves-effect waves-light revise-btn btn teal" do %>
+              <i class="fa fa-check white-text"></i> Accept
+            <% end %>
+          </div>
+          <div class="col s6">
+            <%= link_to "/dashboard/tasks/#{@task.id}/decline_task", class: "waves-effect waves-light revise-btn btn" do %>
+              <i class="fa fa-times white-text"></i> Decline
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>

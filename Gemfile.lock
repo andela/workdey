@@ -98,6 +98,11 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20160615)
       unf (>= 0.0.5, < 1.0.0)
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     em-rspec (0.1.1)
       eventmachine (>= 0.12.10)
     em-synchrony (1.0.5)
@@ -249,6 +254,7 @@ GEM
     redis (3.3.1)
     redis-objects (1.2.1)
       redis (>= 3.0.2)
+    request_store (1.3.1)
     rest-client (2.0.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -366,6 +372,7 @@ DEPENDENCIES
   coffee-rails
   coveralls
   database_cleaner
+  draper
   em-rspec
   eventmachine
   factory_girl_rails

@@ -2,18 +2,35 @@
 require "rails_helper"
 
 RSpec.describe NotificationsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:sender) { create(:user) }
-  let(:bidding) { create(:bidding) }
+  let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
+  let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
+  let(:skillset) { create(:skillset) }
+  let(:price_range) do
+    [
+      Faker::Commerce.price(2000..3000).to_s,
+      Faker::Commerce.price(3001..5000).to_s
+    ]
+  end
+  let(:task) do
+    create(
+      :task,
+      skillset_id: skillset.id,
+      tasker_id: tasker.id,
+      price_range: price_range,
+      broadcasted: true
+    )
+  end
   let(:notification) do
-    create(:notification,
-           notifiable_id: bidding.id,
-           notifiable_type: "Bidding",
-           receiver_id: user.id,
-           sender_id: sender.id)
+    create(
+      :notification,
+      notifiable_id: task.id,
+      receiver_id: taskee.id,
+      sender_id: tasker.id,
+      notifiable_type: "Task"
+    )
   end
 
-  before(:each) { stub_current_user(user) }
+  before(:each) { stub_current_user(tasker) }
 
   describe "GET #index" do
     before { get :index }
@@ -36,7 +53,7 @@ RSpec.describe NotificationsController, type: :controller do
 
     context "when notification is unread" do
       it "returns the notification" do
-        notification = Notification.unread(user)
+        notification = Notification.unread(tasker)
         expect(assigns(:notifications)).to eq(notification)
       end
     end
@@ -64,7 +81,9 @@ RSpec.describe NotificationsController, type: :controller do
     end
 
     context "when normal request" do
-      before { get :show, id: notification.id }
+      before do
+        get :show, id: notification.id
+      end
 
       it_behaves_like "a show GET request"
 

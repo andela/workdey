@@ -35,15 +35,15 @@ nav .nav-wrapper {
   span {
     font-size: 1.1em;
     padding-right: 0.2em;
- }
+  }
   h3, span {
     font-weight: bold;
- }
+  }
 }
 
 .user-reviews {
   margin-top: 5em;
-    h4 {
+  h4 {
     font-weight: 400;
   }
 }
@@ -79,19 +79,19 @@ nav .nav-wrapper {
   }
 
   .side-nav-button {
-      padding: 20px 10px 20px 40px;
-    }
-    .side-nav-button:hover{
-      background-color: #9D9B9B !important;
-      color: #ECECEC;
-    }
-  }
-
-  .selected {
     padding: 20px 10px 20px 40px;
-    background-color:#FFFFFF;
-    color: grey !important;
   }
+  .side-nav-button:hover{
+    background-color: #9D9B9B !important;
+    color: #ECECEC;
+  }
+}
+
+.selected {
+  padding: 20px 10px 20px 40px;
+  background-color:#FFFFFF;
+  color: grey !important;
+}
 
 .nav-wrapper {
   .dropdown {
@@ -121,14 +121,14 @@ nav .nav-wrapper {
     .notification-badge {
       position: absolute;
       top: -15px;
-      left: -10px;
+      left: 56px;
 
       span {
         border: 1px solid #fff;
         padding: 1px 6px;
         border-radius: 3px;
         background-color: #fff;
-        color: #eb4d5c;
+        color: $primary-color;
       }
     }
   }
@@ -154,57 +154,3 @@ nav .nav-wrapper {
   }
 }
 
-// Notifications
-
-.notifications {
-  transition-duration: 0.6s;
-}
-
-.notification-feed {
-  height: em(325px);
-  overflow: hidden;
-}
-
-.feed {
-  border-bottom: 1px solid #ccc;
-  padding: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f6f7f8;
-  transition-duration: 0.6s;
-
-  &.viewed {
-    background-color: transparent;
-    transition-duration: 0.6s;
-  }
-
-  &:last-child {
-    border: 0;
-  }
-
-  img {
-    width: em(30px);
-    height: em(30px);
-    border-radius: 100%;
-  }
-
-  .btn {
-    height: em(25px);
-    line-height: em(25px);
-  }
-}
-
-.full_notification_message {
-  padding: em(55px);
-
-  .actions {
-    @include display(flex);
-    @include justify-content(space-around);
-    padding: 15px 0;
-
-    .btn > .material-icons {
-      pointer-events: none;
-    }
-  }
-}

@@ -97,7 +97,7 @@
             userAction;
 
         if (elem.data("accept")) {
-          sendDbReq({status: "active"}, requestId, elem.data("accept"));
+          sendDbReq({status: "started"}, requestId, elem.data("accept"));
         } else {
           sendDbReq({status: "rejected"}, requestId, elem.data("reject"));
         }

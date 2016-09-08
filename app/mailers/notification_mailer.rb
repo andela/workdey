@@ -15,6 +15,16 @@ class NotificationMailer < ApplicationMailer
     mail to: @taskee.email, subject: "You have notifications on Workdey"
   end
 
+  def send_broadcast_mail(tasker, taskee, task)
+    @tasker = tasker
+    @taskee = taskee
+    @task = task
+    mail(
+      to: @taskee.email,
+      subject: "Available Tasks that matches your skillset"
+    )
+  end
+
   def send_contact_info(tasker, taskee)
     @tasker = tasker
     @taskee = taskee

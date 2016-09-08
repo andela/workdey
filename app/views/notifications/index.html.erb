@@ -1,51 +1,38 @@
 <main>
   <section class="notifications container">
     <div class="row">
-      <div class="col s12">
-        <h3>Notifications</h3>
+      <div class="col s12 center-align">
+        <h2>Notifications</h2>
       </div>
-
       <% if @notifications.present? && current_user.taskee?  %>
-      <div class="notification-feed col s6">
-        <% @notifications.each do |object| %>
-          <%= show_notifications(object) %>
-        <% end %>
-      </div>
-
-      <div class="full_notification_message col s6 center-align card-panel">
-        <p>Click on the view button to get more information about a task</p>
-        <i class="material-icons">directions_bike</i>
-      </div>
-
-      <% elsif @notifications.present? && current_user.user_type == "tasker" %>
-        <div class="notification-feed col s8">
+        <div class="notifications-feed col s12 m8 offset-m2">
           <% @notifications.each do |object| %>
-            <div class="viewed feed">
-              <img src="<%= object.sender.image_url %>" alt="" />
-              <p class="title"> <%= object.message %> </p>
-              <a href="#modal1" onclick="modal_object(<%= object.sender.to_json %>, <%= object.id %>)" class="btn info_btn modal-trigger"> view information</a>
-
-            </div>
+            <%= object.broadcast_taskee_notifications %>
           <% end %>
-          <%#= render partial: "show_information" %>
-          <div id="modal1" class="modal info_modal">
-              <div class="modal-content">
-                <h4>Tasker Information</h4>
-                <p class="taskee_name">Name: <span id="name"></span></p>
-                <p class="taskee_phone">Phone: <span id="phone"></span></p>
-                <p class="taskee_email">Email: <span id="email"></span></p>
+        </div>
+      <% elsif @notifications.present? && current_user.tasker? %>
+        <div class="notifications-feed col s12 m8 offset-m2">
+          <% @notifications.each do |object| %>
+            <% if object.notifiable_type == 'TaskManagement' %>
+              <%= object.share_contact_notifications %>
+              <div id='modal1' class="modal info_modal">
+                <div class='modal-content'>
+                  <h4>Tasker Information</h4>
+                  <p class='taskee_name'>Name: <span id='name'></span></p>
+                  <p class='taskee_phone'>Phone: <span id='phone'></span></p>
+                  <p class='taskee_email'>Email: <span id='email'></span></p>
+                </div>
               </div>
-            </div>
-        </div>
-
-      <% else  %>
-        <div class="col s6 full_notification_message center-align card-panel">
-          <p>No new notifications available</p>
-          <% 4.times do %>
-            <i class="material-icons">highlight_off</i>
+            <% else %>
+              <%= object.broadcast_tasker_notifications %>
+            <% end %>
           <% end %>
-        </div>
-      <% end  %>
-    </div>
-  </section>
-</main>
+        <% else  %>
+          <div class="col s12 m8 offset-m2 center-align">
+            <i class="large material-icons">highlight_off</i>
+            <p>No new notifications available</p>
+          </div>
+        <% end  %>
+      </div>
+    </section>
+  </main>

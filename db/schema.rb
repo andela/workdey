@@ -11,32 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820060921) do
+ActiveRecord::Schema.define(version: 20160829083323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "bid_managements", force: :cascade do |t|
-    t.integer  "bidding_id"
-    t.integer  "taskee_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "bid_managements", ["bidding_id"], name: "index_bid_managements_on_bidding_id", using: :btree
-
-  create_table "biddings", force: :cascade do |t|
+  create_table "bids", force: :cascade do |t|
+    t.string   "description"
+    t.date     "start_date"
+    t.date     "end_date"
     t.integer  "task_id"
-    t.text     "description"
-    t.string   "price_range"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "tasker_id"
-    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.decimal  "price",       precision: 8
   end
 
-  add_index "biddings", ["task_id"], name: "index_biddings_on_task_id", using: :btree
+  add_index "bids", ["task_id"], name: "index_bids_on_task_id", using: :btree
+  add_index "bids", ["user_id"], name: "index_bids_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.string   "message"
@@ -167,8 +160,8 @@ ActiveRecord::Schema.define(version: 20160820060921) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  add_foreign_key "bid_managements", "biddings"
-  add_foreign_key "biddings", "tasks"
+  add_foreign_key "bids", "tasks"
+  add_foreign_key "bids", "users"
   add_foreign_key "taskee_skillsets", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

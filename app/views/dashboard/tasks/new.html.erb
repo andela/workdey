@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col m8 offset-m2">
         <h3><%= task_action(@task) %></h3>
-        <%= form_for @task do |f| %>
+        <%= form_for [:dashboard, @task] do |f| %>
           <%= render "partials/error_msg", object:  @task%>
           <div class="row">
             <div class="input-field col s12">
@@ -72,11 +72,10 @@
                 <i class="material-icons right">send</i>
               </button>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="google-maps-scripts"></div>
+  <div id="google-maps-scripts"></div>
 </main>

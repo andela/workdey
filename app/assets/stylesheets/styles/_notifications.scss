@@ -1,0 +1,94 @@
+// Notifications
+
+.notifications {
+  transition-duration: 0.6s;
+}
+
+.notification-feed {
+  height: 100%;
+  overflow: hidden;
+}
+
+.feed {
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f6f7f8;
+  transition-duration: 0.6s;
+
+  &.viewed {
+    background-color: transparent;
+    transition-duration: 0.6s;
+  }
+
+  &:last-child {
+    border: 0;
+  }
+
+  img {
+    width: em(100px);
+    height: em(100px);
+    border-radius: 100%;
+  }
+
+  .task_desc {
+    font-size: em(15px);
+    font-weight: bold;
+
+    .title {
+      font-size: em(25px);
+      float: left;
+      width: 100%;
+    }
+    .location, .bids, .timeline {
+      @extend .task_desc_styles
+    }
+    .location {
+      text-align: left !important;
+    }
+  }
+
+  .price {
+    position: relative;
+    text-align: center;
+    span {
+      font-weight: bold;
+      font-size: em(20px);
+    }
+    a.btn{
+      width: 100%;
+    }
+    .preloader-wrapper {
+      position: absolute;
+      top: 29px;
+      right: -45px;
+    }
+  }
+}
+
+.task_desc_styles {
+  float: left;
+  padding: 0 3px;
+  text-align: center;
+  width: 33.3333%;
+  font-weight: 200;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.full_notification_message {
+  padding: em(55px);
+
+  .actions {
+    @include display(flex);
+    @include justify-content(space-around);
+    padding: 15px 0;
+
+    .btn > .material-icons {
+      pointer-events: none;
+    }
+  }
+}

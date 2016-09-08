@@ -25,17 +25,17 @@ RSpec.feature "Modify Task" do
 
   scenario "user clicks edit" do
     click_link "edit_task_#{task.id}"
-    expect(page).to have_current_path edit_task_path(task)
+    expect(page).to have_current_path edit_dashboard_task_path(task)
   end
 
   scenario "user edits task" do
-    visit edit_task_path(task)
+    visit edit_dashboard_task_path(task)
 
     fill_in "task_description", with: "Lorem ipsum dolor sit amet," \
       " consectetur adipisicing elit."
     click_button "Update Task"
 
-    expect(page).to have_current_path task_path(task)
+    expect(page).to have_current_path dashboard_task_path(task)
     expect(page).to have_content("Your task has been successfully updated")
   end
 

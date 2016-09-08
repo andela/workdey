@@ -28,12 +28,12 @@ RSpec.describe "Broadcast tasks", type: :feature do
 
   before do
     log_in_with @user.email, @user.password
-    visit "/tasks/#{task.id}"
+    visit "/dashboard/tasks/#{task.id}"
   end
 
   feature "when a user broadcasts a task" do
     scenario "Tasker broadcasts task" do
-      click_on "Broadcast Task"
+      click_link "Broadcast Task"
       expect(page).to have_content message
     end
   end

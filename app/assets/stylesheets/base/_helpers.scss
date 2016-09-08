@@ -146,7 +146,10 @@ button.btn[disabled] {
   box-shadow: none;
 }
 .apply{
-  color: #eb4D5c !important;
+  color: $primary-color !important;
+}
+.apply-bck {
+  background-color: $primary-color !important;
 }
 .my-input {
   #my-input-field:focus {

@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  include PriceRangeValidation
   attr_accessor :min_price, :max_price
   belongs_to :tasker, class_name: "User"
   belongs_to :taskee, class_name: "User"
@@ -6,13 +7,13 @@ class Task < ActiveRecord::Base
 
   has_many :task_management, foreign_key: :task_id
   has_many :notifications, as: :notifiable
+  has_many :bids
   serialize :price_range, Array
   validates :name, presence: true
   validates :tasker_id,
             :description,
             presence: true
   validate :end_time_must_be_greater_than_start_time
-  validate :price_range_validation
 
   scope :unassigned, -> { where(status: "unassigned") }
 
@@ -55,6 +56,28 @@ class Task < ActiveRecord::Base
     )
   end
 
+  def self.send_notification(task, message = "You have been assigned")
+    Notification.create(
+      message: message,
+      sender_id: task.tasker_id,
+      receiver_id: task.taskee_id,
+      notifiable: task
+    ).notify_receiver("broadcast_task")
+  end
+
+  def self.create_task_notification(task)
+    User.get_taskees_by_skillset(task.skillset.name).map do |taskee|
+      NotificationMailer.send_broadcast_mail(task.tasker, taskee, task).
+        deliver_now
+      Notification.create(
+        message: "New Task available that matches your skillset.",
+        sender_id: task.tasker_id,
+        receiver_id: taskee.id,
+        notifiable: task
+      ).notify_receiver("broadcast_task")
+    end
+  end
+
   private_class_method
   def end_time_must_be_greater_than_start_time
     if start_date && end_date
@@ -68,27 +91,6 @@ class Task < ActiveRecord::Base
     same_day = start_date == end_date
     unless (end_date > start_date && end_date > Time.now) || same_day
       errors[:date] = "End date cannot be in the past"
-    end
-  end
-
-  private_class_method
-  def price_range_validation
-    if price_range.empty?
-      errors[:price_range] = "Please enter atleast the minimum price"
-    else
-      check_price_range
-    end
-  end
-
-  def check_price_range
-    min_price, max_price = price_range.map(&:to_i)
-    value_error_message = "Prices must be greater than $2000"
-    comparison_error_message = "Minimum price must be less than the maximum"
-
-    errors[:price_range] = value_error_message if min_price < 2000
-    if max_price.positive?
-      errors[:price_range] = value_error_message if max_price < 2000
-      errors[:price_range] = comparison_error_message if min_price > max_price
     end
   end
 

@@ -1,6 +1,12 @@
 require "rails_helper"
 
-RSpec.describe TasksController, type: :controller do
+RSpec.describe Dashboard::TasksController, type: :controller do
+  let!(:user) do
+    create(:user, user_attr.merge(user_type: "tasker"))
+  end
+  let(:task) do
+    attributes_for(:task, skillset_id: skillset.id, tasker_id: user.id)
+  end
   before(:each) do
     @user = create(:user, user_attr.merge(user_type: "tasker"))
     @skillset = create(:skillset)
@@ -80,14 +86,12 @@ RSpec.describe TasksController, type: :controller do
       end
       let(:message) { "Your task has been successfully updated" }
 
-      it { expect(@task.name).to_not eql task_parameters[:name] }
-
       before(:each) { put :update, id: @task.id, task: task_parameters }
 
       it { is_expected.to set_flash[:notice].to message }
 
       it "should redirect to the show page" do
-        expect(response).to redirect_to task_path(@task)
+        expect(response).to redirect_to dashboard_task_path(@task)
       end
 
       it "should update the task successfully" do
@@ -101,7 +105,7 @@ RSpec.describe TasksController, type: :controller do
       before(:each) { put :update, id: @task.id, task: task_parameters }
 
       it "should not update the task" do
-        expect(@task.name).to_not eql task_parameters[:name]
+        expect(@task.name).to eql task_parameters[:name]
       end
 
       it { is_expected.to_not set_flash }

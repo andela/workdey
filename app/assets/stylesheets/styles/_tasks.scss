@@ -26,21 +26,55 @@
   .broadcast-clmn {
     padding: 10px;
 
+    a.close-btn {
+      @extend .apply-bck;
+    }
+
     a.broadcast-btn, a.close-btn {
       width: 100%;
     }
   }
 
-  .task-title {}
+  .task-title {
+    h3.task-title-h3 {
+      margin-top: 0 !important;
+    }
+  }
 
   .task-status {
     .status {
-      border: 1px solid red;
-      margin: 0 auto;
+      margin: 0.8em auto 0;
       width: 115px;
 
       i {
         font-size: 1em;
+      }
+
+      &.red-status {
+        color: $primary-color;
+        border: 1px solid $primary-color;
+
+        i {
+          color: $primary-color;
+        }
+      }
+
+      &.cyan-status {
+        color: #00bcd4;
+        border: 1px solid #00bcd4;
+
+        i {
+          color: #00bcd4;
+        }
+      }
+
+      &.green-status {
+        color: #4caf50;
+        border: 1px solid #4caf50;
+
+        i {
+          color: #4caf50;
+        }
       }
     }
   }
@@ -80,6 +114,9 @@
       font-size: 1em;
       float: right;
       font-weight: 500;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
 
       i {
         vertical-align: text-bottom;

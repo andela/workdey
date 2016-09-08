@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :taskee_skillsets, foreign_key: :taskee_id
-  has_many :skillsets, through: :taskee_skillsets
   has_many :reviews
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks_assigned, class_name: "Task", foreign_key: :tasker_id
@@ -8,13 +6,12 @@ class User < ActiveRecord::Base
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
   has_one :user_plan
-  has_many :biddings, foreign_key: :tasker_id
-  has_many :bid_managements, foreign_key: :taskee_id
   has_many :notifications, class_name: "Notification", foreign_key: :receiver_id
   has_many :sent_notifications,
            class_name: "Notification",
            foreign_key: :sender_id
   has_many :references, foreign_key: :taskee_id
+  has_many :bids
   has_many :taskee_skillsets, foreign_key: :taskee_id
   has_many :skillsets, foreign_key: :taskee_id, through: :taskee_skillsets
 
@@ -94,6 +91,13 @@ class User < ActiveRecord::Base
     User.joins(:skillsets).where(
       "name ILIKE ?", "%#{skillset}%"
     )
+  end
+
+  def get_rating
+    ratings = reviews.pluck(:rating)
+    ratings.inject(:+) / ratings.size
+  rescue NoMethodError
+    0
   end
 
   def novice?
