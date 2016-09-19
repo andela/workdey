@@ -85,7 +85,7 @@ class DashboardController < ApplicationController
 
   def search_with_map
     @current_user = current_user
-    @users = User.all
+    @skillsets = Skillset.all
   end
 
   def assign_task
