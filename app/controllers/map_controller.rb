@@ -8,7 +8,6 @@ class MapController < WebsocketRails::BaseController
     taskees = get_all_taskees.select do |taskee|
       taskee if taskee[:skillsets].include? message.to_i
     end
-    #require "pry"; binding.pry;
     send_message :success, taskees.to_json, namespace: :search_taskee
   end
 
@@ -35,7 +34,6 @@ class MapController < WebsocketRails::BaseController
         ).to_kilometers,
         skillsets: taskee.skillsets.map(&:id)
       }
-
     end
     nearby_taskees
   end

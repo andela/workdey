@@ -146,8 +146,9 @@ navigatorController.addMarkers = function () {
 navigatorController.getTasks = function (taskees) {
   var tasks = []
   taskees.map(function (taskee) {
-    if (taskee.distance <= 50)
-    tasks.push(taskee.tasks)
+    if (taskee.distance <= 50){
+      tasks.push(taskee.tasks)
+    }
   })
   var result = tasks.reduce(function (a, b) {
     return a.concat(b)
