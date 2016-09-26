@@ -3,7 +3,14 @@ class SeedData
     cloudinary_img_url =
       "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/"\
     "rxxvqznd6ayvqlmxoon2.png"
+    admin_img_url=
     [
+      { firstname: "Super", lastname: "Man",
+        email: "morris.kimani@andela.com", street_address: nil,
+        city: "Nairobi", state: nil, password: "1234567890",
+        user_type: "admin", confirm_token: "112ewqee2123wqwqw12wq",
+        confirmed: true
+      },
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
