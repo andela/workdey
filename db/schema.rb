@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820060921) do
+ActiveRecord::Schema.define(version: 20160926211742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,17 @@ ActiveRecord::Schema.define(version: 20160820060921) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "vetting_records", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "confidence"
+    t.integer  "skill_proficiency"
+    t.integer  "experience"
+    t.integer  "interviewer_verdict"
+    t.text     "interviewer_comments"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
