@@ -3,7 +3,6 @@ class SeedData
     cloudinary_img_url =
       "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/"\
     "rxxvqznd6ayvqlmxoon2.png"
-    admin_img_url=
     [
       { firstname: "Super", lastname: "Man",
         email: "morris.kimani@andela.com", street_address: nil,
@@ -11,6 +10,7 @@ class SeedData
         user_type: "admin", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true
       },
+
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
@@ -18,6 +18,7 @@ class SeedData
         confirmed: true, has_taken_quiz: true,
         image_url: cloudinary_img_url,
         latitude: "6.5001035", longitude: "3.376697" },
+
       { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
@@ -32,12 +33,14 @@ class SeedData
         confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "6.5066561", longitude: "3.3816401" },
+
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url,
         latitude: "6.5275368", longitude: "3.367699" },
+
       {
         firstname: "Hubert", lastname: "Nakitare",
         email: "hubert.nakitare@andela.com",
@@ -47,6 +50,7 @@ class SeedData
         latitude: "-1.297849", longitude: "36.7868873", confirmed: true,
         has_taken_quiz: true
       },
+
       {
         firstname: "Austin", lastname: "Powers",
         email: "austin.powers@andela.com", street_address: "530, Muranga Road",
@@ -55,6 +59,7 @@ class SeedData
         image_url: cloudinary_img_url,
         latitude: "-1.0385092", longitude: "37.0755163"
       },
+
       {
         firstname: "Robert", lastname: "Alai",
         email: "robert.alai@andela.com", street_address: "3, Kitale",
@@ -63,6 +68,7 @@ class SeedData
         image_url: cloudinary_img_url,
         latitude: "1.0187148", longitude: "34.9920014"
       },
+
       {
         firstname: "Jill", lastname: "Scott",
         email: "jill.scott@andela.com", street_address: "Adams Arcade",
@@ -70,7 +76,96 @@ class SeedData
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143"
+      },
+
+      {
+        firstname: "Ron", lastname: "Weasley",
+        email: "ron.weasley@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143"
+      },
+
+      {
+        firstname: "Albus", lastname: "Dumbledore",
+        email: "albus.Dumbledore@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143"
+      },
+
+      {
+        firstname: "Lucius", lastname: "Malfoy",
+        email: "Lucius.Malfoy@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143"
+      },
+
+      {
+        firstname: "Headless", lastname: "Nick",
+        email: "Headless.Nick@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143"
+      },
+
+      {
+        firstname: "Harry", lastname: "Potter",
+        email: "harry.potter@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143"
       }
+    ]
+  end
+
+  def vetting_records_list
+    [
+      {
+        user_id: 10,
+        confidence: 3,
+        skill_proficiency: 3,
+        experience: 3,
+        verdict: 2
+      },
+
+      {
+        user_id: 11,
+        confidence: 3,
+        skill_proficiency: 4,
+        experience: 2,
+        verdict: 2
+      },
+
+      {
+        user_id: 12,
+        confidence: 1,
+        skill_proficiency: 1,
+        experience: 1,
+        verdict: 1
+      },
+
+      {
+        user_id: 13,
+        confidence: 4,
+        skill_proficiency: 4,
+        experience: 3,
+        verdict: 3
+      },
+
+      {
+        user_id: 14,
+        confidence: 5,
+        skill_proficiency: 5,
+        experience: 4,
+        verdict: 3
+      },
     ]
   end
 
@@ -109,6 +204,7 @@ class SeedData
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
     taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
+    vetting_records_list.each {|vetting_record| VettingRecord.create(vetting_record)}
     10.times { biddings }
   end
 
