@@ -132,7 +132,7 @@ class SeedData
         confidence: 3,
         skill_proficiency: 3,
         experience: 3,
-        verdict: 2
+        interviewer_verdict: 2
       },
 
       {
@@ -140,7 +140,7 @@ class SeedData
         confidence: 3,
         skill_proficiency: 4,
         experience: 2,
-        verdict: 2
+        interviewer_verdict: 2
       },
 
       {
@@ -148,7 +148,7 @@ class SeedData
         confidence: 1,
         skill_proficiency: 1,
         experience: 1,
-        verdict: 1
+        interviewer_verdict: 1
       },
 
       {
@@ -156,7 +156,7 @@ class SeedData
         confidence: 4,
         skill_proficiency: 4,
         experience: 3,
-        verdict: 3
+        interviewer_verdict: 3
       },
 
       {
@@ -164,7 +164,7 @@ class SeedData
         confidence: 5,
         skill_proficiency: 5,
         experience: 4,
-        verdict: 3
+        interviewer_verdict: 3
       },
     ]
   end
