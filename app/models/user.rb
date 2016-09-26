@@ -116,6 +116,10 @@ class User < ActiveRecord::Base
     user_type == "tasker"
   end
 
+  def admin?
+    user_type == "admin"
+  end
+
   def skillset_ids
     taskee_skillsets.map(&:skillset_id)
   end
