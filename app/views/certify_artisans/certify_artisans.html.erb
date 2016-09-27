@@ -1,16 +1,19 @@
-<table class="table">
-  <thead>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <!-- <th></th> -->
-  </thead>
-  <tbody>
-    <% @uncertified_artisans.each do |artisan| %>
-    <tr>
-      <td> <%= artisan.firstname %></td>
-      <td> <%= artisan.lastname %></td>
-    </tr>
-    <% end %>
 
-  </tbody>
-</table>
+  <section class="main container center-align">
+    <table class="table">
+      <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </thead>
+      <tbody>
+        <% @uncertified_artisans.each do |artisan| %>
+        <tr>
+          <td> <%= artisan.firstname %></td>
+          <td> <%= artisan.lastname %></td>
+          <td><button class='btn btn-primary'>Certify</button></td>
+        </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  </section>
