@@ -1,8 +1,8 @@
 <ul id="slide-out" class="side-nav sinav fixed">
     <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %>
     <% if current_user.admin? %>
-      <%= raw("<li class='side-nav-button'>Vet Artisans</li>") %>
-      <%= raw("<li class='side-nav-button'>Certify Artisans</li>") %>
+      <%= link_to raw("<li class='side-nav-button'>Vet Artisans</li>"), dashboard_path %>
+      <%= link_to raw("<li class='side-nav-button'>Certify Artisans</li>"), "certify_artisans"%>
     <% else %>
       <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %>
       <%= link_to raw("<li class='side-nav-button'>Biddings</li>"), biddings_path %>
