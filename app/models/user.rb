@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
 
   scope :taskees, -> { where(user_type: "taskee") }
 
-  enum status: [:not_reviewed, :rejected, :accepted, :certified]
+  enum status: [:not_reviewed, :accepted, :rejected, :certified]
 
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
