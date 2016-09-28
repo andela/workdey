@@ -84,7 +84,7 @@ class SeedData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", certified: false
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
 
       {
@@ -93,7 +93,7 @@ class SeedData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", certified: false
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
 
       {
@@ -102,7 +102,7 @@ class SeedData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", certified: false
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
 
       {
@@ -111,7 +111,7 @@ class SeedData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", certified: false
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
 
       {
@@ -120,7 +120,7 @@ class SeedData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", certified: false
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
       }
     ]
   end
@@ -165,7 +165,7 @@ class SeedData
         skill_proficiency: 5,
         experience: 4,
         interviewer_verdict: 3
-      },
+      }
     ]
   end
 
