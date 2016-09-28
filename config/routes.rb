@@ -61,7 +61,8 @@ Rails.application.routes.draw do
   put "/taskee_skillsets" => "taskee_skillsets#update"
 
   get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
-  get "/certify_artisans" => 'certify_artisans#get_uncertified_artisans'
+  get "/admin/certify_artisans"
+  get "/admin/home" 
 
   resources :biddings
   resources :tasks
