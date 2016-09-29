@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   root "pages#index"
   get "admin/dashboard" => "dashboard#home", as: "admin_dashboard"
   get "admin/view_applications" => "admin#view_applications", as: "applications"
-  get "admin/applications/:id/review_applicant" => "admin#review_applicant", as: "review_applicant"
-  post "admin/applications/:id" => "admin#update_applicant", as: "update_applicant"
+  get "admin/view_applications/:id/review_applicant" => "admin#review_applicant", as: "review_applicant"
+  post "admin/view_applications/:id" => "admin#update_applicant", as: "update_applicant"
 
   put "broadcast" => "tasks#broadcast_task"
   get "signup" => "users#new"
