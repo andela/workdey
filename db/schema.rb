@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928145755) do
+ActiveRecord::Schema.define(version: 20160929161217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20160928145755) do
   add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "references", force: :cascade do |t|
     t.integer  "taskee_id"
@@ -164,6 +171,7 @@ ActiveRecord::Schema.define(version: 20160928145755) do
     t.float    "latitude"
     t.boolean  "enable_notifications", default: true
     t.integer  "status"
+    t.integer  "rating_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
