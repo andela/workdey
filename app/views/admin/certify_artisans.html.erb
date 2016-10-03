@@ -1,31 +1,38 @@
+<section class="main container center-align">
+  <table class="table">
+    <thead>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </thead>
+    <tbody>
+      <% @uncertified_artisans.each do |artisan| %>
+      <tr>
+        <td> <%= artisan.firstname %></td>
+        <td> <%= artisan.lastname %></td>
+        <td><button class="waves-effect waves-light btn modal-trigger" href="#rate">Certify</button></td>
+      </tr>
+      <% end %>
 
-  <section class="main container center-align">
-    <table class="table">
-      <thead>
-        <th>First Name</th>
-        <th>Last Name</th>
-      </thead>
-      <tbody>
-        <% @uncertified_artisans.each do |artisan| %>
-        <tr>
-          <td> <%= artisan.firstname %></td>
-          <td> <%= artisan.lastname %></td>
-          <td><button class="waves-effect waves-light btn modal-trigger" href="#rate">Certify</button></td>
-        </tr>
-        <% end %>
+    </tbody>
+  </table>
+</section>
 
-      </tbody>
-    </table>
-  </section>
+<script>
+$(function () {
 
+  $("#rateYo").rateYo({
+  });
 
-    <!-- Modal Structure -->
-    <div id="rate" class="modal">
-      <div class="modal-content">
-        <h4>Rate Artisan</h4>
-        <p>Vetting Results Here</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-      </div>
+});
+</script>
+  <!-- Modal Structure -->
+  <div id="rate" class="modal">
+    <div class="modal-content">
+      <h4>Rate Artisan</h4>
+      <p>Vetting Results Here</p>
+      <div id="rateYo"></div>
     </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+    </div>
+  </div>
