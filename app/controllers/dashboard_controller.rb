@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
     if current_user.user_type.nil?
       redirect_to role_path
     elsif current_user.user_type == "taskee" && !current_user.has_taken_quiz
-      redirect_to quiz_path
+      #redirect_to quiz_path
     else
       @completion_percentage = calculate_profile_completeness
       render :home
@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
     elsif current_user.user_type == "taskee" && current_user.confirmed
       redirect_to dashboard_path
     elsif current_user.user_type == "taskee" && !current_user.confirmed
-      redirect_to quiz_path
+      #redirect_to quiz_path
     else
       redirect_to dashboard_path
     end
