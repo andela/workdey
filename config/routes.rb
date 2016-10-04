@@ -62,13 +62,15 @@ Rails.application.routes.draw do
 
   get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
   get "/admin/certify_artisans"
-  get "/admin/home" 
+  get "/admin/home"
 
   resources :biddings
   resources :tasks
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
   resources :charges, only: [:new, :create]
+  resources :ratings, only: :create
+  get "/ratings/new/:user_id" => "ratings#new"
 
   namespace :dashboard do
     resources :references, only: [:index, :new, :create]
