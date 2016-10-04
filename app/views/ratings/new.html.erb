@@ -1,0 +1,16 @@
+<section class="main container center">
+  <%= form_for @rating, url: ratings_path do |f| %>
+    <%= f.label :comment %>
+    <%= f.text_field :comment, class: "input-field col s6"%>
+    <%= f.label :rating %>
+    <%= f.select :rating, options_for_select((1..5).to_a) %>
+    <%= hidden_field_tag 'user_id', @user_id %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</section>
+
+<script>
+$(document).ready(function() {
+    $('select').material_select();
+});
+</script>
