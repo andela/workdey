@@ -177,17 +177,6 @@ ActiveRecord::Schema.define(version: 20161003195842) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  create_table "vetting_records", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "confidence"
-    t.integer  "skill_proficiency"
-    t.integer  "experience"
-    t.integer  "interviewer_verdict"
-    t.text     "interviewer_comments"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
   add_foreign_key "taskee_skillsets", "skillsets"
