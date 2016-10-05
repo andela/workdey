@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820060921) do
+ActiveRecord::Schema.define(version: 20161004102851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,15 @@ ActiveRecord::Schema.define(version: 20160820060921) do
   end
 
   add_index "references", ["taskee_id"], name: "index_references_on_taskee_id", using: :btree
+
+  create_table "responses", force: :cascade do |t|
+    t.jsonb    "response"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -169,6 +178,7 @@ ActiveRecord::Schema.define(version: 20160820060921) do
 
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
+  add_foreign_key "responses", "users"
   add_foreign_key "taskee_skillsets", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :references, foreign_key: :taskee_id
   has_many :taskee_skillsets, foreign_key: :taskee_id
   has_many :skillsets, foreign_key: :taskee_id, through: :taskee_skillsets
+  has_many :responses, foreign_key: :user_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
