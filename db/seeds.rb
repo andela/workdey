@@ -103,6 +103,7 @@ class SeedData
     user_plan.each { |user| UserPlan.create(user) }
     taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
     10.times { biddings }
+    questions.each { |question| Question.create(question) }
   end
 
   def taskee_skillsets
@@ -115,6 +116,103 @@ class SeedData
       { taskee_id: 7, skillset_id: 4 },
       { taskee_id: 7, skillset_id: 3 },
       { taskee_id: 8, skillset_id: 3 }
+    ]
+  end
+
+  def questions
+    [
+      {
+        question: "Which of the following skills are you proficient in? Pick all that apply.",
+        required: true,
+        options: [
+          "Plumbing",
+          "Electrical",
+          "Carpenting",
+          "House Cleaning"
+          ]
+      },
+
+      {
+        question: "What services do you offer in your skill of specialization?",
+        required: true,
+        options: []
+      },
+
+      {
+        question: "How long have you practised your skill of specialization?",
+        required: true,
+        options: [
+          "Less than 3 months",
+          "3 - 6 months",
+          "6 months to a year",
+          "1 year",
+          "2 years",
+          "3 years",
+          "5 years",
+          "More than 5 years"
+        ]
+      },
+
+      {
+        question: "What do you love about your work?",
+        required: true,
+        options: []
+      },
+
+      {
+        question: "Why do you want to join WorkDey?",
+        required: true,
+        options: []
+      },
+
+      {
+        question: "What training or certification have you received? Where did you receive it?",
+        required: true,
+        options: []
+      },
+
+      {
+        question: "What is your preferred method of communication?",
+        required: true,
+        options: [
+          "Email",
+          "SMS",
+          "Phone Call"
+          ]
+      },
+
+      {
+        question: "Do you have a smartphone?",
+        required: true,
+        options: [
+          "Yes",
+          "No"
+        ]
+      },
+
+      {
+        question: "What training or certification have you received? Where did you receive it?",
+        required: true,
+        options: []
+      },
+
+      {
+        question: "What is your biggest weakness and how do you plan to overcome it?",
+        required: false,
+        options: []
+      },
+
+      {
+        question: "What challenge have you faced at work and how did you deal with it?",
+        required: false,
+        options: []
+      },
+
+      {
+        question: "Where do you see yourself in 5 years?",
+        required: false,
+        options: []
+      }
     ]
   end
 end
