@@ -26,6 +26,8 @@ class SeedData
         confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "6.4994906", longitude: "3.3780381" },
+
+
       { firstname: "Temitope", lastname: "Amodu",
         email: "temitope.amodu@andela.com", street_address: "2 Funso Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
@@ -125,6 +127,44 @@ class SeedData
     ]
   end
 
+  def vetting_records_list
+    [
+      {
+        user_id: 10,
+        confidence: 3,
+        skill_proficiency: 3,
+        experience: 3
+      },
+
+      {
+        user_id: 11,
+        confidence: 3,
+        skill_proficiency: 4,
+        experience: 2
+      },
+
+      {
+        user_id: 12,
+        confidence: 1,
+        skill_proficiency: 1,
+        experience: 1
+      },
+
+      {
+        user_id: 13,
+        confidence: 4,
+        skill_proficiency: 4,
+        experience: 3
+      },
+
+      {
+        user_id: 14,
+        confidence: 5,
+        skill_proficiency: 5,
+        experience: 4
+      }
+    ]
+  end
 
   def skillsets
     [
@@ -161,6 +201,7 @@ class SeedData
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
     taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
+    vetting_records_list.each { |vetting_record| VettingRecord.create(vetting_record) }
     10.times { biddings }
   end
 
