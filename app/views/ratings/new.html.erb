@@ -3,18 +3,54 @@
     <% user = User.find(@user_id) %>
     <%= user.firstname%> <%=user.lastname %>
   </h1>
+  <h2>Vetting Results</h2>
+  <hr>
+  <p>confidence: <%= @vetting_record.confidence %></p>
+  <div id="confidence-rating" class="stars"> </div>
+  <p>experience: <%= @vetting_record.experience %></p>
+  <div id="experience-rating" class ="stars"> </div>
+  <h4>skill proficiency: <%= @vetting_record.skill_proficiency %> </h4>
+  <div id="proficiency"></div>
   <%= form_for @rating, url: ratings_path do |f| %>
     <%= f.label :comment %>
-    <%= f.text_field :comment, class: "input-field col s6"%>
+    <%= f.text_field :comment, required: true%>
     <%= f.label :rating %>
-    <%= f.select :rating, options_for_select((1..5).to_a) %>
+    <div id="rating"></div>
+    <%= f.text_field :rating, id:'rating_value' %>
+    <%#= f.select :rating, options_for_select((1..5).to_a), required: true %>
     <%= hidden_field_tag 'user_id', @user_id %>
     <%= f.submit "Submit" %>
   <% end %>
 </section>
 
 <script>
-$(document).ready(function() {
-    $('select').material_select();
+$(function () {
+  var star_ids = ["#confidence-rating", "#experience-rating", "#proficiency"];
+  var ratings = [
+    <%= @vetting_record.confidence %>,
+    <%= @vetting_record.experience %>,
+    <%= @vetting_record.skill_proficiency %>
+  ];
+  for (var i in star_ids) {
+    $(star_ids[i]).rateYo({
+      rating: ratings[i],
+      readOnly: true
+    });
+  }
+});
+
+$(function () {
+  $("#rating").rateYo({
+    rating: 3.6
+    }
+  });
+});
+
+$(function () {
+  $("#rating_value").rateYo({
+    onSet: function (rating, rateYoInstance) {
+      document.getElementById("rating_value").value = rating;
+    }
+  });
 });
 </script>
