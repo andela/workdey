@@ -98,6 +98,7 @@ class SeedData
     UserPlan.destroy_all
     Bidding.destroy_all
     TaskeeSkillset.destroy_all
+    Question.destroy_all
     users_list.each { |user| User.create(user) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
@@ -129,13 +130,15 @@ class SeedData
           "Electrical",
           "Carpenting",
           "House Cleaning"
-          ]
+          ],
+        radio: false
       },
 
       {
         question: "What services do you offer in your skill of specialization?",
         required: true,
-        options: []
+        options: [],
+        radio: false
       },
 
       {
@@ -150,68 +153,62 @@ class SeedData
           "3 years",
           "5 years",
           "More than 5 years"
-        ]
+        ],
+        radio: true
       },
 
       {
         question: "What do you love about your work?",
         required: true,
-        options: []
+        options: [],
+        radio: false
       },
 
       {
         question: "Why do you want to join WorkDey?",
         required: true,
-        options: []
+        options: [],
+        radio: false
       },
 
       {
         question: "What training or certification have you received? Where did you receive it?",
         required: true,
-        options: []
+        options: [],
+        radio: false
       },
 
       {
-        question: "What is your preferred method of communication?",
+        question: "Which of the following methods of communication are you comfortable with?",
         required: true,
         options: [
           "Email",
           "SMS",
-          "Phone Call"
-          ]
-      },
-
-      {
-        question: "Do you have a smartphone?",
-        required: true,
-        options: [
-          "Yes",
-          "No"
-        ]
-      },
-
-      {
-        question: "What training or certification have you received? Where did you receive it?",
-        required: true,
-        options: []
+          "Phone Call",
+          "Smart Phone"
+          ],
+        radio: false
       },
 
       {
         question: "What is your biggest weakness and how do you plan to overcome it?",
         required: false,
-        options: []
+        options: [],
+        radio: false
       },
 
       {
         question: "What challenge have you faced at work and how did you deal with it?",
         required: false,
-        options: []
+        options: [],
+        radio: false
       },
 
       {
         question: "Where do you see yourself in 5 years?",
         required: false,
-        options: []
+        options: [],
+        radio: false
       }
     ]
   end

@@ -4,17 +4,35 @@
 
 <div class="row">
   <h3 class="center-align">Artisan Questionnaire</h3>
+  <h5 class="left-align">To help us get to know you better, please fill out the following questionnaire. </h5>
 
   <%= form_tag users_responses_path, class: "col s8 offset-s2",
     method: "post", id: "" do %>
+    <% @questions.each do |question| %>
+      <p>
+        <% asterix = if question.required? then " *" else "" end %>
+        <h5 class="row"><%=question.question << asterix%></h5>
 
-    <%= label_tag "response[serv]", "Question" %>
-    <%= text_field_tag "response[services]" %>
+        <% if question.options.empty? %>
+          <%= text_field_tag "responses[#{question.question}]" %>
+        <% else %>
+          <% question.options.each_with_index do |option, index| %>
+            <% if question.radio? %>
+              <input name=<%="responses[#{question.id}]"%> type="radio" id=<%="#{question.id}test#{index}"%> />
+              <label for=<%="#{question.id}test#{index}"%>><%=option%></label>
+            <% else %>
+              <%= check_box_tag("#{question.question}_#{index}") %>
+              <%= label_tag("#{question.question}_#{index}", option) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </p>
+    <% end %>
 
     <div class="input-field row">
-        <button id="choose_skillset" class="btn waves-effect waves-light"submit">Submit
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
+      <button id="responses" class="btn waves-effect waves-light"submit">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
   <% end %>
 </div>

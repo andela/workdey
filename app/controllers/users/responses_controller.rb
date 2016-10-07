@@ -3,11 +3,13 @@ class Users::ResponsesController < ApplicationController
 
   def new
     @response = Response.new
+    @questions = Question.all
   end
 
   def create
     @response = Response.new(response_params)
     if @response.save
+
     else
       render 'new'
     end

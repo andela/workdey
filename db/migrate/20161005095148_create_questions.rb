@@ -4,6 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.text :question
       t.boolean :required
       t.string :options, array: true, default: []
+      t.boolean :radio
 
       t.timestamps null: false
     end
