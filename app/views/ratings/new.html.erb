@@ -16,8 +16,7 @@
     <%= f.text_field :comment, required: true%>
     <%= f.label :rating %>
     <div id="rating"></div>
-    <%= f.text_field :rating, id:'rating_value' %>
-    <%#= f.select :rating, options_for_select((1..5).to_a), required: true %>
+    <%= f.hidden_field :rating, id:'rating_value' %>
     <%= hidden_field_tag 'user_id', @user_id %>
     <%= f.submit "Submit" %>
   <% end %>
@@ -41,16 +40,14 @@ $(function () {
 
 $(function () {
   $("#rating").rateYo({
-    rating: 3.6
-    }
+    fullStar: true
   });
 });
 
 $(function () {
-  $("#rating_value").rateYo({
-    onSet: function (rating, rateYoInstance) {
-      document.getElementById("rating_value").value = rating;
-    }
-  });
+  $("#rating").rateYo()
+              .on("rateyo.set", function (e, data) {
+                  document.getElementById('rating_value').value = data.rating
+              });
 });
 </script>
