@@ -78,90 +78,6 @@ class SeedData
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143"
-      },
-
-      {
-        firstname: "Ron", lastname: "Weasley",
-        email: "ron.weasley@hogwarts.com", street_address: "7 Privet Drive",
-        city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
-      },
-
-      {
-        firstname: "Albus", lastname: "Dumbledore",
-        email: "albus.Dumbledore@hogwarts.com", street_address: "7 Privet Drive",
-        city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
-      },
-
-      {
-        firstname: "Lucius", lastname: "Malfoy",
-        email: "Lucius.Malfoy@hogwarts.com", street_address: "7 Privet Drive",
-        city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
-      },
-
-      {
-        firstname: "Headless", lastname: "Nick",
-        email: "Headless.Nick@hogwarts.com", street_address: "7 Privet Drive",
-        city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
-      },
-
-      {
-        firstname: "Harry", lastname: "Potter",
-        email: "harry.potter@hogwarts.com", street_address: "7 Privet Drive",
-        city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
-      }
-    ]
-  end
-
-  def vetting_records_list
-    [
-      {
-        user_id: 10,
-        confidence: 3,
-        skill_proficiency: 3,
-        experience: 3
-      },
-
-      {
-        user_id: 11,
-        confidence: 3,
-        skill_proficiency: 4,
-        experience: 2
-      },
-
-      {
-        user_id: 12,
-        confidence: 1,
-        skill_proficiency: 1,
-        experience: 1
-      },
-
-      {
-        user_id: 13,
-        confidence: 4,
-        skill_proficiency: 4,
-        experience: 3
-      },
-
-      {
-        user_id: 14,
-        confidence: 5,
-        skill_proficiency: 5,
-        experience: 4
       }
     ]
   end
@@ -201,7 +117,6 @@ class SeedData
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
     taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
-    vetting_records_list.each { |vetting_record| VettingRecord.create(vetting_record) }
     10.times { biddings }
   end
 
@@ -220,3 +135,108 @@ class SeedData
 end
 workdey_data = SeedData.new
 workdey_data.create_all
+
+class DummyData
+  def dummy_applicants_list
+    cloudinary_img_url =
+      "http://res.cloudinary.com/dxoydowjy/image/upload/v1452076402/"\
+    "rxxvqznd6ayvqlmxoon2.png"
+    [
+      {
+        firstname: "Ron", lastname: "Weasley",
+        email: "ron.weasley@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+      },
+
+      {
+        firstname: "Albus", lastname: "Dumbledore",
+        email: "albus.dumbledore@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+      },
+
+      {
+        firstname: "Lucius", lastname: "Malfoy",
+        email: "lucius.malfoy@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+      },
+
+      {
+        firstname: "Headless", lastname: "Nick",
+        email: "headless.nick@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+      },
+
+      {
+        firstname: "Harry", lastname: "Potter",
+        email: "harry.potter@hogwarts.com", street_address: "7 Privet Drive",
+        city: "Utopia", state: nil, password: "1234567890",
+        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        image_url: cloudinary_img_url,
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+      }
+    ]
+  end
+  def vetting_records_list
+    admin = User.find_by(user_type: 'admin').id
+    [
+      {
+        user_id: User.find_by(email: dummy_applicants_list[0][:email]).id,
+        confidence: 3,
+        skill_proficiency: 3,
+        experience: 3,
+        vetted_by: admin
+      },
+
+      {
+        user_id: User.find_by(email: dummy_applicants_list[1][:email]).id,
+        confidence: 3,
+        skill_proficiency: 4,
+        experience: 2,
+        vetted_by: admin
+      },
+
+      {
+        user_id: User.find_by(email: dummy_applicants_list[2][:email]).id,
+        confidence: 1,
+        skill_proficiency: 1,
+        experience: 1,
+        vetted_by: admin
+      },
+
+      {
+        user_id: User.find_by(email: dummy_applicants_list[3][:email]).id,
+        confidence: 4,
+        skill_proficiency: 4,
+        experience: 3,
+        vetted_by: admin
+      },
+
+      {
+        user_id: User.find_by(email: dummy_applicants_list[4][:email]).id,
+        confidence: 5,
+        skill_proficiency: 5,
+        experience: 4,
+        vetted_by: admin
+      }
+    ]
+  end
+  def create_all
+    dummy_applicants_list.each { |applicant| User.create(applicant) }
+    vetting_records_list.each do |vetting_record|
+      VettingRecord.create(vetting_record)
+    end
+  end
+end
+DummyData.new.create_all
