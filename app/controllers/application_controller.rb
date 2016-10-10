@@ -49,4 +49,11 @@ class ApplicationController < ActionController::Base
   def show_notification_count
     @count = Notification.unread(current_user).count if current_user
   end
+
+  def require_admin
+     unless current_user.admin?
+       flash[:error] = "You must be an admin to access this resource"
+       redirect_to dashboard_path
+     end
+   end
 end
