@@ -2,10 +2,6 @@ Rails.application.routes.draw do
   get "taskees/index"  => "taskees#index", as: :taskees
 
   root "pages#index"
-  get "admin/dashboard" => "dashboard#home", as: "admin_dashboard"
-  get "admin/view_applications" => "admin#view_applications", as: "applications"
-  get "admin/view_applications/:id/review_applicant" => "admin#review_applicant", as: "review_applicant"
-  post "admin/view_applications/:id" => "admin#update_applicant", as: "update_applicant"
 
   put "broadcast" => "tasks#broadcast_task"
   get "signup" => "users#new"
@@ -75,5 +71,9 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :references, only: [:index, :new, :create]
     resources :endorsements, only: [:new, :create]
+  end
+
+  namespace :admin do
+    resources :applicants
   end
 end

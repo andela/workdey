@@ -1,5 +1,5 @@
 class Admin < User
-  def self.get_applicants
-    User.where(["user_type = ? and status = ?", "taskee", 0])
-  end
+  scope :get_applicants, lambda{
+    where(user_type: "taskee", status: 0)
+  }
 end

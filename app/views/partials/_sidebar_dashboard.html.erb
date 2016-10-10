@@ -1,7 +1,7 @@
 <ul id="slide-out" class="side-nav sinav fixed">
 <% if current_user.admin? %>
-<%= link_to raw("<li class='side-nav-button'>Home</li>"), admin_dashboard_path %>
-<%= link_to raw("<li class='side-nav-button'>View Applications</li>"), applications_path %>
+<%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %>
+<%= link_to raw("<li class='side-nav-button'>View Applications</li>"), admin_applicants_path %>
 <% else %>
 <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %>
 <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %>

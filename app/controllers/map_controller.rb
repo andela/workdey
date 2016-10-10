@@ -6,7 +6,7 @@ class MapController < WebsocketRails::BaseController
 
   def search_by_task
     taskees = get_all_taskees.select do |taskee|
-      taskee if taskee[:tasks].include? message
+      taskee if taskee[:skillsets].include? message.to_i
     end
     send_message :success, taskees.to_json, namespace: :search_taskee
   end
@@ -32,7 +32,7 @@ class MapController < WebsocketRails::BaseController
           [current_user.latitude, current_user.longitude],
           [taskee[:latitude], taskee[:longitude]]
         ).to_kilometers,
-        tasks: taskee.tasks.map(&:name)
+        skillsets: taskee.skillsets.map(&:id)
       }
     end
     nearby_taskees
