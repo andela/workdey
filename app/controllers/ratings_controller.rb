@@ -6,10 +6,17 @@ class RatingsController < ApplicationController
   end
 
   def create
-    Rating.create(user_id: params["user_id"],
-    comment: params["rating"]["comment"],
-    rating: params["rating"]["rating"])
+    Rating.create(rating_params)
     User.find(params['user_id']).update_attribute(:status, :certified)
     redirect_to '/admin/certify_artisans'
+  end
+
+  private
+  def rating_params
+    {
+      user_id: params["user_id"],
+      comment: params["rating"]["comment"],
+      rating: params["rating"]["rating"]
+    }
   end
 end
