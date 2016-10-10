@@ -44,7 +44,10 @@ class User < ActiveRecord::Base
 
   validates :password,
             presence: true,
-            length: { minimum: 8 }
+            length: { minimum: 8 },
+            on: :create
+
+  validates :status, presence: true
 
   scope :taskees, -> { where(user_type: "taskee") }
 

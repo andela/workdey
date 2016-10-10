@@ -1,6 +1,7 @@
 <div class="container-large">
-  <div class="card center col s12 m12 l12">
-    <ul class="collection">
+  <div class="col s12 m12 l12">
+      <% unless @applicants.empty? %>
+      <ul class="collection">
       <% @applicants.each do |applicant| %>
       <li class="collection-item li-item">
         <%= applicant.fullname %>
@@ -18,6 +19,9 @@
       </p>
       <%= link_to "View", edit_admin_applicant_path(applicant), class: "btn view-btn" %>
     </li>
+    <% end %>
+    <% else %>
+    <%= render 'no_applicants_to_review' %>
     <% end %>
   </ul>
 </div>

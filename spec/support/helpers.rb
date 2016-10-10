@@ -18,11 +18,13 @@ module Helpers
       user_type: "taskee"
     }
 
-    @statuses = %w(done active inactive rejected)
-
     @tasker = create(:user, user_type: "tasker")
     @taskee = create(:user, taskee_attr)
+    status_stub
+  end
 
+  def status_stub
+    @statuses = %w(done active inactive rejected)
     @statuses.each do |status|
       create(:task_management,
              description: Faker::Lorem.sentence,
@@ -36,7 +38,9 @@ module Helpers
       street_address: Faker::Address.street_address,
       has_taken_quiz: true,
       confirmed: true,
-      phone: nil
+      phone: nil,
+      reason: "good",
+      status: "accepted"
     }
   end
 
@@ -55,7 +59,7 @@ module Helpers
                         .pickadate('picker').set('select', #{end_date})")
     find("div.select-wrapper input").click
     sleep(0.2)
-    find("div.select-wrapper li", text: @skillset.name).click
+    first("div.select-wrapper li", text: @skillset.name).click
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
 

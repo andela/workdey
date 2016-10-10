@@ -24,12 +24,12 @@
                 </li>
                 <% end %>
             </ul>
-            <%= form_for @applicant, url: admin_applicant_path, method: :put do |f| %>
+            <%= form_for @applicant, url: admin_applicant_path, method: :patch do |f| %>
             <div class="field">
-                <%= f.radio_button :status, "accepted", id: "1", checked: true%>
-                <%= f.label :status_accepted, "Accept" %>
-                <%= f.radio_button :status,  "rejected", id: "2" %>
-                <%= f.label :status_rejected, "Reject" %>
+                <%= f.radio_button :status, "1" %>
+                <%= f.label :status_1, "Accept" %>
+                <%= f.radio_button :status,  "2" %>
+                <%= f.label :status_2, "Reject"%>
             </div>
 
             <div class="field">

@@ -11,7 +11,8 @@ class Admin::ApplicantsController < ApplicationController
   end
 
   def update
-    @applicant.update_attribute(:status, params[:status].to_i)
+    @applicant.update_attributes(status: applicant_params[:status].to_i,
+                                 reason: applicant_params[:reason])
     redirect_to(admin_applicants_path)
   end
 
@@ -23,5 +24,9 @@ class Admin::ApplicantsController < ApplicationController
 
   def set_applicant
     @applicant = User.find(params[:id])
+  end
+
+  def applicant_params
+    params.require(:user).permit(:status, :reason)
   end
 end

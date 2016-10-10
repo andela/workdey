@@ -7,7 +7,9 @@ RSpec.describe "Profile completion meter" do
       user_type: "taskee",
       has_taken_quiz: true,
       confirmed: true,
-      phone: nil
+      phone: nil,
+      reason: "good",
+      status: "accepted"
     }
   end
 
@@ -16,7 +18,7 @@ RSpec.describe "Profile completion meter" do
     expect(page).to have_content "Welcome #{user.firstname}"
 
     within("div.profile-meter") do
-      expect(page).to have_content "73%"
+      expect(page).to have_content "77%"
     end
   end
 
@@ -25,7 +27,7 @@ RSpec.describe "Profile completion meter" do
     log_in_with(user.email, user.password)
 
     within("div.profile-meter") do
-      expect(page).to have_content "73%"
+      expect(page).to have_content "77%"
     end
 
     click_link "Complete Your Profile"
@@ -34,9 +36,8 @@ RSpec.describe "Profile completion meter" do
     click_button "UPDATE PROFILE"
     visit dashboard_path
 
-
     within("div.profile-meter") do
-      expect(page).to have_content "82%"
+      expect(page).to have_content "85%"
     end
   end
 end
