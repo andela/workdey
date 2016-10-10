@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe VettingRecord, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of(:confidence) }
+  it { should validate_presence_of(:skill_proficiency) }
+  it { should validate_presence_of(:experience) }
 end
