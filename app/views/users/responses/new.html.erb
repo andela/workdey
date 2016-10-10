@@ -7,22 +7,27 @@
   <h5 class="left-align">To help us get to know you better, please fill out the following questionnaire. </h5>
 
   <%= form_tag users_responses_path, class: "col s8 offset-s2",
-    method: "post", id: "" do %>
+    method: "post", id: "response_form", class: "col s12" do %>
     <% @questions.each do |question| %>
       <p>
         <% asterix = if question.required? then " *" else "" end %>
-        <h5 class="row"><%=question.question << asterix%></h5>
+        <h5 class="row"><%= question.question + asterix %></h5>
 
         <% if question.options.empty? %>
-          <%= text_field_tag "responses[#{question.question}]" %>
+          <% if question.required? %>
+            <%= text_area_tag "response[#{question.question}]", nil, class: "materialize-textarea", :required => true %>
+          <% else %>
+            <%= text_area_tag "response[#{question.question}]", nil, class: "materialize-textarea" %>
+          <% end %>
         <% else %>
           <% question.options.each_with_index do |option, index| %>
-            <% if question.radio? %>
-              <input name=<%="responses[#{question.id}]"%> type="radio" id=<%="#{question.id}test#{index}"%> />
-              <label for=<%="#{question.id}test#{index}"%>><%=option%></label>
+            <% if option == "Other" %>
+              <%= text_field_tag "response[#{question.question}][]", nil,
+                placeholder: "Other" %>
             <% else %>
-              <%= check_box_tag("#{question.question}_#{index}") %>
-              <%= label_tag("#{question.question}_#{index}", option) %>
+              <%= check_box_tag("response[#{question.question}][]", option, false,
+                :id => "#{question.id}_#{index}") %>
+              <%= label_tag("#{question.id}_#{index}", option) %>
             <% end %>
           <% end %>
         <% end %>

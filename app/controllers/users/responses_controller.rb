@@ -1,5 +1,4 @@
 class Users::ResponsesController < ApplicationController
-  layout "questionnaire"
 
   def new
     @response = Response.new
@@ -7,17 +6,24 @@ class Users::ResponsesController < ApplicationController
   end
 
   def create
-    @response = Response.new(response_params)
+    @questions = Question.all
+    @response = current_user.responses.create(response_params)
     if @response.save
-
+      current_user.update_attribute(:has_taken_quiz, true)
+      redirect_to users_response_path(@response.id)
     else
       render 'new'
     end
   end
 
+  def show
+    @questions = Question.all
+    @response = current_user.latest_response
+  end
+
   private
 
   def response_params
-    params.require(:response).permit(:response)
+    { "response" => params.require(:response).permit! }
   end
 end

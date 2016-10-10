@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
 
   scope :taskees, -> { where(user_type: "taskee") }
 
+  enum status: [:not_reviewed, :accepted, :rejected, :certified]
+
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
       u.provider = auth.provider
@@ -119,6 +121,10 @@ class User < ActiveRecord::Base
 
   def skillset_ids
     taskee_skillsets.map(&:skillset_id)
+  end
+
+  def latest_response
+    responses.order("created_at").last
   end
 
   private_class_method

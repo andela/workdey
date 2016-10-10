@@ -129,86 +129,69 @@ class SeedData
           "Plumbing",
           "Electrical",
           "Carpenting",
-          "House Cleaning"
-          ],
-        radio: false
+          "House Cleaning",
+          "Other"
+          ]
       },
 
       {
         question: "What services do you offer in your skill of specialization?",
         required: true,
-        options: [],
-        radio: false
+        options: []
       },
 
       {
         question: "How long have you practised your skill of specialization?",
         required: true,
-        options: [
-          "Less than 3 months",
-          "3 - 6 months",
-          "6 months to a year",
-          "1 year",
-          "2 years",
-          "3 years",
-          "5 years",
-          "More than 5 years"
-        ],
-        radio: true
+        options: []
       },
 
       {
         question: "What do you love about your work?",
         required: true,
-        options: [],
-        radio: false
+        options: []
       },
 
       {
         question: "Why do you want to join WorkDey?",
         required: true,
-        options: [],
-        radio: false
+        options: []
       },
 
       {
         question: "What training or certification have you received? Where did you receive it?",
         required: true,
-        options: [],
-        radio: false
+        options: []
       },
 
       {
-        question: "Which of the following methods of communication are you comfortable with?",
+        question: "Which methods of communication are you comfortable with?",
         required: true,
         options: [
           "Email",
           "SMS",
           "Phone Call",
-          "Smart Phone"
-          ],
-        radio: false
+          "Smart Phone",
+          "Other"
+          ]
       },
 
       {
         question: "What is your biggest weakness and how do you plan to overcome it?",
         required: false,
-        options: [],
-        radio: false
+        options: []
       },
 
       {
         question: "What challenge have you faced at work and how did you deal with it?",
         required: false,
-        options: [],
-        radio: false
+        options: []
       },
 
       {
         question: "Where do you see yourself in 5 years?",
         required: false,
-        options: [],
-        radio: false
+        options: []
       }
     ]
   end
