@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  before_action :require_admin
   def new
     @rating = Rating.new
     @user_id = params['user_id']
