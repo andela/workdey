@@ -24,6 +24,13 @@ class Users::ResponsesController < ApplicationController
   private
 
   def response_params
-    { "response" => params.require(:response).permit! }
+    keys = Question.all.map do |q|
+      if q.options.empty?
+        q.question
+      else
+        { q.question => [] }
+      end
+    end
+    { "response" => params.require(:response).permit(keys) }
   end
 end
