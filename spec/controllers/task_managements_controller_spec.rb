@@ -44,8 +44,8 @@ RSpec.describe TaskManagementsController, type: :controller do
         get :index
         expect(assigns(:tasks)).to eql user.tasks_created.to_a
       end
-      it "assigns tasks given to taskee" do
-        user.update_attribute(:user_type, "taskee")
+      it "assigns tasks given to artisan" do
+        user.update_attribute(:user_type, "artisan")
         get :index
         expect(assigns(:tasks)).to eql user.tasks_given.paid_for.to_a
       end
@@ -53,10 +53,10 @@ RSpec.describe TaskManagementsController, type: :controller do
   end
 
   describe "#share" do
-    let(:taskee) { create(:user, user_type: "taskee") }
+    let(:artisan) { create(:user, user_type: "artisan") }
     let(:tasker) { create(:user) }
     let(:task) do
-      create(:task_management, taskee_id: taskee.id, tasker_id: tasker.id)
+      create(:task_management, artisan_id: artisan.id, tasker_id: tasker.id)
     end
 
     it "updates the shared atrribute to true" do

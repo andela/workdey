@@ -12,12 +12,12 @@
       <ul class= "col m5 offset-m1" >
         <h2>Complete this deal</h2>
         <% if @task %>
-          <p> You will have to pay before your taskee will be notified</p>
+          <p> You will have to pay before your artisan will be notified</p>
           <p>You may pay below</p>
-          <% @taskee = @task.taskee.fullname %>
+          <% @artisan = @task.artisan.fullname %>
           <% @description = @task.description %>
           <% @amount = @task.amount %>
-          <li><strong><%= label_tag "Taskee's name" %></strong><%= text_field_tag("name", @taskee, disabled: true) %></li>
+          <li><strong><%= label_tag "Artisan's name" %></strong><%= text_field_tag("name", @artisan, disabled: true) %></li>
           <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", @description, disabled: true ) %></li>
             <% unless @task.paid? %>
               <%= render "pay" %>

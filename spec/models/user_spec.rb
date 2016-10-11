@@ -1,18 +1,18 @@
 require "rails_helper"
 RSpec.describe User, type: :model do
-  it { is_expected.to have_many(:skillsets).through(:taskee_skillsets) }
+  it { is_expected.to have_many(:skillsets).through(:artisan_skillsets) }
 
   it do
-    is_expected.to have_many(:taskee_skillsets).with_foreign_key(:taskee_id)
+    is_expected.to have_many(:artisan_skillsets).with_foreign_key(:artisan_id)
   end
 
   it { is_expected.to have_many(:reviews) }
 
-  it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
+  it { is_expected.to have_many(:bid_managements).with_foreign_key(:artisan_id) }
 
   it do
     is_expected.to have_many(:tasks_given).class_name("TaskManagement").
-      with_foreign_key(:taskee_id)
+      with_foreign_key(:artisan_id)
   end
 
   it do
@@ -113,24 +113,24 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".get_taskee_by_skillset_name" do
+  describe ".get_artisan_by_skillset_name" do
     it "return users by their skillset name" do
       skillset = create(:skillset)
-      user = create(:user, user_attr.merge(user_type: "taskee"))
+      user = create(:user, user_attr.merge(user_type: "artisan"))
       user.skillsets << skillset
       create_list(:skillset, 2)
-      expect(User.get_taskees_by_skillset(skillset.name).count).to eq 1
+      expect(User.get_artisans_by_skillset(skillset.name).count).to eq 1
     end
   end
 
-  describe "#taskee" do
-    it "returns true if the user is a taskee" do
-      user = create(:user, user_type: "taskee")
-      expect(user.taskee?).to eq true
+  describe "#artisan" do
+    it "returns true if the user is a artisan" do
+      user = create(:user, user_type: "artisan")
+      expect(user.artisan?).to eq true
     end
     it "returns false for a tasker" do
       user = create(:user, user_type: "tasker")
-      expect(user.taskee?).to eq false
+      expect(user.artisan?).to eq false
     end
   end
 
@@ -139,8 +139,8 @@ RSpec.describe User, type: :model do
       user = create(:user, user_type: "admin")
       expect(user.admin?).to eq true
     end
-    it "returns false if the user is a taskee" do
-      user = create(:user, user_type: "taskee")
+    it "returns false if the user is a artisan" do
+      user = create(:user, user_type: "artisan")
       expect(user.admin?).to eq false
     end
     it "returns false for a tasker" do

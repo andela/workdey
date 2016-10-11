@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :reference do
-    taskee_id nil
+    artisan_id nil
     email { Faker::Internet.email }
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }

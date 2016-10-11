@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   attr_accessor :min_price, :max_price
   belongs_to :tasker, class_name: "User"
-  belongs_to :taskee, class_name: "User"
+  belongs_to :artisan, class_name: "User"
   belongs_to :skillset
 
   has_many :task_management, foreign_key: :task_id
@@ -16,25 +16,25 @@ class Task < ActiveRecord::Base
 
   scope :unassigned, -> { where(status: "unassigned") }
 
-  def self.get_taskees(keyword, user_email)
-    taskees = User.get_taskees_by_skillset(keyword)
-    return nil if taskees.nil? || taskees.empty?
+  def self.get_artisans(keyword, user_email)
+    artisans = User.get_artisans_by_skillset(keyword)
+    return nil if artisans.nil? || artisans.empty?
     current_user_city_street user_email
-    taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
-    other_taskees = taskees - taskees_nearby
-    [taskees_nearby, other_taskees].flatten
+    artisans_nearby = get_artisans_nearby(artisans, @user_street, @user_city)
+    other_artisans = artisans - artisans_nearby
+    [artisans_nearby, other_artisans].flatten
   end
 
-  def self.get_taskees_nearby(taskees, user_street, user_city)
-    taskees_nearby = taskees.where(
+  def self.get_artisans_nearby(artisans, user_street, user_city)
+    artisans_nearby = artisans.where(
       "LOWER(city) LIKE ? AND LOWER(street_address) LIKE ?",
       user_city,
       user_street
     )
-    if taskees_nearby.nil?
-      taskees_nearby = taskees.where("city LIKE ?", user_city)
+    if artisans_nearby.nil?
+      artisans_nearby = artisans.where("city LIKE ?", user_city)
     end
-    taskees_nearby
+    artisans_nearby
   end
 
   def self.current_user_city_street(user_email)
@@ -50,7 +50,7 @@ class Task < ActiveRecord::Base
     ).includes(:tasks).first
     return skill_with_tasks unless skill_with_tasks
     skill_with_tasks.tasks.where(
-      "taskee_id IS NULL AND start_date >= ?",
+      "artisan_id IS NULL AND start_date >= ?",
       Time.now
     )
   end

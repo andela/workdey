@@ -1,4 +1,4 @@
-<% if @taskee_skillsets.present? %>
+<% if @artisan_skillsets.present? %>
   <div class="container">
     <%= render partial: "partials/flash" %>
     <%= form_for@reference, url: dashboard_references_path(@reference), html: { class: "col s12" } do |f| %>
@@ -21,7 +21,7 @@
       </div>
       <h4>2.) Choose skills to be verified</h4>
       <div class="input-field row">
-        <% @taskee_skillsets.each do |skillset| %>
+        <% @artisan_skillsets.each do |skillset| %>
           <%= check_box_tag 'reference[skillsets][]', skillset.name, false,
             id: "reference_skillsets_#{skillset.name}", class: "validate" %>
           <%= label_tag "reference_skillsets_#{skillset.name}", skillset.name %>

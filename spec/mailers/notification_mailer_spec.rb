@@ -7,10 +7,10 @@ RSpec.describe NotificationMailer, type: :mailer do
   end
   describe "send_notifications" do
     before(:each) do
-      @user = create(:user, user_attr.merge(user_type: "taskee"))
+      @user = create(:user, user_attr.merge(user_type: "artisan"))
       @skillset = create(:skillset)
       @tasker = create(:user, user_attr.merge(user_type: "tasker"))
-      @taskee = create(:user, user_attr.merge(user_type: "taskee"))
+      @artisan = create(:user, user_attr.merge(user_type: "artisan"))
       @task = create(
         :task,
         skillset_id: @skillset.id,
@@ -33,14 +33,14 @@ RSpec.describe NotificationMailer, type: :mailer do
         @user,
         @task,
         @category,
-        @taskee,
+        @artisan,
         @tasker
       )
     end
 
     it "renders the headers" do
       expect(@mail.subject).to eq("You have notifications on Workdey")
-      expect(@mail.to).to eq([@taskee.email.to_s])
+      expect(@mail.to).to eq([@artisan.email.to_s])
       expect(@mail.from).to eq(["noreply@workdey.com"])
     end
 
@@ -50,17 +50,17 @@ RSpec.describe NotificationMailer, type: :mailer do
   end
 
   describe "send_contact_info" do
-    let(:taskee) do
-      create(:user, user_type: "taskee", phone: Faker::PhoneNumber.cell_phone)
+    let(:artisan) do
+      create(:user, user_type: "artisan", phone: Faker::PhoneNumber.cell_phone)
     end
     let(:tasker) { create(:user) }
     let(:mail) do
-      NotificationMailer.send_contact_info(tasker, taskee).deliver_now
+      NotificationMailer.send_contact_info(tasker, artisan).deliver_now
     end
 
     it "renders the subject" do
       expect(mail.subject).to eq(
-        "#{taskee.fullname} has shared contact with you"
+        "#{artisan.fullname} has shared contact with you"
       )
     end
 

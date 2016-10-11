@@ -6,8 +6,8 @@ class TaskManagementsController < ApplicationController
     if params.except(:controller, :action).empty?
       redirect_to(dashboard_path) && return
     end
-    @taskee_id = deobfuscate(params.except(:controller, :action))["id"]
-    @taskee = User.find(@taskee_id) if @taskee_id
+    @artisan_id = deobfuscate(params.except(:controller, :action))["id"]
+    @artisan = User.find(@artisan_id) if @artisan_id
     @task = TaskManagement.new
   end
 
@@ -28,12 +28,12 @@ class TaskManagementsController < ApplicationController
       render "show"
     else
       retain_form_values
-      redirect_to assign_task_path(obfuscate(id: @task.taskee_id))
+      redirect_to assign_task_path(obfuscate(id: @task.artisan_id))
     end
   end
 
   def index
-    @tasks = if current_user.taskee?
+    @tasks = if current_user.artisan?
                sort_status(current_user.tasks_given.paid_for)
              elsif current_user.tasker?
                sort_status(
@@ -59,7 +59,7 @@ class TaskManagementsController < ApplicationController
 
   def send_email_notifications(task)
     return unless current_user.enable_notifications
-    notif_taskee = User.find(task.taskee_id)
+    notif_artisan = User.find(task.artisan_id)
     notif_tasker = User.find(task.tasker_id)
     task_category = Task.find(task.task_id)
     NotificationMailer.send_notifications(
@@ -67,7 +67,7 @@ class TaskManagementsController < ApplicationController
       task,
       task_category,
       notif_tasker,
-      notif_taskee
+      notif_artisan
     ).deliver_now
   end
 
@@ -82,7 +82,7 @@ class TaskManagementsController < ApplicationController
 
   def task_details
     params.require(:task_management).
-      permit(:task_name, :tasker_id, :taskee_id, :amount, :description)
+      permit(:task_name, :tasker_id, :artisan_id, :amount, :description)
   end
 
   def task_date
@@ -149,10 +149,10 @@ class TaskManagementsController < ApplicationController
   end
 
   def notify_tasker(task)
-    NotificationMailer.send_contact_info(task.tasker, task.taskee).deliver_now
+    NotificationMailer.send_contact_info(task.tasker, task.artisan).deliver_now
     Notification.create(
-      message: "#{task.taskee.fullname} has shared contact with you!",
-      sender_id: task.taskee_id,
+      message: "#{task.artisan.fullname} has shared contact with you!",
+      sender_id: task.artisan_id,
       receiver_id: task.tasker_id,
       notifiable: task
     ).notify_receiver("broadcast_task")

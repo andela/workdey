@@ -27,10 +27,10 @@ RSpec.describe "Searching for needs", type: :feature do
       start_date: Date.yesterday
     )
   end
-  let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
+  let(:artisan) { create(:user, user_attr.merge(user_type: "artisan")) }
 
   scenario "when user search for need that has a task" do
-    search_helper(taskee, skillset)
+    search_helper(artisan, skillset)
 
     within("ul.collection") do
       expect(page).not_to have_content task2.name
@@ -39,7 +39,7 @@ RSpec.describe "Searching for needs", type: :feature do
   end
 
   scenario "when user search for need that has no task" do
-    search_helper(taskee, skillset2)
+    search_helper(artisan, skillset2)
 
     expect(page).to have_content "No search result found!"
   end

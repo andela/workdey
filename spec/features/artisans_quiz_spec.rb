@@ -10,7 +10,7 @@ feature "SignUp" do
     workdey_data.create_all
   end
 
-  scenario "Take the taskee quiz" do
+  scenario "Take the artisan quiz" do
     sign_in
     click_button "I'm ready!"
     answer_quiz
@@ -22,9 +22,9 @@ feature "SignUp" do
     right_answers_arr = [2, 2, 3, 2, 1, 2, 3, 2, 2, 4, 2]
     right_answers_arr.each do |ans|
       find(:xpath, "//label[@for='radio #{ans}']").click
-      sleep(1.5)
+      sleep(1)
       click_button "Submit"
-      sleep(1.5)
+      sleep(1)
       click_button "Next"
     end
   end

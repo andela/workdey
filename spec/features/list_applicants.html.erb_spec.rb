@@ -25,7 +25,7 @@ RSpec.feature "List applicants", type: :feature do
   end
 
   scenario "when user clicks View Applications" do
-    create(:user, user_type: "taskee")
+    create(:user, user_type: "artisan")
     log_in_with(admin.email, admin.password)
     click_link "View Applications"
     expect(page).to have_content "View"

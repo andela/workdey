@@ -13,11 +13,11 @@ WebsocketRails::EventMap.describe do
   #   end
   # The above will handle an event triggered on the client like `product.new`.
 
-  namespace :taskees do
-    subscribe :get_nearby_taskees, "map#get_nearby_taskees"
+  namespace :artisans do
+    subscribe :get_nearby_artisans, "map#get_nearby_artisans"
   end
 
-  namespace :search_taskee do
+  namespace :search_artisan do
     subscribe :search_by_task, "map#search_by_task"
   end
 end

@@ -1,5 +1,5 @@
-class TaskeeSkillsetsController < ApplicationController
-  before_action :taskee_required
+class ArtisanSkillsetsController < ApplicationController
+  before_action :artisan_required
 
   def index
     @skillsets = Skillset.all
@@ -10,9 +10,9 @@ class TaskeeSkillsetsController < ApplicationController
     return_data = if params["skills"].blank?
                     { success: false, message: Message.choose_skill }
                   else
-                    current_user.taskee_skillsets.destroy_all
+                    current_user.artisan_skillsets.destroy_all
                     params["skills"].each do |id|
-                      current_user.taskee_skillsets.create(
+                      current_user.artisan_skillsets.create(
                         skillset_id: id.to_i
                       )
                     end

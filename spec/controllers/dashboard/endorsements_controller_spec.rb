@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Dashboard::EndorsementsController, type: :controller do
   let(:user) { create(:user) }
   let(:reference) do
-    create(:reference, taskee_id: user.id,
+    create(:reference, artisan_id: user.id,
                        skillsets: { "skills" => %w(Plumbing Carpentry) })
   end
 
@@ -23,11 +23,11 @@ RSpec.describe Dashboard::EndorsementsController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it "assigns taskee firstname to @taskee" do
-      expect(assigns(:taskee)).to eq(user.firstname)
+    it "assigns artisan firstname to @artisan" do
+      expect(assigns(:artisan)).to eq(user.firstname)
     end
-    it "assigns taskee's skillset to @taskee_skillsets" do
-      expect(assigns(:taskee_skillsets)).to eql(%w(Plumbing Carpentry))
+    it "assigns artisan's skillset to @artisan_skillsets" do
+      expect(assigns(:artisan_skillsets)).to eql(%w(Plumbing Carpentry))
     end
   end
 

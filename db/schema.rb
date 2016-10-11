@@ -17,9 +17,19 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
+  create_table "artisan_skillsets", force: :cascade do |t|
+    t.integer  "skillset_id"
+    t.integer  "artisan_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "artisan_skillsets", ["artisan_id"], name: "index_artisan_skillsets_on_artisan_id", using: :btree
+  add_index "artisan_skillsets", ["skillset_id"], name: "index_artisan_skillsets_on_skillset_id", using: :btree
+
   create_table "bid_managements", force: :cascade do |t|
     t.integer  "bidding_id"
-    t.integer  "taskee_id"
+    t.integer  "artisan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,7 +65,7 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
   create_table "references", force: :cascade do |t|
-    t.integer  "taskee_id"
+    t.integer  "artisan_id"
     t.string   "email"
     t.string   "firstname"
     t.string   "lastname"
@@ -67,7 +77,7 @@ ActiveRecord::Schema.define(version: 20161010205437) do
     t.boolean  "done",               default: false
   end
 
-  add_index "references", ["taskee_id"], name: "index_references_on_taskee_id", using: :btree
+  add_index "references", ["artisan_id"], name: "index_references_on_artisan_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.jsonb    "response"
@@ -96,7 +106,7 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   create_table "task_managements", force: :cascade do |t|
     t.integer  "task_id"
     t.integer  "tasker_id"
-    t.integer  "taskee_id"
+    t.integer  "artisan_id"
     t.string   "description"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -107,16 +117,6 @@ ActiveRecord::Schema.define(version: 20161010205437) do
     t.boolean  "paid",        default: false
     t.boolean  "shared",      default: false
   end
-
-  create_table "taskee_skillsets", force: :cascade do |t|
-    t.integer  "skillset_id"
-    t.integer  "taskee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "taskee_skillsets", ["skillset_id"], name: "index_taskee_skillsets_on_skillset_id", using: :btree
-  add_index "taskee_skillsets", ["taskee_id"], name: "index_taskee_skillsets_on_taskee_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20161010205437) do
     t.integer  "skillset_id"
     t.decimal  "latitude",    precision: 10, scale: 6
     t.decimal  "longitude",   precision: 10, scale: 6
-    t.integer  "taskee_id"
+    t.integer  "artisan_id"
     t.text     "price_range"
     t.boolean  "broadcasted",                          default: false
   end
@@ -178,9 +178,9 @@ ActiveRecord::Schema.define(version: 20161010205437) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
   add_foreign_key "responses", "users"
-  add_foreign_key "taskee_skillsets", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

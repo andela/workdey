@@ -17,9 +17,9 @@ class ChargesController < ApplicationController
       currency: "usd"
     )
     @task.update_attribute(:paid, true)
-    notify_taskee @task
+    notify_artisan @task
     redirect_to dashboard_path, notice: "You have been charged successfully"\
-      " and your taskee has been notified"
+      " and your artisan has been notified"
   rescue Stripe::CardError
     redirect_to dashboard_path, danger: "There was a problem with your card"\
       "\nTry and enter valid card details"
@@ -28,12 +28,12 @@ class ChargesController < ApplicationController
       ".\nYou have to try again"
   end
 
-  def notify_taskee(task)
+  def notify_artisan(task)
     tasker = User.find(task.tasker_id).firstname
     Notification.create(
       message: "a new task from #{tasker}",
       sender_id: task.tasker_id,
-      receiver_id: task.taskee_id,
+      receiver_id: task.artisan_id,
       notifiable: task
     ).notify_receiver("new_task")
   end

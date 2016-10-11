@@ -4,12 +4,12 @@ RSpec.describe "Share contact", js: true do
   before do
     page.driver.browser.manage.window.maximize
   end
-  let(:taskee) { create(:user, user_type: "taskee", confirmed: true) }
+  let(:artisan) { create(:user, user_type: "artisan", confirmed: true) }
   let(:tasker) { create(:user, user_type: "tasker", confirmed: true) }
   let!(:task) do
     create(
       :task_management,
-      taskee_id: taskee.id,
+      artisan_id: artisan.id,
       tasker_id: tasker.id,
       paid: true,
       status: "active"
@@ -17,18 +17,18 @@ RSpec.describe "Share contact", js: true do
   end
 
   before(:each) do
-    log_in_with(taskee.email, taskee.password)
+    log_in_with(artisan.email, artisan.password)
   end
 
-  describe "taskee" do
-    scenario "When taskee shares contact with tasker", js: true do
+  describe "artisan" do
+    scenario "When artisan shares contact with tasker", js: true do
       share_contact
 
       expect(page).to have_content "Success!"
       expect(task.reload.shared).to be_truthy
     end
 
-    scenario "When taskee doesn't share contact with tasker" do
+    scenario "When artisan doesn't share contact with tasker" do
       share_contact(false)
 
       expect(page).to have_content("You can share your contact later")
@@ -37,15 +37,15 @@ RSpec.describe "Share contact", js: true do
   end
 
   describe "tasker" do
-    scenario "when tasker views the taskee details " do
+    scenario "when tasker views the artisan details " do
       share_contact
       Capybara.reset_sessions!
       log_in_with(tasker.email, tasker.password)
       visit notifications_path
       click_on "view information"
 
-      expect(page).to have_content(taskee.firstname)
-      expect(page).to have_content(taskee.email)
+      expect(page).to have_content(artisan.firstname)
+      expect(page).to have_content(artisan.email)
     end
   end
 

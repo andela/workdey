@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Admin::ApplicantsController, type: :controller do
   before(:each) do
     @admin = create(:user, user_type: "admin")
-    taskee_stub
+    artisan_stub
     @applicants = Admin.get_applicants
     @applicant = @applicants[0]
   end
@@ -41,7 +41,7 @@ RSpec.describe Admin::ApplicantsController, type: :controller do
   describe "GET#edit" do
     before(:each) do
       stub_current_user(@admin)
-      taskee_stub
+      artisan_stub
       get :edit, id: @applicant.id
     end
 

@@ -128,7 +128,7 @@
           },
           showGuidelines: function () {
             var guidelineBtn = document.querySelector(".guidelines"),
-                guidelines = document.querySelector(".taskee-guidelines"),
+                guidelines = document.querySelector(".artisan-guidelines"),
                 quizSection = main.view.quizSection;
 
             guidelineBtn.addEventListener("click", function () {
