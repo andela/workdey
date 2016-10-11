@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20161010072229) do
     t.text     "question"
     t.boolean  "required"
     t.string   "options",    default: [],              array: true
-    t.boolean  "radio"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
