@@ -9,8 +9,6 @@ before_install:
   - gem update --system
   - gem --version
   - bundle install
-  - bundle exec rake db:migrate RAILS_ENV=test
-  - bundle exec rake
 
 before_script:
   - psql -c 'create database workdey_test;' -U postgres
