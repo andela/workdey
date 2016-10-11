@@ -8,6 +8,8 @@ RSpec.describe User, type: :model do
 
   it { is_expected.to have_many(:reviews) }
 
+  it { is_expected.to have_many(:responses) }
+
   it { is_expected.to have_many(:bid_managements).with_foreign_key(:taskee_id) }
 
   it do
