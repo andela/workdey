@@ -44,7 +44,7 @@
     <br>
     <div id="rating" style="margin:auto;"></div>
 
-    <%= f.hidden_field :rating, id:'rating_value' %>
+    <%= f.hidden_field :rating, id:'rating_value', required: true %>
     <%= hidden_field_tag 'user_id', @user_id %>
     <br>
     <br>

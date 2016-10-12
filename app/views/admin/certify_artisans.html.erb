@@ -9,7 +9,7 @@
       <tr>
         <td> <%= artisan.firstname %></td>
         <td> <%= artisan.lastname %></td>
-        <td> <%= link_to 'Certify', '/ratings/new/' + artisan.id.to_s %></td>
+        <td> <%= link_to 'Certify', '/ratings/new/' + artisan.id.to_s, :class => "btn btn-large"  %></td>
       </tr>
       <% end %>
 
