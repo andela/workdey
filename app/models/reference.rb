@@ -1,5 +1,5 @@
 class Reference < ActiveRecord::Base
-  belongs_to :taskee, class_name: "User"
+  belongs_to :artisan, class_name: "User"
 
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\.]+[\w+]\.[a-z]+\z/i
 

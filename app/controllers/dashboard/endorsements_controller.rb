@@ -3,8 +3,8 @@ module Dashboard
     before_action :set_endorsement, only: [:new, :create]
 
     def new
-      @taskee = @reference.taskee.firstname
-      @taskee_skillsets = JSON.parse(@reference.skillsets["skills"])
+      @artisan = @reference.artisan.firstname
+      @artisan_skillsets = JSON.parse(@reference.skillsets["skills"])
     end
 
     def create

@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :taskee_skillset do
+  factory :artisan_skillset do
   end
 end

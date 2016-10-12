@@ -2,7 +2,7 @@
   <div class="row">
     <section class="col m9 offset-m2">
       <h2>Task logs</h2>
-      <% if current_user.taskee? %>
+      <% if current_user.artisan? %>
         <table>
           <thead>
             <tr>
@@ -48,7 +48,7 @@
             <tr>
               <td></td>
               <td><strong>Description</strong></td>
-              <td><strong>Taskee</strong></td>
+              <td><strong>Artisan</strong></td>
               <td><strong>Status</strong></td>
             </tr>
           </thead>
@@ -57,10 +57,10 @@
               <tr>
                 <td><%= idx %></td>
                 <td><%= description_string(task) %></td>
-                <!-- Taskee name or unassigned -->
-                <% if task.taskee_id %>
-                  <% user = User.find(task.taskee_id) %>
-                  <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
+                <!-- Artisan name or unassigned -->
+                <% if task.artisan_id %>
+                  <% user = User.find(task.artisan_id) %>
+                  <td><%= artisan = "#{user.firstname} #{user.lastname}" %></td>
                 <% else %>
                     <td><span class="red-text"><i class="tiny material-icons">not_interested</i> Not yet assigned</span></td>
                 <% end %>
@@ -72,7 +72,7 @@
                   <% elsif task.status.downcase == "inactive" %>
                       <td><span class="red-text"><i class="tiny material-icons">not_interested</i> <%= task.status.downcase %></span><br>
                       <% unless task.paid? %>
-                        <% details = { num: task.id, task: task.description, taskee: taskee, user_id: user.id, id: task.id } %>
+                        <% details = { num: task.id, task: task.description, artisan: artisan, user_id: user.id, id: task.id } %>
                         <%= link_to "Pay for this task", review_task_path(details) %>
                         <% end %></td>
                   <% elsif task.status.downcase == "unassigned" %>

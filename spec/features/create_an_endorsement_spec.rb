@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.feature "Submit an endorsement", type: :feature do
-  let(:user) { create(:user, user_attr.merge(user_type: "taskee")) }
-  let!(:reference) { create(:reference, taskee_id: user.id) }
+  let(:user) { create(:user, user_attr.merge(user_type: "artisan")) }
+  let!(:reference) { create(:reference, artisan_id: user.id) }
   let(:url) do
     "http://#{Capybara.current_session.server.host}:" \
     "#{Capybara.current_session.server.port}" \

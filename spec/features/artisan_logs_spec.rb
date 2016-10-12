@@ -1,16 +1,16 @@
 require "rails_helper"
 
-RSpec.feature "Taskee Log" do
+RSpec.feature "Artisan Log" do
   before :each do
-    taskee_stub
+    artisan_stub
   end
 
   context "Task logs page" do
     before do
-      log_in_with @taskee.email, @taskee.password
+      log_in_with @artisan.email, @artisan.password
     end
 
-    it { expect(page).to have_content("Welcome #{@taskee.firstname}") }
+    it { expect(page).to have_content("Welcome #{@artisan.firstname}") }
 
     scenario "see tasker names for the task assigned" do
       visit my_tasks_path
@@ -18,7 +18,7 @@ RSpec.feature "Taskee Log" do
       expect(page).to have_content("Tasker")
     end
 
-    scenario "taskee sees assigned tasks" do
+    scenario "artisan sees assigned tasks" do
       visit my_tasks_path
 
       within "table tbody" do

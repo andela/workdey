@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe TaskeesController, type: :controller do
+RSpec.describe ArtisansController, type: :controller do
   describe "#index" do
     let(:user) { create(:user) }
 
@@ -16,9 +16,9 @@ RSpec.describe TaskeesController, type: :controller do
     end
 
     it "should assign a paginated collection to @users" do
-      create_list(:user, 4, user_type: "taskee")
-      expect(assigns(:taskees)).to be_a ActiveRecord::Relation
-      expect(assigns(:taskees).count).to eql 4
+      create_list(:user, 4, user_type: "artisan")
+      expect(assigns(:artisans)).to be_a ActiveRecord::Relation
+      expect(assigns(:artisans).count).to eql 4
     end
   end
 end

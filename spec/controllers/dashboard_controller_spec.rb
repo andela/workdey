@@ -3,16 +3,19 @@ include DashboardHelper
 
 RSpec.describe DashboardController, type: :controller do
   describe "GET #home" do
-    context "when a taskee  without skillsets visits the dashboard " do
-      let(:user) { create(:user, user_type: "taskee", has_taken_quiz: true) }
+    context "when a artisan  without skillsets visits the dashboard " do
+      let(:user) do
+        create(:user, user_type: "artisan",
+                      has_taken_quiz: true)
+      end
       before(:each) do
         allow_any_instance_of(ApplicationController).
           to receive(:current_user).and_return(user)
         get :home
       end
 
-      it "returns the percentage for a taskee with skillset" do
-        expect(assigns[:completion_percentage]).to eq 82
+      it "returns the percentage for a artisan with skillset" do
+        expect(assigns[:completion_percentage]).to eq 85
       end
       it "returns a status code of 200" do
         expect(response.status).to eq 200
@@ -22,9 +25,9 @@ RSpec.describe DashboardController, type: :controller do
       end
     end
 
-    context "when a taskee with skillset visits the dashboard" do
+    context "when a artisan with skillset visits the dashboard" do
       before(:each) do
-        @user = create(:user, user_type: "taskee", has_taken_quiz: true)
+        @user = create(:user, user_type: "artisan", has_taken_quiz: true)
         @user.skillsets << create(:skillset)
         allow_any_instance_of(ApplicationController).
           to receive(:current_user).and_return(@user)
@@ -35,7 +38,7 @@ RSpec.describe DashboardController, type: :controller do
 
       let!(:req) { get :home }
 
-      it "returns the percentage for a taskee with skillset" do
+      it "returns the percentage for a artisan with skillset" do
         expect(assigns[:completion_percentage]).not_to be_nil
       end
 
@@ -64,7 +67,7 @@ RSpec.describe DashboardController, type: :controller do
         to receive(:current_user).and_return(user)
       get :home
     end
-    it "returns the percentage for a taskee with skillset" do
+    it "returns the percentage for a artisan with skillset" do
       expect(assigns[:completion_percentage]).to eq 100
     end
     it "returns a status code of 200" do
@@ -92,8 +95,8 @@ RSpec.describe DashboardController, type: :controller do
       end
     end
 
-    context "when taskee" do
-      let(:role) { "taskee" }
+    context "when artisan" do
+      let(:role) { "artisan" }
 
       it "assigns skillsets to @skillsets" do
         expect(assigns(:skillsets)).to eq(Skillset.all)
@@ -117,8 +120,8 @@ RSpec.describe DashboardController, type: :controller do
           expect(user_skill_ids).not_to be_nil
         end
 
-        it "sets the user type as taskee" do
-          expect(user.taskee?).to be true
+        it "sets the user type as artisan" do
+          expect(user.artisan?).to be true
         end
 
         it "redirects to quiz path" do

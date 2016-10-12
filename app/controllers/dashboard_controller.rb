@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
   def home
     if current_user.user_type.nil?
       redirect_to role_path
-    elsif current_user.user_type == "taskee" && !current_user.has_taken_quiz
+    elsif current_user.user_type == "artisan" && !current_user.has_taken_quiz
       redirect_to quiz_path
     else
       @completion_percentage = calculate_profile_completeness
@@ -17,9 +17,9 @@ class DashboardController < ApplicationController
   def choose_role
     if current_user.user_type.nil?
       render :choose_role
-    elsif current_user.user_type == "taskee" && current_user.confirmed
+    elsif current_user.user_type == "artisan" && current_user.confirmed
       redirect_to dashboard_path
-    elsif current_user.user_type == "taskee" && !current_user.confirmed
+    elsif current_user.user_type == "artisan" && !current_user.confirmed
       redirect_to quiz_path
     else
       redirect_to dashboard_path
@@ -43,9 +43,9 @@ class DashboardController < ApplicationController
     end
     params["skillsets"].each do |skill_id|
       Skillset.find_by!(id: skill_id)
-      current_user.taskee_skillsets.create(skillset_id: skill_id)
+      current_user.artisan_skillsets.create(skillset_id: skill_id)
     end
-    current_user.update_attribute(:user_type, "taskee")
+    current_user.update_attribute(:user_type, "artisan")
     redirect_to quiz_path
   rescue ActiveRecord::RecordNotFound
     redirect_to role_path, notice: Message.try_again
@@ -78,18 +78,18 @@ class DashboardController < ApplicationController
     param = deobfuscate(params.except(
                           :controller,
                           :action,
-                          :taskee_view
-    ))["taskee_id"]
+                          :artisan_view
+    ))["artisan_id"]
     @user = User.find(param)
   end
 
   def search_with_map
     @current_user = current_user
-    @users = User.all
+    @skillsets = Skillset.all
   end
 
   def assign_task
-    deobfuscate(params.except(:controller, :action))["taskee_id"]
+    deobfuscate(params.except(:controller, :action))["artisan_id"]
   end
 
   private
@@ -100,7 +100,7 @@ class DashboardController < ApplicationController
 
   def profile_params
     params.permit(:user_pix, :phone, :street_address, :city, :state, :gender,
-                  :taskee_id, date: [:day, :month, :year])
+                  :artisan_id, date: [:day, :month, :year])
   end
 
   def location_params
@@ -113,11 +113,11 @@ class DashboardController < ApplicationController
       !DEFAULT_ATTR.include? key
     end
     completed = profile_parameters.values.count { |parameter| parameter }.to_f
-    add_skillset_for_taskee(completed, profile_parameters.count)
+    add_skillset_for_artisan(completed, profile_parameters.count)
   end
 
-  def add_skillset_for_taskee(completed, profile_parameters)
-    if current_user.taskee?
+  def add_skillset_for_artisan(completed, profile_parameters)
+    if current_user.artisan?
       completed += current_user.skillsets.empty? ? 0 : 1.0
       profile_parameters += 1
     end

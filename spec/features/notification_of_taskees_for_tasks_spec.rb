@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "Notification of taskees for new tasks", type: :feature do
-  let(:taskee) { create(:user, user_attr.merge(user_type: "taskee")) }
+RSpec.describe "Notification of artisans for new tasks", type: :feature do
+  let(:artisan) { create(:user, user_attr.merge(user_type: "artisan")) }
   let(:tasker) { create(:user, user_attr.merge(user_type: "tasker")) }
   let(:skillset) { create(:skillset) }
   let(:price_range) do
@@ -23,21 +23,21 @@ RSpec.describe "Notification of taskees for new tasks", type: :feature do
     create(
       :notification,
       notifiable_id: task.id,
-      receiver_id: taskee.id,
+      receiver_id: artisan.id,
       sender_id: tasker.id,
       notifiable_type: "Task"
     )
-    log_in_with taskee.email, taskee.password
+    log_in_with artisan.email, artisan.password
     visit notifications_path
     page.all(".btn")[0].click
   end
 
-  scenario "taskee rejects a task" do
+  scenario "artisan rejects a task" do
     click_on "Reject"
     expect(page).to have_content "Task rejected"
   end
 
-  scenario "taskee accepts a task" do
+  scenario "artisan accepts a task" do
     click_on "Accept"
     expect(page).to have_content "Task accepted"
   end

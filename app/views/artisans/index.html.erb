@@ -1,16 +1,16 @@
 <main>
   <section class="main container search-height">
     <div class="row" style="margin-left: 50px">
-      <% if @taskees.empty? %>
-          <h5 class="text-center"> There are currently no taskees here </h5>
+      <% if @artisans.empty? %>
+          <h5 class="text-center"> There are currently no artisans here </h5>
       <% else %>
-          <h3 id="center"> <b>Taskees and their skillsets </b></h3><br>
+          <h3 id="center"> <b>Artisans and their skillsets </b></h3><br>
           <table>
             <thead>
-              <th><b>Taskee</b></th><th><b>Skillsets</b></th><th><b>Location</b></th>
+              <th><b>Artisan</b></th><th><b>Skillsets</b></th><th><b>Location</b></th>
             </thead>
             <tbody>
-              <%= render @taskees %>
+              <%= render @artisans %>
             </tbody>
           </table>
           <div id="user-location-modal" class="modal" data-name="<%=ENV['geoKeyBrowser']%>">
@@ -21,7 +21,7 @@
           </div>
           <div id="google-maps-scripts"></div>
 
-          <%= will_paginate @taskees %>
+          <%= will_paginate @artisans %>
       <% end %>
     </div>
   </section>

@@ -118,7 +118,7 @@ RSpec.describe TasksController, type: :controller do
     end
 
     context "when a user broadcasts a task" do
-      let(:message) { "Available Taskees have been notified" }
+      let(:message) { "Available Artisans have been notified" }
 
       it "updates the task's price range and broadcasted status" do
         put :broadcast_task, id: task.id

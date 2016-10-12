@@ -6,7 +6,7 @@ RSpec.describe ReferenceMailer, type: :mailer do
     let(:url) do
       "#{new_dashboard_endorsement_url}?t=#{reference.confirmation_token}"
     end
-    let(:reference) { create(:reference, taskee_id: user.id) }
+    let(:reference) { create(:reference, artisan_id: user.id) }
     let(:mail) { described_class.reference_email(reference, url).deliver_now }
 
     it "renders the subject" do

@@ -1,40 +1,40 @@
 class MapController < WebsocketRails::BaseController
-  def get_nearby_taskees
-    taskees = get_all_taskees
-    send_message :success, taskees.to_json, namespace: :taskees
+  def get_nearby_artisans
+    artisans = get_all_artisans
+    send_message :success, artisans.to_json, namespace: :artisans
   end
 
   def search_by_task
-    taskees = get_all_taskees.select do |taskee|
-      taskee if taskee[:tasks].include? message
+    artisans = get_all_artisans.select do |artisan|
+      artisan if artisan[:skillsets].include? message.to_i
     end
-    send_message :success, taskees.to_json, namespace: :search_taskee
+    send_message :success, artisans.to_json, namespace: :search_artisan
   end
 
   private
 
-  def get_all_taskees
-    nearby_taskees = []
-    User.all.where(user_type: "taskee").each do |taskee|
-      nearby_taskees << {
-        name: "#{taskee[:firstname]} #{taskee[:lastname]}",
-        email: taskee[:email],
-        gender: taskee[:gender],
-        phone: taskee[:phone],
-        joined: taskee[:created_at],
-        type: taskee[:user_type],
-        link: user_profile_path(obfuscate(taskee_id: taskee[:id])),
-        location: "#{taskee[:street_address]}. #{taskee[:state]}, "\
-        "#{taskee[:city]}",
-        coords: [taskee[:latitude], taskee[:longitude]],
-        avatar: taskee[:image_url],
+  def get_all_artisans
+    nearby_artisans = []
+    User.all.where(user_type: "artisan").each do |artisan|
+      nearby_artisans << {
+        name: "#{artisan[:firstname]} #{artisan[:lastname]}",
+        email: artisan[:email],
+        gender: artisan[:gender],
+        phone: artisan[:phone],
+        joined: artisan[:created_at],
+        type: artisan[:user_type],
+        link: user_profile_path(obfuscate(artisan_id: artisan[:id])),
+        location: "#{artisan[:street_address]}. #{artisan[:state]}, "\
+        "#{artisan[:city]}",
+        coords: [artisan[:latitude], artisan[:longitude]],
+        avatar: artisan[:image_url],
         distance: Haversine.distance(
           [current_user.latitude, current_user.longitude],
-          [taskee[:latitude], taskee[:longitude]]
+          [artisan[:latitude], artisan[:longitude]]
         ).to_kilometers,
-        tasks: taskee.tasks.map(&:name)
+        skillsets: artisan.skillsets.map(&:id)
       }
     end
-    nearby_taskees
+    nearby_artisans
   end
 end

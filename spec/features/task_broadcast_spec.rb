@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Broadcast tasks", type: :feature do
-  let(:message) { "Available Taskees have been notified" }
+  let(:message) { "Available Artisans have been notified" }
 
   before(:each) do
     @user = create(:user, user_attr.merge(user_type: "tasker"))
