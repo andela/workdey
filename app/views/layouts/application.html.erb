@@ -11,8 +11,8 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body class="<%= "#{params[:controller]}-#{params[:action]}"%>">
-  <% response_p = current_page?(users_response_path(current_user.latest_response)) if current_user && current_user.latest_response %>
-  <%= render "partials/header" unless (current_page?(role_path) || current_page?(new_users_response_path) || response_p) %>
+
+  <%= render "partials/header" unless (current_page?(role_path) || current_page?(new_users_response_path)) %>
 
   <%= yield %>
 

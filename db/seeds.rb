@@ -136,32 +136,27 @@ class SeedData
 
       {
         question: "What services do you offer in your skill of specialization?",
-        required: true,
-        options: []
+        required: true
       },
 
       {
         question: "How long have you practised your skill of specialization?",
-        required: true,
-        options: []
+        required: true
       },
 
       {
         question: "What do you love about your work?",
-        required: true,
-        options: []
+        required: true
       },
 
       {
         question: "Why do you want to join WorkDey?",
-        required: true,
-        options: []
+        required: true
       },
 
       {
         question: "What training or certification have you received? Where did you receive it?",
-        required: true,
-        options: []
+        required: true
       },
 
       {
@@ -178,20 +173,17 @@ class SeedData
 
       {
         question: "What is your biggest weakness and how do you plan to overcome it?",
-        required: false,
-        options: []
+        required: false
       },
 
       {
         question: "What challenge have you faced at work and how did you deal with it?",
-        required: false,
-        options: []
+        required: false
       },
 
       {
         question: "Where do you see yourself in 5 years?",
-        required: false,
-        options: []
+        required: false
       }
     ]
   end

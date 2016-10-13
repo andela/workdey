@@ -1,7 +1,11 @@
 <% if logged_in? %>
+  <% pending_artisan = current_user.taskee? && current_user.status != "accepted" %>
   <header>
     <nav class="nav-wrapper" id="nav-wrapper">
+
+      <% unless pending_artisan %>
       <a href="#" data-activates="slide-out" class=" sidenav-tog button-collapse"><i class="material-icons">menu</i></a>
+      <% end %>
       <div class="container">
         <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
         <a href="#" class="right dropdown" data-activates="options">
@@ -65,7 +69,8 @@
           </li>
         </ul>
       </div>
-      <%= render "partials/sidebar_dashboard" %>
+
+      <%= render "partials/sidebar_dashboard" unless pending_artisan %>
     </nav>
 </header>
 <% else %>
