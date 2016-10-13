@@ -8,8 +8,7 @@ class SeedData
         email: "morris.kimani@andela.com", street_address: nil,
         city: "Nairobi", state: nil, password: "1234567890",
         user_type: "admin", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true
-      },
+        confirmed: true },
 
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
@@ -26,7 +25,6 @@ class SeedData
         confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "6.4994906", longitude: "3.3780381" },
-
 
       { firstname: "Temitope", lastname: "Amodu",
         email: "temitope.amodu@andela.com", street_address: "2 Funso Street",
@@ -153,7 +151,8 @@ class DummyData
 
       {
         firstname: "Albus", lastname: "Dumbledore",
-        email: "albus.dumbledore@hogwarts.com", street_address: "7 Privet Drive",
+        email: "albus.dumbledore@hogwarts.com",
+        street_address: "7 Privet Drive",
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
@@ -188,8 +187,9 @@ class DummyData
       }
     ]
   end
+
   def vetting_records_list
-    admin = User.find_by(user_type: 'admin').id
+    admin = User.find_by(user_type: "admin").id
     [
       {
         user_id: User.find_by(email: dummy_applicants_list[0][:email]).id,
@@ -232,6 +232,7 @@ class DummyData
       }
     ]
   end
+
   def create_all
     dummy_applicants_list.each { |applicant| User.create(applicant) }
     vetting_records_list.each do |vetting_record|

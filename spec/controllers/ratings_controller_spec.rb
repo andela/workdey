@@ -6,28 +6,28 @@ RSpec.describe RatingsController, type: :controller do
     @non_admin = create(:user, user_type: "tasker")
   end
 
-  describe 'GET#new' do
-    context 'when user is admin' do
-      before(:each) {
+  describe "GET#new" do
+    context "when user is admin" do
+      before(:each) do
         stub_current_user(@admin)
         get :new, user_id: 1
-      }
-
-      it 'renders new rating template' do
-        expect(response).to render_template 'new'
       end
 
-      it 'responds with status code OK' do
+      it "renders new rating template" do
+        expect(response).to render_template "new"
+      end
+
+      it "responds with status code OK" do
         expect(response.status).to eq 200
       end
     end
 
-    context 'when user is not admin' do
-      before(:each) {
+    context "when user is not admin" do
+      before(:each) do
         stub_current_user(@non_admin)
         get :new, user_id: 1
-      }
-      it 'denies the user access to the rating resource' do
+      end
+      it "denies the user access to the rating resource" do
         expect(flash[:error]).to be_present
         expect(response).to redirect_to(dashboard_path)
       end
