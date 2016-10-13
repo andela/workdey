@@ -51,9 +51,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-     unless current_user.admin?
-       flash[:error] = "You must be an admin to access this resource"
-       redirect_to dashboard_path
-     end
-   end
+    unless current_user.admin?
+      flash[:error] = "You must be an admin to access this resource"
+      redirect_to dashboard_path
+    end
+  end
 end

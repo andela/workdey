@@ -6,7 +6,7 @@ class AdminController < ApplicationController
   end
 
   def certify_artisans
-    @uncertified_artisans = User.all.select { |a_user| a_user.accepted? }
-    render 'certify_artisans'
+    @uncertified_artisans = User.all.select(&:accepted?)
+    render "certify_artisans"
   end
 end
