@@ -1,5 +1,7 @@
 <section class="main container center-align">
-  <table class="table">
+  <h1>Uncertified Artisans</h1>
+
+  <table class="table striped">
     <thead>
       <th>First Name</th>
       <th>Last Name</th>
@@ -9,10 +11,10 @@
       <tr>
         <td> <%= artisan.firstname %></td>
         <td> <%= artisan.lastname %></td>
-        <td> <%= link_to 'Certify', '/ratings/new/' + artisan.id.to_s, :class => "btn btn-large"  %></td>
+        <td> <%= link_to 'Certify', '/ratings/new/' + artisan.id.to_s,
+        :class => "btn btn-large" %></td>
       </tr>
       <% end %>
-
     </tbody>
   </table>
 </section>
