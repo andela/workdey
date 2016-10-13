@@ -7,9 +7,13 @@ class RatingsController < ApplicationController
   end
 
   def create
-    Rating.create(rating_params)
-    User.find(params["user_id"]).update_attribute(:status, :certified)
-    redirect_to "/admin/certify_artisans"
+    @rating = Rating.new(rating_params)
+    if @rating.save
+      User.find(params["user_id"]).update_attribute(:status, :certified)
+      redirect_to "/admin/certify_artisans"
+    else
+      redirect_to :back, flash: { errors: @rating.errors.messages }
+    end
   end
 
   private

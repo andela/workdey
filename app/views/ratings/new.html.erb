@@ -34,17 +34,24 @@
             </tr>
         </tbody>
     </table>
-
+    <% if flash[:errors] %>
+      <div>
+        <p style="color:red;">Error</p>
+        <% flash[:errors].each do |key, error| %>
+          <p style="color:red;"> <%= "#{key}: #{error.join}" %> </p>
+        <% end %>
+      </div>
+    <% end %>
     <%= form_for @rating, url: ratings_path do |f| %>
     <br>
     <%= f.label :comment, {:style=> "font-size: 120%"} %>
-    <%= f.text_field :comment, required: true%>
+    <%= f.text_field :comment%>
     <%= f.label :rating, {:style=> "font-size: 120%"} %>
     <br>
     <br>
     <div id="rating" style="margin:auto;"></div>
 
-    <%= f.hidden_field :rating, id:'rating_value', required: true %>
+    <%= f.hidden_field :rating, id:'rating_value'%>
     <%= hidden_field_tag 'user_id', @user_id %>
     <br>
     <br>
@@ -53,21 +60,20 @@
 </section>
 
 <script>
-    $(function () {
-        var star_ids = ["#confidence-rating", "#experience-rating", "#proficiency"];
-        var ratings = [<%= @vetting_record.confidence %>, <%= @vetting_record.experience %>, <%= @vetting_record.skill_proficiency %>];
-        for (var i in star_ids) {
-            $(star_ids[i]).rateYo({rating: ratings[i], readOnly: true});
-        }
-    });
+    $("document").ready(function () {
+      var star_ids = ["#confidence-rating", "#experience-rating", "#proficiency"];
+      var ratings = [
+        <%= @vetting_record.confidence %>,
+        <%= @vetting_record.experience %>,
+        <%= @vetting_record.skill_proficiency %>];
+      for (var i in star_ids) {
+          $(star_ids[i]).rateYo({rating: ratings[i], readOnly: true});
+      }
 
-    $(function () {
-        $("#rating").rateYo({fullStar: true, starWidth: "50px"});
-    });
+      $("#rating").rateYo({fullStar: true, starWidth: "50px"});
 
-    $(function () {
-        $("#rating").rateYo().on("rateyo.set", function (e, data) {
-            document.getElementById('rating_value').value = data.rating
-        });
+      $("#rating").rateYo().on("rateyo.set", function (e, data) {
+          document.getElementById('rating_value').value = data.rating
+      });
     });
 </script>
