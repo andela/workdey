@@ -6,7 +6,7 @@ class Response < ActiveRecord::Base
   def required_questions_must_be_answered
     Question.all.each do |q|
       if q.required && question_empty(q)
-        errors.add(:response, "#{q.question} can't be blank")
+        errors.add(:response, q.question)
       end
     end
   end

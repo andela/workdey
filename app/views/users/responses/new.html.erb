@@ -11,7 +11,9 @@
 
     <% if flash["errors"] %>
       <div id="error_explanation">
-        <h2><%= pluralize(flash["errors"]["response"].count, "error") %></h2>
+        <h2><%= pluralize(flash["errors"]["response"].count, "error") %>
+          found. Please fill out the following questions:
+        </h2>
         <ul>
           <%flash["errors"]["response"].each do |msg| %>
             <li><%= msg %></li>
