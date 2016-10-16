@@ -1,10 +1,5 @@
 require "rails_helper"
 RSpec.feature "Admin can rate artisans", type: :feature do
-  background do
-    workdey_data = Seed.new
-    workdey_data.create_all
-  end
-
   before(:each) do
     @user = create(:user, user_type: "admin")
     stub_current_user(@user)
