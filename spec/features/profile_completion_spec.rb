@@ -34,7 +34,6 @@ RSpec.describe "Profile completion meter" do
     click_button "UPDATE PROFILE"
     visit dashboard_path
 
-
     within("div.profile-meter") do
       expect(page).to have_content "82%"
     end

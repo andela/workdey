@@ -33,7 +33,9 @@ RSpec.describe Task, type: :model do
       it { expect(Task.get_artisans("Marketting", @user.email)).to eq nil }
     end
     context "returns an array of artisans nearby with the correct Keyword" do
-      it { expect(Task.get_artisans(@skillset.name, @user.email).count).to eq 1 }
+      it do
+        expect(Task.get_artisans(@skillset.name, @user.email).count).to eq 1
+      end
     end
   end
 

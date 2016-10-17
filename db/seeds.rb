@@ -114,7 +114,9 @@ class SeedData
     users_list.each { |user| User.create(user) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
-    artisan_skillsets.each { |tas_skillset| ArtisanSkillset.create(tas_skillset) }
+    artisan_skillsets.each do |tas_skillset|
+      ArtisanSkillset.create(tas_skillset)
+    end
     10.times { biddings }
   end
 

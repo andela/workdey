@@ -5,8 +5,8 @@ RSpec.feature "GetArtisansBySkillsets", type: :feature do
     @tasker = create(:user, confirmed: true)
     @artisan = create(:user, user_type: "artisan")
     @other_artisan = create(:user,
-                           email: Faker::Internet.email,
-                           user_type: "artisan")
+                            email: Faker::Internet.email,
+                            user_type: "artisan")
     @skillset = create(:skillset)
     @artisan.skillsets << @skillset
   end
