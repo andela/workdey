@@ -47,8 +47,6 @@ class User < ActiveRecord::Base
             length: { minimum: 8 },
             on: :create
 
-  validates :status, presence: true
-
   scope :artisans, -> { where(user_type: "artisan") }
 
   enum status: [:not_reviewed, :accepted, :rejected, :certified]
