@@ -13,7 +13,7 @@
         <%= form_for @task, url: create_task_path, html: { class: "assign-form" } do |f| %>
           <%= f.hidden_field :task_name, value: session[:searcher] %>
           <%= f.hidden_field :tasker_id, value: current_user.id %>
-          <%= f.hidden_field :taskee_id, value: @taskee_id %>
+          <%= f.hidden_field :artisan_id, value: @artisan_id %>
 
           <div class="row">
             <div class="col s8">
@@ -88,9 +88,9 @@
 
             <div class="col s4">
               <div class="card-panel center-align">
-                <%= cl_image_tag @taskee.image_url %>
+                <%= cl_image_tag @artisan.image_url %>
                 <p class="center-align">
-                  <%= "#{@taskee.firstname} #{@taskee.lastname}" %>
+                  <%= "#{@artisan.firstname} #{@artisan.lastname}" %>
                 </p>
                 <%= f.button "Create Task", class: "btn", id: "create-task" %>
               </div>

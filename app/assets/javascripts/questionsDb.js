@@ -96,23 +96,23 @@
     },
 
     {
-      question: "You show up to a taskee’s house to perform the scheduled task and \
+      question: "You show up to a artisan’s house to perform the scheduled task and \
                  no one is answering the door, you receive a message on the app \
                  from the tasker saying he no longer needs the task to be done. \
                  What do you do?",
 
       options: [
-        "Call the taskee repeatedly until he decides to pay you for your effort",
+        "Call the artisan repeatedly until he decides to pay you for your effort",
         "Contact Workdey customer care for task cancellation policies",
-        "Threaten the Taskee and tell him you want to do the task by force",
-        "Beg the Taskee for another task in a bid to collect small change"
+        "Threaten the Artisan and tell him you want to do the task by force",
+        "Beg the Artisan for another task in a bid to collect small change"
       ],
 
       answer: "Contact Workdey customer care for task cancellation policies",
       reason: "In the light of last minute cancellations, we encourage both \
-               tasker’s and taskee’s  to effectively communicate as quickly \
+               tasker’s and artisan’s  to effectively communicate as quickly \
                as possible. However policies are in place to reimburse efforts \
-               made by the taskee in scenarios similar to this"
+               made by the artisan in scenarios similar to this"
     },
 
     {
@@ -144,7 +144,7 @@
 
       answer: "False",
       reason: "A certain percentage is deducted from the amount paid by the Tasker \
-               for each completed task. The taskee’s money is however calculated \
+               for each completed task. The artisan’s money is however calculated \
                and paid to him"
     },
 

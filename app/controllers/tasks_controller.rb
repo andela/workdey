@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   def broadcast_task
     if @task.update(broadcasted: true)
       create_task_notification(@task)
-      update_redirect("Available Taskees have been notified")
+      update_redirect("Available Artisans have been notified")
     else
       render "show"
     end
@@ -82,16 +82,16 @@ class TasksController < ApplicationController
     @skillsets = Skillset.all.select(&:name)
   end
 
-  def available_taskees(skillset)
-    User.get_taskees_by_skillset(skillset)
+  def available_artisans(skillset)
+    User.get_artisans_by_skillset(skillset)
   end
 
   def create_task_notification(task)
-    available_taskees(task.skillset.name).map do |taskee|
+    available_artisans(task.skillset.name).map do |artisan|
       Notification.create(
         message: "New Task available that matches your skillset.",
         sender_id: task.tasker_id,
-        receiver_id: taskee.id,
+        receiver_id: artisan.id,
         notifiable: task
       ).notify_receiver("broadcast_task")
     end

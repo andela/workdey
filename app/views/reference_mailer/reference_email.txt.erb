@@ -1,12 +1,12 @@
 Hello, <%= @reference.firstname %>
 ===============================================
 
-Your contact <%= @reference.taskee.full_name %> listed you as a reference on our platform.
+Your contact <%= @reference.artisan.full_name %> listed you as a reference on our platform.
 
-Does <%= @reference.taskee.firstname %> have these skills or expertise?
+Does <%= @reference.artisan.firstname %> have these skills or expertise?
 <% JSON.parse(@reference.skillsets["skills"]).each.with_index do |skill, i| %>
    <%= i + 1 %>). <%= skill %>
 <% end %>
-Please follow this link to endorse <%= @reference.taskee.firstname %>: <%= @url %>
+Please follow this link to endorse <%= @reference.artisan.firstname %>: <%= @url %>
 
 Thanks!

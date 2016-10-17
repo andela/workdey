@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class AddTaskeeIdToTasks < ActiveRecord::Migration
+class AddArtisanIdToTasks < ActiveRecord::Migration
   def change
-    add_column :tasks, :taskee_id, :integer
+    add_column :tasks, :artisan_id, :integer
   end
 end

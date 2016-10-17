@@ -11,17 +11,17 @@ module Helpers
       to receive(:current_user).and_return(user)
   end
 
-  def taskee_stub
-    taskee_attr = {
+  def artisan_stub
+    artisan_attr = {
       confirmed: true,
       has_taken_quiz: true,
-      user_type: "taskee"
+      user_type: "artisan"
     }
 
     @statuses = %w(done active inactive rejected)
 
     @tasker = create(:user, user_type: "tasker")
-    @taskee = create(:user, taskee_attr)
+    @artisan = create(:user, artisan_attr)
 
     @statuses.each do |status|
       create(:task_management,
@@ -59,8 +59,8 @@ module Helpers
     fill_in "task[description]", with: Faker::Lorem.sentence
   end
 
-  def search_helper(taskee, skillset)
-    log_in_with(taskee.email, taskee.password)
+  def search_helper(artisan, skillset)
+    log_in_with(artisan.email, artisan.password)
     find("#search").click
     fill_in "need", with: skillset.name
     find("#my-input-field").native.send_keys(:return)

@@ -11,18 +11,18 @@
         swalType = obj.status === "active" ? "success" : "error",
         swalBtnColor = "#eb4d5c",
         userAction,
-        taskee_response;
+        artisan_response;
 
     function userActionData() {
       if (obj.status === "active") {
-        taskee_response = "Taskee accepted your task"
+        artisan_response = "Artisan accepted your task"
       } else {
-        taskee_response = "Taskee rejected your task"
+        artisan_response = "Artisan rejected your task"
       }
       return {
         notifiable_attr_to_update: { status: obj.status },
         reply_to_sender: true,
-        message: taskee_response
+        message: artisan_response
       };
     };
 

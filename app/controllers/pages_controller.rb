@@ -22,13 +22,13 @@ class PagesController < ApplicationController
   def terms
   end
 
-  def become_a_taskee
+  def become_a_artisan
   end
 
   def search
     if params[:searcher] || session[:searcher]
       session[:searcher] = params[:searcher] if params[:searcher]
-      @taskees = get_taskees_by_search(session[:searcher])
+      @artisans = get_artisans_by_search(session[:searcher])
       skillset = Skillset.where("LOWER(name) LIKE ?",
                                 "%#{session[:searcher].downcase}%").first
       session[:searcher] = skillset.name if skillset
@@ -38,9 +38,9 @@ class PagesController < ApplicationController
 
   protected
 
-  def get_taskees_by_search(keyword)
-    return User.get_taskees_by_skillset(keyword) unless current_user
+  def get_artisans_by_search(keyword)
+    return User.get_artisans_by_skillset(keyword) unless current_user
     user_email = current_user.email
-    Task.get_taskees(keyword, user_email)
+    Task.get_artisans(keyword, user_email)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class RenameNotifiedToTaskeeNotified < ActiveRecord::Migration
+class RenameNotifiedToArtisanNotified < ActiveRecord::Migration
   def change
-    rename_column :task_managements, :notified, :taskee_notified
+    rename_column :task_managements, :notified, :artisan_notified
   end
 end

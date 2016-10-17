@@ -10,7 +10,7 @@ feature "SignUp" do
     workdey_data.create_all
   end
 
-  scenario "Take the taskee quiz" do
+  scenario "Take the artisan quiz" do
     sign_in
     click_button "I'm ready!"
     answer_quiz

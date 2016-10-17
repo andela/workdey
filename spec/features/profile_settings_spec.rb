@@ -8,7 +8,7 @@ RSpec.feature "ProfileSettings", type: :feature do
 
   scenario "login with valid email and password" do
     log_in_with "ruth.chukwumam@andela.com", "1234567890"
-    expect(page).to have_content("Workdey Taskee Verification Quiz")
+    expect(page).to have_content("Workdey Artisan Verification Quiz")
   end
 
   scenario "view profile" do

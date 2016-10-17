@@ -10,7 +10,7 @@ $('button#update_skillset').click(function(e) {
 
   $.ajax({
     method: 'PUT',
-    url: '/taskee_skillsets',
+    url: '/artisan_skillsets',
     data: { skills: checkedSkills },
     dataType: 'json',
     success: function(data) {

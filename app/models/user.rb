@@ -1,22 +1,22 @@
 class User < ActiveRecord::Base
-  has_many :taskee_skillsets, foreign_key: :taskee_id
-  has_many :skillsets, through: :taskee_skillsets
+  has_many :artisan_skillsets, foreign_key: :artisan_id
+  has_many :skillsets, through: :artisan_skillsets
   has_many :reviews
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks_assigned, class_name: "Task", foreign_key: :tasker_id
-  has_many :tasks, class_name: "Task", foreign_key: :taskee_id
-  has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
+  has_many :tasks, class_name: "Task", foreign_key: :artisan_id
+  has_many :tasks_given, class_name: "TaskManagement", foreign_key: :artisan_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
   has_one :user_plan
   has_many :biddings, foreign_key: :tasker_id
-  has_many :bid_managements, foreign_key: :taskee_id
+  has_many :bid_managements, foreign_key: :artisan_id
   has_many :notifications, class_name: "Notification", foreign_key: :receiver_id
   has_many :sent_notifications,
            class_name: "Notification",
            foreign_key: :sender_id
-  has_many :references, foreign_key: :taskee_id
-  has_many :taskee_skillsets, foreign_key: :taskee_id
-  has_many :skillsets, foreign_key: :taskee_id, through: :taskee_skillsets
+  has_many :references, foreign_key: :artisan_id
+  has_many :artisan_skillsets, foreign_key: :artisan_id
+  has_many :skillsets, foreign_key: :artisan_id, through: :artisan_skillsets
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
 
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
             presence: true,
             length: { minimum: 8 }
 
-  scope :taskees, -> { where(user_type: "taskee") }
+  scope :artisans, -> { where(user_type: "artisan") }
 
   enum status: [:not_reviewed, :accepted, :rejected, :certified]
 
@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
     where("email = ?", user_email).pluck(:city, :street_address)
   end
 
-  def self.get_taskees_by_skillset(skillset)
+  def self.get_artisans_by_skillset(skillset)
     User.joins(:skillsets).where(
       "name ILIKE ?", "%#{skillset}%"
     )
@@ -112,8 +112,8 @@ class User < ActiveRecord::Base
     user_plan && user_plan.name == "maestro"
   end
 
-  def taskee?
-    user_type == "taskee"
+  def artisan?
+    user_type == "artisan"
   end
 
   def tasker?
@@ -125,7 +125,7 @@ class User < ActiveRecord::Base
   end
 
   def skillset_ids
-    taskee_skillsets.map(&:skillset_id)
+    artisan_skillsets.map(&:skillset_id)
   end
 
   private_class_method

@@ -1,7 +1,7 @@
 class CreateReferences < ActiveRecord::Migration
   def change
     create_table :references do |t|
-      t.integer :taskee_id, index: true, foreign_key: true
+      t.integer :artisan_id, index: true, foreign_key: true
       t.string :email
       t.string :firstname
       t.string :lastname

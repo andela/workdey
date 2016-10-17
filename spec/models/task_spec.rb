@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Task, type: :model do
   before :each do
-    @user = create(:user, user_attr.merge(user_type: "taskee"))
-    create(:user, user_attr.merge(user_type: "taskee"))
+    @user = create(:user, user_attr.merge(user_type: "artisan"))
+    create(:user, user_attr.merge(user_type: "artisan"))
     @skillset = create(:skillset)
     @user.skillsets << @skillset
   end
@@ -17,23 +17,23 @@ RSpec.describe Task, type: :model do
     end
   end
 
-  describe ".get_taskees_nearby" do
-    let(:taskee) { User.all }
-    it "should return two taskees that match the exact city and street " do
-      expect(Task.get_taskees_nearby(
-        taskee,
+  describe ".get_artisans_nearby" do
+    let(:artisan) { User.all }
+    it "should return two artisans that match the exact city and street " do
+      expect(Task.get_artisans_nearby(
+        artisan,
         @user.street_address.downcase,
         @user.city.downcase
       ).count).to eq 1
     end
   end
 
-  describe ".get_taskees" do
+  describe ".get_artisans" do
     context "return nil when the wrong keyword is passed" do
-      it { expect(Task.get_taskees("Marketting", @user.email)).to eq nil }
+      it { expect(Task.get_artisans("Marketting", @user.email)).to eq nil }
     end
-    context "returns an array of taskees nearby with the correct Keyword" do
-      it { expect(Task.get_taskees(@skillset.name, @user.email).count).to eq 1 }
+    context "returns an array of artisans nearby with the correct Keyword" do
+      it { expect(Task.get_artisans(@skillset.name, @user.email).count).to eq 1 }
     end
   end
 

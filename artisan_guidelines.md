@@ -1,6 +1,6 @@
-# Guidelines for taskees
+# Guidelines for artisans
 
-Workdey is the platform to grow your business. As a taskee on workdey, you have full access to the entire platform and you can start earning cash but there are a few things you need to be aware of:
+Workdey is the platform to grow your business. As a artisan on workdey, you have full access to the entire platform and you can start earning cash but there are a few things you need to be aware of:
 
 * Honesty: Make sure you submit valid information about yourself as this will place you as a better candidate for available tasks.
 * Reliability: To ensure that you always deliver the possible best at all times, make sure that you are reliable. Always complete assigned tasks at the appropriate agreed time.
@@ -8,7 +8,7 @@ Workdey is the platform to grow your business. As a taskee on workdey, you have 
 * Always be clear with your client: Make sure you always communicate effectively with your client as this help mitigate any issues that might arise due to poor communication between you and your client. Be sure to inform your client of any additional thing that will be needed to complete an assigned task.
 * Treat workdey like a business: A popular Nigerian saying goes thus: "na where man dey work, na there im dey chop". When you deliver great services on workdey, you will always get more work and thereby grow your own business.
 
-The following sections provide more detail on what we expect from you as a Taskee.
+The following sections provide more detail on what we expect from you as a Artisan.
 
 ### Timeliness
 
@@ -42,13 +42,13 @@ The following section detail how you should conduct your business on the workdey
 
 ### Bidding for tasks
 
-* A client will not always choose one particular taskee to carry out a task, this is true especially when the client hasn't worked with any taskee before and in this situation, your reputation on the platform will go a long way in helping you seal the deal.
+* A client will not always choose one particular artisan to carry out a task, this is true especially when the client hasn't worked with any artisan before and in this situation, your reputation on the platform will go a long way in helping you seal the deal.
 * You can't negotiate for this kind of task as the price will more than likely be fixed at a certain price.
 * Only bid for tasks you are able to carry out effectively and efficiently.
 
 ### Negotiations and rates
 
-* You can set your price range for different task types that you are able to carry out. This will go a long way when clients are looking for a taskee to delegate a task to. Once a task is accepted, you can't review the price until the task is done.
+* You can set your price range for different task types that you are able to carry out. This will go a long way when clients are looking for a artisan to delegate a task to. Once a task is accepted, you can't review the price until the task is done.
 * Always review your price range to make sure it is commensurate with your skill level, qualifications, experience and availability.
 * Once a task is complete, endeavor to mark it as complete.
 

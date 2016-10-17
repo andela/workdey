@@ -8,7 +8,7 @@ module Dashboard
 
     def new
       @reference = current_user.references.new
-      @taskee_skillsets = current_user.skillsets
+      @artisan_skillsets = current_user.skillsets
     end
 
     def create

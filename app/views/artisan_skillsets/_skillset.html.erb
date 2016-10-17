@@ -2,7 +2,7 @@
   <%= skillset.name %>
   <div id="<%= skillset.name %>" class="switch" style="float: right;">
     <label for='<%= "skillset_#{skillset.name}" %>'>
-      <%= check_box_tag 'taskee[skillsets[]]', skillset.id,
+      <%= check_box_tag 'artisan[skillsets[]]', skillset.id,
         (@user_skillset.include? skillset.id), id: "skillset_#{skillset.name}", class: "skillset" %>
       <span class="lever"></span>
     </label>

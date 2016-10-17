@@ -4,21 +4,21 @@ class NotificationMailer < ApplicationMailer
     user,
     task,
     task_category,
-    notification_taskee,
+    notification_artisan,
     notification_tasker
   )
     @user = user
     @task = task
     @task_category = task_category
-    @taskee = notification_taskee
+    @artisan = notification_artisan
     @tasker = notification_tasker
-    mail to: @taskee.email, subject: "You have notifications on Workdey"
+    mail to: @artisan.email, subject: "You have notifications on Workdey"
   end
 
-  def send_contact_info(tasker, taskee)
+  def send_contact_info(tasker, artisan)
     @tasker = tasker
-    @taskee = taskee
-    @fullname = taskee.fullname
+    @artisan = artisan
+    @fullname = artisan.fullname
     mail to: tasker.email, subject: "#{@fullname} has shared contact with you"
   end
 end

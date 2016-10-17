@@ -13,7 +13,7 @@ class SeedData
       { firstname: "Olaide", lastname: "Ojewale",
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, has_taken_quiz: true,
         image_url: cloudinary_img_url,
         latitude: "6.5001035", longitude: "3.376697" },
@@ -37,7 +37,7 @@ class SeedData
       { firstname: "Ruth", lastname: "Chukwumam",
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url,
         latitude: "6.5275368", longitude: "3.367699" },
 
@@ -55,7 +55,7 @@ class SeedData
         firstname: "Austin", lastname: "Powers",
         email: "austin.powers@andela.com", street_address: "530, Muranga Road",
         city: "Muranga", state: "Central", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.0385092", longitude: "37.0755163"
       },
@@ -64,7 +64,7 @@ class SeedData
         firstname: "Robert", lastname: "Alai",
         email: "robert.alai@andela.com", street_address: "3, Kitale",
         city: "Kitale", state: "Busia", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "1.0187148", longitude: "34.9920014"
       },
@@ -73,7 +73,7 @@ class SeedData
         firstname: "Jill", lastname: "Scott",
         email: "jill.scott@andela.com", street_address: "Adams Arcade",
         city: "Kileleshwa", state: "Kiambu", password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143"
       }
@@ -110,24 +110,24 @@ class SeedData
     Skillset.destroy_all
     UserPlan.destroy_all
     Bidding.destroy_all
-    TaskeeSkillset.destroy_all
+    ArtisanSkillset.destroy_all
     users_list.each { |user| User.create(user) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
-    taskee_skillsets.each { |tas_skillset| TaskeeSkillset.create(tas_skillset) }
+    artisan_skillsets.each { |tas_skillset| ArtisanSkillset.create(tas_skillset) }
     10.times { biddings }
   end
 
-  def taskee_skillsets
+  def artisan_skillsets
     [
-      { taskee_id: 1, skillset_id: 1 },
-      { taskee_id: 1, skillset_id: 2 },
-      { taskee_id: 4, skillset_id: 4 },
-      { taskee_id: 1, skillset_id: 3 },
-      { taskee_id: 6, skillset_id: 1 },
-      { taskee_id: 7, skillset_id: 4 },
-      { taskee_id: 7, skillset_id: 3 },
-      { taskee_id: 8, skillset_id: 3 }
+      { artisan_id: 1, skillset_id: 1 },
+      { artisan_id: 1, skillset_id: 2 },
+      { artisan_id: 4, skillset_id: 4 },
+      { artisan_id: 1, skillset_id: 3 },
+      { artisan_id: 6, skillset_id: 1 },
+      { artisan_id: 7, skillset_id: 4 },
+      { artisan_id: 7, skillset_id: 3 },
+      { artisan_id: 8, skillset_id: 3 }
     ]
   end
 end
@@ -144,7 +144,7 @@ class DummyData
         firstname: "Ron", lastname: "Weasley",
         email: "ron.weasley@hogwarts.com", street_address: "7 Privet Drive",
         city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
@@ -154,7 +154,7 @@ class DummyData
         email: "albus.dumbledore@hogwarts.com",
         street_address: "7 Privet Drive",
         city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
@@ -163,7 +163,7 @@ class DummyData
         firstname: "Lucius", lastname: "Malfoy",
         email: "lucius.malfoy@hogwarts.com", street_address: "7 Privet Drive",
         city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
@@ -172,7 +172,7 @@ class DummyData
         firstname: "Headless", lastname: "Nick",
         email: "headless.nick@hogwarts.com", street_address: "7 Privet Drive",
         city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143", status: 1
       },
@@ -181,7 +181,7 @@ class DummyData
         firstname: "Harry", lastname: "Potter",
         email: "harry.potter@hogwarts.com", street_address: "7 Privet Drive",
         city: "Utopia", state: nil, password: "1234567890",
-        user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
+        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143", status: 1
       }

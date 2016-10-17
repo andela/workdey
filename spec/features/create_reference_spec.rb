@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Create a reference", type: :feature do
   before(:each) do
-    @user = create(:user, user_attr.merge(user_type: "taskee"))
+    @user = create(:user, user_attr.merge(user_type: "artisan"))
     @skill = create(:skillset)
     @user.skillsets << @skill
   end
@@ -13,7 +13,7 @@ RSpec.feature "Create a reference", type: :feature do
   end
 
   before { log_in_with(@user.email, @user.password) }
-  context "when a taskee has no skill set" do
+  context "when a artisan has no skill set" do
     scenario "clicks 'My Refereces' link" do
       visit dashboard_references_path
 
@@ -24,7 +24,7 @@ RSpec.feature "Create a reference", type: :feature do
   end
 
   feature "reference" do
-    scenario "when taskee fills reference form" do
+    scenario "when artisan fills reference form" do
       visit new_dashboard_reference_path
       fill_in "reference_firstname", with: Faker::Name.first_name
       fill_in "reference_lastname", with: Faker::Name.last_name
@@ -37,7 +37,7 @@ RSpec.feature "Create a reference", type: :feature do
       expect(current_path).to eq(new_dashboard_reference_path)
     end
 
-    scenario "when taskee does not fill reference form" do
+    scenario "when artisan does not fill reference form" do
       visit new_dashboard_reference_path
       click_button "Send Email"
       expect(page).to have_css("input.invalid")
