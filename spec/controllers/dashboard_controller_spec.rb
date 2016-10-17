@@ -15,7 +15,7 @@ RSpec.describe DashboardController, type: :controller do
       end
 
       it "returns the percentage for a artisan with skillset" do
-        expect(assigns[:completion_percentage]).to eq 85
+        expect(assigns[:completion_percentage]).to eq 82
       end
       it "returns a status code of 200" do
         expect(response.status).to eq 200

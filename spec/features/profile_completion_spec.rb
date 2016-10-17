@@ -16,7 +16,7 @@ RSpec.describe "Profile completion meter" do
     expect(page).to have_content "Welcome #{user.firstname}"
 
     within("div.profile-meter") do
-      expect(page).to have_content "77%"
+      expect(page).to have_content "73%"
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe "Profile completion meter" do
     log_in_with(user.email, user.password)
 
     within("div.profile-meter") do
-      expect(page).to have_content "77%"
+      expect(page).to have_content "73%"
     end
 
     click_link "Complete Your Profile"
@@ -35,7 +35,7 @@ RSpec.describe "Profile completion meter" do
     visit dashboard_path
 
     within("div.profile-meter") do
-      expect(page).to have_content "85%"
+      expect(page).to have_content "82%"
     end
   end
 end
