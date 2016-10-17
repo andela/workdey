@@ -1,4 +1,4 @@
-class RatingsController < ApplicationController
+class Admin::RatingsController < ApplicationController
   before_action :require_admin
   def new
     @rating = Rating.new
@@ -14,6 +14,11 @@ class RatingsController < ApplicationController
     else
       redirect_to :back, flash: { errors: @rating.errors.messages }
     end
+  end
+
+  def certify_artisans
+    @uncertified_artisans = User.all.select(&:accepted?)
+    render "certify_artisans"
   end
 
   private

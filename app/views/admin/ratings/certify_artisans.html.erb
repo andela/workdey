@@ -11,7 +11,7 @@
       <tr>
         <td> <%= artisan.firstname %></td>
         <td> <%= artisan.lastname %></td>
-        <td> <%= link_to 'Certify', '/ratings/new/' + artisan.id.to_s,
+        <td> <%= link_to 'Certify', admin_new_rating_path(artisan.id),
         :class => "btn btn-large" %></td>
       </tr>
       <% end %>

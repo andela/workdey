@@ -42,7 +42,7 @@
         <% end %>
       </div>
     <% end %>
-    <%= form_for @rating, url: ratings_path do |f| %>
+    <%= form_for @rating, url: admin_ratings_path do |f| %>
     <br>
     <%= f.label :comment, {:style=> "font-size: 120%"} %>
     <%= f.text_field :comment%>

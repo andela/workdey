@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe RatingsController, type: :controller do
+RSpec.describe Admin::RatingsController, type: :controller do
   before(:each) do
     @admin = create(:user, user_type: "admin")
     @non_admin = create(:user, user_type: "tasker")

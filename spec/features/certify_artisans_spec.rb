@@ -48,6 +48,6 @@ RSpec.feature "Admin can rate artisans", type: :feature do
   end
 
   def visit_new_rating_path
-    visit "ratings/new/" + @uncertified_user.id.to_s
+    visit admin_new_rating_path(@uncertified_user.id)
   end
 end
