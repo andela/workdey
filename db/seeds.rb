@@ -213,7 +213,7 @@ class DummyData
 
   def vetting_records_list
     admin = User.find_by(user_type: "admin").id
-    [
+    vetting_records = [
       {
         user_id: User.find_by(email: dummy_applicants_list[0][:email]).id,
         confidence: 3,
@@ -254,6 +254,17 @@ class DummyData
         vetted_by: admin
       }
     ]
+    User.all.select(&:accepted?).each do |accepted_user|
+      vetting_record = {
+        user_id: accepted_user.id,
+        confidence: 1,
+        skill_proficiency: 5,
+        experience: 4,
+        vetted_by: admin
+      }
+      vetting_records.push(vetting_record)
+    end
+    vetting_records
   end
 
   def create_all
