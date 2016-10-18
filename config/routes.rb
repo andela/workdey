@@ -62,12 +62,6 @@ Rails.application.routes.draw do
 
   get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
 
-  namespace :admin do
-    get "certify_artisans", to: "ratings#certify_artisans"
-    resources :ratings, only: :create
-    get "ratings/new/:user_id", to: "ratings#new", as: "new_rating"
-  end
-
   resources :biddings
   resources :tasks
   post "/tasks/search", to: "tasks#search", as: :tasks_search
@@ -79,4 +73,10 @@ Rails.application.routes.draw do
     resources :endorsements, only: [:new, :create]
   end
 
+  namespace :admin do
+    resources :applicants
+    get "certify_artisans", to: "ratings#certify_artisans"
+    resources :ratings, only: :create
+    get "ratings/new/:user_id", to: "ratings#new", as: "new_rating"
+  end
 end

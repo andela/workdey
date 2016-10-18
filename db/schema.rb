@@ -17,6 +17,16 @@ ActiveRecord::Schema.define(version: 20161010175558) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
+  create_table "artisan_skillsets", force: :cascade do |t|
+    t.integer  "skillset_id"
+    t.integer  "artisan_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "artisan_skillsets", ["artisan_id"], name: "index_artisan_skillsets_on_artisan_id", using: :btree
+  add_index "artisan_skillsets", ["skillset_id"], name: "index_artisan_skillsets_on_skillset_id", using: :btree
+
   create_table "bid_managements", force: :cascade do |t|
     t.integer  "bidding_id"
     t.integer  "artisan_id"
@@ -77,6 +87,15 @@ ActiveRecord::Schema.define(version: 20161010175558) do
 
   add_index "references", ["artisan_id"], name: "index_references_on_artisan_id", using: :btree
 
+  create_table "responses", force: :cascade do |t|
+    t.jsonb    "response"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "reviewer_id"
@@ -106,16 +125,6 @@ ActiveRecord::Schema.define(version: 20161010175558) do
     t.boolean  "paid",        default: false
     t.boolean  "shared",      default: false
   end
-
-  create_table "artisan_skillsets", force: :cascade do |t|
-    t.integer  "skillset_id"
-    t.integer  "artisan_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "artisan_skillsets", ["skillset_id"], name: "index_artisan_skillsets_on_skillset_id", using: :btree
-  add_index "artisan_skillsets", ["artisan_id"], name: "index_artisan_skillsets_on_artisan_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -171,7 +180,8 @@ ActiveRecord::Schema.define(version: 20161010175558) do
     t.float    "longitude"
     t.float    "latitude"
     t.boolean  "enable_notifications", default: true
-    t.integer  "status"
+    t.integer  "status",               default: 0
+    t.string   "reason"
     t.integer  "rating_id"
   end
 
@@ -191,5 +201,6 @@ ActiveRecord::Schema.define(version: 20161010175558) do
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
   add_foreign_key "artisan_skillsets", "skillsets"
+  add_foreign_key "responses", "users"
   add_foreign_key "tasks", "skillsets"
 end

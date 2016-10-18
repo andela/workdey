@@ -1,0 +1,28 @@
+<div class="container-large">
+  <div class="col s12 m12 l12">
+      <% unless @applicants.empty? %>
+      <ul class="collection">
+      <% @applicants.each do |applicant| %>
+      <li class="collection-item li-item">
+        <%= applicant.fullname %>
+      </br>
+      <ul class="li-item">
+        <% applicant.skillsets.each do |skillset| %>
+        <li class="chip trade-chips">
+          <%= skillset.name %>&nbsp
+        </li>
+        <% end %>
+      </ul>
+      <p>
+        Submitted on:
+        <%= strptime(applicant.created_at)%>
+      </p>
+      <%= link_to "View", edit_admin_applicant_path(applicant), class: "btn view-btn" %>
+    </li>
+    <% end %>
+    <% else %>
+    <%= render 'no_applicants_to_review' %>
+    <% end %>
+  </ul>
+</div>
+</div>
