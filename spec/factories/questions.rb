@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :question do
-    question "MyText"
-    required false
-    options "MyString"
+    question Faker::Lorem.sentence
+    required true
+    options []
   end
 end

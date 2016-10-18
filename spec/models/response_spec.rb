@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Response do
   it { should validate_presence_of(:response) }
