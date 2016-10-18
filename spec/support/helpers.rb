@@ -39,9 +39,7 @@ module Helpers
       street_address: Faker::Address.street_address,
       has_taken_quiz: true,
       confirmed: true,
-      phone: nil,
-      reason: "good",
-      status: "accepted"
+      phone: nil
     }
   end
 
