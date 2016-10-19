@@ -3,7 +3,7 @@ require "rails_helper"
 feature "Artisan Questionnaire" do
 
   let(:user) do
-    create(:user, user_type: "taskee", confirmed: true, has_taken_questionnaire: false)
+    create(:user, user_type: "artisan", confirmed: true, has_taken_questionnaire: false)
   end
 
   background do

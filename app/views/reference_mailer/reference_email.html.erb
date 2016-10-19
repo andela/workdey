@@ -6,10 +6,10 @@
   <body>
     <h1>Hello, <%= @reference.firstname %></h1>
     <p>
-      Your contact <%= @reference.taskee.fullname %> listed you as a reference on our platform.
+      Your contact <%= @reference.artisan.fullname %> listed you as a reference on our platform.
     </p>
     <p>
-      Does <%= @reference.taskee.firstname %> have these skills or expertise?
+      Does <%= @reference.artisan.firstname %> have these skills or expertise?
     </p>
     <ul>
       <% JSON.parse(@reference.skillsets["skills"]).each do |skill| %>
@@ -17,7 +17,7 @@
       <% end %>
     </ul>
     <p>
-      Please follow <a href="<%= @url %>">this link </a>to endorse <%= @reference.taskee.firstname %>.
+      Please follow <a href="<%= @url %>">this link </a>to endorse <%= @reference.artisan.firstname %>.
     </p>
     <p>Thanks!</p>
   </body>

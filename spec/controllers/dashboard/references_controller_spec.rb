@@ -19,8 +19,8 @@ RSpec.describe Dashboard::ReferencesController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it "assigns user's skillsets to taskee_skillsets" do
-      expect(assigns(:taskee_skillsets)).to eql(user.skillsets)
+    it "assigns user's skillsets to artisan_skillsets" do
+      expect(assigns(:artisan_skillsets)).to eql(user.skillsets)
     end
   end
 

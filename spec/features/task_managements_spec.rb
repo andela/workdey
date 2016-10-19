@@ -6,12 +6,12 @@ RSpec.feature "TaskLogs", type: :feature do
     task2_desc = Faker::Lorem.characters(45)
     @task1 = create(:task_management, description: task1_desc, paid: true)
     @task2 = create(:task_management, description: task2_desc,
-                                      tasker_id: 2, taskee_id: 3)
+                                      tasker_id: 2, artisan_id: 3)
     @user = create(:user, confirmed: true)
     @user2 = create(:user, email: Faker::Internet.email,
                            firstname: Faker::Name.first_name,
                            lastname: Faker::Name.last_name,
-                           user_type: "taskee", confirmed: true)
+                           user_type: "artisan", confirmed: true)
   end
 
   it { expect(TaskManagement.count).to eql 2 }
@@ -21,7 +21,7 @@ RSpec.feature "TaskLogs", type: :feature do
     end
 
     scenario "should see a list of tasks created if you are a tasker" do
-      expect(page).to have_content("Taskee")
+      expect(page).to have_content("Artisan")
     end
 
     scenario "tasker should see only his tasks" do
@@ -33,16 +33,16 @@ RSpec.feature "TaskLogs", type: :feature do
     end
   end
 
-  context "user is a taskee" do
+  context "user is a artisan" do
     before do
       log_in_with @user2.email, @user2.password
     end
 
-    scenario "should see a list of tasks given if you are a taskee" do
+    scenario "should see a list of tasks given if you are a artisan" do
       expect(page).to have_content("Tasker")
     end
 
-    scenario "taskee should see only tasks assigned" do
+    scenario "artisan should see only tasks assigned" do
       expect(page).to have_content(@task1.description)
       expect(page).to_not have_content(@task2.description)
     end

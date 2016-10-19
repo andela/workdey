@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.feature "Update Taskee Skill Set" do
+RSpec.feature "Update Artisan Skill Set" do
   let!(:skillsets) { create_list(:skillset, 4) }
-  let(:user) { create(:user, user_type: "taskee", confirmed: true) }
-  let!(:taskee_skillset) do
-    create(:taskee_skillset, taskee: user, skillset: skillsets.first)
+  let(:user) { create(:user, user_type: "artisan", confirmed: true) }
+  let!(:artisan_skillset) do
+    create(:artisan_skillset, artisan: user, skillset: skillsets.first)
   end
 
   before { log_in_with(user.email, user.password) }

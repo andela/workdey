@@ -1,5 +1,5 @@
 class SkillsetsController < ApplicationController
-  before_action :taskee_required
+  before_action :artisan_required
 
   def index
     @skillsets = current_user.skillsets.select(&:name)

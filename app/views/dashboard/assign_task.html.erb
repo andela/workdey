@@ -7,7 +7,7 @@
 
           <%= f.hidden_field :task_name, value: session[:searcher] %>
           <%= f.hidden_field :tasker_id, value: current_user.id %>
-          <%= f.hidden_field :taskee_id, value: @taskee_id %>
+          <%= f.hidden_field :artisan_id, value: @artisan_id %>
 
           <div class="row">
             <div class="col s8">
@@ -51,11 +51,11 @@
 
             <div class="col s4">
               <div class="card-panel center-align">
-                <%= cl_image_tag @taskee.image_url %>
+                <%= cl_image_tag @artisan.image_url %>
                 <p class="center-align">
-                  <%= "#{@taskee.firstname} #{@taskee.lastname}" %>
+                  <%= "#{@artisan.firstname} #{@artisan.lastname}" %>
                 </p>
-                <%= f.button "Notify Taskee", class: "btn" %>
+                <%= f.button "Notify Artisan", class: "btn" %>
               </div>
             </div>
           </div>
@@ -64,12 +64,12 @@
 
         <% form_tag do%>
         <% id = params["id"].nil? ? nil : params["id"] %>
-        <%= label_tag "Taskee ID:" %>
+        <%= label_tag "Artisan ID:" %>
 
         <% if id %>
-          <%= text_field_tag "taskee_id", "#{id}", disabled: true %>
+          <%= text_field_tag "artisan_id", "#{id}", disabled: true %>
         <% else %>
-          <%= text_field_tag "taskee_id", "#{id}" %>
+          <%= text_field_tag "artisan_id", "#{id}" %>
         <% end %>
 
         <%= label_tag "Amount:" %>
@@ -91,7 +91,7 @@
         <%= label_tag "Description:" %>
         <%= text_area_tag "description" %>
 
-        <button class="btn waves-effect" type="submit">NOTIFY TASKEE</button>
+        <button class="btn waves-effect" type="submit">NOTIFY ARTISAN</button>
         <% end %>
     </div>
   </div>

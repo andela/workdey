@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 require "rails_helper"
 
-RSpec.describe TaskeeSkillsetsController, type: :controller do
+RSpec.describe ArtisanSkillsetsController, type: :controller do
   let!(:skillsets) { create_list(:skillset, 4) }
-  let(:user) { create(:user, user_type: "taskee") }
-  let(:taskee_skillset) do
-    create(:taskee_skillset, taskee: user, skillset: skillsets.first)
+  let(:user) { create(:user, user_type: "artisan") }
+  let(:artisan_skillset) do
+    create(:artisan_skillset, artisan: user, skillset: skillsets.first)
   end
   let(:new_skills) { [skillsets[3].id, skillsets[2].id] }
 
@@ -28,7 +28,7 @@ RSpec.describe TaskeeSkillsetsController, type: :controller do
     end
 
     it "assigns user skillset ids to @user_skillset" do
-      user_skillset = user.taskee_skillsets.map(&:skillset_id)
+      user_skillset = user.artisan_skillsets.map(&:skillset_id)
       expect(assigns(:user_skillset)).to eq(user_skillset)
     end
   end
@@ -37,7 +37,7 @@ RSpec.describe TaskeeSkillsetsController, type: :controller do
     let!(:req) { put :update, { skills: new_skills }, format: :js }
     context "when skill ids are present" do
       it "updates skill set" do
-        skill_ids = user.taskee_skillsets.map(&:skillset_id)
+        skill_ids = user.artisan_skillsets.map(&:skillset_id)
         expect(skill_ids).to eq(new_skills)
       end
 

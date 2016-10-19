@@ -71,26 +71,26 @@ navigatorController.initMap = function (pos) {
     infoWindow.open(map, marker)
   })
 
-  this.createTaskeesMarkers()
+  this.createArtisansMarkers()
 }
 
-navigatorController.markerInfo = function (taskee) {
-  var phone = taskee.phone || 'n/a'
+navigatorController.markerInfo = function (artisan) {
+  var phone = artisan.phone || 'n/a'
 
   var infoString = [
     '<section style="width: 400px; text-align: initial"><div class="row"><div class="col s4">',
-    '<img src="' + taskee.avatar + '" alt="' + taskee.name + '" width="50px" height="50px" style="border-radius: 100%">',
+    '<img src="' + artisan.avatar + '" alt="' + artisan.name + '" width="50px" height="50px" style="border-radius: 100%">',
     '</div><div class="col s8">',
-    '<h4>' + taskee.name + '</h4>',
+    '<h4>' + artisan.name + '</h4>',
     '</div></div><div class="row"><div class="col s6">',
     '<i class="material-icons">phone</i> ' + phone + '',
     '</div><div class="col s6">',
-    '<b>Joined: </b>' + moment(taskee.joined, 'YYYYMMDD').fromNow() + '',
+    '<b>Joined: </b>' + moment(artisan.joined, 'YYYYMMDD').fromNow() + '',
     '</div></div><div class="row"><div class="col s12">',
-    '<i class="material-icons">room</i> ' + taskee.location + '',
+    '<i class="material-icons">room</i> ' + artisan.location + '',
     '</div></div><div class="row">',
     '<div class="col s12">',
-    '<a class="btn" href="' + taskee.link + '">View</a>',
+    '<a class="btn" href="' + artisan.link + '">View</a>',
     '</div></div></section>',
   ].join('')
 
@@ -101,19 +101,19 @@ navigatorController.markerInfo = function (taskee) {
   return infoWindow
 }
 
-navigatorController.createMarkers = function (taskees) {
+navigatorController.createMarkers = function (artisans) {
   var bounds = new google.maps.LatLngBounds()
-  taskees.map(function (taskee) {
-    if (taskee.distance <= 50) {
+  artisans.map(function (artisan) {
+    if (artisan.distance <= 50) {
       var m = new google.maps.Marker({
         position: {
-          lat: taskee.coords[0],
-          lng: taskee.coords[1]
+          lat: artisan.coords[0],
+          lng: artisan.coords[1]
         }
       })
       markers.push({
         marker: m,
-        taskee: taskee
+        artisan: artisan
       })
       bounds.extend(m.getPosition())
       map.fitBounds(bounds)
@@ -122,13 +122,13 @@ navigatorController.createMarkers = function (taskees) {
   navigatorController.addMarkers()
 }
 
-navigatorController.createTaskeesMarkers = function () {
-  dispatcher.trigger('taskees.get_nearby_taskees')
-  dispatcher.bind('taskees.success', function (taskee) {
-    var taskees = JSON.parse(taskee)
-    var tasks = navigatorController.getTasks(taskees)
+navigatorController.createArtisansMarkers = function () {
+  dispatcher.trigger('artisans.get_nearby_artisans')
+  dispatcher.bind('artisans.success', function (artisan) {
+    var artisans = JSON.parse(artisan)
+    var tasks = navigatorController.getTasks(artisans)
     navigatorController.createSelect(tasks)
-    navigatorController.createMarkers(taskees)
+    navigatorController.createMarkers(artisans)
   })
 }
 
@@ -136,15 +136,15 @@ navigatorController.addMarkers = function () {
   markers.map(function (marker) {
     marker.marker.setMap(map)
     marker.marker.addListener('click', function () {
-      navigatorController.markerInfo(marker.taskee).open(map, marker.marker)
+      navigatorController.markerInfo(marker.artisan).open(map, marker.marker)
     })
   })
 }
 
-navigatorController.getTasks = function (taskees) {
+navigatorController.getTasks = function (artisans) {
   var tasks = []
-  taskees.map(function (taskee) {
-    if (taskee.distance <= 50) tasks.push(taskee.tasks)
+  artisans.map(function (artisan) {
+    if (artisan.distance <= 50) tasks.push(artisan.tasks)
   })
   var result = tasks.reduce(function (a, b) {
     return a.concat(b)
@@ -181,10 +181,10 @@ navigatorController.geolocate = function () {
 }
 
 $('#select_task').change(function () {
-  dispatcher.trigger('search_taskee.search_by_task', this.value)
-  dispatcher.bind('search_taskee.success', function (taskee) {
-    var taskees = JSON.parse(taskee)
-    navigatorController.createMarkers(taskees)
+  dispatcher.trigger('search_artisan.search_by_task', this.value)
+  dispatcher.bind('search_artisan.success', function (artisan) {
+    var artisans = JSON.parse(artisan)
+    navigatorController.createMarkers(artisans)
   })
 })
 

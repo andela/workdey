@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "taskees/index"  => "taskees#index", as: :taskees
+  get "artisans/index"  => "artisans#index", as: :artisans
 
   root "pages#index"
 
@@ -45,9 +45,9 @@ Rails.application.routes.draw do
   match "contact" => "pages#contact", as: :contact, via: [:post, :get]
   get "pages/terms"
 
-  match "search/taskees" => "pages#search", as: "search", via: [:post, :get]
+  match "search/artisans" => "pages#search", as: "search", via: [:post, :get]
 
-  get "pages/become_a_taskee"
+  get "pages/become_a_artisan"
 
   get "dashboard/tasks" => "task_managements#index", as: :my_tasks
   get "dashboard/tasks/review" => "task_managements#show", as: :review_task
@@ -57,8 +57,8 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
-  get "/my_skillsets" => "taskee_skillsets#index", as: :my_skillsets
-  put "/taskee_skillsets" => "taskee_skillsets#update"
+  get "/my_skillsets" => "artisan_skillsets#index", as: :my_skillsets
+  put "/artisan_skillsets" => "artisan_skillsets#update"
 
   get "/tasks/:id/close_bid" => "tasks#close_bid", as: "close_bid"
 
