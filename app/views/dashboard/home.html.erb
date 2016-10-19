@@ -13,7 +13,7 @@
         <section class="col s6">
             <div class="user_info">
                 <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
-                <% if current_user.artisan? && current_user.status != "accepted" %>
+                <% if current_user.artisan? && current_user.status != "accepted" && current_user.latest_response %>
                 <h5>view application submitted</h5>
                 <%= form_tag users_response_path(current_user.latest_response), method: "get" do %>
                     <button id='notification' class="waves-effect waves-light btn"> view </button>

@@ -16,24 +16,6 @@ describe Users::ResponsesController do
 
   end
 
-  describe "POST #create" do
-
-    let(:user) { create(:user, user_type: "artisan", has_taken_questionnaire: false) }
-    before(:each) { stub_current_user(user) }
-
-    let!(:req) do
-       post :create,
-         response: {
-          response: Faker::Lorem.paragraph
-         }
-    end
-
-    context "saving response" do
-      it { should respond_with :ok }
-      it { should render_with_layout :application }
-    end
-  end
-
   describe "GET #show" do
 
     context "when viewing questionnaire" do

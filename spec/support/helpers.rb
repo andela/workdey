@@ -22,6 +22,7 @@ module Helpers
     @tasker = create(:user, user_type: "tasker")
     @artisan = create(:user, artisan_attr)
     status_stub
+    create(:response, user_id: @artisan.id)
   end
 
   def status_stub
