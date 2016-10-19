@@ -10,7 +10,7 @@ class Admin::RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
     if @rating.save
       User.find(params["user_id"]).update_attribute(:status, :certified)
-      redirect_to "/admin/certify_artisans"
+      redirect_to certify_artisans_admin_ratings_path
     else
       redirect_to :back, flash: { errors: @rating.errors.messages }
     end

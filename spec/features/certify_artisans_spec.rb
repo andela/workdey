@@ -8,7 +8,7 @@ RSpec.feature "Admin can rate artisans", type: :feature do
   end
 
   scenario "Admin sees a list of uncertified artisans" do
-    visit admin_certify_artisans_path
+    visit certify_artisans_admin_ratings_path
     expect(page).to have_content("Uncertified Artisans")
     expect(page).to have_content(@uncertified_user.firstname)
   end
@@ -24,7 +24,7 @@ RSpec.feature "Admin can rate artisans", type: :feature do
       fill_in :rating["comment"], with: "a comment"
       find("#rating").click
       click_button "Submit"
-      expect(page.current_path).to eq admin_certify_artisans_path
+      expect(page.current_path).to eq certify_artisans_admin_ratings_path
       expect(page).to have_no_content(@uncertified_user.firstname)
     end
   end
@@ -48,6 +48,6 @@ RSpec.feature "Admin can rate artisans", type: :feature do
   end
 
   def visit_new_rating_path
-    visit admin_new_rating_path(@uncertified_user.id)
+    visit new_admin_ratings_path(@uncertified_user.id)
   end
 end

@@ -75,8 +75,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :applicants
-    get "certify_artisans", to: "ratings#certify_artisans"
-    resources :ratings, only: :create
-    get "ratings/new/:user_id", to: "ratings#new", as: "new_rating"
+    resources :ratings, only: :create do
+      collection do
+        get "certify_artisans"
+        get "ratings/new/:user_id", to: "ratings#new", as: "new"
+      end
+    end
   end
 end
