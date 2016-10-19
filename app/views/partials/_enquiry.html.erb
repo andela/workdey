@@ -1,0 +1,25 @@
+<div id="enquiry-slider" style="right:-342px;">
+  <div id="enquiry-sidebar" onclick="open_panel()">
+    <p class="btn-floating btn-large waves-effect waves-light">
+      <i class="material-icons">email</i>
+    </p>
+  </div>
+  <%= form_for @enquiry, url: enquiries_path, method: :post do |f| %>
+
+  <div id="contact-form">
+    <h3>Enquiry</h3>
+     <%= f.fields_for :user do |user| %>
+    <div class="input-field">
+      <%= user.text_field :firstname, placeholder: "name" %>
+    </div>
+    <div class="input-field">
+      <%= user.email_field :email, placeholder: "email" %>
+    </div>
+    <% end %>
+    <div class="field">
+      <%= f.text_area :question, class: 'form-control materialize-textarea', placeholder: "message", required: true%>
+    </div>
+    <%= f.submit "Send", class: 'btn' %>
+  </div>
+  <% end %>
+</div>

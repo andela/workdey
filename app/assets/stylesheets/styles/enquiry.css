@@ -1,0 +1,21 @@
+#enquiry-slider {
+width: 500px;
+top: 100px;
+position: absolute;
+}
+
+#contact-form {
+width: 300px;
+position: absolute;
+right: 5px;
+border:1px solid #d8d8d8;
+padding:20px 40px;
+color: #525252;
+background: #FFF;
+}
+
+#enquiry-sidebar {
+position: absolute;
+top: 180px;
+left: 100px;
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010205437) do
+ActiveRecord::Schema.define(version: 20161019132212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   end
 
   add_index "biddings", ["task_id"], name: "index_biddings_on_task_id", using: :btree
+
+  create_table "enquiries", force: :cascade do |t|
+    t.string   "question"
+    t.string   "response"
+    t.boolean  "answered",   default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "enquiries", ["user_id"], name: "index_enquiries_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.string   "message"
@@ -181,6 +192,7 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
+  add_foreign_key "enquiries", "users"
   add_foreign_key "responses", "users"
   add_foreign_key "tasks", "skillsets"
 end

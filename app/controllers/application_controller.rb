@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def login_required
+    @enquiry = Enquiry.new
     redirect_to root_path unless logged_in?
   end
 
