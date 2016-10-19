@@ -14,7 +14,7 @@ module Helpers
   def taskee_stub
     taskee_attr = {
       confirmed: true,
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       user_type: "taskee"
     }
 
@@ -34,7 +34,7 @@ module Helpers
   def user_attr
     {
       street_address: Faker::Address.street_address,
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       confirmed: true,
       phone: nil
     }

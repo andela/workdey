@@ -5,7 +5,7 @@ RSpec.describe "Profile completion meter" do
   let(:user_attr) do
     {
       user_type: "taskee",
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       confirmed: true,
       phone: nil
     }

@@ -1,15 +1,16 @@
 class DashboardController < ApplicationController
   before_action :login_required
   before_action :show_notification_count,
-                only: [:home, :user_profile, :profile_view, :choose_role, :quiz]
+                only: [:home, :user_profile, :profile_view, :choose_role]
 
   def home
     if current_user.user_type.nil?
       redirect_to role_path
-    elsif current_user.user_type == "taskee" && !current_user.has_taken_quiz
+    elsif current_user.user_type == "taskee" &&
+      current_user.confirmed && !current_user.has_taken_questionnaire
       redirect_to new_users_response_path
-    elsif current_user.user_type == "taskee" && current_user.status == "not_reviewed"
-      redirect_to users_response_path(current_user.latest_response)
+   # elsif current_user.user_type == "taskee" && current_user.status == "not_reviewed"
+    #  redirect_to users_response_path(current_user.latest_response)
     else
       @completion_percentage = calculate_profile_completeness
       render :home
@@ -21,8 +22,8 @@ class DashboardController < ApplicationController
       render :choose_role
     elsif current_user.user_type == "taskee" && current_user.confirmed
       redirect_to dashboard_path
-    elsif current_user.user_type == "taskee" && !current_user.confirmed
-      redirect_to new_users_response_path
+    #elsif current_user.user_type == "taskee" && !current_user.confirmed
+     # redirect_to new_users_response_path
     else
       redirect_to dashboard_path
     end
@@ -31,11 +32,11 @@ class DashboardController < ApplicationController
   def set_role
     if params[:role] == "tasker"
       current_user.update_attribute(:user_type, params[:role])
-      current_user.update_attribute(:has_taken_quiz, true)
+      current_user.update_attribute(:has_taken_questionnaire, true)
       redirect_to dashboard_path
     else
       current_user.update_attribute(:user_type, params[:role])
-      redirect_to new_users_response_path
+      redirect_to dashboard_path
     end
   end
 
@@ -51,16 +52,6 @@ class DashboardController < ApplicationController
     redirect_to quiz_path
   rescue ActiveRecord::RecordNotFound
     redirect_to role_path, notice: Message.try_again
-  end
-
-  def quiz
-    redirect_to(dashboard_path) && return if current_user.has_taken_quiz
-    if quiz_params[:aced]
-      current_user.update_attribute(:has_taken_quiz, true)
-      redirect_to dashboard_path
-    else
-      render :quiz
-    end
   end
 
   def user_profile
@@ -95,10 +86,6 @@ class DashboardController < ApplicationController
   end
 
   private
-
-  def quiz_params
-    params.permit(:aced)
-  end
 
   def profile_params
     params.permit(:user_pix, :phone, :street_address, :city, :state, :gender,

@@ -6,9 +6,9 @@ class Users::ResponsesController < ApplicationController
   end
 
   def create
-    @response = current_user.responses.create(response_params)
+    @response = current_user.responses.new(response_params)
     if @response.save
-      current_user.update_attribute(:has_taken_quiz, true)
+      current_user.update_attribute(:has_taken_questionnaire, true)
       redirect_to users_response_path(@response.id)
     else
       redirect_to new_users_response_path, flash: { errors: @response.errors}

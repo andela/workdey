@@ -4,7 +4,7 @@ include DashboardHelper
 RSpec.describe DashboardController, type: :controller do
   describe "GET #home" do
     context "when a taskee  without skillsets visits the dashboard " do
-      let(:user) { create(:user, user_type: "taskee", has_taken_quiz: true) }
+      let(:user) { create(:user, user_type: "taskee", has_taken_questionnaire: true) }
       before(:each) do
         allow_any_instance_of(ApplicationController).
           to receive(:current_user).and_return(user)
@@ -24,7 +24,7 @@ RSpec.describe DashboardController, type: :controller do
 
     context "when a taskee with skillset visits the dashboard" do
       before(:each) do
-        @user = create(:user, user_type: "taskee", has_taken_quiz: true)
+        @user = create(:user, user_type: "taskee", has_taken_questionnaire: true)
         @user.skillsets << create(:skillset)
         allow_any_instance_of(ApplicationController).
           to receive(:current_user).and_return(@user)
@@ -52,7 +52,7 @@ RSpec.describe DashboardController, type: :controller do
   context "when a tasker with complete profile visits the dashboard" do
     user_attr = {
       user_type: "tasker",
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       street_address: Faker::Address.street_address,
       birthday: Date.today
     }
@@ -76,7 +76,7 @@ RSpec.describe DashboardController, type: :controller do
   end
 
   describe "POST #set_role" do
-    let(:user) { create(:user, user_type: nil, has_taken_quiz: false) }
+    let(:user) { create(:user, user_type: nil, has_taken_questionnaire: false) }
     before(:each) { stub_current_user(user) }
     let(:role) { "tasker" }
 
@@ -88,7 +88,7 @@ RSpec.describe DashboardController, type: :controller do
       end
 
       it "sets user as tasken quiz" do
-        expect(user.has_taken_quiz).to be true
+        expect(user.has_taken_questionnaire).to be true
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe DashboardController, type: :controller do
 
   describe "POST #create_skillset" do
     let(:skillsets) { create_list(:skillset, 4) }
-    let(:user) { create(:user, user_type: nil, has_taken_quiz: false) }
+    let(:user) { create(:user, user_type: nil, has_taken_questionnaire: false) }
     before(:each) { stub_current_user(user) }
     let(:skill_ids) { [skillsets[0].id, skillsets[1].id] }
 

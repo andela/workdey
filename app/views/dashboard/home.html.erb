@@ -13,6 +13,12 @@
         <section class="col s6">
             <div class="user_info">
                 <h3>Welcome <%= "#{current_user.firstname} #{current_user.lastname}" %> </h3>
+                <% if current_user.taskee? && current_user.status != "accepted" %>
+                <h5>view application submitted</h5>
+                <%= form_tag users_response_path(current_user.latest_response), method: "get" do %>
+                    <button id='notification' class="waves-effect waves-light btn"> view </button>
+                <% end %>
+                <% end %>
                 <h5>enable mail notifications</h5>
                 <%= form_tag user_settings_path do %>
                     <div class="switch" style="padding: 2em;">

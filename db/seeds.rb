@@ -8,7 +8,7 @@ class SeedData
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true, has_taken_quiz: true,
+        confirmed: true, has_taken_questionnaire: true,
         image_url: cloudinary_img_url,
         latitude: "6.5001035", longitude: "3.376697" },
       { firstname: "Chinedu", lastname: "Daniel",
@@ -29,7 +29,7 @@ class SeedData
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
         user_type: "taskee", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url,
+        confirmed: true, has_taken_questionnaire: true, image_url: cloudinary_img_url,
         latitude: "6.5275368", longitude: "3.367699" },
       {
         firstname: "Hubert", lastname: "Nakitare",
@@ -38,7 +38,7 @@ class SeedData
         state: "Nairobi", password: "1234567890", user_type: "tasker",
         confirm_token: "112ewqee2123wqwqw12wq", image_url: cloudinary_img_url,
         latitude: "-1.297849", longitude: "36.7868873", confirmed: true,
-        has_taken_quiz: true
+        has_taken_questionnaire: true
       },
       {
         firstname: "Austin", lastname: "Powers",

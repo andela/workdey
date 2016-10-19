@@ -6,8 +6,8 @@
   <h3 class="center-align">Artisan Questionnaire</h3>
   <h5 class="left-align">To help us get to know you better, please fill out the following questionnaire. </h5>
 
-  <%= form_tag users_responses_path, class: "col s8 offset-s2",
-    method: "post", id: "response_form", class: "col s12" do %>
+  <%= form_tag users_responses_path, class: "col s12",
+    method: "post", id: "response_form" do %>
 
     <% if flash["errors"] %>
       <div id="error_explanation">

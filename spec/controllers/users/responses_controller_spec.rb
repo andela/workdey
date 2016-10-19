@@ -5,7 +5,7 @@ describe Users::ResponsesController do
   describe 'GET #new' do
 
     context "when user is logged in but has not taken questionnaire" do
-      let(:user) { create(:user, user_type: "taskee", has_taken_quiz: false) }
+      let(:user) { create(:user, user_type: "taskee", has_taken_questionnaire: false) }
       before do
         get :new
       end
@@ -18,7 +18,7 @@ describe Users::ResponsesController do
 
   describe "POST #create" do
 
-    let(:user) { create(:user, user_type: nil, has_taken_quiz: false) }
+    let(:user) { create(:user, user_type: "taskee", has_taken_questionnaire: false) }
     before(:each) { stub_current_user(user) }
 
     let!(:req) do
@@ -37,7 +37,7 @@ describe Users::ResponsesController do
   describe "GET #show" do
 
     context "when viewing questionnaire" do
-      let(:user) { create(:user, user_type: "taskee", has_taken_quiz: false) }
+      let(:user) { create(:user, user_type: "taskee", has_taken_questionnaire: false) }
       before(:each) { stub_current_user(user) }
 
       let!(:req) do

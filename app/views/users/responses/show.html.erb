@@ -1,29 +1,23 @@
-<header class="center-align">
-
-</header>
-
-<div class="container row">
-  <div class="center-align">
-    <h3 class="center-align">Artisan Questionnaire</h3>
-
-    <h4 class="left-align">Your application was successfully submitted. An administrator will soon contact you to schedule your vetting process. Here are the responses you submitted: </h4>
-
-    <% @questions.each do |question| %>
+<div class="container">
+  <div class="row">
+    <div class="center-align">
+      <h3 class="center-align">Artisan Questionnaire</h3>
+      <h4 class="left-align">Your application was successfully submitted. An administrator will soon contact you to schedule your vetting process. Here are the responses you submitted: </h4>
+      <% @questions.each do |question| %>
       <div class="card grey darken-2">
         <div class="card-content white-text">
           <span class="card-title"><%= question.question %></span>
-            <% ans = @response[:response][question.question] %>
-              <% if ans.is_a?(Array) %>
-                <% ans.each do |a| %>
-                  <p><%= a %></p>
-                <% end %>
-              <% else %>
-                <p><%= ans %></p>
-              <% end %>
+          <% ans = @response[:response][question.question] %>
+          <% if ans.is_a?(Array) %>
+          <% ans.each do |a| %>
+          <p><%= a %></p>
+          <% end %>
+          <% else %>
+          <p><%= ans %></p>
+          <% end %>
         </div>
       </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
-
-
