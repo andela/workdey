@@ -136,6 +136,21 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#admin" do
+    it "returns true if the user is an admin" do
+      user = create(:user, user_type: "admin")
+      expect(user.admin?).to eq true
+    end
+    it "returns false if the user is a artisan" do
+      user = create(:user, user_type: "artisan")
+      expect(user.admin?).to eq false
+    end
+    it "returns false for a tasker" do
+      user = create(:user, user_type: "tasker")
+      expect(user.admin?).to eq false
+    end
+  end
+
   describe ".first_or_create_from_oauth" do
     context "when a user is not found" do
       before do

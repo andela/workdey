@@ -45,7 +45,8 @@ class User < ActiveRecord::Base
 
   validates :password,
             presence: true,
-            length: { minimum: 8 }
+            length: { minimum: 8 },
+            on: :create
 
   scope :artisans, -> { where(user_type: "artisan") }
 
@@ -117,6 +118,10 @@ class User < ActiveRecord::Base
 
   def tasker?
     user_type == "tasker"
+  end
+
+  def admin?
+    user_type == "admin"
   end
 
   def skillset_ids

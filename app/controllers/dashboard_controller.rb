@@ -9,8 +9,6 @@ class DashboardController < ApplicationController
     elsif current_user.user_type == "artisan" &&
       current_user.confirmed && !current_user.has_taken_questionnaire
       redirect_to new_users_response_path
-   # elsif current_user.user_type == "artisan" && current_user.status == "not_reviewed"
-    #  redirect_to users_response_path(current_user.latest_response)
     else
       @completion_percentage = calculate_profile_completeness
       render :home
@@ -22,8 +20,6 @@ class DashboardController < ApplicationController
       render :choose_role
     elsif current_user.user_type == "artisan" && current_user.confirmed
       redirect_to dashboard_path
-    #elsif current_user.user_type == "artisan" && !current_user.confirmed
-     # redirect_to new_users_response_path
     else
       redirect_to dashboard_path
     end
@@ -35,6 +31,7 @@ class DashboardController < ApplicationController
       current_user.update_attribute(:has_taken_questionnaire, true)
       redirect_to dashboard_path
     else
+      @skillsets = Skillset.all
       current_user.update_attribute(:user_type, params[:role])
       redirect_to dashboard_path
     end
@@ -78,7 +75,7 @@ class DashboardController < ApplicationController
 
   def search_with_map
     @current_user = current_user
-    @users = User.all
+    @skillsets = Skillset.all
   end
 
   def assign_task

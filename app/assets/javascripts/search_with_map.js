@@ -103,6 +103,8 @@ navigatorController.markerInfo = function (artisan) {
 
 navigatorController.createMarkers = function (artisans) {
   var bounds = new google.maps.LatLngBounds()
+  clearMarkers(markers)
+  markers = []
   artisans.map(function (artisan) {
     if (artisan.distance <= 50) {
       var m = new google.maps.Marker({
@@ -144,7 +146,9 @@ navigatorController.addMarkers = function () {
 navigatorController.getTasks = function (artisans) {
   var tasks = []
   artisans.map(function (artisan) {
-    if (artisan.distance <= 50) tasks.push(artisan.tasks)
+    if (artisan.distance <= 50){
+      tasks.push(artisan.tasks)
+    }
   })
   var result = tasks.reduce(function (a, b) {
     return a.concat(b)
@@ -187,6 +191,12 @@ $('#select_task').change(function () {
     navigatorController.createMarkers(artisans)
   })
 })
+
+function clearMarkers(markers) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].marker.setMap(null)
+  }
+}
 
 function reloadMap () {
   $("#reload-map").on('click', function () {

@@ -4,7 +4,10 @@ include DashboardHelper
 RSpec.describe DashboardController, type: :controller do
   describe "GET #home" do
     context "when a artisan  without skillsets visits the dashboard " do
-      let(:user) { create(:user, user_type: "artisan", has_taken_questionnaire: true) }
+      let(:user) do
+        create(:user, user_type: "artisan",
+                      has_taken_questionnaire: true)
+      end
       before(:each) do
         allow_any_instance_of(ApplicationController).
           to receive(:current_user).and_return(user)

@@ -2,13 +2,18 @@
     <section class="main container center-align map-search">
         <div class="row">
             <div class="col m9 s12">
-                <div class="card" id="map" style='width: 100%; height: 600px;'></div>
+                <div class="card" id="map" style='width: 100%; height: 600px;'>
+                    <div id="google-maps-scripts"></div>
+                </div>
             </div>
             <div class="col m3 s12">
                 <br>
                 <span class="hidden" id="marker-location" data-longitude="<%= @current_user.longitude %>" data-latitude="<%= @current_user.latitude %>"></span>
                 <label for="select_task">Search for tasks:</label>
                 <select name="select_task" id="select_task">
+                  <% @skillsets.each do |skillset| %>
+                  <option value="<%= skillset.id %>"><%= skillset.name %></option>
+                  <% end %>
                 </select>
                 <br><br>
                 <button class="btn" id="reload-map">Reload Map</button>

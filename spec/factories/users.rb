@@ -12,6 +12,7 @@ FactoryGirl.define do
     has_taken_questionnaire true
     user_type "tasker"
     street_address { Faker::Address.street_address }
+    status "not_reviewed"
 
     factory :user_with_tasks do
       transient do

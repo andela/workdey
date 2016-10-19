@@ -9,6 +9,7 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.delivery_method = :test
   host = "http://localhost:3000"
+  config.active_record.maintain_test_schema = false
   config.action_mailer.default_url_options = { host: host }
   config.active_support.test_order = :random
   config.active_support.deprecation = :stderr

@@ -23,10 +23,6 @@ class Seed
       { firstname: "Chinedu", lastname: "Dan",
         email: "chinedu.dan@andela.com", street_address: "34, Adeyemo Alakija",
         city: "VI", state: "Lagos", password: "1234567890",
-        user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq" },
-      { firstname: "Ben", lastname: "Kanyolo",
-        email: "bernard.kanyolo+workdey1@andela.com", street_address: "34, Adeyemo Alakija",
-        city: "VI", state: "Lagos", password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq" }
     ]
   end

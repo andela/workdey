@@ -77,4 +77,8 @@ Rails.application.routes.draw do
     resources :references, only: [:index, :new, :create]
     resources :endorsements, only: [:new, :create]
   end
+
+  namespace :admin do
+    resources :applicants
+  end
 end

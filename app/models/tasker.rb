@@ -1,0 +1,2 @@
+class Tasker < User
+end

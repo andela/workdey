@@ -8,6 +8,9 @@ class Users::ResponsesController < ApplicationController
   def create
     @response = current_user.responses.new(response_params)
     if @response.save
+      response_params["response"][Question.first.question].each do |s|
+        add_skillset(s)
+      end
       current_user.update_attribute(:has_taken_questionnaire, true)
       redirect_to users_response_path(@response.id)
     else
@@ -20,6 +23,12 @@ class Users::ResponsesController < ApplicationController
   end
 
   private
+
+  def add_skillset(skillset)
+    skill = Skillset.find_or_create_by(name: skillset)
+    ArtisanSkillset.create(skillset_id: skill.id,
+        artisan_id: current_user.id)
+  end
 
   def get_questions
     @questions = Question.all
