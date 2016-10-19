@@ -72,4 +72,18 @@ module Helpers
   def parsed_response
     JSON.parse(response.body)
   end
+
+  def fill_contact_form
+    fill_in "name", with: Faker::Name.name
+    fill_in "email", with: Faker::Internet.free_email
+    fill_in "message", with: Faker::Lorem.sentence
+
+    click_button "Send Message"
+  end
+
+  def respond_to_enquiry
+    fill_in "response", with: Faker::Lorem.sentence
+
+    click_button "Submit"
+  end
 end
