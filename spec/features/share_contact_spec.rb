@@ -40,6 +40,7 @@ RSpec.describe "Share contact", js: true do
     scenario "when tasker views the artisan details " do
       share_contact
       Capybara.reset_sessions!
+      visit root_path
       log_in_with(tasker.email, tasker.password)
       visit notifications_path
       click_on "view information"
