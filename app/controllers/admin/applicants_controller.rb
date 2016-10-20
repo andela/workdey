@@ -1,6 +1,6 @@
 class Admin::ApplicantsController < ApplicationController
   before_action :login_required
-  before_action :check_admin
+  before_action :require_admin
   before_action :set_applicant, only: [:edit, :update]
 
   def index
@@ -14,10 +14,6 @@ class Admin::ApplicantsController < ApplicationController
     @applicant.update_attributes(status: applicant_params[:status].to_i,
                                  reason: applicant_params[:reason])
     redirect_to(admin_applicants_path)
-  end
-
-  def check_admin
-    redirect_to dashboard_path unless current_user.admin?
   end
 
   private

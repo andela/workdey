@@ -77,7 +77,7 @@ RSpec.describe EnquiriesController, type: :controller do
     before do
       put :update, params: {
         id: enquiry.id,
-        enquiry: attributes_for(:enquiry, response: Faker.Lorem.sentence)
+        enquiry: attributes_for(:enquiry, response: Faker::Lorem.sentence)
       }
     end
 

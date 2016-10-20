@@ -50,4 +50,8 @@ class ApplicationController < ActionController::Base
   def show_notification_count
     @count = Notification.unread(current_user).count if current_user
   end
+
+  def require_admin
+    redirect_to dashboard_path unless current_user.admin?
+  end
 end

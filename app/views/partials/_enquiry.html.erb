@@ -8,16 +8,20 @@
 
   <div id="contact-form">
     <h3>Enquiry</h3>
+     <%= f.hidden_field :user_id, value: current_user.id %>
      <%= f.fields_for :user do |user| %>
     <div class="input-field">
-      <%= user.text_field :firstname, placeholder: "name" %>
+      <%= user.text_field :firstname %>
+      <%= user.label :firstname %>
     </div>
     <div class="input-field">
-      <%= user.email_field :email, placeholder: "email" %>
+      <%= user.email_field :email %>
+      <%= user.label :email %>
     </div>
     <% end %>
     <div class="field">
-      <%= f.text_area :question, class: 'form-control materialize-textarea', placeholder: "message", required: true%>
+      <%= f.text_area :question, class: 'form-control materialize-textarea',
+      placeholder: "message", required: true%>
     </div>
     <%= f.submit "Send", class: 'btn' %>
   </div>

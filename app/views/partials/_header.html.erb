@@ -67,6 +67,7 @@
       </div>
       <%= render "partials/sidebar_dashboard" %>
     </nav>
+    <%= render "partials/enquiry" unless current_user.admin? %>
 </header>
 <% else %>
   <header>

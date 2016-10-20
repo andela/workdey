@@ -1,0 +1,23 @@
+<%= form_for @enquiry, url: enquiries_path, method: :post do |f| %>
+
+<div id="contact-form">
+  <h3>Enquiry</h3>
+   <%= f.fields_for :user do |user| %>
+  <div class="input-field">
+    <%= user.text_field :firstname, disabled: true %>
+  </div>
+  <div class="input-field">
+    <%= user.email_field :email, disabled: true %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.text_area :question, class: 'form-control materialize-textarea',
+    disabled: true, required: true%>
+  </div>
+  <div class="field">
+    <%= f.text_area :response, class: 'form-control materialize-textarea',
+    placeholder: "response", required: true%>
+  </div>
+  <%= f.submit "Send", class: 'btn' %>
+</div>
+<% end %>
