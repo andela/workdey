@@ -11,7 +11,7 @@ RSpec.feature "Review applicant", type: :feature do
   scenario "when admin clicks view button" do
     visit "/admin/applicants"
     click_link "View"
-    expect(page).to have_content "Accept"
+    expect(page).to have_content "Strong No"
     expect(page.current_path).to eql "/admin/applicants/#{applicant.id}/edit"
   end
 
@@ -25,7 +25,7 @@ RSpec.feature "Review applicant", type: :feature do
 
   scenario "when admin rejects an applicant" do
     visit "/admin/applicants/#{applicant.id}/edit"
-    find("label[for=user_status_2]").click
+    find("label[for=user_status_4]").click
     fill_in "Reasons", with: "Bad"
     click_button "Update"
     expect(page.current_path).to eq "/admin/applicants"
