@@ -49,7 +49,8 @@ class User < ActiveRecord::Base
 
   scope :artisans, -> { where(user_type: "artisan") }
 
-  enum status: [:not_reviewed, :accepted, :rejected, :certified]
+  enum status: [:not_reviewed, :strong_yes,
+                :weak_yes, :weak_no, :strong_no, :certified]
 
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
