@@ -1,6 +1,8 @@
 <section class="main container center-align">
   <h1>Uncertified Artisans</h1>
-
+  <% if @uncertified_artisans.empty? %>
+    <p> There are no uncertified artisans at the moment. </p>
+  <% else %>
   <table class="table striped">
     <thead>
       <th>First Name</th>
@@ -17,4 +19,5 @@
       <% end %>
     </tbody>
   </table>
+  <% end %>
 </section>
