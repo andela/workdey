@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20161018094828) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
   create_table "references", force: :cascade do |t|
     t.integer  "artisan_id"
     t.string   "email"
@@ -179,12 +187,23 @@ ActiveRecord::Schema.define(version: 20161018094828) do
     t.boolean  "has_taken_questionnaire", default: false
     t.float    "longitude"
     t.float    "latitude"
-    t.boolean  "enable_notifications", default: true
-    t.integer  "status",               default: 0
+    t.boolean  "enable_notifications",    default: true
+    t.integer  "status",                  default: 0
     t.string   "reason"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "vetting_records", force: :cascade do |t|
+    t.integer  "confidence"
+    t.integer  "skill_proficiency"
+    t.integer  "experience"
+    t.string   "interviewer_comment"
+    t.integer  "user_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "vetted_by"
+  end
 
   add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "bid_managements", "biddings"

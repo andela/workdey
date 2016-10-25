@@ -9,6 +9,8 @@ class DashboardController < ApplicationController
     elsif current_user.user_type == "artisan" &&
       current_user.confirmed && !current_user.has_taken_questionnaire
       redirect_to new_users_response_path
+    elsif current_user.admin?
+      render :admin_home
     else
       @completion_percentage = calculate_profile_completeness
       render :home

@@ -1,14 +1,14 @@
 <div class="container-large">
-    <div class="row">
-        <div class="modal-content col s12">
-            <h4><%= @applicant.fullname%></h4>
-            <ul class="li-item">
-                <% @applicant.skillsets.each do |skillset| %>
-                <li class="trade">
-                    <%= skillset.name %>&nbsp
-                </li>
-                <% end %>
-            </ul>
+  <div class="row">
+    <div class="modal-content col s12">
+      <h4><%= @applicant.fullname%></h4>
+      <ul class="li-item">
+        <% @applicant.skillsets.each do |skillset| %>
+        <li class="trade">
+          <%= skillset.name %>&nbsp
+        </li>
+        <% end %>
+      </ul>
 
         </div>
         <div class="modal-content col s10">
@@ -28,20 +28,26 @@
                 </li>
                 <% end %>
             </ul>
-            <%= form_for @applicant, url: admin_applicant_path, method: :patch do |f| %>
-            <div class="field">
-                <%= f.radio_button :status, "1" %>
-                <%= f.label :status_1, "Accept" %>
-                <%= f.radio_button :status,  "2" %>
-                <%= f.label :status_2, "Reject"%>
-            </div>
 
-            <div class="field">
-              <%= f.text_area :reason, class: 'form-control materialize-textarea', required: true%>
-              <%= f.label :reason, "Reasons" %>
-            </div>
-            <%= f.submit "Update", class: "btn view-btn" %>
-            <% end %>
-        </div>
+
+      <%= form_for @applicant, url: admin_applicant_path, method: :patch do |f| %>
+      <div class="field horizontal-radio-buttons">
+        <%= f.radio_button :status,  "4" %>
+        <%= f.label :status_4, "Strong No"%>
+        <%= f.radio_button :status, "3" %>
+        <%= f.label :status_3, "Weak No" %>
+        <%= f.radio_button :status,  "2" %>
+        <%= f.label :status_2, "Weak Yes"%>
+        <%= f.radio_button :status, "1" %>
+        <%= f.label :status_1, "Strong Yes" %>
+      </div>
+
+      <div class="field">
+        <%= f.text_area :reason, class: 'form-control materialize-textarea', required: true%>
+        <%= f.label :reason, "Reasons" %>
+      </div>
+      <%= f.submit "Update", class: "btn view-btn" %>
+      <% end %>
     </div>
   </div>
+</div>

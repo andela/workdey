@@ -5,8 +5,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200italic,300,300italic,400,400italic,700" rel="stylesheet" type="text/css">
-
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
@@ -16,6 +16,7 @@
 
   <%= yield %>
 
+  </script>
   <%= render "partials/footer" %>
 
   <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" %>

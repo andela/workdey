@@ -1,9 +1,8 @@
 <% if logged_in? %>
-  <% pending_artisan = current_user.artisan? && current_user.status != "accepted" %>
   <header>
     <nav class="nav-wrapper" id="nav-wrapper">
 
-      <% unless pending_artisan %>
+      <% unless current_user.pending_artisan? %>
       <a href="#" data-activates="slide-out" class=" sidenav-tog button-collapse"><i class="material-icons">menu</i></a>
       <% end %>
       <div class="container">
@@ -70,7 +69,7 @@
         </ul>
       </div>
 
-      <%= render "partials/sidebar_dashboard" unless pending_artisan %>
+      <%= render "partials/sidebar_dashboard" unless current_user.pending_artisan? %>
     </nav>
 </header>
 <% else %>
