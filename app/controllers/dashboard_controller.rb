@@ -6,6 +6,8 @@ class DashboardController < ApplicationController
   def home
     if current_user.user_type.nil?
       redirect_to role_path
+    elsif current_user.admin?
+      render :admin_home
     elsif current_user.user_type == "artisan" && !current_user.has_taken_quiz
       redirect_to quiz_path
     else

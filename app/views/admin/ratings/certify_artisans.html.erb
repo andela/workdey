@@ -1,0 +1,23 @@
+<section class="main container center-align">
+  <h1>Uncertified Artisans</h1>
+  <% if @uncertified_artisans.empty? %>
+    <p> There are no uncertified artisans at the moment. </p>
+  <% else %>
+  <table class="table striped">
+    <thead>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </thead>
+    <tbody>
+      <% @uncertified_artisans.each do |artisan| %>
+      <tr>
+        <td> <%= artisan.firstname %></td>
+        <td> <%= artisan.lastname %></td>
+        <td> <%= link_to 'Certify', new_admin_ratings_path(artisan.id),
+        :class => "btn btn-large" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</section>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010205437) do
+ActiveRecord::Schema.define(version: 20161010175558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
 
   create_table "references", force: :cascade do |t|
     t.integer  "artisan_id"
@@ -174,13 +182,25 @@ ActiveRecord::Schema.define(version: 20161010205437) do
     t.boolean  "enable_notifications", default: true
     t.integer  "status",               default: 0
     t.string   "reason"
+    t.integer  "rating_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  add_foreign_key "artisan_skillsets", "skillsets"
+  create_table "vetting_records", force: :cascade do |t|
+    t.integer  "confidence"
+    t.integer  "skill_proficiency"
+    t.integer  "experience"
+    t.string   "interviewer_comment"
+    t.integer  "user_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "vetted_by"
+  end
+
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
+  add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "responses", "users"
   add_foreign_key "tasks", "skillsets"
 end

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.validate.min.js
+//= require jquery.rateyo.min.js
 //= require turbolinks
 //= require materialize-sprockets
 //= require smooth-scroll.min.js

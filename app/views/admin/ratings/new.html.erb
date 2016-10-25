@@ -1,0 +1,79 @@
+<section class="main container center">
+    <h3>
+        <% user = User.find(@user_id) %>
+        <%= user.firstname%>
+        <%=user.lastname %>
+    </h3>
+    <h4>Vetting Results</h4>
+    <hr>
+    <table class="responsive-table" style="width: 60%;" align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <h5 style="position: relative; float: left">confidence:</h5>
+                </td>
+                <td>
+                    <div id="confidence-rating" class="stars" style="position: relative; float: right"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5 style="position: relative; float: left">experience:</h5>
+                </td>
+                <td>
+                    <div id="experience-rating" class="stars" style="position: relative; float: right"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5 style="position: relative; float: left">skill proficiency:</h5>
+                </td>
+                <td>
+                    <div id="proficiency" style="position: relative; float: right"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <% if flash[:errors] %>
+      <div>
+        <p style="color:red;">Error</p>
+        <% flash[:errors].each do |key, error| %>
+          <p style="color:red;"> <%= "#{key}: #{error.join}" %> </p>
+        <% end %>
+      </div>
+    <% end %>
+    <%= form_for @rating, url: admin_ratings_path do |f| %>
+    <br>
+    <%= f.label :comment, {:style=> "font-size: 120%"} %>
+    <%= f.text_field :comment%>
+    <%= f.label :rating, {:style=> "font-size: 120%"} %>
+    <br>
+    <br>
+    <div id="rating" style="margin:auto;"></div>
+
+    <%= f.hidden_field :rating, id:'rating_value'%>
+    <%= hidden_field_tag 'user_id', @user_id %>
+    <br>
+    <br>
+    <%= f.submit "Submit", :class => "btn btn-large" %>
+    <% end %>
+</section>
+
+<script>
+    $("document").ready(function () {
+      var star_ids = ["#confidence-rating", "#experience-rating", "#proficiency"];
+      var ratings = [
+        <%= @vetting_record.confidence %>,
+        <%= @vetting_record.experience %>,
+        <%= @vetting_record.skill_proficiency %>];
+      for (var i in star_ids) {
+          $(star_ids[i]).rateYo({rating: ratings[i], readOnly: true});
+      }
+
+      $("#rating").rateYo({fullStar: true, starWidth: "50px"});
+
+      $("#rating").rateYo().on("rateyo.set", function (e, data) {
+          document.getElementById('rating_value').value = data.rating
+      });
+    });
+</script>

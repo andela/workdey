@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :references, foreign_key: :artisan_id
   has_many :artisan_skillsets, foreign_key: :artisan_id
   has_many :skillsets, foreign_key: :artisan_id, through: :artisan_skillsets
+  has_one :vetting_record
+  has_many :ratings, foreign_key: :user_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?

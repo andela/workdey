@@ -31,6 +31,9 @@
 .sinav{
   background-color: #444;
 }
+.si:target {
+  color: red;
+}
 
 .side-nav a:hover {
   background-color: #ddd;
@@ -42,9 +45,18 @@ ul#slide-out {
   left: 0;
 }
 
-.side-nav li {
-  float: none;
-  padding: 0;
+.side-nav {
+    li {
+        float: none;
+        padding: 0;
+        margin-left: 0 !important;
+
+        &.active {
+            a {
+              color: #444 !important;
+            }
+        }
+    }
 }
 
 .sidenav-tog{
