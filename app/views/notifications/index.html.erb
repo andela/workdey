@@ -7,8 +7,11 @@
 
       <% if @notifications.present? && current_user.artisan?  %>
       <div class="notification-feed col s6">
-        <% @notifications.each do |object| %>
-          <%= show_notifications(object) %>
+        <% @notifications.each do |notification| %>
+        <% if notification.notifiable_type == "Enquiry" %>
+           <% redirect_to enquiry_path(notification.notifiable_id) %>
+        <% else %>
+          <%= show_notifications(notification) %>
         <% end %>
       </div>
 
@@ -16,18 +19,24 @@
         <p>Click on the view button to get more information about a task</p>
         <i class="material-icons">directions_bike</i>
       </div>
+      <% end %>
 
       <% elsif @notifications.present? && current_user.user_type == "tasker" %>
         <div class="notification-feed col s8">
-          <% @notifications.each do |object| %>
+          <% @notifications.each do |notification| %>
             <div class="viewed feed">
-              <img src="<%= object.sender.image_url %>" alt="" />
-              <p class="title"> <%= object.message %> </p>
-              <a href="#modal1" onclick="modal_object(<%= object.sender.to_json %>, <%= object.id %>)" class="btn info_btn modal-trigger"> view information</a>
+              <img src="<%= notification.sender.image_url %>" alt="" />
+              <p class="title"> <%= notification.message %> </p>
+              <% if notification.notifiable_type == "Enquiry" %>
+           <%#= link_to "View Response", enquiry_path(notification.notifiable_id), class: 'btn' %>
+           <a href="#modal2" onclick="modal_notification(<%= notification.notifiable.to_json %>, <%= notification.id %>)" class="btn info_btn modal-trigger-enquiry"> view response</a>
+
+        <% else %>
+              <a href="#modal1" onclick="modal_notification(<%= notification.sender.to_json %>, <%= notification.id %>)" class="btn info_btn modal-trigger"> view information</a>
 
             </div>
-          <% end %>
-          <%#= render partial: "show_information" %>
+            <% end %>
+
           <div id="modal1" class="modal info_modal">
               <div class="modal-content">
                 <h4>Tasker Information</h4>
@@ -36,7 +45,30 @@
                 <p class="artisan_email">Email: <span id="email"></span></p>
               </div>
             </div>
+            <div id="modal2" class="modal info_modal">
+              <div class="modal-content">
+                <h4>Response to Enquiry</h4>
+                <p class="artisan_name">Question: <span id="question"></span></p>
+                <p class="artisan_phone">Response: <span id="response"></span></p>
+                <p class="artisan_email">Email: <span id="email"></span></p>
+              </div>
+            </div>
         </div>
+         <% end %>
+        <%= will_paginate @notifications %>
+
+          <% elsif @notifications.present? && current_user.user_type == "admin" %>
+        <div class="notification-feed col s8">
+          <% @notifications.each do |notification| %>
+            <div class="viewed feed">
+              <img src="<%= notification.sender.image_url %>" alt="" />
+              <p class="title"> <%= notification.message %> </p>
+              <%= link_to "Respond", edit_enquiry_path(notification.notifiable_id) %>
+              <% notification.update_as_read %>
+            </div>
+          <% end %>
+          <%= will_paginate @notifications %>
+          <%#= render partial: "show_information" %>
 
       <% else  %>
         <div class="col s6 full_notification_message center-align card-panel">

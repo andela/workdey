@@ -7,8 +7,12 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def login_required
-    @enquiry = Enquiry.new
     redirect_to root_path unless logged_in?
+    enquiry
+  end
+
+  def enquiry
+    @enquiry = Enquiry.new
   end
 
   def guest_only
@@ -17,6 +21,7 @@ class ApplicationController < ActionController::Base
 
   def artisan_required
     redirect_to root_path unless current_user.artisan?
+    enquiry
   end
 
   def obfuscate(hash)

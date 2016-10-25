@@ -1,9 +1,10 @@
 class NotificationsController < ApplicationController
+  before_action :login_required
   before_action :show_notification_count, only: :index
   before_action :set_notification, only: [:show, :update]
 
   def index
-    @notifications = Notification.unread(current_user)
+    @notifications = Notification.unread(current_user).paginate(page: params[:page], per_page: 4)
     Notification.update_as_notified(current_user)
   end
 

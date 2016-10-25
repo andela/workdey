@@ -1,4 +1,6 @@
 class ChargesController < ApplicationController
+  before_action :enquiry
+
   def new
   end
 

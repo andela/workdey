@@ -1,7 +1,7 @@
-<%= form_for @enquiry, url: enquiries_path, method: :post do |f| %>
+<%= form_for @enquiry, url: enquiry_path(@enquiry.id), method: :put do |f| %>
 
-<div id="contact-form">
-  <h3>Enquiry</h3>
+<div class="col s6 container-large">
+  <h3 class="center-align">Respond to enquiry</h3>
    <%= f.fields_for :user do |user| %>
   <div class="input-field">
     <%= user.text_field :firstname, disabled: true %>

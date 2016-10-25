@@ -1,4 +1,6 @@
 class MapController < WebsocketRails::BaseController
+  before_action :enquiry
+
   def get_nearby_artisans
     artisans = get_all_artisans
     send_message :success, artisans.to_json, namespace: :artisans
