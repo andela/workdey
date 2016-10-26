@@ -32,6 +32,12 @@ class Service < ActiveRecord::Base
     where("tasker_id = ? AND status = ?", current_user, 0)
   end
 
+  def expired?
+    Time.now > created_at + 5.hours
+  end
+
+  def
+
   private
 
   def end_date_must_be_greater_than_start_date
