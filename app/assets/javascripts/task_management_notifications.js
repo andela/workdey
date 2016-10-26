@@ -22,7 +22,8 @@
       return {
         notifiable_attr_to_update: { status: obj.status },
         reply_to_sender: true,
-        message: artisan_response
+        message: artisan_response,
+        event_name: "new task"
       };
     };
 

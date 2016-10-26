@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :update]
 
   def index
-    @notifications = Notification.unread(current_user).paginate(page: params[:page], per_page: 4)
+    @notifications = Notification.unread(current_user)
     Notification.update_as_notified(current_user)
   end
 
@@ -26,8 +26,8 @@ class NotificationsController < ApplicationController
     end
     record = @notification.notifiable
     if record.update_attributes(@notifiable_attr_to_update.symbolize_keys)
-      if @reply_to_sender == true
-        @notification.reply_to_sender(@message, "new_task")
+      if @reply_to_sender == "true"
+        @notification.reply_to_sender(@message, @event_name)
         @notification.update_as_read
       end
       render json: { message: "success" }
@@ -50,5 +50,10 @@ class NotificationsController < ApplicationController
     @notifiable_attr_to_update = params[:notifiable_attr_to_update]
     @message = params[:message]
     @reply_to_sender = params[:reply_to_sender]
+    @event_name = params[:event_name]
+  end
+
+  def paginate_notifications(notifications)
+    notifications.paginate(page: params[:page], per_page: 4)
   end
 end

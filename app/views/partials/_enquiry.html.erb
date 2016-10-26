@@ -11,12 +11,10 @@
      <%= f.hidden_field :user_id, value: current_user.id %>
      <%= f.fields_for :user do |user| %>
     <div class="input-field">
-      <%= user.text_field :firstname %>
-      <%= user.label :firstname %>
+      <%= user.text_field :firstname, placeholder: 'firstname' %>
     </div>
     <div class="input-field">
-      <%= user.email_field :email %>
-      <%= user.label :email %>
+      <%= user.email_field :email, placeholder: 'email' %>
     </div>
     <% end %>
     <div class="field">
