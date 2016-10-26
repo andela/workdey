@@ -36,8 +36,6 @@ class Service < ActiveRecord::Base
     Time.now > created_at + 5.hours
   end
 
-  def
-
   private
 
   def end_date_must_be_greater_than_start_date
