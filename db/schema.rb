@@ -75,6 +75,22 @@ ActiveRecord::Schema.define(version: 20161019132212) do
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
+  create_table "questions", force: :cascade do |t|
+    t.text     "question"
+    t.boolean  "required"
+    t.string   "options",    default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
   create_table "references", force: :cascade do |t|
     t.integer  "artisan_id"
     t.string   "email"
@@ -168,26 +184,37 @@ ActiveRecord::Schema.define(version: 20161019132212) do
     t.date     "birthday"
     t.string   "phone"
     t.string   "password_digest"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "user_type"
     t.string   "provider"
     t.string   "oauth_id"
     t.string   "confirm_token"
-    t.boolean  "confirmed",            default: false
+    t.boolean  "confirmed",               default: false
     t.string   "state"
     t.string   "city"
     t.string   "street_address"
     t.string   "image_url"
-    t.boolean  "has_taken_quiz",       default: false
+    t.boolean  "has_taken_questionnaire", default: false
     t.float    "longitude"
     t.float    "latitude"
-    t.boolean  "enable_notifications", default: true
-    t.integer  "status",               default: 0
+    t.boolean  "enable_notifications",    default: true
+    t.integer  "status",                  default: 0
     t.string   "reason"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "vetting_records", force: :cascade do |t|
+    t.integer  "confidence"
+    t.integer  "skill_proficiency"
+    t.integer  "experience"
+    t.string   "interviewer_comment"
+    t.integer  "user_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "vetted_by"
+  end
 
   add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "bid_managements", "biddings"

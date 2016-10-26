@@ -1,0 +1,61 @@
+<header class="center-align">
+  <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
+</header>
+
+<div class="row">
+  <h3 class="center-align">Artisan Questionnaire</h3>
+  <h5 class="left-align">To help us get to know you better, please fill out the following questionnaire. </h5>
+
+  <%= form_tag users_responses_path, class: "col s12",
+    method: "post", id: "response_form" do %>
+
+    <% if flash["errors"] %>
+      <div id="error_explanation">
+        <h2><%= pluralize(flash["errors"]["response"].count, "error") %>
+          found. Please fill out the following questions:
+        </h2>
+        <ul>
+          <%flash["errors"]["response"].each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% @questions.each do |question| %>
+      <p>
+        <% asterix = if question.required? then " *" else "" end %>
+        <h5 class="row"><%= question.question %>
+          <font color="red">
+            <%= asterix %>
+          </font>
+        </h5>
+
+        <% if question.options.empty? %>
+          <% if question.required? %>
+            <%= text_area_tag "response[#{question.question}]", nil, class: "materialize-textarea" %>
+          <% else %>
+            <%= text_area_tag "response[#{question.question}]", nil, class: "materialize-textarea" %>
+          <% end %>
+        <% else %>
+          <% question.options.each_with_index do |option, index| %>
+            <% if option == "Other" %>
+              <%= text_field_tag "response[#{question.question}][]", nil,
+                placeholder: "Other" %>
+            <% else %>
+              <%= check_box_tag("response[#{question.question}][]", option, false,
+                :id => "#{question.id}_#{index}") %>
+              <%= label_tag("#{question.id}_#{index}", option) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </p>
+    <% end %>
+
+    <div class="input-field row">
+      <button id="responses" class="btn waves-effect waves-light"submit">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  <% end %>
+</div>

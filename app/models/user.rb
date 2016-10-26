@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :references, foreign_key: :artisan_id
   has_many :artisan_skillsets, foreign_key: :artisan_id
   has_many :skillsets, foreign_key: :artisan_id, through: :artisan_skillsets
+  has_many :responses, foreign_key: :user_id
+  has_one :vetting_record
+  has_many :ratings, foreign_key: :user_id
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -49,7 +52,8 @@ class User < ActiveRecord::Base
 
   scope :artisans, -> { where(user_type: "artisan") }
 
-  enum status: [:not_reviewed, :accepted, :rejected, :certified]
+  enum status: [:not_reviewed, :strong_yes,
+                :weak_yes, :weak_no, :strong_no, :certified]
 
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
@@ -127,7 +131,20 @@ class User < ActiveRecord::Base
     artisan_skillsets.map(&:skillset_id)
   end
 
+  def latest_response
+    responses.order("created_at").last
+  end
+
+  def accepted?
+    strong_yes? || weak_yes?
+  end
+
+  def pending_artisan?
+    artisan? && not_reviewed?
+  end
+
   private_class_method
+
   def self.users
     User.arel_table
   end

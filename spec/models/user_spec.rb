@@ -1,5 +1,9 @@
 require "rails_helper"
 RSpec.describe User, type: :model do
+  it { should have_many(:ratings) }
+  it { should have_one(:vetting_record) }
+  it { should define_enum_for(:status) }
+
   it { is_expected.to have_many(:skillsets).through(:artisan_skillsets) }
 
   it do
@@ -7,6 +11,8 @@ RSpec.describe User, type: :model do
   end
 
   it { is_expected.to have_many(:reviews) }
+
+  it { is_expected.to have_many(:responses) }
 
   it { is_expected.to have_many(:bid_managements).with_foreign_key(:artisan_id) }
 

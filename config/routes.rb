@@ -67,6 +67,11 @@ Rails.application.routes.draw do
   resources :enquiries
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
+
+  namespace :users do
+    resources :responses, only: [:show, :new, :create]
+  end
+
   resources :charges, only: [:new, :create]
 
   namespace :dashboard do
@@ -76,5 +81,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :applicants
+    resources :ratings, only: :create do
+      collection do
+        get "certify_artisans"
+        get "ratings/new/:user_id", to: "ratings#new", as: "new"
+      end
+    end
   end
 end

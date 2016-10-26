@@ -31,6 +31,7 @@ gem "websocket-rails", github: "moaa/websocket-rails", branch: "sync_fixes"
 gem "stripe"
 gem 'puma'
 gem 'will_paginate-materialize'
+gem 'rateyo-rails'
 
 group :development, :test do
   gem "capybara"
@@ -40,7 +41,7 @@ group :development, :test do
   gem "pry-rails"
   gem "pry-nav"
   gem "rspec-rails"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "2.53"
   gem "transactional_capybara"
 end
 
