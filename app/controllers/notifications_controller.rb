@@ -26,17 +26,20 @@ class NotificationsController < ApplicationController
     record = @notification.notifiable
     if record.update_attributes(@notifiable_attr_to_update.symbolize_keys)
       if @reply_to_sender == true
-        @notification.reply_to_sender(@message, "new_task")
+        @notification.reply_to_sender(@message, @event_name)
         @notification.update_as_read
       end
       render json: { message: "success" }
     end
   end
-
   private
 
   def notification_params
     params.require(:notification).permit!
+  end
+
+  def set_quote
+
   end
 
   def set_notification
@@ -49,5 +52,6 @@ class NotificationsController < ApplicationController
     @notifiable_attr_to_update = params[:notifiable_attr_to_update]
     @message = params[:message]
     @reply_to_sender = params[:reply_to_sender]
+    @event_name = params[:event_name]
   end
 end

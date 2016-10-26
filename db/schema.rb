@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20161025180711) do
     t.integer  "artisan_id"
     t.integer  "service_id"
     t.integer  "quoted_value"
-    t.integer  "status"
+    t.integer  "status", default: 0
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20161025180711) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "duration"
-    t.integer  "status"
+    t.integer  "status", default: 0
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
