@@ -1,10 +1,10 @@
 class ServiceAssignmentJob < ActiveJob::Base
   queue_as :default
-  
+
   def perform(service)
     if service.accepted?
       # break task
-    elsif service.day_old?
+    elsif service.expired?
       #stop execution
       #send inform mail to tasker
     elsif gone_through_all_artisans?
