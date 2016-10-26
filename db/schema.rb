@@ -115,11 +115,14 @@ ActiveRecord::Schema.define(version: 20161026115817) do
 
   create_table "service_assignments", force: :cascade do |t|
     t.integer  "service_id"
-    t.integer  "artisan_id"
+    t.integer  "user_id"
     t.boolean  "accepted",   default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  add_index "service_assignments", ["service_id"], name: "index_service_assignments_on_service_id", using: :btree
+  add_index "service_assignments", ["user_id"], name: "index_service_assignments_on_user_id", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.integer  "tasker_id"
@@ -235,6 +238,8 @@ ActiveRecord::Schema.define(version: 20161026115817) do
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
   add_foreign_key "responses", "users"
+  add_foreign_key "service_assignments", "services"
+  add_foreign_key "service_assignments", "users"
   add_foreign_key "services", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end
