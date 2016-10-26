@@ -66,6 +66,11 @@ Rails.application.routes.draw do
   resources :tasks
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
+
+  namespace :users do
+    resources :responses, only: [:show, :new, :create]
+  end
+
   resources :charges, only: [:new, :create]
 
   namespace :dashboard do

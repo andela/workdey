@@ -3,7 +3,7 @@ RSpec.feature "Admin can rate artisans", type: :feature do
   before(:each) do
     @user = create(:user, user_type: "admin")
     stub_current_user(@user)
-    @uncertified_user = create(:user, status: "accepted")
+    @uncertified_user = create(:user, status: "strong_yes")
     create(:vetting_record, user_id: @uncertified_user.id)
   end
 

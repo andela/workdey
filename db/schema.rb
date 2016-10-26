@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010175558) do
+ActiveRecord::Schema.define(version: 20161018094828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(version: 20161010175558) do
   add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "questions", force: :cascade do |t|
+    t.text     "question"
+    t.boolean  "required"
+    t.string   "options",    default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
@@ -165,24 +173,23 @@ ActiveRecord::Schema.define(version: 20161010175558) do
     t.date     "birthday"
     t.string   "phone"
     t.string   "password_digest"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "user_type"
     t.string   "provider"
     t.string   "oauth_id"
     t.string   "confirm_token"
-    t.boolean  "confirmed",            default: false
+    t.boolean  "confirmed",               default: false
     t.string   "state"
     t.string   "city"
     t.string   "street_address"
     t.string   "image_url"
-    t.boolean  "has_taken_quiz",       default: false
+    t.boolean  "has_taken_questionnaire", default: false
     t.float    "longitude"
     t.float    "latitude"
-    t.boolean  "enable_notifications", default: true
-    t.integer  "status",               default: 0
+    t.boolean  "enable_notifications",    default: true
+    t.integer  "status",                  default: 0
     t.string   "reason"
-    t.integer  "rating_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -198,9 +205,9 @@ ActiveRecord::Schema.define(version: 20161010175558) do
     t.integer  "vetted_by"
   end
 
+  add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
-  add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "responses", "users"
   add_foreign_key "tasks", "skillsets"
 end

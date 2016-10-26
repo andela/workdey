@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :references, foreign_key: :artisan_id
   has_many :artisan_skillsets, foreign_key: :artisan_id
   has_many :skillsets, foreign_key: :artisan_id, through: :artisan_skillsets
+  has_many :responses, foreign_key: :user_id
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
 
@@ -130,7 +131,20 @@ class User < ActiveRecord::Base
     artisan_skillsets.map(&:skillset_id)
   end
 
+  def latest_response
+    responses.order("created_at").last
+  end
+
+  def accepted?
+    strong_yes? || weak_yes?
+  end
+
+  def pending_artisan?
+    artisan? && not_reviewed?
+  end
+
   private_class_method
+
   def self.users
     User.arel_table
   end
