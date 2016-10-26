@@ -5,7 +5,7 @@ RSpec.feature "Create Task for bidding", type: :feature do
   let(:user_attr) do
     {
       user_type: "tasker",
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       confirmed: true,
       phone: nil
     }

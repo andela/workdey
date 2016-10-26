@@ -10,20 +10,26 @@
         <% end %>
       </ul>
 
-    </div>
-    <div class="modal-content col s10">
-      <% question = "What is your name" %>
-      <% answer = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." %>
-      <ul>
-        <% 5.times do |qsn| %>
-        <li><%= question %>
-        </li>
-        <li class="answers">
-          <%= answer %>
-        </li>
-        <% end %>
-      </ul>
+        </div>
+        <div class="modal-content col s10">
+            <% @questions.each do |question| %>
+            <ul>
+                <li><%= question.question %>
+                </li>
+                <li class="answers">
+                    <% ans = @response[:response][question.question] %>
+                    <% if ans.is_a?(Array) %>
+                        <% ans.each do |a| %>
+                            <p><%= a %></p>
+                        <% end %>
+                    <% else %>
+                        <p><%= ans %></p>
+                    <% end %>
+                </li>
+                <% end %>
+            </ul>
+
+
       <%= form_for @applicant, url: admin_applicant_path, method: :patch do |f| %>
       <div class="field horizontal-radio-buttons">
         <%= f.radio_button :status,  "4" %>

@@ -8,6 +8,8 @@ class Admin::ApplicantsController < ApplicationController
   end
 
   def edit
+    @questions = Question.all
+    @response = @applicant.latest_response
   end
 
   def update

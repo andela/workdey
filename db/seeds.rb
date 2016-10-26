@@ -14,10 +14,10 @@ class SeedData
         email: "olaide.ojewale@andela.com", street_address: "55 Moleye Street",
         city: "Yaba", state: "Lagos", password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true, has_taken_quiz: true,
+        confirmed: true, has_taken_questionnaire: true,
         image_url: cloudinary_img_url,
         latitude: "6.5001035", longitude: "3.376697",
-        status: 0,
+        status: 1,
         reason: nil },
       { firstname: "Chinedu", lastname: "Daniel",
         email: "chinedu.daniel@andela.com", street_address: "55 Moleye Street",
@@ -41,7 +41,7 @@ class SeedData
         email: "ruth.chukwumam@andela.com", street_address: "44 Isaac John",
         city: "GRA", state: "Lagos", password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
-        confirmed: true, has_taken_quiz: true, image_url: cloudinary_img_url,
+        confirmed: true, has_taken_questionnaire: true, image_url: cloudinary_img_url,
         latitude: "6.5275368", longitude: "3.367699",
         status: 1,
         reason: "good" },
@@ -52,7 +52,7 @@ class SeedData
         state: "Nairobi", password: "1234567890", user_type: "tasker",
         confirm_token: "112ewqee2123wqwqw12wq", image_url: cloudinary_img_url,
         latitude: "-1.297849", longitude: "36.7868873", confirmed: true,
-        has_taken_quiz: true,
+        has_taken_questionnaire: true,
         status: 1,
         reason: "good"
       },
@@ -64,7 +64,7 @@ class SeedData
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.0385092", longitude: "37.0755163",
-        status: 0,
+        status: 1,
         reason: nil
       },
 
@@ -75,7 +75,7 @@ class SeedData
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "1.0187148", longitude: "34.9920014",
-        status: 0,
+        status: 1,
         reason: nil
       },
 
@@ -86,7 +86,7 @@ class SeedData
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
         latitude: "-1.2999473", longitude: "36.7809143",
-        status: 0,
+        status: 1,
         reason: nil
       },
       {
@@ -134,11 +134,14 @@ class SeedData
     UserPlan.destroy_all
     Bidding.destroy_all
     ArtisanSkillset.destroy_all
+    Question.destroy_all
+    Response.destroy_all
     users_list.each { |user| User.create(user) }
     skillsets.each { |skill| Skillset.create(skill) }
     user_plan.each { |user| UserPlan.create(user) }
     artisan_skillsets.each { |tas_skillset| ArtisanSkillset.create(tas_skillset) }
     10.times { biddings }
+    questions.each { |question| Question.create(question) }
   end
 
   def artisan_skillsets
@@ -153,9 +156,82 @@ class SeedData
       { artisan_id: 8, skillset_id: 3 }
     ]
   end
+
+  def questions
+    [
+      {
+        question: "Which of the following skills are you proficient in? Pick all that apply.",
+        required: true,
+        options: [
+          "Plumbing",
+          "Electrician",
+          "Carpentry",
+          "Cleaning",
+          "Other"
+          ]
+      },
+
+      {
+        question: "What services do you offer in your skill of specialization?",
+        required: true
+      },
+
+      {
+        question: "How long have you practised your skill of specialization?",
+        required: true
+      },
+
+      {
+        question: "What do you love about your work?",
+        required: true
+      },
+
+      {
+        question: "Why do you want to join WorkDey?",
+        required: true
+      },
+
+      {
+        question: "What training or certification have you received? Where did you receive it?",
+        required: true
+      },
+
+      {
+        question: "Which methods of communication are you comfortable with?",
+        required: true,
+        options: [
+          "Email",
+          "SMS",
+          "Phone Call",
+          "Smart Phone",
+          "Other"
+          ]
+      },
+
+      {
+        question: "What is your biggest weakness and how do you plan to
+        overcome it?",
+        required: false
+      },
+
+      {
+        question: "What challenge have you faced at work and how did you
+        deal with it?",
+        required: false
+      },
+
+      {
+        question: "Where do you see yourself in 5 years?",
+        required: false
+      }
+    ]
+  end
 end
+
 workdey_data = SeedData.new
 workdey_data.create_all
+
+
 
 class DummyData
   def dummy_applicants_list

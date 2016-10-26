@@ -9,7 +9,7 @@ FactoryGirl.define do
     state  { Faker::Address.state }
     city { Faker::Address.city }
     image_url { Faker::Avatar.image }
-    has_taken_quiz true
+    has_taken_questionnaire true
     user_type "tasker"
     street_address { Faker::Address.street_address }
     status "not_reviewed"
