@@ -1,0 +1,35 @@
+<div class="row container submit-request-row">
+  <% unless @services.empty? %>
+  <div class="col m7 submit-request-column">
+    <table class="bordered responsive-table">
+      <thead>
+        <tr>
+          <th data-field="name">TITLE</th>
+          <th data-field="name">DESCRIPTION</th>
+          <th data-field="name">SKILLSET</th>
+          <th data-field="name">DURATION(Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <div class="row">
+          <% @services.each do |service| %>
+          <tr>
+            <td><%= service.title %></td>
+            <td><%= service.description %></td>
+            <td><%= service.skillset.name %></td>
+            <td><%= service.duration %></td>
+            <td>
+              <%= link_to "View", service_path(service), class: "btn view-btn" %>
+            </td>
+          </tr>
+          <% end %>
+        </div>
+      </tbody>
+    </table>
+  </div>
+  <% else %>
+  <div class="col m7 submit-request-column">
+    <p>There no pending requests.</p>
+  </div>
+  <% end %>
+</div>
