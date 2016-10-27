@@ -12,10 +12,15 @@ border:1px solid #d8d8d8;
 padding:20px 40px;
 color: #525252;
 background: #FFF;
+z-index: 1;
 }
 
 #enquiry-sidebar {
 position: absolute;
 top: 180px;
 left: 100px;
+}
+
+.enquiry-message {
+  font-size: 12px;
 }

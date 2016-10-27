@@ -7,6 +7,7 @@ class SeedData
       { firstname: "Super", lastname: "Man",
         email: "morris.kimani@andela.com", street_address: nil,
         city: "Nairobi", state: nil, password: "1234567890",
+        image_url: cloudinary_img_url,
         user_type: "admin", confirm_token: "112ewqee2123wqwqw12wq",
         confirmed: true },
 

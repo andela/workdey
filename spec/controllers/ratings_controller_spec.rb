@@ -28,7 +28,6 @@ RSpec.describe Admin::RatingsController, type: :controller do
         get :new, user_id: 1
       end
       it "denies the user access to the rating resource" do
-        expect(flash[:error]).to be_present
         expect(response).to redirect_to(dashboard_path)
       end
     end

@@ -4,11 +4,10 @@ require "rails_helper"
 RSpec.describe NotificationsController, type: :controller do
   let(:user) { create(:user) }
   let(:sender) { create(:user) }
-  let(:bidding) { create(:bidding) }
+  let(:enquiry) { create(:enquiry) }
   let(:notification) do
     create(:notification,
-           notifiable_id: bidding.id,
-           notifiable_type: "Bidding",
+           notifiable: enquiry,
            receiver_id: user.id,
            sender_id: sender.id)
   end
@@ -94,8 +93,9 @@ RSpec.describe NotificationsController, type: :controller do
         xhr :put,
             :update,
             id: notification.id,
-            notifiable_attr_to_update: { name: "Updated" },
+            notifiable_attr_to_update: { response: "Updated" },
             message: "a message",
+            event_name: "Enquiry",
             reply_to_sender: true
       end
 
@@ -106,8 +106,9 @@ RSpec.describe NotificationsController, type: :controller do
       before do
         put :update, id: notification.id,
                      notification: {
-                       notifiable_attr_to_update: { name: "Updated" },
+                       notifiable_attr_to_update: { response: "Updated" },
                        message: "a message",
+                       event_name: "Enquiry",
                        reply_to_sender: true
                      }
       end

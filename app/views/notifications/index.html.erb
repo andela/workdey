@@ -10,7 +10,7 @@
       <div class="viewed feed">
         <img src="<%= notification.sender.image_url %>" alt="" />
         <% if notification.notifiable_type == "Enquiry" %>
-        <p class="title"> Response to enquiry dated <%= strptime(notification.created_at) %> </p>
+        <p class="title"> Enquiry dated <%= strptime(notification.created_at) %> </p>
         <a href="#modal2" onclick="get_response(<%=notification.id %>)"
         class="btn info_btn modal-trigger"> View </a>
         <% else %>

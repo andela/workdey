@@ -52,6 +52,8 @@ class User < ActiveRecord::Base
 
   scope :artisans, -> { where(user_type: "artisan") }
 
+  scope :admins, -> { where(user_type: "admin") }
+
   enum status: [:not_reviewed, :strong_yes,
                 :weak_yes, :weak_no, :strong_no, :certified]
 

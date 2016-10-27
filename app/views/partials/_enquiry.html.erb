@@ -1,25 +1,20 @@
 <div id="enquiry-slider" style="right:-342px;">
   <div id="enquiry-sidebar" onclick="open_panel()">
-    <p class="btn-floating btn-large waves-effect waves-light">
+    <button class="btn-floating btn-large waves-effect waves-light">
       <i class="material-icons">email</i>
-    </p>
+    </button>
   </div>
   <%= form_for @enquiry, url: enquiries_path, method: :post do |f| %>
 
   <div id="contact-form">
     <h3>Enquiry</h3>
+    <p class="enquiry-message">Hey! Our customer service consultants are
+      ready to serve you but aren't currently available on chat.
+      Send us a message and we'll get back to you as quickly as possible. </p>
      <%= f.hidden_field :user_id, value: current_user.id %>
-     <%= f.fields_for :user do |user| %>
-    <div class="input-field">
-      <%= user.text_field :firstname, placeholder: 'firstname' %>
-    </div>
-    <div class="input-field">
-      <%= user.email_field :email, placeholder: 'email' %>
-    </div>
-    <% end %>
     <div class="field">
       <%= f.text_area :question, class: 'form-control materialize-textarea',
-      placeholder: "message", required: true%>
+      placeholder: "question", required: true%>
     </div>
     <%= f.submit "Send", class: 'btn' %>
   </div>

@@ -1,58 +1,48 @@
 require "rails_helper"
 
-RSpec.feature "Create Task for bidding", type: :feature do
+RSpec.feature "Create enquiry", type: :feature do
   let(:user) { create(:user, confirmed: true) }
   let(:admin) { create(:user, user_type: "admin", confirmed: true) }
+  let(:enquiry) { create(:enquiry) }
 
   before do
-    log_in_with(user.email, user.password)
-    fill_contact_form
-    visit logout_path
+    create(
+      :notification,
+      notifiable: enquiry,
+      receiver_id: admin.id,
+      sender_id: user.id
+    )
   end
 
-  context "when user is artisan or tasker" do
-    before do
-      log_in_with(admin.email, admin.password)
+  context "when current_user is admin" do
+    before(:each) do
+      log_in_with admin.email, admin.password
+      visit notifications_path
+      page.all(".btn")[0].click
+    end
+
+    scenario "admin gets notification when enquiry has been made" do
+      expect(page).to have_content enquiry.question
+    end
+
+    scenario "admin responds to enquiry" do
       respond_to_enquiry
-      visit logout_path
+      expect(page).to have_content "No new notifications available"
+    end
+  end
+
+  context "when current_user is sender of enquiry" do
+    scenario "user gets response to question asked" do
+      get_notification.reply_to_sender(Faker::Lorem.word, Faker::Lorem.word)
       log_in_with(user.email, user.password)
-    end
-
-    scenario "user gets notification when response has been made" do
-
-    end
-
-    scenario "user sees response to question asked" do
       visit notifications_path
       page.all(".btn")[0].click
 
-      expect(page).to have_content "Response to your enquiry"
+      expect(page).to have_content enquiry.response
     end
   end
 
-  context "when user is admin" do
-    before do
-      log_in_with(admin.email, admin.password)
-    end
-
-    scenario "admin gets notification when an enquiry has been asked" do
-
-    end
-
-    scenario "admin clicks on notification" do
-      visit notifications_path
-      page.all(".btn")[0].click
-
-      expect(page).to have_content "Respond to enquiry"
-    end
-
-    scenario "admin responds to question" do
-      let(:question) { create(:enquiry, user_id: user.id) }
-
-      visit "/admin/enquiry/#{question.id}"
-      respond_to_enquiry
-
-      expect(page).to have_content "Response sent successfully"
-    end
+  def get_notification
+    Notification.find_by(notifiable_id: enquiry.id)
   end
 end

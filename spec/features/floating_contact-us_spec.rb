@@ -1,27 +1,21 @@
 require "rails_helper"
 
-RSpec.feature "Create Task for bidding", type: :feature do
+RSpec.feature "Floating enquiry form", type: :feature do
   let(:user) { create(:user, confirmed: true) }
+  let(:admin) { create(:user, user_type: "admin") }
 
   before(:each) do
     log_in_with(user.email, user.password)
   end
 
-  scenario "user logs in" do
-    expect(page).to have_selector("a", text: "email")
+  scenario "user clicks floating message icon" do
+    click_button "email"
+
+    expect(page).to have_selector("h3", text: "Enquiry")
   end
 
-  scenario "user clicks message button to contact workdey staff" do
-    click_link "email"
-
-    expect(page).to have_selector("h2", text: "Contact Form")
-    expect(page).to have_css("form.contact_form")
-  end
-
-  scenario "user can fill the contact form" do
+  scenario "user fills the contact form" do
     fill_contact_form
-
-    expect(page).to have_content("Message sent successfully")
-    expect(page).to have_selector("a", text: "email")
+    expect(current_path).to eq "/dashboard"
   end
 end

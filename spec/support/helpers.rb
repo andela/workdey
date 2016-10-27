@@ -75,16 +75,15 @@ module Helpers
   end
 
   def fill_contact_form
-    fill_in "name", with: Faker::Name.name
-    fill_in "email", with: Faker::Internet.free_email
-    fill_in "message", with: Faker::Lorem.sentence
-
-    click_button "Send Message"
+    click_button "email"
+    
+    fill_in "enquiry_question", with: Faker::Lorem.sentence
+    click_button "Send"
   end
 
   def respond_to_enquiry
     fill_in "response", with: Faker::Lorem.sentence
 
-    click_button "Submit"
+    click_link "Submit"
   end
 end

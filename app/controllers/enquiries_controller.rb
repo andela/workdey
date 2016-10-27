@@ -14,10 +14,12 @@ class EnquiriesController < ApplicationController
   private
 
   def notify_admin
-    admin = User.find_by(user_type: "admin")
-    Notification.create(message: enquiry_params[:question],
-    sender_id: current_user.id, receiver_id: admin.id,
-    notifiable: @enquiry)
+    admins = User.admins
+    admins.each do |admin|
+      Notification.create(message: enquiry_params[:question],
+      sender_id: current_user.id, receiver_id: admin.id,
+      notifiable: @enquiry)
+    end
   end
 
   def enquiry_params

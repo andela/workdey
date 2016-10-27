@@ -8,16 +8,16 @@ function get_response(id){
   },function(req, status, error){
     console.log(error)
   })
-  }
+}
 
 function responseData(){
-      return {
-        notifiable_attr_to_update: { response: $("#response").val(), answered: true },
-        reply_to_sender: true,
-        message: "Enquiry",
-        event_name: "Enquiry"
-      };
-    };
+  return {
+    notifiable_attr_to_update: { response: $("#response").val(), answered: true },
+    reply_to_sender: true,
+    message: "Enquiry",
+    event_name: "Enquiry"
+  };
+};
 
 function send_response(id) {
   $.ajax({
