@@ -22,9 +22,9 @@ class Notification < ActiveRecord::Base
 
   def self.responded_enquiry(enquiry)
     return unless Notification.receiver.admin?
-      .where(notifiable_type: "Enquiry")
-        .where(notifiable_id: enquiry.id).each do |notification|
-          notification.update_attributes(read: true, user_notified: true)
+    where(notifiable_type: "Enquiry").
+      where(notifiable_id: enquiry.id).each do |notification|
+      notification.update_attributes(read: true, user_notified: true)
     end
   end
 

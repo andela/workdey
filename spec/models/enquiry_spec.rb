@@ -7,6 +7,5 @@ RSpec.describe Enquiry, type: :model do
 
   let(:user) { create(:user, confirmed: true) }
 
-  let(:admin) { create(:user, confirmed: true)}
-
+  let(:admin) { create(:user, confirmed: true) }
 end

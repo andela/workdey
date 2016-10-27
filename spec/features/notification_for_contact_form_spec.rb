@@ -5,7 +5,7 @@ RSpec.feature "Create enquiry", type: :feature do
   let(:admin) { create(:user, user_type: "admin", confirmed: true) }
   let(:enquiry) { create(:enquiry) }
 
-  before do
+  before(:each) do
     create(
       :notification,
       notifiable: enquiry,

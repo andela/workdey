@@ -76,7 +76,7 @@ module Helpers
 
   def fill_contact_form
     click_button "email"
-    
+
     fill_in "enquiry_question", with: Faker::Lorem.sentence
     click_button "Send"
   end

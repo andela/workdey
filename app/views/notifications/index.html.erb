@@ -1,82 +1,97 @@
 <main>
-<section class="notifications container">
-  <div class="row">
-    <div class="col s12">
-      <h3>Notifications</h3>
-    </div>
-    <% if @notifications.present? %>
-    <div class="notification-feed col s6">
-      <% @notifications.each do |notification| %>
-      <div class="viewed feed">
-        <img src="<%= notification.sender.image_url %>" alt="" />
-        <% if notification.notifiable_type == "Enquiry" %>
-        <p class="title"> Enquiry dated <%= strptime(notification.created_at) %> </p>
-        <a href="#modal2" onclick="get_response(<%=notification.id %>)"
-        class="btn info_btn modal-trigger"> View </a>
-        <% else %>
+  <section class="notifications container">
+    <div class="row">
+      <div class="col s12">
+        <h3>Notifications</h3>
+      </div>
+      <% if @notifications.present? %>
+      <div class="notification-feed col s6">
+        <% @notifications.each do |notification| %>
+        <div class="viewed feed">
+          <img src="<%= notification.sender.image_url %>" alt=""/>
+          <p class="title">
+            <%= notification.message %>
+          </p>
+          <% if notification.notifiable_type == "Enquiry" %>
+          <a href="#modal2" onclick="get_response(<%=notification.id %>)" class="btn info_btn modal-trigger">
+            View
+          </a>
+        </div>
+      <% else %>
         <% if current_user.artisan? %>
         <%= show_notifications(notification) %>
         <div class="full_notification_message col s6 center-align card-panel">
           <p>Click on the view button to get more information about a task</p>
           <i class="material-icons">directions_bike</i>
         </div>
-        <% else %>
+      <% else %>
         <div class="notification-feed col s8">
-          <p class="title"> <%= notification.message %> </p>
-          <a href="#modal1" onclick="modal_notification(<%=notification.sender.to_json %>, <%= notification.id %>)" class="btn info_btn modal-trigger"> view information</a>
+          <a href="#modal1" onclick="modal_notification(<%=notification.sender.to_json %>, <%= notification.id %>)" class="btn info_btn modal-trigger">
+            view information</a>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+      <div id="modal1" class="modal info_modal">
+        <div class="modal-content">
+          <h4>Tasker Information</h4>
+          <p class="artisan_name">Name:
+            <span id="name"></span>
+          </p>
+          <p class="artisan_phone">Phone:
+            <span id="phone"></span>
+          </p>
+          <p class="artisan_email">Email:
+            <span id="email"></span>
+          </p>
+        </div>
+      </div>
+      <div id="modal2" class="modal info_modal">
+        <div class="modal-content">
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <h4>Response to Enquiry</h4>
+                <p>Enquiry type:
+                  <span id="type"></span>
+                </p>
+                <h5>Question</h5>
+                <p>
+                  <span id="question"></span>
+                </p>
+                <% if current_user.admin? %>
+                <div class="input-field col s12">
+                  <textarea id="response" class="materialize-textarea" placeholder="response"></textarea>
+                </div>
+              <% else %>
+                <h5>Response</h5>
+                <p>
+                  <span id="response"></span>
+                </p>
+                <% end %>
+              </div>
+            </form>
+          </div>
+        </div>
+        <% if current_user.admin? %>
+        <div class="modal-footer">
+          <a href="#!" onclick="send_response(<%=notification.id %>)" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+        </div>
+      <% else %>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
         <% end %>
       </div>
-    </div>
-    <% end %>
-    <div id="modal1" class="modal info_modal">
-      <div class="modal-content">
-        <h4>Tasker Information</h4>
-        <p class="artisan_name">Name: <span id="name"></span></p>
-        <p class="artisan_phone">Phone: <span id="phone"></span></p>
-        <p class="artisan_email">Email: <span id="email"></span></p>
-      </div>
-    </div>
-    <div id="modal2" class="modal info_modal">
-      <div class="modal-content">
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <h4>Response to Enquiry</h4>
-              <p>Enquiry type: <span id="type"></span></p>
-              <h5>Question</h5>
-              <p><span id="question"></span></p>
-              <% if current_user.admin? %>
-              <div class="input-field col s12">
-                <textarea id="response" class="materialize-textarea" placeholder="response"></textarea>
-              </div>
-              <% else %>
-              <h5>Response</h5>
-              <p><span id="response"></span></p>
-              <% end %>
-            </div>
-          </form>
-        </div>
-      </div>
-      <% if current_user.admin? %>
-      <div class="modal-footer">
-        <a href="#!" onclick="send_response(<%=notification.id %>)" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-      </div>
-      <% else %>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-      </div>
       <% end %>
-    </div>
-    <% end %>
-    <%#= render partial: "show_information" %>
+      <%#= render partial: "show_information" %>
     <% else  %>
-    <div class="col s6 full_notification_message center-align card-panel">
-      <p>No new notifications available</p>
-      <% 4.times do %>
-      <i class="material-icons">highlight_off</i>
-      <% end %>
-    </div>
-    <% end  %>
-  </section>
+      <div class="col s6 full_notification_message center-align card-panel">
+        <p>No new notifications available</p>
+        <% 4.times do %>
+        <i class="material-icons">highlight_off</i>
+        <% end %>
+      </div>
+      <% end  %>
+    </section>
   </main>

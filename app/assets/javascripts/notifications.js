@@ -32,4 +32,3 @@ function send_response(id) {
       console.log(error)
   })
 }
-
