@@ -3,21 +3,39 @@ class ServiceAssignmentJob < ActiveJob::Base
 
   def perform(service)
     if service.accepted?
-      # break task
+      break
     elsif service.expired?
-      #stop execution
-      #send inform mail to tasker
-    elsif gone_through_all_artisans?
-      #stop execution
-      #send inform mail to tasker
+      notify_tasker("service request took too long to be assigned", service)
     else
-      # get highest rated available
-      # assign
-      # send notification to newly assigned artisan
-      # send notification to old artisan, if any
-      # call yourself here recursively in 30 minutes to check if artisan accepted
+      assignment = ServiceAssignment.assign(service)
+      if assignment
+        notify_artisan("you have a new service request", assignment)
+        ServiceAssignmentJob.set(wait: 30.minutes).perform_later(service)
+      else
+        notify_tasker("there are no artisans to perform your task", service)
+      end
     end
   end
 
-  ServiceAssignment [service_id, artisan_id]
+  private
+
+  def notify_artisan(message, assignment)
+    Notification.create(
+      message: message,
+      sender_id: nil,
+      receiver_id: assignment.user_id,
+      notifiable_id: assignment.service_id,
+      notifiable_type: "Services"
+    )
+  end
+
+  def notify_tasker(message, service)
+    Notification.create(
+      message: message,
+      sender_id: nil,
+      receiver_id: service.tasker.id,
+      notifiable_id: service.id,
+      notifiable_type: "Services"
+    )
+  end
 end
