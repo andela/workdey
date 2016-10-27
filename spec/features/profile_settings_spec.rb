@@ -6,11 +6,6 @@ RSpec.feature "ProfileSettings", type: :feature do
     workdey_data.create_all
   end
 
-  scenario "login with valid email and password" do
-    log_in_with "ruth.chukwumam@andela.com", "1234567890"
-    expect(page).to have_content("Workdey Artisan Verification Quiz")
-  end
-
   scenario "view profile" do
     log_in_with "ruth.chukwumam@andela.com", "1234567890"
     visit profile_path

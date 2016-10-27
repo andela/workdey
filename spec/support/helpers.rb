@@ -1,7 +1,7 @@
 module Helpers
   def log_in_with(email, password)
     visit signin_path
-    fill_in "session[email]", with: email
+    fill_in "session_email", with: email
     fill_in "session_password", with: password
     click_button "Sign in"
   end
@@ -14,7 +14,7 @@ module Helpers
   def artisan_stub
     artisan_attr = {
       confirmed: true,
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       user_type: "artisan",
       status: 0
     }
@@ -22,6 +22,7 @@ module Helpers
     @tasker = create(:user, user_type: "tasker")
     @artisan = create(:user, artisan_attr)
     status_stub
+    create(:response, user_id: @artisan.id)
   end
 
   def status_stub
@@ -37,7 +38,7 @@ module Helpers
   def user_attr
     {
       street_address: Faker::Address.street_address,
-      has_taken_quiz: true,
+      has_taken_questionnaire: true,
       confirmed: true,
       phone: nil
     }

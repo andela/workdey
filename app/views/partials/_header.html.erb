@@ -1,7 +1,10 @@
 <% if logged_in? %>
   <header>
     <nav class="nav-wrapper" id="nav-wrapper">
+
+      <% unless current_user.pending_artisan? %>
       <a href="#" data-activates="slide-out" class=" sidenav-tog button-collapse"><i class="material-icons">menu</i></a>
+      <% end %>
       <div class="container">
         <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
         <a href="#" class="right dropdown" data-activates="options">
@@ -65,7 +68,8 @@
           </li>
         </ul>
       </div>
-      <%= render "partials/sidebar_dashboard" %>
+
+      <%= render "partials/sidebar_dashboard" unless current_user.pending_artisan? %>
     </nav>
 </header>
 <% else %>
@@ -75,7 +79,7 @@
         <%= link_to "Workdey", root_path, class: "brand-logo" %>
         <ul class="right">
           <li>
-            <%= link_to "BECOME A TASKEE", "#", class: "waves-effect waves-light" %>
+            <%= link_to "SIGN UP", signup_path, class: "waves-effect waves-light" %>
           </li>
           <li>
             <%= link_to "SIGN IN", signin_path, class: "waves-effect waves-light" %>
