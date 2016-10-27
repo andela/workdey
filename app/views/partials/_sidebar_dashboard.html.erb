@@ -5,6 +5,8 @@
 <% else %>
 <%= link_to raw("<li class='side-nav-button'>Home</li>"), dashboard_path %>
 <%= link_to raw("<li class='side-nav-button'>Edit Profile</li>"), profile_path %>
+<%= link_to raw("<li class='side-nav-button'>Submit Request</li>"), new_service_path %>
+<%= link_to raw("<li class='side-nav-button'>Pending Requests</li>"), services_path %>
 <%= link_to raw("<li class='side-nav-button'>Biddings</li>"), biddings_path %>
 <% if current_user.artisan? %>
 <%= link_to raw("<li class='side-nav-button'>My Skillset</li>"), my_skillsets_path %>
