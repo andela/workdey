@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010205437) do
+ActiveRecord::Schema.define(version: 20161024182847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,24 @@ ActiveRecord::Schema.define(version: 20161010205437) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "services", force: :cascade do |t|
+    t.integer  "tasker_id"
+    t.integer  "artisan_id"
+    t.integer  "skillset_id"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.decimal  "duration"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status",      default: 0
+  end
+
+  add_index "services", ["artisan_id"], name: "index_services_on_artisan_id", using: :btree
+  add_index "services", ["skillset_id"], name: "index_services_on_skillset_id", using: :btree
+  add_index "services", ["tasker_id"], name: "index_services_on_tasker_id", using: :btree
+
   create_table "skillsets", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,6 +135,16 @@ ActiveRecord::Schema.define(version: 20161010205437) do
     t.boolean  "paid",        default: false
     t.boolean  "shared",      default: false
   end
+
+  create_table "taskee_skillsets", force: :cascade do |t|
+    t.integer  "skillset_id"
+    t.integer  "taskee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "taskee_skillsets", ["skillset_id"], name: "index_taskee_skillsets_on_skillset_id", using: :btree
+  add_index "taskee_skillsets", ["taskee_id"], name: "index_taskee_skillsets_on_taskee_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -182,5 +210,6 @@ ActiveRecord::Schema.define(version: 20161010205437) do
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
   add_foreign_key "responses", "users"
+  add_foreign_key "services", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end
