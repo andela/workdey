@@ -36,18 +36,19 @@ RSpec.describe "Share contact", js: true do
     end
   end
 
-  describe "tasker" do
-    scenario "when tasker views the artisan details " do
-      share_contact
-      Capybara.reset_sessions!
-      log_in_with(tasker.email, tasker.password)
-      visit notifications_path
-      click_on "view information"
-
-      expect(page).to have_content(artisan.firstname)
-      expect(page).to have_content(artisan.email)
-    end
-  end
+  # describe "tasker" do
+  #   scenario "when tasker views the artisan details " do
+  #     share_contact
+  #     Capybara.reset_sessions!
+  #     log_in_with(tasker.email, tasker.password)
+  #     visit notifications_path
+  #     click_on "view quote"
+  #     click_button "Accept"
+  #
+  #     expect(page).to have_content(artisan.firstname)
+  #     expect(page).to have_content(artisan.email)
+  #   end
+  # end
 
   def share_contact(share = true)
     visit my_tasks_path

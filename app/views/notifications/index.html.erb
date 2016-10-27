@@ -25,7 +25,7 @@
               <img src="<%= object.sender.image_url %>" alt="" />
               <p class="title"> <%= object.message %> </p>
               <%if object.notifiable_type == 'Quote'%>
-              <a href="#quote_modal" onclick="quote_object(<%= object.sender.to_json %>,<%=object.notifiable.to_json%>, <%= object.id %>)" class="btn info_btn modal-trigger"> View Quote</a>
+              <a href="#quote_modal" onclick="quote_object(<%= object.sender.to_json %>,<%=object.notifiable.to_json%>, <%= object.id %>)" class="btn info_btn modal-trigger"> view quote</a>
 
               <%else%>
 
@@ -44,8 +44,9 @@
                     <h5>Details</h5>
                     <p class="artisan_phone">Phone: <span id="phone"></span></p>
                     <p class="artisan_email">Email: <span id="email"></span></p>
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                   </div>
-                  <button
+
                   <button id='quote_accept' class="btn teal modal-action" onclick="quotation('accepted',<%=object.notifiable.id%>)">Accept</button>
                   <button id='quote_reject' class="btn modal-action modal-close" onclick="quotation('rejected',<%=object.notifiable.id%>)">Reject</button>
                 </div>
