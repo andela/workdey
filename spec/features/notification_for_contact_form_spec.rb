@@ -18,7 +18,7 @@ RSpec.feature "Create enquiry", type: :feature do
     before(:each) do
       log_in_with admin.email, admin.password
       visit notifications_path
-      page.all(".btn")[0].click
+      page.execute_script("$('#notification-btn').click()")
     end
 
     scenario "admin gets notification when enquiry has been made" do
@@ -36,7 +36,7 @@ RSpec.feature "Create enquiry", type: :feature do
       get_notification.reply_to_sender(Faker::Lorem.word, Faker::Lorem.word)
       log_in_with(user.email, user.password)
       visit notifications_path
-      page.all(".btn")[0].click
+      page.execute_script("$('#notification-btn').click()")
 
       expect(page).to have_content enquiry.response
     end

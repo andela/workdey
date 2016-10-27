@@ -1,8 +1,4 @@
-<div id="modal1" class="modal info_modal">
-    <div class="modal-content">
-      <h4>Tasker Information</h4>
-      <p class="artisan_name">Name: <span id="name"></span></p>
-      <p class="artisan_phone">Phone: <span id="phone"></span></p>
-      <p class="artisan_email">Email: <span id="email"></span></p>
-    </div>
-  </div>
+
+  <% @notifications.each do |object| %>
+  <%= show_notifications(object) %>
+  <% end %>

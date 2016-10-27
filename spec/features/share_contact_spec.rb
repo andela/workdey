@@ -42,7 +42,7 @@ RSpec.describe "Share contact", js: true do
       Capybara.reset_sessions!
       log_in_with(tasker.email, tasker.password)
       visit notifications_path
-      click_on "view information"
+      click_on "view"
 
       expect(page).to have_content(artisan.firstname)
       expect(page).to have_content(artisan.email)

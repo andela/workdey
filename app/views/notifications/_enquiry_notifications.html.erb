@@ -1,0 +1,53 @@
+<div class="notification-feed col s8">
+
+  <% @notifications.each do |notification| %>
+  <% if notification.notifiable_type == "Enquiry" %>
+  <div class="viewed feed">
+    <img src="<%= notification.sender.image_url %>" alt=""/>
+    <p class="title">
+      <%= notification.message %>
+    </p>
+
+    <a href="#modal2" id="notification-btn" onclick="get_response(<%=notification.id %>)" class="btn info_btn modal-trigger">
+      View
+    </a>
+  </div>
+  <div id="modal2" class="modal info_modal">
+    <div class="modal-content">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <h4>Response to Enquiry</h4>
+            <p>Enquiry type:
+              <span id="type"></span>
+            </p>
+            <h5>Question</h5>
+            <p>
+              <span id="question"></span>
+            </p>
+            <% if current_user.admin? %>
+            <div class="input-field col s12">
+              <textarea id="response" class="materialize-textarea" placeholder="response"></textarea>
+            </div>
+          <% else %>
+            <h5>Response</h5>
+            <p>
+              <span id="response"></span>
+            </p>
+            <% end %>
+          </div>
+        </form>
+      </div>
+    </div>
+    <% if current_user.admin? %>
+    <div class="modal-footer">
+      <a href="#!" id="notification-btn" onclick="send_response(<%=notification.id %>)" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+    </div>
+  <% else %>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    <% end %>
+  </div>
+<% end %>
+<% end %>

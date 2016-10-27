@@ -14,7 +14,8 @@ module NotificationsHelper
     raw "<div class='#{css_class_name}'>
       #{cl_image_tag tasker_image}
       <p class='title'>#{message}</p>
-      #{button_tag 'view', class: 'btn', data: { id: id }}
+      #{button_tag 'view', class: 'btn',
+                           id: 'notification-btn', data: { id: id }}
     </div>"
   end
 end
