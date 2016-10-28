@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161018094828) do
+ActiveRecord::Schema.define(version: 20161024182847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,16 +151,6 @@ ActiveRecord::Schema.define(version: 20161018094828) do
     t.boolean  "paid",        default: false
     t.boolean  "shared",      default: false
   end
-
-  create_table "taskee_skillsets", force: :cascade do |t|
-    t.integer  "skillset_id"
-    t.integer  "taskee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "taskee_skillsets", ["skillset_id"], name: "index_taskee_skillsets_on_skillset_id", using: :btree
-  add_index "taskee_skillsets", ["taskee_id"], name: "index_taskee_skillsets_on_taskee_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
