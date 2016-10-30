@@ -22,6 +22,8 @@
   <%= link_to "Edit Profile", profile_path %>
 </li>
 
+<% if current_user.tasker? %>
+
 <li class="side-nav-button <%= set_active_class(new_service_path) %>">
   <%= link_to "Submit Request", new_service_path %>
 </li>
@@ -29,6 +31,8 @@
 <li class="side-nav-button <%= set_active_class(services_path) %>">
   <%= link_to "Pending Requests", services_path %>
 </li>
+
+<% end %>
 
 <li class="side-nav-button <%= set_active_class(biddings_path) %>">
   <%= link_to "Biddings", biddings_path %>
