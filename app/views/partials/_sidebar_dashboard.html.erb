@@ -1,5 +1,6 @@
 <ul id="slide-out" class="side-nav sinav fixed">
 <% if current_user.admin? %>
+
 <li class='side-nav-button  <%= set_active_class(dashboard_path) %>'>
   <%= link_to "Home", dashboard_path %>
 </li>
@@ -11,8 +12,8 @@
   <%= link_to "Certify Artisans", certify_artisans_admin_ratings_path %>
 </li>
 
-
 <% else %>
+
 <li class="side-nav-button <%= set_active_class(dashboard_path) %>">
   <%= link_to "Home", dashboard_path %>
 </li>
@@ -20,6 +21,15 @@
 <li class="side-nav-button <%= set_active_class(profile_path) %>">
   <%= link_to "Edit Profile", profile_path %>
 </li>
+
+<li class="side-nav-button <%= set_active_class(new_service_path) %>">
+  <%= link_to "Submit Request", new_service_path %>
+</li>
+
+<li class="side-nav-button <%= set_active_class(services_path) %>">
+  <%= link_to "Pending Requests", services_path %>
+</li>
+
 <li class="side-nav-button <%= set_active_class(biddings_path) %>">
   <%= link_to "Biddings", biddings_path %>
 </li>

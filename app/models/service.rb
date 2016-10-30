@@ -35,7 +35,7 @@ class Service < ActiveRecord::Base
   end
 
   def expired?
-    Time.now > created_at + 5.hours
+    Time.now > created_at + 5.minutes
   end
 
   private
@@ -50,8 +50,9 @@ class Service < ActiveRecord::Base
 
   def check_start_and_end_dates
     same_day = start_date == end_date
-    unless (end_date > start_date && end_date > Time.now) || same_day
-      errors[:date] = "End date cannot be in the past"
+    unless (end_date > start_date &&
+            end_date > Date.today && start_date >= Date.today) || same_day
+      errors[:date] = "'Start Date' or 'End Date' cannot be in the past"
     end
   end
 end
