@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   end
 
   def busy?
-    services.any? { |service| !service.expired? }
+    services.any?(&:in_progress?)
   end
 
   private_class_method

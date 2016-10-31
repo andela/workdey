@@ -38,6 +38,10 @@ class Service < ActiveRecord::Base
     Time.now > created_at + 24.hours || Time.now > end_date
   end
 
+  def in_progress?
+    (start_date..end_date).cover? Time.now
+  end
+
   def assign(artisan)
     update(artisan_id: artisan.id, status: :assigned)
   end
