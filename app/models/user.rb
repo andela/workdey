@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :responses, foreign_key: :user_id
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
+  has_many :quotes
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
