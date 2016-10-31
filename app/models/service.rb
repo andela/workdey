@@ -35,7 +35,7 @@ class Service < ActiveRecord::Base
   end
 
   def expired?
-    Time.now > created_at + 5.minutes || Time.now > end_date
+    Time.now > created_at + 24.hours || Time.now > end_date
   end
 
   def assign(artisan)
