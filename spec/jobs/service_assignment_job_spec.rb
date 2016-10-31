@@ -6,8 +6,8 @@ RSpec.describe ServiceAssignmentJob, type: :job do
   subject(:job) { described_class.perform_later(create(:service)) }
 
   it "queues the job" do
-    expect { job }
-      .to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+    enqueued_jobs = ActiveJob::Base.queue_adapter.enqueued_jobs
+    expect { job }.to change(enqueued_jobs, :size).by(1)
   end
 
   it "is in default queue" do
