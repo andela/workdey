@@ -7,8 +7,8 @@ function get_response(id){
     $('#response').html(data.response)
   },function(req, status, error){
     console.log(error)
-  })
-}
+  });
+};
 
 function responseData(){
   return {
@@ -30,8 +30,8 @@ function send_response(id) {
     },
     function(req, status, error) {
       console.log(error)
-  })
-}
+  });
+};
 function task_details(sender, task, id){
   var endDate = new Date(task.end_date).toDateString(),
       startDate = new Date(task.start_date).toDateString();
@@ -43,7 +43,7 @@ function task_details(sender, task, id){
      $("span#lower_bound").html(task.price_range[0]);
      $("span#upper_bound").html(task.price_range[1]);
      $.get( "/dashboard/notifications/"+ id);
- }
+ };
 
 function task_response_data(action) {
   if (action == "active") {
