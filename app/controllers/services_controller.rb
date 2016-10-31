@@ -16,10 +16,9 @@ class ServicesController < ApplicationController
   def create
     @service = Service.new(service_params)
     if @service.save
-      # ServiceAssignmentJob.perform_later(@service)
+      ServiceAssignmentJob.perform_later(@service)
       redirect_to service_path(@service), notice:
                     "Service request was successfully created."
-      ServiceAssignmentJob.perform_later(@service)
     else
       redirect_to new_service_path, notice: @service.errors.full_messages
     end

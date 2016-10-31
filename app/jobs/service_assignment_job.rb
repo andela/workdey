@@ -9,7 +9,7 @@ class ServiceAssignmentJob < ActiveJob::Base
       notify_tasker("service request took too long to be assigned", service)
     elsif ServiceAssignment.assign(service)
       notify_artisan("you have a new service request", service)
-      ServiceAssignmentJob.set(wait: 15.seconds).perform_later(service)
+      ServiceAssignmentJob.set(wait: 10.seconds).perform_later(service)
     else
       service.unassign
       notify_tasker("there are no artisans to perform your task", service)
