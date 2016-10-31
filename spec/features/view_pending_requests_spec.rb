@@ -17,7 +17,8 @@ RSpec.feature "PendingRequest", type: :feature do
     submit_request(service.start_date.strftime("%d %B, %Y"),
                    service.end_date.strftime("%d %B, %Y"))
     click_link "Pending Requests"
-    expect(page.find_all("td a.btn").count).to eq 1
+    expect(page).to have_selector(:xpath, "/html/body/div[1]/div"\
+                                  "/table/tbody/tr/td[5]")
     service_title = find_all("tr td")[0].text
     find_all("td a.btn")[0].click
     expect(page).to have_content(service_title)
