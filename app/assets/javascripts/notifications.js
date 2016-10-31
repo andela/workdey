@@ -32,6 +32,7 @@ function send_response(id) {
       console.log(error)
   });
 };
+
 function task_details(sender, task, id){
   var endDate = new Date(task.end_date).toDateString(),
       startDate = new Date(task.start_date).toDateString();

@@ -37,7 +37,8 @@
     </div>
     <% if current_user.admin? %>
     <div class="modal-footer">
-      <a href="#!" id="notification-btn" onclick="send_response(<%=notification.id %>)" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+      <a href="#!" id="notification-btn" onclick="send_response(<%=notification.id %>)"
+        class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
     </div>
   <% else %>
     <div class="modal-footer">
