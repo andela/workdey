@@ -29,16 +29,16 @@ RSpec.describe "Notification of artisans for new tasks", type: :feature do
     )
     log_in_with artisan.email, artisan.password
     visit notifications_path
-    page.all(".btn")[0].click
+    page.execute_script("$('#notification-btn').click()")
   end
 
   scenario "artisan rejects a task" do
-    click_on "Reject"
+    page.execute_script("$('#task_reject').click()")
     expect(page).to have_content "Task rejected"
   end
 
   scenario "artisan accepts a task" do
-    click_on "Accept"
+    page.execute_script("$('#task_accept').click()")
     expect(page).to have_content "Task accepted"
   end
 end

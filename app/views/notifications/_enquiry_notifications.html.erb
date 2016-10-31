@@ -1,7 +1,3 @@
-<div class="notification-feed col s8">
-
-  <% @notifications.each do |notification| %>
-  <% if notification.notifiable_type == "Enquiry" %>
   <div class="viewed feed">
     <img src="<%= notification.sender.image_url %>" alt=""/>
     <p class="title">
@@ -49,5 +45,3 @@
     </div>
     <% end %>
   </div>
-<% end %>
-<% end %>

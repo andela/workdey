@@ -1,0 +1,22 @@
+<div class="viewed feed">
+  <img src="<%= notification.sender.image_url %>" alt=""/>
+  <p class="title">
+    <%= notification.message %>
+  </p>
+<a href="#task_modal" id="notification-btn" onclick="task_details(<%= notification.sender.to_json %>,
+  <%=notification.notifiable.to_json%>, <%= notification.id %>)" class="btn info_btn modal-trigger"> view task</a>
+  </div>
+<div id="task_modal" class="modal info_modal">
+  <div class="modal-content">
+    <h4>Task Information</h4>
+    <p>Sender:
+      <span id="sender"></span>
+    </p>
+    <p> <span id="description"></p>
+      <p></span> I want this task to be done between <strong><span id="startDate"></span>
+    </strong> and <strong><span id="startDate"></span></strong> for the price between
+          <strong><span id="lower_bound"></span></strong> and <strong><span id="upper_bound"></span></strong></p>
+  <button id='task_accept' class="btn teal modal-action modal-close" onclick="task_response('active',<%=notification.id%>)">Accept</button>
+  <button id='task_reject' class="btn modal-action modal-close" onclick="task_response('rejected',<%=notification.id%>)">Reject</button>
+</div>
+</div>

@@ -6,40 +6,53 @@
       </div>
 
       <% if @notifications.present? %>
-
-      <%= render partial: "enquiry_notifications" %>
       <%if current_user.artisan?%>
-      <%= render partial: "show_information" %>
-
-    <% else %>
-
+      <div class="notification-feed col s8">
         <% @notifications.each do |notification| %>
+        <% if notification.notifiable_type == "Enquiry" %>
+        <%= render partial: "enquiry_notifications", locals: { notification: notification } %>
+      <% else %>
+        <%= render partial: "task_notification", locals: { notification: notification } %>
+
+        <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="notification-feed col s8">
+        <% @notifications.each do |notification| %>
+        <% if notification.notifiable_type == "Enquiry" %>
+        <%= render partial: "enquiry_notifications", locals: { notification: notification } %>
+      <% else %>
         <div class="viewed feed">
           <img src="<%= notification.sender.image_url %>" alt=""/>
           <p class="title">
             <%= notification.message %>
           </p>
-          <a href="#modal1" onclick="modal_object(<%= notification.sender.to_json %>, <%= notification.id %>)" class="btn info_btn modal-trigger">
+          <a href="#modal1" id="notification-btn" onclick="modal_object(<%= notification.sender.to_json %>, <%= notification.id %>)" class="btn info_btn modal-trigger">
             view</a>
 
         </div>
+        <% end %>
+        <% end %>
+      </div>
 
-        <%#= render partial: "show_information" %>
-        <div id="modal1" class="modal info_modal">
-          <div class="modal-content">
-            <h4>Artisan Information</h4>
-            <p class="artisan_name">Name:
-              <span id="name"></span>
-            </p>
-            <p class="artisan_phone">Phone:
-              <span id="phone"></span>
-            </p>
-            <p class="artisan_email">Email:
-              <span id="email"></span>
-            </p>
-          </div>
+      <%#= render partial: "show_information" %>
+      <div id="modal1" class="modal info_modal">
+        <div class="modal-content">
+          <h4>Artisan Information</h4>
+          <p class="artisan_name">Name:
+            <span id="name"></span>
+          </p>
+          <p class="artisan_phone">Phone:
+            <span id="phone"></span>
+          </p>
+          <p class="artisan_email">Email:
+            <span id="email"></span>
+          </p>
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
-      <% end %>
+      </div>
+
       <% end %>
     <% else  %>
       <div class="col s6 full_notification_message center-align card-panel">
