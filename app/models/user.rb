@@ -150,6 +150,10 @@ class User < ActiveRecord::Base
     ratings.average("rating") || 0.0
   end
 
+  def busy?
+    services.any? { |service| !service.expired? }
+  end
+
   private_class_method
 
   def self.users
