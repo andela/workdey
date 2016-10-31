@@ -38,6 +38,14 @@ class Service < ActiveRecord::Base
     Time.now > created_at + 5.minutes
   end
 
+  def assign(artisan)
+    update(artisan_id: artisan.id, status: :assigned)
+  end
+
+  def unassign
+    update(artisan_id: nil, status: :unassigned)
+  end
+
   private
 
   def end_date_must_be_greater_than_start_date

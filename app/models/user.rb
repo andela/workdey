@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
     artisan? && not_reviewed?
   end
 
-  def overall_rating
+  def avg_rating
     ratings.average("rating") || 0.0
   end
 
