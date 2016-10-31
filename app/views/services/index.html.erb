@@ -17,9 +17,9 @@
             <td><%= service.title %></td>
             <td><%= service.description %></td>
             <td><%= service.skillset.name %></td>
-            <td><%= service.duration %></td>
+            <td><%= service.duration.round %></td>
             <td>
-              <%= link_to "View", service_path(service), class: "btn view-btn" %>
+              <%= link_to "View", service_path(service), class: "btn view-btn", id: service.id  %>
             </td>
           </tr>
           <% end %>
