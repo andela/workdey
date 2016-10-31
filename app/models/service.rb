@@ -28,9 +28,9 @@ class Service < ActiveRecord::Base
 
   enum status: [:unassigned, :assigned, :accepted]
 
-  def self.pending_requests(current_user)
+  scope :pending_requests, (lambda do |current_user|
     where("tasker_id = ? AND status = ?", current_user.id, 0)
-  end
+  end)
 
   private
 
