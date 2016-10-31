@@ -1,6 +1,8 @@
 class NotificationsController < ApplicationController
   before_action :show_notification_count, only: :index
   before_action :set_notification, only: [:show, :update]
+  before_action :set_expiration, only: :show
+  NOTIFICATION_EXPIRATION_TIME = 1800
 
   def index
     @notifications = Notification.unread(current_user)
@@ -9,7 +11,8 @@ class NotificationsController < ApplicationController
 
   def show
     @notification.update_as_read
-    record = @notification.notifiable
+    record = @notification.notifiable.as_json
+    record['expired'] = @notification.expired
     if request.xhr?
       render json: record
     else
@@ -49,5 +52,11 @@ class NotificationsController < ApplicationController
     @notifiable_attr_to_update = params[:notifiable_attr_to_update]
     @message = params[:message]
     @reply_to_sender = params[:reply_to_sender]
+  end
+
+  def set_expiration
+    if (Time.now - @notification.created_at) > NOTIFICATION_EXPIRATION_TIME
+      @notification.update(expired: true)
+    end
   end
 end
