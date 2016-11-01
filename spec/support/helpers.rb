@@ -73,4 +73,20 @@ module Helpers
   def parsed_response
     JSON.parse(response.body)
   end
+
+  def submit_request(start_date, end_date)
+    click_link "Submit Request"
+    fill_in "service_title", with: "Quo possimus sint"
+    fill_in "service_description", with: "Eligendi consectetur fugit sunt
+                                 sapiente.Libero voluptates necessitatibus
+                                 saepe corporis aliquid repellendus esse.
+                                 Nostrum ea quia eos sed beatae.Debitis aut
+                                 molestiae laborum nemo aut ea nisi."
+    select("Carpentry", from: "service_skillset_id")
+    page.execute_script("$('#service_start_date')\
+                        .pickadate('picker').set('select', '#{start_date}')")
+    page.execute_script("$('#service_end_date')\
+                        .pickadate('picker').set('select', '#{end_date}')")
+    page.execute_script("$('#commit').click()")
+  end
 end
