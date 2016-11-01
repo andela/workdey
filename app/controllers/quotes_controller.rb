@@ -5,6 +5,8 @@ class QuotesController < ApplicationController
     head :ok if @quote.save
   end
 
+  private
+
   def quote_params
     {
       artisan_id: current_user.id,
@@ -18,7 +20,7 @@ class QuotesController < ApplicationController
       message: "An artisan has been assigned to your task",
       sender_id: current_user.id,
       receiver_id: tasker_id,
-      notifiable_type: 'Quote',
+      notifiable_type: "Quote",
       notifiable_id: params["service_id"]
     }
   end
