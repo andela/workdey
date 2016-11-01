@@ -15,17 +15,8 @@ RSpec.feature "Create enquiry", type: :feature do
   end
 
   context "when current_user is admin" do
-    before do
-      log_in_with admin.email, admin.password
-    end
-
-    scenario "admin gets notification when enquiry has been made" do
-      visit notifications_path
-      page.execute_script("$('#notification-btn').click()")
-      expect(page).to have_content enquiry.question
-    end
-
     scenario "admin responds to enquiry" do
+      log_in_with admin.email, admin.password
       visit notifications_path
       page.execute_script("$('#notification-btn').click()")
       respond_to_enquiry
