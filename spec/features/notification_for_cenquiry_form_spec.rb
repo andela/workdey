@@ -4,14 +4,11 @@ RSpec.feature "Create enquiry", type: :feature do
   let(:user) { create(:user, confirmed: true) }
   let(:admin) { create(:user, user_type: "admin", confirmed: true) }
   let(:enquiry) { create(:enquiry) }
-
-  before(:each) do
-    create(
-      :notification,
-      notifiable: enquiry,
-      receiver_id: admin.id,
-      sender_id: user.id
-    )
+  let!(:notification) do
+    create(:notification,
+           notifiable: enquiry,
+           receiver_id: admin.id,
+           sender_id: user.id)
   end
 
   context "when current_user is admin" do
