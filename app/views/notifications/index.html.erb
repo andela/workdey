@@ -26,10 +26,6 @@
               <p class="title"> <%= object.message %> </p>
               <%if object.notifiable_type == 'Quote'%>
               <a href="#quote_modal" onclick="quote_object(<%= object.sender.to_json %>,<%=object.notifiable.to_json%>, <%= object.id %>)" class="btn info_btn modal-trigger"> view quote</a>
-
-              <%else%>
-
-              <%#= render partial: "show_information" %>
               <%end%>
 
             </div>

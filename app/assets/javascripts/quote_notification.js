@@ -13,7 +13,6 @@ function quotation(action,id){
       method: "PUT",
       data: responseData(action)
     }).then(function(data){
-      // console.log(data)
       $('#quote_accept').hide()
       $('#quote_reject').hide()
       $('#information').show()
