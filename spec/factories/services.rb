@@ -1,13 +1,11 @@
 FactoryGirl.define do
   factory :service do
-    tasker_id 1
-    artisan_id 1
-    skillset_id 1
-    title "MyString"
-    description "MyString"
-    start_date "2016-10-25 20:53:19"
-    end_date "2016-10-25 20:53:19"
-    duration "2016-10-25 20:53:19"
-    status 1
+    title Faker::Lorem.sentence
+    description Faker::Lorem.paragraph
+    start_date Date.today
+    end_date Date.parse(1.day.from_now.to_s)
+    duration Faker::Number.decimal(2, 2)
+    status "unassigned"
+    skillset
   end
 end

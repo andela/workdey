@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks_assigned, class_name: "Task", foreign_key: :tasker_id
   has_many :tasks, class_name: "Task", foreign_key: :artisan_id
+  has_many :services_requested, class_name: "Service", foreign_key: :tasker_id
+  has_many :services, class_name: "Service", foreign_key: :artisan_id
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :artisan_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
   has_one :user_plan
@@ -20,6 +22,8 @@ class User < ActiveRecord::Base
   has_many :responses, foreign_key: :user_id
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
+  has_many :quotes
+  has_many :service_assignments
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -141,6 +145,14 @@ class User < ActiveRecord::Base
 
   def pending_artisan?
     artisan? && not_reviewed?
+  end
+
+  def avg_rating
+    ratings.average("rating") || 0.0
+  end
+
+  def busy?
+    services.any?(&:in_progress?)
   end
 
   private_class_method

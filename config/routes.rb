@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
+  post "/quotes", to: "quotes#create"
+
   get "/my_skillsets" => "artisan_skillsets#index", as: :my_skillsets
   put "/artisan_skillsets" => "artisan_skillsets#update"
 
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
 
   resources :biddings
   resources :tasks
+  resources :services, only: [:index, :show, :new, :create]
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
 

@@ -16,13 +16,8 @@ function quotation(action,id){
       $('#quote_accept').hide()
       $('#quote_reject').hide()
       $('#information').show()
-    },
-    function(req, status, error) {
-      console.log(error)
-  });
+    });
 }
-
-
 $(document).ready(function(){
   $('#information').hide()
 })
