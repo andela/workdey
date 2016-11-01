@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Create enquiry", type: :feature do
-  let(:user) { create(:user, confirmed: true) }
-  let(:admin) { create(:user, user_type: "admin", confirmed: true) }
-  let(:enquiry) { create(:enquiry) }
+  let!(:user) { create(:user, confirmed: true) }
+  let!(:admin) { create(:user, user_type: "admin", confirmed: true) }
+  let!(:enquiry) { create(:enquiry) }
   let!(:notification) do
     create(:notification,
            notifiable: enquiry,
