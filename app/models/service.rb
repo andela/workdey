@@ -50,6 +50,10 @@ class Service < ActiveRecord::Base
     update(artisan_id: nil, status: :unassigned)
   end
 
+  scope :pending_requests, (lambda do |current_user|
+    where("tasker_id = ? AND status = ?", current_user.id, 0)
+  end)
+
   private
 
   def end_date_must_be_greater_than_start_date
