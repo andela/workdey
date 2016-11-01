@@ -76,6 +76,10 @@ $(".notification-feed").on("click", ".btn", function (e) {
             alert('You must enter a quote.');
             return;
           }
+          if (quoted_value_is_zero_or_negative()){
+            alert('Quote value must be greater than 0');
+            return;
+          }
           send_quote(notifiableObj.id)
           respond_to_service_request({status: "accepted"}, requestId, elem.data("accept"));
         })

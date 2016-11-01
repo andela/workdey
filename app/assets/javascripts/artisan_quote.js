@@ -19,16 +19,14 @@ function is_quoted_value_empty(){
   return quoted_value() == '';
 }
 
+function quoted_value_is_zero_or_negative(){
+  return quoted_value() <= 0;
+}
+
 function send_quote(service_id){
   $.ajax({
       url: ('/quotes'),
       method: "POST",
       data: { service_id: service_id, quoted_value: quoted_value() }
     });
-}
-
-
-
-function send_quote_notification_to_tasker(){
-;
 }
