@@ -14,7 +14,7 @@ function responseData(){
   return {
     notifiable_attr_to_update: { response: $("#response").val(), answered: true },
     reply_to_sender: true,
-    message: "Enquiry",
+    message: "Enquiry Response",
     event_name: "Enquiry"
   };
 };

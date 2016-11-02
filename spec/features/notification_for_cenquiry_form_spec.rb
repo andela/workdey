@@ -12,12 +12,12 @@ RSpec.feature "Create enquiry", type: :feature do
   end
 
   context "when current_user is admin" do
-    scenario "admin responds to enquiry" do
+    scenario "admin receives the enquiry" do
       log_in_with admin.email, admin.password
       visit notifications_path
       page.execute_script("$('#notification-btn').click()")
-      respond_to_enquiry
-      expect(page).to have_content "No new notifications available"
+
+      expect(page).to have_content enquiry.question
     end
   end
 

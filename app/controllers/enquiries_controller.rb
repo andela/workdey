@@ -16,7 +16,7 @@ class EnquiriesController < ApplicationController
   def notify_admin
     admins = User.admins
     admins.each do |admin|
-      Notification.create(message: enquiry_params[:question],
+      Notification.create(message: "New enquiry",
                           sender_id: current_user.id,
                           receiver_id: admin.id,
                           notifiable: @enquiry)
