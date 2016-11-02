@@ -2,6 +2,8 @@ class Service < ActiveRecord::Base
   belongs_to :tasker, class_name: "User"
   belongs_to :artisan, class_name: "User"
   belongs_to :skillset
+  has_many :service_assignments
+  has_many :notifications, as: :notifiable
 
   validates :title,
             presence: true
@@ -27,6 +29,26 @@ class Service < ActiveRecord::Base
   validate :end_date_must_be_greater_than_start_date
 
   enum status: [:unassigned, :assigned, :accepted]
+
+  def self.pending_requests(current_user)
+    where("tasker_id = ? AND status = ?", current_user, 0)
+  end
+
+  def expired?
+    Time.now > created_at + 24.hours || Time.now > end_date
+  end
+
+  def in_progress?
+    (start_date..end_date).cover? Time.now
+  end
+
+  def assign(artisan)
+    update(artisan_id: artisan.id, status: :assigned)
+  end
+
+  def unassign
+    update(artisan_id: nil, status: :unassigned)
+  end
 
   scope :pending_requests, (lambda do |current_user|
     where("tasker_id = ? AND status = ?", current_user.id, 0)

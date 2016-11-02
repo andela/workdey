@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :responses, foreign_key: :user_id
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
+  has_many :service_assignments
 
   before_save { self.email = email.downcase }
   before_create :generate_confirm_token, unless: :oauth_user?
@@ -143,6 +144,14 @@ class User < ActiveRecord::Base
 
   def pending_artisan?
     artisan? && not_reviewed?
+  end
+
+  def avg_rating
+    ratings.average("rating") || 0.0
+  end
+
+  def busy?
+    services.any?(&:in_progress?)
   end
 
   private_class_method

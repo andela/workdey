@@ -47,6 +47,7 @@ RSpec.describe ServicesController, type: :controller do
     let(:skillset) { create :skillset }
     before(:each) do
       stub_current_user(user)
+      ActiveJob::Base.queue_adapter = :test
     end
 
     context "with valid attributes" do
@@ -57,6 +58,12 @@ RSpec.describe ServicesController, type: :controller do
 
       it "creates a new service" do
         expect { service_request_create }.to change(Service, :count).by(1)
+      end
+
+      it "enques a background job" do
+        service_request_create
+        expect(ServiceAssignmentJob).to have_been_enqueued
+        expect(ServiceAssignmentJob).to have_been_enqueued.on_queue("default")
       end
 
       it "returns a status code of 302" do
