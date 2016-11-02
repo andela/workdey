@@ -239,7 +239,8 @@ class DummyData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1,
+        confirmed: true, has_taken_questionnaire: true
       },
 
       {
@@ -249,7 +250,8 @@ class DummyData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1,
+        confirmed: true, has_taken_questionnaire: true
       },
 
       {
@@ -258,7 +260,8 @@ class DummyData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1,
+        confirmed: true, has_taken_questionnaire: true
       },
 
       {
@@ -267,7 +270,8 @@ class DummyData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1,
+        confirmed: true, has_taken_questionnaire: true
       },
 
       {
@@ -276,7 +280,8 @@ class DummyData
         city: "Utopia", state: nil, password: "1234567890",
         user_type: "artisan", confirm_token: "112ewqee2123wqwqw12wq",
         image_url: cloudinary_img_url,
-        latitude: "-1.2999473", longitude: "36.7809143", status: 1
+        latitude: "-1.2999473", longitude: "36.7809143", status: 1,
+        confirmed: true, has_taken_questionnaire: true
       }
     ]
   end
