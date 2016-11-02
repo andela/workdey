@@ -43,6 +43,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "selenium-webdriver", "2.53"
   gem "transactional_capybara"
+  gem "fuubar"
 end
 
 group :development do
