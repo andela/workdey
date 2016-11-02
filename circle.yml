@@ -1,8 +1,9 @@
 deployment:
   staging:
     branch: master
-    heroku:
-      appname: workdey-staging
+    commands:
+      - git push git@heroku.com:workdey-staging.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app workdey-staging
 machine:
   ruby:
-    version: 2.3.0
+    version: 2.3.0x
