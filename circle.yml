@@ -6,4 +6,4 @@ deployment:
       - heroku run rake db:migrate --app workdey-staging
 machine:
   ruby:
-    version: 2.3.0x
+    version: 2.3.0
