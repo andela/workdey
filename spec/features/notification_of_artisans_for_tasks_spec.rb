@@ -50,12 +50,5 @@ RSpec.describe "Notification of artisans for new tasks", type: :feature do
       alert_text = page.driver.browser.switch_to.alert.text
       expect(alert_text).to eq "You must enter a quote."
     end
-
-    # scenario "when a valid quote is entered" do
-    #   click_on "Accept"
-    #   fill_in "quote_value", with: 200
-    #   click_on "send-quote"
-    #   expect(page).to have_content("Task Accepted")
-    # end
   end
 end
