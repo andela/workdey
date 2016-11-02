@@ -6,3 +6,6 @@ deployment:
 machine:
   ruby:
     version: 2.3.0
+test:
+  override:
+    - rspec spec/features/notification_for_cenquiry_form_spec.rb
