@@ -4,6 +4,7 @@ function artisan_quote_input(){
                       <p>Name your price</p>\
                       <input id='quote_value' type='number'\
                        placeholder='Enter your quote'>\
+                       <div id='quote_value_error'></div>\
                       <button id='send-quote' class='btn waves-effect waves-light teal'>\
                         Send Quote\
                       </button>\
