@@ -28,9 +28,9 @@ class NotificationsController < ApplicationController
     end
     record = @notification.notifiable
     if record.update_attributes(@notifiable_attr_to_update.symbolize_keys)
+      @notification.update_as_read force_update: true
       if @reply_to_sender == true
         @notification.reply_to_sender(@message, "new_task")
-        @notification.update_as_read
       end
       render json: { message: "success" }
     end
