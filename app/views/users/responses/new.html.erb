@@ -1,7 +1,3 @@
-<header class="center-align">
-  <%= link_to "Workdey", dashboard_path, class: "brand-logo" %>
-</header>
-
 <div class="row">
   <h3 class="center-align">Artisan Questionnaire</h3>
   <h5 class="left-align">To help us get to know you better, please fill out the following questionnaire. </h5>
@@ -9,51 +5,74 @@
   <%= form_tag users_responses_path, class: "col s12",
     method: "post", id: "response_form" do %>
 
-    <% if flash["errors"] %>
+
+    <% if @response.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(flash["errors"]["response"].count, "error") %>
-          found. Please fill out the following questions:
-        </h2>
-        <ul>
-          <%flash["errors"]["response"].each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
+        <h4><%= pluralize(@response.errors.count, "error") %> found. Please resolve.
+        </h4>
       </div>
     <% end %>
 
     <% @questions.each do |question| %>
-      <p>
+
         <% asterix = if question.required? then " *" else "" end %>
         <h5 class="row"><%= question.question %>
           <font color="red">
             <%= asterix %>
           </font>
         </h5>
+        <% error_message = @response.errors[question.question].first %>
+        <% if error_message %>
+          <h6 class="row">
+            <font color="red">
+              <%= error_message %>
+            </font>
+          </h6>
+        <% end %>
 
         <% if question.options.empty? %>
-          <% if question.required? %>
-            <%= text_area_tag "response[#{question.question}]", nil, class: "materialize-textarea" %>
-          <% else %>
-            <%= text_area_tag "response[#{question.question}]", nil, class: "materialize-textarea" %>
-          <% end %>
+            <% user_input = @response.response[question.question] if @response.response %>
+
+            <%= text_area_tag(
+                  "response[#{question.question}]",
+                  user_input,
+                  class: "materialize-textarea"
+                )
+            %>
+
+
         <% else %>
+          <% other_entry = @response.response[question.question].detect {
+               |entry| question.options.exclude? (entry)
+             } if @response.response %>
           <% question.options.each_with_index do |option, index| %>
+            <% selected = @response.response[question.question].detect {
+              |opt| opt == option
+              } if @response.response %>
+
             <% if option == "Other" %>
-              <%= text_field_tag "response[#{question.question}][]", nil,
-                placeholder: "Other" %>
+              <%= text_field_tag(
+                    "response[#{question.question}][]",
+                    other_entry,
+                    placeholder: "Other"
+                  )
+              %>
             <% else %>
-              <%= check_box_tag("response[#{question.question}][]", option, false,
-                :id => "#{question.id}_#{index}") %>
+              <%= check_box_tag(
+                    "response[#{question.question}][]",
+                    option,
+                    selected,
+                    id: "#{question.id}_#{index}"
+                    ) %>
               <%= label_tag("#{question.id}_#{index}", option) %>
             <% end %>
           <% end %>
         <% end %>
-      </p>
+
     <% end %>
 
     <div class="input-field row">
-      <button id="responses" class="btn waves-effect waves-light"submit">Submit
+      <button id="responses" class="btn waves-effect waves-light" type="submit">Submit
         <i class="material-icons right">send</i>
       </button>
     </div>

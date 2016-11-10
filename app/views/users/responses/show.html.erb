@@ -7,13 +7,13 @@
       <div class="card grey darken-2">
         <div class="card-content white-text">
           <span class="card-title"><%= question.question %></span>
-          <% ans = @response[:response][question.question] %>
-          <% if ans.is_a?(Array) %>
-          <% ans.each do |a| %>
-          <p><%= a %></p>
-          <% end %>
-          <% else %>
-          <p><%= ans %></p>
+            <% ans = @response[:response][question.question] %>
+            <% if ans.is_a?(Array) %>
+              <% ans.each do |a| %>
+                <p><%= a %></p>
+              <% end %>
+            <% else %>
+              <p><%= ans %></p>
           <% end %>
         </div>
       </div>

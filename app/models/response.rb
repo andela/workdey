@@ -6,12 +6,12 @@ class Response < ActiveRecord::Base
   def required_questions_must_be_answered
     Question.all.each do |q|
       if q.required && question_empty(q)
-        errors.add(:response, q.question)
+        errors.add(q.question, "You must answer this question.")
       end
     end
   end
 
   def question_empty(q)
-    response[q.question].empty? || response[q.question] == [""]
+    response[q.question].blank? || response[q.question] == [""]
   end
 end

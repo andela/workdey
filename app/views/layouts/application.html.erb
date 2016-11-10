@@ -12,7 +12,7 @@
 </head>
 <body class="<%= "#{params[:controller]}-#{params[:action]}"%>">
 
-  <%= render "partials/header" unless (current_page?(role_path) || current_page?(new_users_response_path)) %>
+  <%= render "partials/header" unless current_page?(role_path) %>
 
   <%= yield %>
 

@@ -6,15 +6,15 @@ class Users::ResponsesController < ApplicationController
   end
 
   def create
-    @response = current_user.responses.new(response_params)
+    @response = current_user.responses.new(strip_all(response_params))
     if @response.save
-      response_params["response"][Question.first.question].each do |s|
-        add_skillset(s)
+      response_params["response"][Question.first.question].each do |skillset|
+        add_skillset(skillset)
       end
       current_user.update_attribute(:has_taken_questionnaire, true)
       redirect_to users_response_path(@response.id)
     else
-      redirect_to new_users_response_path, flash: { errors: @response.errors}
+      render "new"
     end
   end
 
@@ -26,12 +26,25 @@ class Users::ResponsesController < ApplicationController
 
   def add_skillset(skillset)
     skill = Skillset.find_or_create_by(name: skillset)
-    ArtisanSkillset.create(skillset_id: skill.id,
-        artisan_id: current_user.id)
+    ArtisanSkillset.create(
+      skillset_id: skill.id,
+      artisan_id: current_user.id
+    )
   end
 
   def get_questions
     @questions = Question.all
+  end
+
+  def strip_all(response_params)
+    response_params["response"].map do |key, _value|
+      if response_params["response"][key].is_a?(Array)
+        response_params["response"][key].map(&:strip!)
+      else
+        response_params["response"][key].strip!
+      end
+    end
+    response_params
   end
 
   def response_params
