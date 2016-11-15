@@ -49,7 +49,7 @@ class Users::ResponsesController < ApplicationController
 
   def response_params
     keys = Question.all.map do |q|
-      if q.options.empty?
+      if q.options.empty? || !q.can_select_multiple
         q.question
       else
         { q.question => [] }

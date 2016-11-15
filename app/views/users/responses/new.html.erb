@@ -42,6 +42,7 @@
 
 
         <% else %>
+          <% if question.can_select_multiple? %>
           <% other_entry = @response.response[question.question].detect {
                |entry| question.options.exclude? (entry)
              } if @response.response %>
@@ -67,6 +68,19 @@
               <%= label_tag("#{question.id}_#{index}", option) %>
             <% end %>
           <% end %>
+          <% else %>
+          <% selected = @response.response[question.question] if @response.response %>
+          <% question.options.each_with_index do |option, index| %>
+              <%= radio_button_tag(
+                    "response[#{question.question}]",
+                    option,
+                    selected == option,
+                    id: "#{question.id}_#{index}"
+                    ) %>
+              <%= label_tag("#{question.id}_#{index}", option) %>
+          <% end %>
+          <% end %>
+
         <% end %>
 
     <% end %>
