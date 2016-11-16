@@ -3,6 +3,7 @@ class Service < ActiveRecord::Base
   belongs_to :artisan, class_name: "User"
   belongs_to :skillset
   has_many :service_assignments
+  has_many :service_ratings
   has_many :notifications, as: :notifiable
 
   validates :title,
