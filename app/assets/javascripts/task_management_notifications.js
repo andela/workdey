@@ -1,86 +1,58 @@
-(function () {
-  function sendDbReq(obj, urlParam, btnId) {
-    var displayContext = $(".full_notification_message"),
-        notificationFeed = $(".notification-feed"),
-        actionElem = $(".feed .btn[data-id=" + btnId + "]").closest(".feed"),
-        swalTitle = obj.status === "active" ? "Task accepted" : "Task rejected",
-        swalText =
-          obj.status === "active" ?
-            "You can view all your assigned tasks from the manage tasks page" :
-            "The tasker will be notified of your choice",
-        swalType = obj.status === "active" ? "success" : "error",
-        swalBtnColor = "#eb4d5c",
-        userAction,
-        artisan_response;
+function respond_to_service_request(obj, urlParam, btnId) {
+  var displayContext = $(".full_notification_message"),
+      notificationFeed = $(".notification-feed"),
+      actionElem = $(".feed .btn[data-id=" + btnId + "]").closest(".feed"),
+      userAction;
 
-    function userActionData() {
-      if (obj.status === "active") {
-        artisan_response = "Artisan accepted your task"
-      } else {
-        artisan_response = "Artisan rejected your task"
+      function userActionData(){
+        return {
+          notifiable_attr_to_update: { status: obj.status },
+          reply_to_sender: false
+        };
       }
-      return {
-        notifiable_attr_to_update: { status: obj.status },
-        reply_to_sender: true,
-        message: artisan_response
-      };
-    };
 
-    userAction = $.ajax({
-      url: ("/dashboard/notifications/" + urlParam),
-      method: "PUT",
-      data: userActionData()
-    });
-
-    userAction.done(function () {
-      swal({
-        title: swalTitle,
-        text: swalText,
-        type: swalType,
-        confirmButtonColor: swalBtnColor
+      //send artisan response
+      userAction = $.ajax({
+        url: ("/dashboard/notifications/" + urlParam),
+        method: "PUT",
+        data: userActionData()
       });
 
-      displayContext.empty().append("<p>Click on the view button to get more information about a task</p>")
-        .append("<i class='material-icons'>directions_bike</i>");
+      display_confirmation_alert(obj.status);
+      displayContext.empty();
+      remove_notification(btnId);
+}
 
-      actionElem.css("opacity", 0);
+$(".notification-feed").on("click", ".btn", function (e) {
+  var requestId = $(this).data("id"),
+      messageTitle = $(this).prev(".title").text().trim()
+      request = get_notifiable_record(requestId);
+  request.done(function(notifiableObj) {
+    var endDate = new Date(notifiableObj.end_date).toDateString(),
+        startDate = new Date(notifiableObj.start_date).toDateString();
 
-      window.setTimeout(function () {
-        actionElem.remove();
-      }, 1000);
+    var displayContext = $(".full_notification_message");
 
-      if (notificationFeed.children().length === 1) {
-            displayContext.empty().append("<p>No new notifications available</p>")
-            .append("<i class='material-icons'>highlight_off</i>")
-            .append("<i class='material-icons'>highlight_off</i>")
-            .append("<i class='material-icons'>highlight_off</i>")
-            .append("<i class='material-icons'>highlight_off</i>");
-      }
-    });
-  }
-
-  $(".notification-feed").on("click", ".btn", function (e) {
-    var requestId = $(this).data("id"),
-        messageTitle = $(this).prev(".title").text().trim()
-        request = $.ajax({
-          url: ("/dashboard/notifications/" + requestId),
-          method: "GET",
-          dataType: "json"
-        });
-
-    $(this).closest(".feed").addClass("viewed");
-
-    request.done(function(notifiableObj) {
-      var endDate = new Date(notifiableObj.end_time).toDateString(),
-          startDate = new Date(notifiableObj.start_time).toDateString();
-
-      var displayContext = $(".full_notification_message"),
-          title = $("<h5>").text(messageTitle),
+    if (notifiableObj.expired){
+      var title = $("<h5>").text("Notification Expired"),
+          content = $("<p>").text("Please note that service request\
+           notifications expire within 30 minutes\
+           \nAlso, missing notifications lowers your rating"),
+          action_button = $("<button id='expired-notification-confirmation'class='btn waves-effect waves-light teal'>")
+                      .html("OK");
+      displayContext.empty().append(title).append(content).append(action_button);
+      $('#expired-notification-confirmation').on('click', function(){
+        $('.full_notification_message').empty();
+        remove_notification(requestId)
+      })
+    }
+    else{
+      var title = $("<h5>").text(messageTitle),
           content = $("<p>")
                       .html(notifiableObj.description +
-                            ", I want this task to be done on <strong>" +
-                            startDate + "</strong> by <strong>" + endDate + "</strong> for the price of " +
-                            "<strong>" + notifiableObj.amount + "<strong>"
+                            "<br>Start Date: <strong>" + startDate +
+                             "</strong>\
+                             <br>End Date: <strong>" + endDate + "</strong>"
                             ),
           actions = $("<div class='actions'>"),
           accept = $("<button class='btn waves-effect waves-light teal' data-accept=" + requestId + ">")
@@ -90,23 +62,66 @@
 
       actions.append(accept).append(reject)
       displayContext.empty().append(title).append(content).append(actions);
+    }
 
-      $(".actions").on("click", function (e) {
-        var elem = $(e.target),
-            notificationFeed = $(".notification-feed"),
-            userAction;
 
-        if (elem.data("accept")) {
-          sendDbReq({status: "active"}, requestId, elem.data("accept"));
-        } else {
-          sendDbReq({status: "rejected"}, requestId, elem.data("reject"));
-        }
-      });
-    });
+    $(".actions").on("click", function(e) {
+      var elem = $(e.target),
+          notificationFeed = $(".notification-feed");
 
-    request.fail(function (msg) {
-      return false
+      if (elem.data("accept")) {
+        displayContext.empty().append(title).append(content).append(artisan_quote_input());
+        $('#send-quote').on('click', function(){
+          if (is_quoted_value_empty()){
+            alert('You must enter a quote.');
+            return;
+          }
+          if (quoted_value_is_zero_or_negative()){
+            alert('Quote value must be greater than 0');
+            return;
+          }
+          send_quote(notifiableObj.id)
+          respond_to_service_request({status: "accepted"}, requestId, elem.data("accept"));
+        })
+      } else {
+        respond_to_service_request({status: "unassigned"}, requestId, elem.data("reject"));
+      }
     });
   });
+})
 
-}());
+function display_confirmation_alert(user_choice){
+  var alert_type, alert_title, alert_text;
+  if (user_choice === "accepted"){
+    alert_type = "success";
+    alert_title = "Task Accepted";
+    alert_text = "You have accepted to perform this task with a quote of $" +
+    quoted_value();
+  }
+  else {
+    alert_type = "error";
+    alert_title = "Task Rejected.";
+    alert_text = "You have rejected this task.\n\
+     Please note that rejecting tasks lowers your rating.";
+  }
+  swal({
+    title: alert_title,
+    text: alert_text,
+    type: alert_type,
+    confirmButtonColor: "#eb4d5c"
+  });
+}
+
+function remove_notification(notification_id){
+  $('#notification-item-' + notification_id).remove();
+  if ($('.notification-feed').has('div').length == 0){
+    $('.notification-feed').append('<p>You have no new notifications</p>');
+  }
+}
+
+function get_notifiable_record(notifiable_id){
+  return $.ajax({
+    url: ("/dashboard/notifications/" + notifiable_id),
+    method: "GET",
+    dataType: "json"});
+}

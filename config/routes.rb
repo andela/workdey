@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
+  post "/quotes", to: "quotes#create"
+
   get "/my_skillsets" => "artisan_skillsets#index", as: :my_skillsets
   put "/artisan_skillsets" => "artisan_skillsets#update"
 

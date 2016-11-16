@@ -96,6 +96,7 @@ RSpec.describe NotificationsController, type: :controller do
             id: notification.id,
             notifiable_attr_to_update: { name: "Updated" },
             message: "a message",
+            event_name: "a name",
             reply_to_sender: true
       end
 
@@ -108,6 +109,7 @@ RSpec.describe NotificationsController, type: :controller do
                      notification: {
                        notifiable_attr_to_update: { name: "Updated" },
                        message: "a message",
+                       event_name: "a name",
                        reply_to_sender: true
                      }
       end

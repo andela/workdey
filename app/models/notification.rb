@@ -19,7 +19,6 @@ class Notification < ActiveRecord::Base
     user.notifications.where(user_notified: false).
       update_all(user_notified: true)
   end
-
   def update_as_read
     update_attribute(:read, true)
   end

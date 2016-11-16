@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :responses, foreign_key: :user_id
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
+  has_many :quotes
   has_many :service_assignments
 
   before_save { self.email = email.downcase }
