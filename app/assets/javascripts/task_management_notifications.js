@@ -7,7 +7,7 @@ function respond_to_service_request(obj, urlParam, btnId) {
       function userActionData(){
         return {
           notifiable_attr_to_update: { status: obj.status },
-          reply_to_sender: false
+          reply_to_sender: true
         };
       }
 
