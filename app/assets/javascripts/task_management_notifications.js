@@ -80,6 +80,10 @@ $(".notification-feed").on("click", ".btn", function (e) {
             $('#quote_value_error').empty().append('Quote value must be greater than 0');
             return;
           }
+          if (quoted_value_has_non_numeric_characters()){
+            $('#quote_value_error').empty().append('Quote value must be a number');
+            return;
+          }
           send_quote(notifiableObj.id)
           respond_to_service_request({status: "accepted"}, requestId, elem.data("accept"));
         })

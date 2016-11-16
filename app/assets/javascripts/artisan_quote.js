@@ -24,6 +24,10 @@ function quoted_value_is_zero_or_negative(){
   return quoted_value() <= 0;
 }
 
+function quoted_value_has_non_numeric_characters(){
+  return !(/^\d+$/.test(quoted_value()));
+}
+
 function send_quote(service_id){
   $.ajax({
       url: ('/quotes'),
