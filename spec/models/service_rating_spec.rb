@@ -8,39 +8,29 @@ RSpec.describe ServiceRating, type: :model do
     @service_second = create(:service, tasker: @tasker, artisan: @artisan)
   end
 
-  describe "associations" do
-    it { is_expected.to belong_to(:service) }
+  it { is_expected.to belong_to(:service) }
+
+  it { is_expected.to validate_presence_of :rating }
+  it do
+    is_expected.to validate_inclusion_of(:rating).
+      in_array([1, 2, 3, 4, 5])
   end
 
-  describe "validates rating" do
-    it { is_expected.to validate_presence_of :rating }
-    it do
-      is_expected.to validate_inclusion_of(:rating).
-        in_array([1, 2, 3, 4, 5])
-    end
+  it { is_expected.to validate_presence_of :private_feedback }
+  it do
+    is_expected.to validate_length_of(:private_feedback).is_at_least(3).
+      with_message("Too short. The minimum length is 3 characters.")
   end
 
-  describe "validates private_feedback" do
-    it { is_expected.to validate_presence_of :private_feedback }
-    it do
-      is_expected.to validate_length_of(:private_feedback).is_at_least(3).
-        with_message("Too short. The minimum length is 3 characters.")
-    end
+  it { is_expected.to validate_presence_of :public_feedback }
+  it do
+    is_expected.to validate_length_of(:public_feedback).is_at_least(3).
+      with_message("Too short. The minimum length is 3 characters.")
   end
 
-  describe "validates public_feedback" do
-    it { is_expected.to validate_presence_of :public_feedback }
-    it do
-      is_expected.to validate_length_of(:public_feedback).is_at_least(3).
-        with_message("Too short. The minimum length is 3 characters.")
-    end
-  end
+  it { is_expected.to validate_presence_of :category }
 
-  describe "validates rating type" do
-    it { is_expected.to validate_presence_of :category }
-  end
-
-  describe "gets ratings by user" do
+  describe ".get_ratings" do
     it "returns ratings of an artisan" do
       create :service_rating, service: @service
 
@@ -50,7 +40,7 @@ RSpec.describe ServiceRating, type: :model do
     end
   end
 
-  describe "computes average rating" do
+  describe ".compute_average_rating" do
     it "returns the average rating of an artisan" do
       create :service_rating, rating: 3, service: @service
       create :service_rating, rating: 4, service: @service_second
@@ -61,7 +51,7 @@ RSpec.describe ServiceRating, type: :model do
     end
   end
 
-  describe "gets an artisan's rating" do
+  describe ".get_artisan_rating" do
     it "returns the rating of an artisan" do
       create :service_rating, rating: 3, service: @service
 
@@ -71,7 +61,7 @@ RSpec.describe ServiceRating, type: :model do
     end
   end
 
-  describe "gets a tasker's rating" do
+  describe ".get_tasker_rating" do
     it "returns the rating of a tasker" do
       create(
         :service_rating,
@@ -86,7 +76,7 @@ RSpec.describe ServiceRating, type: :model do
     end
   end
 
-  describe "get an artisan's average rating" do
+  describe ".get_artisan_average_rating" do
     it "returns the average rating of an artisan" do
       create :service_rating, rating: 2, service: @service
       create :service_rating, rating: 4, service: @service_second
@@ -97,7 +87,7 @@ RSpec.describe ServiceRating, type: :model do
     end
   end
 
-  describe "gets a tasker's average rating" do
+  describe ".get_tasker_average_rating" do
     it "returns the average rating of a tasker" do
       create(
         :service_rating,
@@ -116,6 +106,27 @@ RSpec.describe ServiceRating, type: :model do
       tasker_rating = ServiceRating.get_tasker_average_rating(@tasker)
 
       expect(tasker_rating).to eq 2.5
+    end
+  end
+
+  describe "#tasker_to_artisan?" do
+    it "returns the rating type tasker_to_artisan" do
+      @service_rating = create :service_rating, rating: 3, service: @service
+
+      expect(@service_rating.tasker_to_artisan?).to eq true
+    end
+  end
+
+  describe "#artisan_to_tasker?" do
+    it "returns the rating type artisan_to_tasker" do
+      @service_rating = create(
+        :service_rating,
+        rating: 2,
+        category: ServiceRating.categories[:artisan_to_tasker],
+        service: @service
+      )
+
+      expect(@service_rating.artisan_to_tasker?).to eq true
     end
   end
 end
