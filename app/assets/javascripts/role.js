@@ -14,7 +14,7 @@
         var parentWrapper = app.view.parentWrapper,
             taskerWrapper = app.view.taskerGuidelinesWrapper,
             artisanWrapper = app.view.artisanGuidelinesWrapper;
-        
+
         parentWrapper.style.transform = "translateX(-200px)";
 
         taskerWrapper.style.opacity = "0";
@@ -39,7 +39,7 @@
           taskerWrapper.style.opacity = "1";
           taskerWrapper.style.zIndex = "1";
         }, 1000);
-        
+
       },
       handleClickEvents: function () {
         var artisanBtn = app.view.artisanBtn,
