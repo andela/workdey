@@ -67,4 +67,12 @@ class ServiceRating < ActiveRecord::Base
       services: { tasker_id: user.id }
     ).average(:rating)
   end
+
+  def tasker_to_artisan?
+    category == "tasker_to_artisan"
+  end
+
+  def artisan_to_tasker?
+    category == "artisan_to_tasker"
+  end
 end
