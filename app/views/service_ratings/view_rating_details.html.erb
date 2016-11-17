@@ -1,31 +1,29 @@
-<div class="row container">
+<div class="row container service-rating">
   <div class="col s10 offset-s1 l8 offset-l2 service-rating-row">
     <%= form_for @service_rating do |f| %>
     <div class="row">
-      <% if current_user.tasker? %>
+      <% if @service_rating.tasker_to_artisan? %>
 
-      <%= fields_for :artisan, @service_rating.service.artisan do |artisan_fields| %>
+      <%= fields_for :service, @service_rating.service.artisan do |artisan_fields| %>
       <div class="col s2 offset-s5 l2 offset-l5">
-        <%= cl_image_tag @service_rating.service.tasker.image_url, class: "user-image" %>
-      </div>
-      <div class="col s6 offset-s3 l6 offset-l3">
-        <p class="center">
-          <%= @service_rating.service.tasker.firstname %> <%= @service_rating.service.tasker.lastname %>
-        </p>
-      </div>
-      <% end %>
-
-      <% end %>
-
-      <% if current_user.artisan? %>
-
-      <%= fields_for :tasker, @service_rating.service.tasker do |tasker_fields| %>
-      <div class="col s6 offset-s3 l6 offset-l3">
         <%= cl_image_tag @service_rating.service.artisan.image_url, class: "user-image" %>
       </div>
       <div class="col s6 offset-s3 l6 offset-l3">
         <p class="center">
           <%= @service_rating.service.artisan.firstname %> <%= @service_rating.service.artisan.lastname %>
+        </p>
+      </div>
+      <% end %>
+
+      <% else %>
+
+      <%= fields_for :service, @service_rating.service.tasker do |tasker_fields| %>
+      <div class="col s6 offset-s3 l6 offset-l3">
+        <%= cl_image_tag @service_rating.service.tasker.image_url, class: "user-image" %>
+      </div>
+      <div class="col s6 offset-s3 l6 offset-l3">
+        <p class="center">
+          <%= @service_rating.service.tasker.firstname %> <%= @service_rating.service.tasker.lastname %>
         </p>
       </div>
       <% end %>
