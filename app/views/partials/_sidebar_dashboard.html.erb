@@ -13,6 +13,10 @@
   <%= link_to "Certify Artisans", certify_artisans_admin_ratings_path %>
 </li>
 
+<li class="side-nav-button <%= set_active_class(service_ratings_path) %>">
+  <%= link_to "View Ratings", service_ratings_path %>
+</li>
+
 <% else %>
 
 <li class="side-nav-button <%= set_active_class(dashboard_path) %>">
