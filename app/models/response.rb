@@ -11,6 +11,8 @@ class Response < ActiveRecord::Base
     end
   end
 
+  private
+
   def question_empty(q)
     response[q.question].blank? || response[q.question] == [""]
   end
