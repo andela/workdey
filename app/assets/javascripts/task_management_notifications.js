@@ -73,11 +73,15 @@ $(".notification-feed").on("click", ".btn", function (e) {
         displayContext.empty().append(title).append(content).append(artisan_quote_input());
         $('#send-quote').on('click', function(){
           if (is_quoted_value_empty()){
-            alert('You must enter a quote.');
+            $('#quote_value_error').empty().append('You must enter a quote');
             return;
           }
           if (quoted_value_is_zero_or_negative()){
-            alert('Quote value must be greater than 0');
+            $('#quote_value_error').empty().append('Quote value must be greater than 0');
+            return;
+          }
+          if (quoted_value_has_non_numeric_characters()){
+            $('#quote_value_error').empty().append('Quote value must be a number');
             return;
           }
           send_quote(notifiableObj.id)

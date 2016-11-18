@@ -1,13 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Quote, type: :model do
-  describe "associations" do
-    it { should belong_to(:artisan) }
-  end
-  describe "validates quoted value" do
-    it { should validate_presence_of(:quoted_value) }
-  end
-  describe "validates status" do
-    it { should validate_presence_of(:status) }
-  end
+  it { is_expected.to validate_presence_of :artisan_id }
+  it { is_expected.to validate_presence_of :service_id }
+  it { is_expected.to validate_presence_of :quoted_value }
+  it { is_expected.to belong_to :artisan }
+  it { is_expected.to belong_to :service }
+  it { is_expected.to define_enum_for :status }
 end

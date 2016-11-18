@@ -19,7 +19,9 @@ class Notification < ActiveRecord::Base
     user.notifications.where(user_notified: false).
       update_all(user_notified: true)
   end
-  def update_as_read
+
+  def update_as_read(force_update: false)
+    return if notifiable_type == "Service" && !expired && !force_update
     update_attribute(:read, true)
   end
 
