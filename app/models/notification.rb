@@ -21,7 +21,7 @@ class Notification < ActiveRecord::Base
   end
 
   def update_as_read(force_update: false)
-    return if notifiable_type == 'Service' && !force_update
+    return if notifiable_type == "Service" && !expired && !force_update
     update_attribute(:read, true)
   end
 
