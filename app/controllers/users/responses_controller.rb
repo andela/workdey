@@ -33,7 +33,7 @@ class Users::ResponsesController < ApplicationController
   end
 
   def get_questions
-    @questions = Question.all
+    @questions = Question.order(rank: :asc)
   end
 
   def strip_all(response_params)
