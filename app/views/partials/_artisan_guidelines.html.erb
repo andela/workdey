@@ -150,7 +150,7 @@
           </li>
         </ul>
         <% if current_page?(role_path) %>
-          <%= link_to raw("I understand <i class='material-icons left'>send</i>"), role_path(role: "artisan"), method: :post, remote: true, class: "btn", id: "accept-artisan-guidlines" %>
+          <%= link_to raw("I understand <i class='material-icons left'>send</i>"), role_path(role: "artisan"), method: :post, class: "btn", id: "accept-artisan-guidlines" %>
         <% end %>
       </div>
     </div>
