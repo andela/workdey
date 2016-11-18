@@ -20,4 +20,34 @@
     </tbody>
   </table>
   <% end %>
+  <a href="#email_modal" id="view-quote" class="btn info_btn modal-trigger"> Email Rejected Applicants</a>
+
+
+   <div id="email_modal" class="modal info_modal">
+                <div class="modal-content">
+                  <h4>Edit Email</h4>
+                 </div>
+                 <div>
+                   <textarea id="email-body">
+
+  Thank you for applying to be a Workdey Artisan. We regret to inform you that you did not make it to the next stage.
+
+  Kindly take some time to improve on the areas were pointed out by our recruitment team.
+
+  We shall be accepting new applications between <%= strptime(7.days.from_now) %> and <%= strptime(14.days.from_now) %>
+
+  Wishing you all the best.
+
+  Many thanks,
+
+  The Workdey Team. 
+                   </textarea>
+                 </div>
+                 <div class="modal-footer">
+      <a href="#!" id="notification-btn" onclick="send_email()"
+        class="modal-action modal-close waves-effect waves-green btn-flat">Send</a>
+    </div>
+
+
+        </div>
 </section>

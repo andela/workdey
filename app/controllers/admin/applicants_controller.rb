@@ -22,6 +22,15 @@ class Admin::ApplicantsController < ApplicationController
     redirect_to dashboard_path unless current_user.admin?
   end
 
+  def regret_email
+    rejected_users = User.artisans.rejected
+    body = params[:body]
+    rejected_users.each do |user|  
+    RegretMailer.regret_email(user, body).deliver_now
+    end
+    head :no_content
+  end
+
   private
 
   def set_applicant

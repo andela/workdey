@@ -55,6 +55,8 @@ class User < ActiveRecord::Base
             on: :create
 
   scope :artisans, -> { where(user_type: "artisan") }
+  
+  scope :rejected, -> { where(status: "strong_no" || "no") }
 
   enum status: [:not_reviewed, :strong_yes,
                 :yes, :no, :strong_no, :certified]

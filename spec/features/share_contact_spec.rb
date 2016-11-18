@@ -50,6 +50,7 @@ RSpec.describe "Share contact", js: true do
     end
   end
 
+
   def share_contact(share = true)
     visit my_tasks_path
     click_on "Share Contact"
