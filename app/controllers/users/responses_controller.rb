@@ -48,7 +48,7 @@ class Users::ResponsesController < ApplicationController
   end
 
   def response_params
-    keys = Question.all.map do |q|
+    keys = Question.order(rank: :asc).map do |q|
       if q.options.empty? || !q.can_select_multiple
         q.question
       else

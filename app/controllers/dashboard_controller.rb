@@ -31,12 +31,11 @@ class DashboardController < ApplicationController
     if params[:role] == "tasker"
       current_user.update_attribute(:user_type, params[:role])
       current_user.update_attribute(:has_taken_questionnaire, true)
-      redirect_to dashboard_path
     else
       @skillsets = Skillset.all
       current_user.update_attribute(:user_type, params[:role])
-      redirect_to dashboard_path
     end
+    redirect_to dashboard_path
   end
 
   def create_skillset
