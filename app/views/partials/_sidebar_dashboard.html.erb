@@ -12,6 +12,10 @@
   <%= link_to "Certify Artisans", certify_artisans_admin_ratings_path %>
 </li>
 
+<li class='side-nav-button  <%= set_active_class(admin_questions_path) %>'>
+  <%= link_to "Manage Questions", admin_questions_path %>
+</li>
+
 <% else %>
 
 <li class="side-nav-button <%= set_active_class(dashboard_path) %>">

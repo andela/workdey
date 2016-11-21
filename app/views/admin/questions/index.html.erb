@@ -1,0 +1,27 @@
+<div class="container-large">
+  <div class="row">
+    <h3 class="center-align">You can view, rank, add, edit and delete questions from this page</h3>
+  <% @questions.each do |question| %>
+    <div class="questions card z-depth-1 hoverable" id="<%=question.rank%>">
+      <h5>
+        <%= question.question %>
+      </h5>
+
+      <ul>
+        <% question.options.each do |option| %>
+        <li class="chip">
+          <%= option %>
+        </li>
+        <% end %>
+      </ul>
+
+      <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div>
+    </div>
+  <% end %>
+
+
+  </div>
+</div>

@@ -24,6 +24,10 @@ class Question < ActiveRecord::Base
     end
   end
 
+  def self.ranked
+    Question.order(rank: :asc)
+  end
+
   private
 
   def set_rank

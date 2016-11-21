@@ -33,7 +33,7 @@ class Users::ResponsesController < ApplicationController
   end
 
   def get_questions
-    @questions = Question.order(rank: :asc)
+    @questions = Question.ranked
   end
 
   def strip_all(response_params)
@@ -48,7 +48,7 @@ class Users::ResponsesController < ApplicationController
   end
 
   def response_params
-    keys = Question.order(rank: :asc).map do |q|
+    keys = Question.ranked.map do |q|
       if q.options.empty? || !q.can_select_multiple
         q.question
       else
