@@ -16,13 +16,21 @@
       <ul>
         <li class="chip">
           <% if question.can_select_multiple? %>
-            User Can Select Multiple Options
+            Multiple Options Selectable
           <% elsif question.options.empty? %>
             Open Text Field
           <% else %>
-            User Can Only Select One Option
+            Single Option Selectable
           <% end %>
         </li>
+
+
+          <% if question.can_select_multiple? && question.options.include?("Other") %>
+            <li class="chip">
+              Includes "Write In" Option
+            </li>
+          <% end %>
+
       </ul>
 
       <div class="card-action red-text">
