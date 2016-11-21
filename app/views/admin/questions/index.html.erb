@@ -15,6 +15,14 @@
 
       <ul>
         <li class="chip">
+          <% if question.required? %>
+            Mandatory
+          <% else %>
+            Optional
+          <% end %>
+        </li>
+
+        <li class="chip">
           <% if question.can_select_multiple? %>
             Multiple Options Selectable
           <% elsif question.options.empty? %>
@@ -37,7 +45,7 @@
         <%= link_to "Edit", edit_admin_question_path(question), class: "" %>
         <%= link_to "Move Up", promote_admin_question_path(question), method: :patch %>
         <%= link_to "Move Down", demote_admin_question_path(question), method: :patch %>
-        <%= link_to "Delete", edit_admin_question_path(question), class: "red-text text-darken-4" %>
+        <%= link_to "Delete", admin_question_path(question), method: :delete, class: "red-text text-accent-2", data: { confirm: "Are you sure you want to delete this question?" } %>
       </div>
     </div>
     <% end %>

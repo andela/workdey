@@ -1,6 +1,6 @@
 class Admin::QuestionsController < ApplicationController
   before_action :find_question
-    
+
   def index
     @questions = Question.ranked
   end
@@ -12,6 +12,10 @@ class Admin::QuestionsController < ApplicationController
 
   def demote
     @question.demote_rank
+    redirect_to admin_questions_path
+  end
+
+  def destroy
     redirect_to admin_questions_path
   end
 
