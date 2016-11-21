@@ -23,21 +23,26 @@
         </li>
 
         <li class="chip">
-          <% if question.can_select_multiple? %>
-            Closed: Multiple Options Selectable
-          <% elsif question.options.empty? %>
-            Open-ended
+          <% if question.options.any? %>
+            Closed
           <% else %>
-            Closed: Single Option Selectable
+            Open-ended
           <% end %>
         </li>
 
 
-          <% if question.can_select_multiple? && question.options.include?("Other") %>
-            <li class="chip">
-              Includes "Write In" Option
-            </li>
+          <% if question.can_select_multiple? %>
+            <li class="chip">Multiple Options Selectable</li>
+          <% elsif question.options.any? %>
+            <li class="chip">Single Option Selectable</li>
           <% end %>
+
+
+        <% if question.can_select_multiple? && question.options.include?("Other") %>
+          <li class="chip">
+            Includes "Write In" Option
+          </li>
+        <% end %>
 
       </ul>
 
@@ -53,7 +58,7 @@
           </div>
           <div class="modal-footer">
             <%= link_to "#", class: "btn white-text teal col s6 m6 l6" do %>
-              Close<i class="material-icons right">close</i>
+              Keep<i class="material-icons right">cancel</i>
             <% end %>
 
             <%= link_to admin_question_path(question), method: :delete, class: "btn white-text red accent-2 col s6 m6 l6" do %>
