@@ -35,8 +35,8 @@
 
       <div class="card-action red-text">
         <%= link_to "Edit", edit_admin_question_path(question), class: "" %>
-        <%= link_to "Move Up", edit_admin_question_path(question), class: "" %>
-        <%= link_to "Move Down", edit_admin_question_path(question), class: "" %>
+        <%= link_to "Move Up", promote_admin_question_path(question), method: :patch %>
+        <%= link_to "Move Down", demote_admin_question_path(question), method: :patch %>
         <%= link_to "Delete", edit_admin_question_path(question), class: "red-text text-darken-4" %>
       </div>
     </div>
