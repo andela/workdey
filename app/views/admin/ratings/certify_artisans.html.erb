@@ -1,4 +1,12 @@
 <section class="main container center-align">
+  <% if flash[:success].present? %>
+    <div class="flash-success">
+      <p>
+        <i class="material-icons alert-success "></i>
+        <%= flash[:success] %>
+      </p>
+    </div>
+  <% end %>
   <h1>Uncertified Artisans</h1>
   <% if @uncertified_artisans.empty? %>
     <p> There are no uncertified artisans at the moment. </p>
@@ -20,15 +28,15 @@
     </tbody>
   </table>
   <% end %>
-  <a href="#email_modal" id="view-quote" class="btn info_btn modal-trigger"> Email Rejected Applicants</a>
+  <a href="#email_modal" id="reject" class="btn info_btn modal-trigger<%="s disabled" if User.artisans.rejected.empty? %>" style="margin: 20px"> Email Rejected Applicants</a>
 
 
-   <div id="email_modal" class="modal info_modal">
+   <div id="email_modal" class="modal info_modal" style="padding:5px">
                 <div class="modal-content">
                   <h4>Edit Email</h4>
                  </div>
                  <div>
-                   <textarea id="email-body">
+                   <textarea id="email-body" style="height:440px; padding: 20px ">
 
   Thank you for applying to be a Workdey Artisan. We regret to inform you that you did not make it to the next stage.
 
@@ -44,8 +52,8 @@
                    </textarea>
                  </div>
                  <div class="modal-footer">
-      <a href="#!" id="notification-btn" onclick="send_email()"
-        class="modal-action modal-close waves-effect waves-green btn-flat">Send</a>
+      <a href="#!" id="send" onclick="send_email()"
+        class=" waves-effect waves-green btn-flat">Send</a>
     </div>
 
 

@@ -23,9 +23,9 @@ class Admin::ApplicantsController < ApplicationController
   end
 
   def regret_email
-    rejected_users = User.artisans.rejected
+    @rejected_users = User.artisans.rejected
     body = params[:body]
-    rejected_users.each do |user|  
+    @rejected_users.each do |user|
     RegretMailer.regret_email(user, body).deliver_now
     end
     head :no_content
