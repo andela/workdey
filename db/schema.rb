@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019132212) do
+ActiveRecord::Schema.define(version: 20161026115817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,35 @@ ActiveRecord::Schema.define(version: 20161019132212) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "service_assignments", force: :cascade do |t|
+    t.integer  "service_id"
+    t.integer  "user_id"
+    t.boolean  "accepted",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "service_assignments", ["service_id"], name: "index_service_assignments_on_service_id", using: :btree
+  add_index "service_assignments", ["user_id"], name: "index_service_assignments_on_user_id", using: :btree
+
+  create_table "services", force: :cascade do |t|
+    t.integer  "tasker_id"
+    t.integer  "artisan_id"
+    t.integer  "skillset_id"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.decimal  "duration"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status",      default: 0
+  end
+
+  add_index "services", ["artisan_id"], name: "index_services_on_artisan_id", using: :btree
+  add_index "services", ["skillset_id"], name: "index_services_on_skillset_id", using: :btree
+  add_index "services", ["tasker_id"], name: "index_services_on_tasker_id", using: :btree
+
   create_table "skillsets", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -219,7 +248,9 @@ ActiveRecord::Schema.define(version: 20161019132212) do
   add_foreign_key "artisan_skillsets", "skillsets"
   add_foreign_key "bid_managements", "biddings"
   add_foreign_key "biddings", "tasks"
-  add_foreign_key "enquiries", "users"
   add_foreign_key "responses", "users"
+  add_foreign_key "service_assignments", "services"
+  add_foreign_key "service_assignments", "users"
+  add_foreign_key "services", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

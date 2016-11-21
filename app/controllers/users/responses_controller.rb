@@ -1,5 +1,6 @@
 class Users::ResponsesController < ApplicationController
   before_action :get_questions
+  before_action :enquiry
 
   def new
     @response = Response.new

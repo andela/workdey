@@ -26,7 +26,7 @@ class NotificationsController < ApplicationController
     end
     record = @notification.notifiable
     if record.update_attributes(@notifiable_attr_to_update.symbolize_keys)
-      if @reply_to_sender == true || true.to_s
+      if @reply_to_sender == true || @reply_to_sender == true.to_s
         @notification.update_as_read
         @notification.reply_to_sender(@message, @event_name)
       end

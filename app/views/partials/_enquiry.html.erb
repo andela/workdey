@@ -5,7 +5,6 @@
     </button>
   </div>
   <%= form_for @enquiry, url: enquiries_path, method: :post do |f| %>
-
   <div id="contact-form">
     <h3>Enquiry</h3>
     <p class="enquiry-message">Hey! Our customer service consultants are
@@ -14,7 +13,7 @@
      <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="field">
       <%= f.text_area :question, class: 'form-control materialize-textarea',
-      placeholder: "question", required: true%>
+      placeholder: "question"%>
     </div>
     <%= f.submit "Send", class: 'btn' %>
   </div>
