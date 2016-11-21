@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.3.0"
+ruby "2.3.3"
 gem "bcrypt", "~> 3.1.7"
 gem "bourbon"
 gem "cloudinary", "1.1.0"
