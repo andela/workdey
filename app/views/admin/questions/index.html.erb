@@ -1,27 +1,39 @@
-<div class="container-large">
+<div class="container-large col s12">
   <div class="row">
     <h3 class="center-align">You can view, rank, add, edit and delete questions from this page</h3>
-  <% @questions.each do |question| %>
-    <div class="questions card z-depth-1 hoverable" id="<%=question.rank%>">
-      <h5>
-        <%= question.question %>
+    <% @questions.each do |question| %>
+    <div class="questions card z-depth-1 hoverable col s12" id="<%=question.rank%>">
+      <h5><%= question.question %>
       </h5>
-
-      <ul>
+      <ol>
         <% question.options.each do |option| %>
-        <li class="chip">
+        <li>
           <%= option %>
         </li>
         <% end %>
+      </ol>
+
+      <ul>
+        <li class="chip">
+          <% if question.can_select_multiple? %>
+            User Can Select Multiple Options
+          <% elsif question.options.empty? %>
+            Open Text Field
+          <% else %>
+            User Can Only Select One Option
+          <% end %>
+        </li>
       </ul>
 
-      <div class="card-action">
-        <a href="#">This is a link</a>
-        <a href="#">This is a link</a>
+      <div class="card-action red-text">
+        <%= link_to "Edit", edit_admin_question_path(question), class: "" %>
+        <%= link_to "Move Up", edit_admin_question_path(question), class: "" %>
+        <%= link_to "Move Down", edit_admin_question_path(question), class: "" %>
+        <%= link_to "Delete", edit_admin_question_path(question), class: "red-text text-darken-4" %>
       </div>
     </div>
-  <% end %>
+    <% end %>
 
-
+    <%= link_to "Add New Question", new_admin_question_path, class: "btn view-btn left-align" %>
   </div>
 </div>
