@@ -87,6 +87,11 @@ Rails.application.routes.draw do
         get "ratings/new/:user_id", to: "ratings#new", as: "new"
       end
     end
-    resources :questions
+    resources :questions do
+      member do
+        patch "promote"
+        patch "demote"
+      end
+    end
   end
 end
