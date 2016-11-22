@@ -3,70 +3,7 @@
     <h3 class="center-align"><strong>You can view, rank, add, edit and delete questions from this page</strong></h3>
     <% @questions.each do |question| %>
     <div class="questions card z-depth-1 hoverable col s12" id="<%=question.rank%>">
-      <h5><%= question.question %>
-      </h5>
-      <ol>
-        <% question.options.each do |option| %>
-        <li>
-          <%= option %>
-        </li>
-        <% end %>
-      </ol>
-
-      <ul>
-        <li class="chip">
-          <% if question.required? %>
-            Mandatory
-          <% else %>
-            Optional
-          <% end %>
-        </li>
-
-        <li class="chip">
-          <% if question.options.any? %>
-            Closed
-          <% else %>
-            Open-ended
-          <% end %>
-        </li>
-
-          <% if question.can_select_multiple? %>
-            <li class="chip">Multiple Options Selectable</li>
-          <% elsif question.options.any? %>
-            <li class="chip">Single Option Selectable</li>
-          <% end %>
-
-        <% if question.can_select_multiple? && question.options.include?("Other") %>
-          <li class="chip">
-            Includes "Write In" Option
-          </li>
-        <% end %>
-
-      </ul>
-
-      <div class="card-action red-text">
-        <%= link_to "Edit", edit_admin_question_path(question) %>
-        <%= link_to "Move Up", promote_admin_question_path(question), method: :patch %>
-        <%= link_to "Move Down", demote_admin_question_path(question), method: :patch %>
-        <%= link_to "Delete", "#delete_modal_#{question.rank}", class: "modal-trigger red-text text-accent-2" %>
-
-        <div id='<%="delete_modal_#{question.rank}"%>', class="modal">
-          <div class="modal-content black-text center-align">
-            <h4>Are you sure you want to delete this question?</h4>
-          </div>
-          <div class="modal-footer">
-            <%= link_to "#", class: "btn white-text teal col s6 m6 l6" do %>
-              Cancel<i class="material-icons right">cancel</i>
-            <% end %>
-
-            <%= link_to admin_question_path(question), method: :delete, class: "btn white-text red accent-2 col s6 m6 l6" do %>
-              Delete<i class="material-icons right">delete</i>
-            <% end %>
-
-          </div>
-        </div>
-
-      </div>
+      <%= render partial: 'admin/questions/question', locals: { question: question } %>
     </div>
     <% end %>
 
