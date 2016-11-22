@@ -59,7 +59,8 @@ class User < ActiveRecord::Base
   scope :rejected, -> { where("status=? OR status=?", 4, 3) }
 
   enum status: [:not_reviewed, :strong_yes,
-                :yes, :no, :strong_no,:certified, :accepted_emailed, :rejected_emailed]
+                :yes, :no, :strong_no, :certified,
+                :accepted_emailed, :rejected_emailed]
 
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
