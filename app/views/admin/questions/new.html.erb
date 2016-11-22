@@ -3,22 +3,27 @@
 
     <h4 class="row center-align"><strong>Create new question</strong></h4>
 
-    <h5 class="row">Question<h5>
 
-    <%= f.text_field :question %>
+
+    <div class="input-field">
+      <%= f.text_field :question %>
+      <%= f.label :question, "Question" %>
+    </div>
 
     <h5>Options</h5>
 
     <% if @question.options.any? %>
-    <% else %>
-    <% end %>
-
-      <% @question.options.each do %>
+      <% @question.options.each do |option| %>
         <div class="input-field">
-          <%= f.label :question, "Question" %>
+          <%= f.label :question, option %>
           <%= f.text_field :question %>
         </div>
       <% end %>
+    <% else %>
+      <%=  %>
+    <% end %>
+
+      <h5>Attributes</h5>
 
       <div class="input-field row">
         <%= f.check_box :required %>

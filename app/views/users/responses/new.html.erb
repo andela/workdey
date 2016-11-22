@@ -45,20 +45,12 @@
           <% if question.can_select_multiple? %>
           <% other_entry = @response.response[question.question].detect {
                |entry| question.options.exclude? (entry)
-             } if @response.response %>
+             } if @response.response && @response.response[question.question] %>
           <% question.options.each_with_index do |option, index| %>
             <% selected = @response.response[question.question].detect {
               |opt| opt == option
-              } if @response.response %>
+              } if @response.response && @response.response[question.question] %>
 
-            <% if option == "Other" %>
-              <%= text_field_tag(
-                    "response[#{question.question}][]",
-                    other_entry,
-                    placeholder: "Other"
-                  )
-              %>
-            <% else %>
               <%= check_box_tag(
                     "response[#{question.question}][]",
                     option,
@@ -66,8 +58,18 @@
                     id: "#{question.id}_#{index}"
                     ) %>
               <%= label_tag("#{question.id}_#{index}", option) %>
-            <% end %>
+
           <% end %>
+
+          <% if question.include_other? %>
+            <%= text_field_tag(
+                "response[#{question.question}][]",
+                other_entry,
+                placeholder: "Other"
+              )
+            %>
+          <% end %>
+
           <% else %>
           <% selected = @response.response[question.question] if @response.response %>
           <% question.options.each_with_index do |option, index| %>

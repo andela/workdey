@@ -32,7 +32,7 @@
         <li class="chip">Single Option Selectable</li>
       <% end %>
 
-    <% if question.can_select_multiple? && question.options.include?("Other") %>
+    <% if question.can_select_multiple? && question.include_other? %>
       <li class="chip">
         Includes "Write In" Option
       </li>
