@@ -20,10 +20,33 @@ RSpec.describe ServicesController, type: :controller do
   end
 
   describe "#show" do
-    before(:each) { get :show, id: service.id }
+    context "when the request is an XHR request (ajax)" do
+      before(:each) { xhr :get, :show, id: service.id }
 
-    it "renders the show view" do
-      expect(response).to render_template("show")
+      it "renders JSON data containing the 'service' and 'tasker' details" do
+        body = JSON.parse(response.body)
+        expect(body).to include("service", "tasker")
+      end
+
+      it "only renders one service attribute, the service description" do
+        body = JSON.parse(response.body)
+        expect(body["service"].keys).to contain_exactly "description"
+      end
+
+      it "only renders 'firstname', 'lastname', 'phone' and 'email' user\
+      attributes" do
+        body = JSON.parse(response.body)
+        expect(body["tasker"].keys).to eq(
+          %w[firstname lastname email phone]
+        )
+      end
+    end
+
+    context "when the request expects HTML data" do
+      before(:each) { get :show, id: service.id }
+      it "renders the show view" do
+        expect(response).to render_template("show")
+      end
     end
   end
 
