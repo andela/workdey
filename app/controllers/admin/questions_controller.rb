@@ -6,6 +6,11 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def new
+    @question = Question.new
+  end
+
+  def create
+
   end
 
   def edit
@@ -29,5 +34,9 @@ class Admin::QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find_by(id: params[:id])
+  end
+
+  def question_params
+    params.require(:question)
   end
 end

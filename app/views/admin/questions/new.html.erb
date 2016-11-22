@@ -1,2 +1,36 @@
 <div class="container-large col s12">
+  <%= form_for [:admin, @question], url: { action: "create" }, html: { class: "row z-depth-1 hoverable" } do |f| %>
+
+    <h4 class="row center-align"><strong>Create new question</strong></h4>
+
+    <h5 class="row">Question<h5>
+
+    <%= f.text_field :question %>
+
+    <h5>Options</h5>
+
+    <% if @question.options.any? %>
+    <% else %>
+    <% end %>
+
+      <% @question.options.each do %>
+        <div class="input-field">
+          <%= f.label :question, "Question" %>
+          <%= f.text_field :question %>
+        </div>
+      <% end %>
+
+      <div class="input-field row">
+        <%= f.check_box :required %>
+        <%= f.label :required, "Mandatory" %>
+      </div>
+
+      <div class="input-field row">
+        <%= f.check_box :can_select_multiple %>
+        <%= f.label :can_select_multiple, "Enable Multiple Selections" %>
+      </div>
+
+
+    <%= f.submit "Save", class: "btn view-btn teal row center-align" %>
+  <% end %>
 </div>
