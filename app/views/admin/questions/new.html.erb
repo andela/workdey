@@ -1,5 +1,5 @@
 <div class="container-large col s12">
-  <%= form_for [:admin, @question], url: { action: "create" }, html: { class: "row z-depth-1 hoverable" } do |f| %>
+  <%= form_for [:admin, @question], url: { action: "create" }, html: { class: "row z-depth-1 hoverable questions" } do |f| %>
 
     <h4 class="row center-align"><strong>Create new question</strong></h4>
 
@@ -30,6 +30,10 @@
         <%= f.label :can_select_multiple, "Enable Multiple Selections" %>
       </div>
 
+      <div class="input-field row">
+        <%= f.check_box :include_other %>
+        <%= f.label :include_other, "Include Open Write-In Option" %>
+      </div>
 
     <%= f.submit "Save", class: "btn view-btn teal row center-align" %>
   <% end %>
