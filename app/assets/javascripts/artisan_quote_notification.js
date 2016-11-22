@@ -28,7 +28,7 @@ function display_full_message(quote_record, service_record, display_context, not
   service_title = $("<h5 class='center-align'>").text("Service Description");
   service_text = $("<p>").text(service_record.service.description);
   quote_title = $("<h5 class='center-align'>").text("Quote Details");
-  quote_text = $("<p>").text("Accepted quote: $" + quote_record.quoted_value);
+  quote_text = $("<p>").text(quote_record.status + " quote: $" + quote_record.quoted_value);
   tasker_title = $("<h5 class='center-align'>").text("Tasker Details");
   tasker_name = $("<p>").text("Name: " + service_record.tasker.firstname + " " + service_record.tasker.lastname)
   tasker_email= $("<p>").text("Email: " + service_record.tasker.email);
@@ -41,12 +41,18 @@ function display_full_message(quote_record, service_record, display_context, not
     service_text,
     $("<hr>"),
     quote_title,
-    quote_text,
-    $("<hr>"),
-    tasker_title,
-    tasker_name,
-    tasker_email,
-    tasker_phone,
-    ok_button
+    quote_text
   );
+
+  if (quote_record.status == "accepted"){
+    display_context.append(
+      $("<hr>"),
+      tasker_title,
+      tasker_name,
+      tasker_email,
+      tasker_phone
+    );
+  }
+
+  display_context.append(ok_button);
 }

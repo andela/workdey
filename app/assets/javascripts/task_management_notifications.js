@@ -1,5 +1,6 @@
 function respond_to_service_request(obj, urlParam, btnId) {
   var notificationFeed = $(".notification-feed"),
+      displayContext = $(".full_notification_message"),
       userAction;
 
       function userActionData(){
