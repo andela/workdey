@@ -1,7 +1,5 @@
 function respond_to_service_request(obj, urlParam, btnId) {
-  var displayContext = $(".full_notification_message"),
-      notificationFeed = $(".notification-feed"),
-      actionElem = $(".feed .btn[data-id=" + btnId + "]").closest(".feed"),
+  var notificationFeed = $(".notification-feed"),
       userAction;
 
       function userActionData(){
@@ -24,9 +22,10 @@ function respond_to_service_request(obj, urlParam, btnId) {
 }
 
 $(".notification-feed").on("click", ".btn", function (e) {
-  var requestId = $(this).data("id"),
-      messageTitle = $(this).prev(".title").text().trim()
-      request = get_notifiable_record(requestId);
+  if($(this).data("notification-type") != "Service") return;
+  var notificationId = $(this).data("id"),
+      messageTitle = $(this).prev(".title").text().trim(),
+      request = get_notifiable_record(notificationId);
   request.done(function(notifiableObj) {
     var endDate = new Date(notifiableObj.end_date).toDateString(),
         startDate = new Date(notifiableObj.start_date).toDateString();
@@ -43,7 +42,7 @@ $(".notification-feed").on("click", ".btn", function (e) {
       displayContext.empty().append(title).append(content).append(action_button);
       $('#expired-notification-confirmation').on('click', function(){
         $('.full_notification_message').empty();
-        remove_notification(requestId)
+        remove_notification(notificationId)
       })
     }
     else{
@@ -55,9 +54,9 @@ $(".notification-feed").on("click", ".btn", function (e) {
                              <br>End Date: <strong>" + endDate + "</strong>"
                             ),
           actions = $("<div class='actions'>"),
-          accept = $("<button class='btn waves-effect waves-light teal' data-accept=" + requestId + ">")
+          accept = $("<button class='btn waves-effect waves-light teal' data-accept=" + notificationId + ">")
                       .html("<i class='material-icons left'>thumb_up</i> Accept"),
-          reject = $("<button class='btn waves-effect waves-light' data-reject=" + requestId + ">")
+          reject = $("<button class='btn waves-effect waves-light' data-reject=" + notificationId + ">")
                       .html("<i class='material-icons left'>thumb_down</i> Reject");
 
       actions.append(accept).append(reject)
@@ -85,10 +84,10 @@ $(".notification-feed").on("click", ".btn", function (e) {
             return;
           }
           send_quote(notifiableObj.id)
-          respond_to_service_request({status: "accepted"}, requestId, elem.data("accept"));
+          respond_to_service_request({status: "accepted"}, notificationId, elem.data("accept"));
         })
       } else {
-        respond_to_service_request({status: "unassigned"}, requestId, elem.data("reject"));
+        respond_to_service_request({status: "unassigned"}, notificationId, elem.data("reject"));
       }
     });
   });
