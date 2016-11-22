@@ -84,4 +84,14 @@ RSpec.describe Admin::ApplicantsController, type: :controller do
       end
     end
   end
+
+  describe "POST#regret_email" do
+    before(:each) do
+      stub_current_user(@admin)
+      post :regret_email
+    end
+    it "assigns @rejected_users to rejected applicants" do
+      expect(assigns(:rejected_users)).to eq User.artisans.rejected
+    end
+  end
 end

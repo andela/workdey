@@ -44,7 +44,6 @@ RSpec.describe "Share contact", js: true do
       visit notifications_path
       click_on "view quote"
       click_button "Accept"
-
       expect(page).to have_content(artisan.firstname)
       expect(page).to have_content(artisan.email)
     end

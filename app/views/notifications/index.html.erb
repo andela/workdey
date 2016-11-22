@@ -23,7 +23,8 @@
               <img src="<%= object.sender.image_url %>" alt="" />
               <p class="title"> <%= object.message %> </p>
               <%if object.notifiable_type == 'Quote'%>
-              <a href="#quote_modal" onclick="quote_object(<%= object.sender.to_json %>,<%=object.notifiable.to_json%>, <%= object.id %>)" class="btn info_btn modal-trigger"> view quote</a>
+
+              <a href="#quote_modal" id="view-quote" onclick="quote_object(<%= object.sender.to_json %>,<%=object.notifiable.to_json%>, <%= object.id %>)" class="btn info_btn modal-trigger"> view quote</a>
               <%end%>
 
             </div>
