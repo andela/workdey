@@ -30,13 +30,11 @@
           <% end %>
         </li>
 
-
           <% if question.can_select_multiple? %>
             <li class="chip">Multiple Options Selectable</li>
           <% elsif question.options.any? %>
             <li class="chip">Single Option Selectable</li>
           <% end %>
-
 
         <% if question.can_select_multiple? && question.options.include?("Other") %>
           <li class="chip">
@@ -58,7 +56,7 @@
           </div>
           <div class="modal-footer">
             <%= link_to "#", class: "btn white-text teal col s6 m6 l6" do %>
-              Keep<i class="material-icons right">cancel</i>
+              Cancel<i class="material-icons right">cancel</i>
             <% end %>
 
             <%= link_to admin_question_path(question), method: :delete, class: "btn white-text red accent-2 col s6 m6 l6" do %>

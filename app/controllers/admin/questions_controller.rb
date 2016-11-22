@@ -5,6 +5,16 @@ class Admin::QuestionsController < ApplicationController
     @questions = Question.ranked
   end
 
+  def new
+  end
+
+  def edit
+  end
+
+  def destroy
+    redirect_to admin_questions_path
+  end
+
   def promote
     @question.promote_rank
     redirect_to admin_questions_path
@@ -12,10 +22,6 @@ class Admin::QuestionsController < ApplicationController
 
   def demote
     @question.demote_rank
-    redirect_to admin_questions_path
-  end
-
-  def destroy
     redirect_to admin_questions_path
   end
 
