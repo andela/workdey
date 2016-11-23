@@ -6,14 +6,16 @@ class ServicesController < ApplicationController
   end
 
   def show
-     if request.xhr?
-       render json: {
-         service: @service.attributes.select {|attribute| attribute == "description"},
-         tasker: @service.tasker.attributes.select do |attribute|
-           ["firstname", "lastname", "phone", "email"].include?(attribute)
-         end
-       }
-     end
+    if request.xhr?
+     render json: {
+       service: @service.attributes.select do |attribute|
+         attribute == "description"
+       end,
+       tasker: @service.tasker.attributes.select do |attribute|
+         %w[firstname, lastname, phone, email].include?(attribute)
+       end
+     }
+    end
   end
 
   def new
