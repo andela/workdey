@@ -1,11 +1,24 @@
 <div class="container-large col s12">
   <%= form_for [:admin, @question], url: { action: "create" }, html: { class: "row z-depth-1 hoverable questions" } do |f| %>
 
+    <% if @question.errors.any? %>
+      <div id="error_explanation">
+        <h5><%= pluralize(@question.errors.count, "error") %> found. Please resolve.
+        </h5>
+      </div>
+    <% end %>
+
     <h4 class="row center-align"><strong>Create new question</strong></h4>
 
+    <div id="error_explanation">
+    <% @question.errors[:question].each do |error| %>
+      <h6>Question <%=error%></h6>
+    <% end %>
+    </div>
+
     <div class="input-field">
-      <%= f.text_field :question %>
-      <%= f.label :question, "Question" %>
+      <%= text_field_tag "Question", @question.question %>
+      <%= label_tag "Question" %>
     </div>
 
     <h5>Options</h5>
@@ -18,10 +31,10 @@
     <div id="question_options" class="row">
 
       <% @question.options.each_with_index do |option, index| %>
-        <div class="input-field row" id="<%=option%>">
-          <%= text_field_tag "question[options][]", option, class: "col s9 m9 l9" %>
-          <a class='waves-effect waves-light btn red small col s3 m3 l3' onclick='removeInputBox("<%=option%>")'>
-            <i class='material-icons left'>cancel</i>Remove
+        <div class="input-field row" id="question_option_<%=index%>">
+          <%= text_field_tag "question[options][]", option, class: "col s11 m11 l11" %>
+          <a class='waves-effect waves-light btn-floating btn-small red' onclick='removeInputBox("question_option_<%=index%>")'>
+            <i class='material-icons left'>cancel</i>
           </a>
         </div>
       <% end %>

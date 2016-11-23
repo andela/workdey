@@ -10,7 +10,12 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def create
-
+    @question = Question.new(question_params)
+    if @question.save
+      redirect_to admin_questions_path
+    else
+      render "new"
+    end
   end
 
   def edit
@@ -37,6 +42,11 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question)
+    params.require(:question).permit(
+      :required,
+      :can_select_multiple,
+      :include_other,
+      options: []
+    ).merge(question: params[:Question])
   end
 end
