@@ -29,7 +29,7 @@ class NotificationsController < ApplicationController
     record = @notification.notifiable
     if record.update_attributes(@notifiable_attr_to_update.symbolize_keys)
       @notification.update_as_read force_update: true
-      if @reply_to_sender == true
+      if @reply_to_sender == "true"
         @notification.reply_to_sender(@message, @event_name)
       end
       render json: { message: "success" }

@@ -7,5 +7,6 @@ FactoryGirl.define do
     duration Faker::Number.decimal(2, 2)
     status "unassigned"
     skillset
+    tasker
   end
 end
