@@ -1,6 +1,5 @@
 class Question < ActiveRecord::Base
   validates :question, presence: true
-  validates :required, inclusion: [true, false]
   validates :rank, presence: true, uniqueness: true
   before_validation :set_rank, on: :create
   before_create :set_rank
