@@ -12,7 +12,7 @@ class ServicesController < ApplicationController
          attribute == "description"
        end,
        tasker: @service.tasker.attributes.select do |attribute|
-         %w[firstname, lastname, phone, email].include?(attribute)
+         %w[firstname lastname phone email].include?(attribute)
        end
      }
     end
