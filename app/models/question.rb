@@ -31,7 +31,7 @@ class Question < ActiveRecord::Base
 
   def question_options_provided_not_empty
     options.each_with_index do |option, index|
-      errors.add(:options_empty, "option #{index}") if option.empty?
+      errors.add(:options_empty, "option #{index}") if option.blank?
     end
   end
 

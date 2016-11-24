@@ -1,8 +1,17 @@
 class Admin::QuestionsController < ApplicationController
-  before_action :find_question
+  before_action :login_required
+  before_action :require_admin
+  before_action(
+    :find_question,
+    only: [:edit, :update, :destroy, :promote, :demote]
+  )
 
   def index
     @questions = Question.ranked
+  end
+
+  def show
+    redirect_to admin_questions_path
   end
 
   def new
@@ -19,6 +28,14 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @question.update(edit_question_params)
+      redirect_to admin_questions_path
+    else
+      render "edit"
+    end
   end
 
   def destroy
@@ -40,6 +57,12 @@ class Admin::QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find_by(id: params[:id])
+  end
+
+  def edit_question_params
+    edit_params = question_params
+    edit_params[:options] = [] unless edit_params.key?(:options)
+    edit_params
   end
 
   def question_params
