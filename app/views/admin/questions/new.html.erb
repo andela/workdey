@@ -79,6 +79,9 @@
         <% end %>
       </div>
 
-    <%= f.submit "Save", class: "btn view-btn teal row center-align" %>
+      <div class="row">
+        <%= f.submit "Save", class: "btn view-btn teal" %>
+        <%= link_to "Cancel", admin_questions_path, class: "btn view-btn red" %>
+      </div>
   <% end %>
 </div>
