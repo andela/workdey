@@ -3,6 +3,8 @@ class Response < ActiveRecord::Base
   validates :response, presence: true
   validate :required_questions_must_be_answered
 
+  private
+
   def required_questions_must_be_answered
     Question.all.each do |q|
       if q.required && question_empty(q)
@@ -10,8 +12,6 @@ class Response < ActiveRecord::Base
       end
     end
   end
-
-  private
 
   def question_empty(q)
     response[q.question].blank? || response[q.question] == [""]

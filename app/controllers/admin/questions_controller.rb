@@ -22,6 +22,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def destroy
+    @question.destroy
     redirect_to admin_questions_path
   end
 
