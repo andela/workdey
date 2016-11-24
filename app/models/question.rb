@@ -10,18 +10,16 @@ class Question < ActiveRecord::Base
   def promote_rank
     next_higher = Question.find_by(rank: rank - 1)
     if next_higher
-      next_higher.update(rank: -1)
-      update(rank: rank - 1)
-      next_higher.update(rank: rank + 1)
+      next_higher.increment!(:rank)
+      decrement!(:rank)
     end
   end
 
   def demote_rank
     next_lower = Question.find_by(rank: rank + 1)
     if next_lower
-      next_lower.update(rank: -1)
-      update(rank: rank + 1)
-      next_lower.update(rank: rank - 1)
+      next_lower.decrement!(:rank)
+      increment!(:rank)
     end
   end
 
@@ -62,7 +60,8 @@ class Question < ActiveRecord::Base
   end
 
   def set_rank
-    self.rank = Question.maximum(:rank) + 1
+    max = Question.maximum(:rank)
+    self.rank = max + 1 if max
   end
 
   def normalize_ranks
