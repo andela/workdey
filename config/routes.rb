@@ -92,6 +92,10 @@ Rails.application.routes.draw do
         patch "promote"
         patch "demote"
       end
+
+      collection do
+        get "preview"
+      end
     end
   end
 end

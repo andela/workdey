@@ -53,6 +53,10 @@ class Admin::QuestionsController < ApplicationController
     redirect_to admin_questions_path
   end
 
+  def preview
+    @questions = Question.ranked
+  end
+
   private
 
   def find_question

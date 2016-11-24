@@ -7,6 +7,9 @@
     </div>
     <% end %>
 
-    <%= link_to "Add New Question", new_admin_question_path, class: "btn view-btn left-align teal" %>
+    <div class="row">
+      <%= link_to "Add New Question", new_admin_question_path, class: "btn view-btn teal" %>
+      <%= link_to "Preview Questionnaire", preview_admin_questions_path, class: "btn view-btn teal" if @questions.count > 0 %>
+    </div>
   </div>
 </div>
