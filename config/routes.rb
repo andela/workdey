@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   get "user_plans" => "user_plans#index"
   post "/charge" => "user_plans#create"
 
+  post "/quotes", to: "quotes#create"
+
   get "/my_skillsets" => "artisan_skillsets#index", as: :my_skillsets
   put "/artisan_skillsets" => "artisan_skillsets#update"
 
@@ -66,7 +68,7 @@ Rails.application.routes.draw do
   resources :tasks
   resources :services, only: [:index, :show, :new, :create]
   resources :service_ratings
-  get "view_rating_details/:id" => "service_ratings#view_rating_details", as: :view_rating_details 
+  get "view_rating_details/:id" => "service_ratings#view_rating_details", as: :view_rating_details
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
 

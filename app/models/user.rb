@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :responses, foreign_key: :user_id
   has_one :vetting_record
   has_many :ratings, foreign_key: :user_id
+  has_many :quotes
   has_many :service_assignments
 
   before_save { self.email = email.downcase }
@@ -56,7 +57,7 @@ class User < ActiveRecord::Base
   scope :artisans, -> { where(user_type: "artisan") }
 
   enum status: [:not_reviewed, :strong_yes,
-                :weak_yes, :weak_no, :strong_no, :certified]
+                :yes, :no, :strong_no, :certified]
 
   def self.first_or_create_from_oauth(auth)
     where(email: auth.info.email).first_or_create do |u|
@@ -139,7 +140,7 @@ class User < ActiveRecord::Base
   end
 
   def accepted?
-    strong_yes? || weak_yes?
+    strong_yes? || yes?
   end
 
   def pending_artisan?
