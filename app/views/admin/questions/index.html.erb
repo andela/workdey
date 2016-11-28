@@ -1,5 +1,6 @@
 <div class="container-large col s12" id="questions_index">
   <div class="row">
+    <%= render partial: "partials/flash" %>
     <h3 class="center-align"><strong>You can view, rank, add, edit and delete questions from this page</strong></h3>
     <% @questions.each do |question| %>
     <div class="questions card z-depth-1 hoverable col s12" id="<%=question.rank%>">

@@ -21,7 +21,7 @@ class Admin::QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to admin_questions_path
+      redirect_to(admin_questions_path, notice: "Question successfully saved.")
     else
       render "new"
     end
@@ -32,7 +32,7 @@ class Admin::QuestionsController < ApplicationController
 
   def update
     if @question.update(edit_question_params)
-      redirect_to admin_questions_path
+      redirect_to(admin_questions_path, notice: "Question successfully edited.")
     else
       render "edit"
     end
@@ -40,17 +40,17 @@ class Admin::QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    redirect_to admin_questions_path
+    redirect_to(admin_questions_path, notice: "Question successfully deleted.")
   end
 
   def promote
     @question.promote_rank
-    redirect_to admin_questions_path
+    redirect_to(admin_questions_path, notice: "Question successfully promoted.")
   end
 
   def demote
     @question.demote_rank
-    redirect_to admin_questions_path
+    redirect_to(admin_questions_path, notice: "Question successfully demoted.")
   end
 
   def preview
