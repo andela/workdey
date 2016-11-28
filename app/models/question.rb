@@ -68,6 +68,6 @@ class Question < ActiveRecord::Base
     (1...Question.maximum(:rank)).each do |rank|
       Question.find_by(rank: rank + 1).update(rank: rank) unless
         Question.find_by(rank: rank)
-    end
+    end if Question.exists?
   end
 end

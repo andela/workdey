@@ -1,17 +1,13 @@
 class Admin::QuestionsController < ApplicationController
   before_action :login_required
   before_action :require_admin
+  before_action :ranked_questions, only: [:index, :preview]
   before_action(
     :find_question,
     only: [:edit, :update, :destroy, :promote, :demote]
   )
 
   def index
-    @questions = Question.ranked
-  end
-
-  def show
-    redirect_to admin_questions_path
   end
 
   def new
@@ -54,13 +50,20 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def preview
-    @questions = Question.ranked
   end
 
   private
 
+  def ranked_questions
+    @questions = Question.ranked
+  end
+
   def find_question
     @question = Question.find_by(id: params[:id])
+    redirect_to(
+      admin_questions_path,
+      notice: "Question not found."
+    ) unless @question
   end
 
   def edit_question_params
