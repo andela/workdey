@@ -37,12 +37,13 @@ RSpec.describe "Share contact", js: true do
   end
 
   describe "tasker" do
-    scenario "when tasker views the artisan details " do
-      share_contact
+    scenario "when tasker views the artisan's quote " do
       Capybara.reset_sessions!
+      send_quote
       log_in_with(tasker.email, tasker.password)
       visit notifications_path
-      click_on "view information"
+      click_on "view quote"
+      click_button "Accept"
 
       expect(page).to have_content(artisan.firstname)
       expect(page).to have_content(artisan.email)
@@ -54,5 +55,16 @@ RSpec.describe "Share contact", js: true do
     click_on "Share Contact"
     sleep 1.5
     share ? click_on("Yes, share it") : click_on("No, don't share")
+  end
+
+  def send_quote
+    quote = create(:quote, artisan_id: artisan.id)
+    create(
+      :notification,
+      receiver_id: tasker.id,
+      sender_id: artisan.id,
+      notifiable_type: "Quote",
+      notifiable_id: quote.id
+    )
   end
 end

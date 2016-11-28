@@ -208,5 +208,13 @@ nav .nav-wrapper {
     .btn > .material-icons {
       pointer-events: none;
     }
+
+    .quote-value-input {
+      padding: 15px 0;
+    }
   }
+}
+
+#quote_value_error{
+  color: red;
 }

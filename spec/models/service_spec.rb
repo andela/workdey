@@ -36,7 +36,7 @@ RSpec.describe Service, type: :model do
   describe "validates status" do
     it { should validate_presence_of :status }
   end
-
+  
   describe "assign and unassign" do
     it "assigns artisan to service" do
       user = create(:user)
@@ -51,4 +51,5 @@ RSpec.describe Service, type: :model do
       expect(service.status).to eq("unassigned")
     end
   end
+
 end

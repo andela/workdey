@@ -11,7 +11,7 @@ module NotificationsHelper
   end
 
   def generate_html(css_class_name, tasker_image, message, id)
-    raw "<div class='#{css_class_name}'>
+    raw "<div class='#{css_class_name}', id='notification-item-#{id}'>
       #{cl_image_tag tasker_image}
       <p class='title'>#{message}</p>
       #{button_tag 'view', class: 'btn', data: { id: id }}
