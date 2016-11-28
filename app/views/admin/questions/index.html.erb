@@ -1,0 +1,16 @@
+<div class="container-large col s12" id="questions_index">
+  <div class="row">
+    <%= render partial: "partials/flash" %>
+    <h3 class="center-align"><strong>You can view, rank, add, edit and delete questions from this page</strong></h3>
+    <% @questions.each do |question| %>
+    <div class="questions card z-depth-1 hoverable col s12" id="<%=question.rank%>">
+      <%= render partial: 'admin/questions/question', locals: { question: question } %>
+    </div>
+    <% end %>
+
+    <div class="row">
+      <%= link_to "Add New Question", new_admin_question_path, class: "btn view-btn teal" %>
+      <%= link_to "Preview Questionnaire", preview_admin_questions_path, class: "btn view-btn teal" if @questions.count > 0 %>
+    </div>
+  </div>
+</div>

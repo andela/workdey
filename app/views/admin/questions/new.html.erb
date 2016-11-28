@@ -1,0 +1,87 @@
+<div class="container-large col s12">
+  <%= form_for [:admin, @question], url: { action: "create" }, html: { class: "row z-depth-1 hoverable questions" } do |f| %>
+
+    <% if @question.errors.any? %>
+      <div id="error_explanation">
+        <h5><%= pluralize(@question.errors.count, "error") %> found. Please resolve.
+        </h5>
+      </div>
+    <% end %>
+
+    <h4 class="row center-align"><strong>Create new question</strong></h4>
+
+    <div id="error_explanation">
+    <% @question.errors[:question].each do |error| %>
+      <h6>Question <%=error%></h6>
+    <% end %>
+    </div>
+
+    <div class="input-field">
+      <%= text_field_tag "Question", @question.question %>
+      <%= label_tag "Question" %>
+    </div>
+
+    <h5>Options</h5>
+    <div id="error_explanation">
+      <% @question.errors[:options_count].each do |error| %>
+        <h6><%=error%></h6>
+      <% end %>
+    </div>
+    <%= link_to "#", class: "waves-effect waves-light btn teal small", id: "add_option", onclick: 'addInputBox("")' do %>
+      Add Option<i class="material-icons left">add</i>
+    <% end %>
+
+    <h6>Click on 'ADD OPTION' to add choices for multiple-choice (closed) questions below</h6>
+    <h6>If there are no options, then the question is open</h6>
+
+    <div id="question_options" class="row">
+
+      <% @question.options.each_with_index do |option, index| %>
+        <div class="input-field row" id="question_option_<%=index%>">
+          <div id="error_explanation">
+            <% if @question.errors[:options_empty].include?("option #{index}") %>
+              <h6>Fill this option or remove it</h6>
+            <% end %>
+          </div>
+          <%= text_field_tag "question[options][]", option, class: "col s11 m11 l11" %>
+          <a class='waves-effect waves-light btn-floating btn-small red' onclick='removeInputBox("question_option_<%=index%>")'>
+            <i class='material-icons left'>cancel</i>
+          </a>
+        </div>
+      <% end %>
+
+    </div>
+
+      <h5>Attributes</h5>
+
+      <div class="input-field row">
+        <%= f.check_box :required %>
+        <%= f.label :required, "Mandatory" %>
+      </div>
+
+      <div class="input-field row">
+        <%= f.check_box :can_select_multiple %>
+        <%= f.label :can_select_multiple, "Enable Multiple Selections" %>
+      </div>
+      <div id="error_explanation">
+        <% @question.errors[:multiple].each do |error| %>
+          <h6><%=error%></h6>
+        <% end %>
+      </div>
+
+      <div class="input-field row">
+        <%= f.check_box :include_other %>
+        <%= f.label :include_other, "Enable Write-In Option (Other)" %>
+      </div>
+      <div id="error_explanation">
+        <% @question.errors[:other].each do |error| %>
+          <h6><%=error%></h6>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <%= f.submit "Save", class: "btn view-btn teal" %>
+        <%= link_to "Cancel", admin_questions_path, class: "btn view-btn red" %>
+      </div>
+  <% end %>
+</div>

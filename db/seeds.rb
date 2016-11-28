@@ -162,7 +162,7 @@ class SeedData
           "Carpentry",
           "Cleaning",
           "Other"
-          ]
+        ]
       },
 
       {
@@ -199,18 +199,16 @@ class SeedData
           "Phone Call",
           "Smart Phone",
           "Other"
-          ]
+        ]
       },
 
       {
-        question: "What is your biggest weakness and how do you plan to
-        overcome it?",
+        question: "What is your biggest weakness and how do you plan to overcome it?",
         required: false
       },
 
       {
-        question: "What challenge have you faced at work and how did you
-        deal with it?",
+        question: "What challenge have you faced at work and how did you deal with it?",
         required: false
       },
 

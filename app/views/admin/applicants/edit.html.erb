@@ -12,12 +12,12 @@
 
         </div>
         <div class="modal-content col s10">
-            <% @questions.each do |question| %>
+            <% @response.response.keys.each do |question| %>
             <ul>
-                <li><%= question.question %>
+                <li><%= question %>
                 </li>
                 <li class="answers">
-                    <% ans = @response[:response][question.question] %>
+                    <% ans = @response.response[question] %>
                     <% if ans.is_a?(Array) %>
                         <% ans.each do |a| %>
                             <p><%= a %></p>

@@ -3,18 +3,18 @@
     <div class="center-align">
       <h3 class="center-align">Artisan Questionnaire</h3>
       <h4 class="left-align">Your application was successfully submitted. An administrator will soon contact you to schedule your vetting process. Here are the responses you submitted: </h4>
-      <% @questions.each do |question| %>
+      <% @response.response.keys.each do |question| %>
       <div class="card grey darken-2">
         <div class="card-content white-text">
-          <span class="card-title"><%= question.question %></span>
-          <% ans = @response[:response][question.question] %>
-          <% if ans.is_a?(Array) %>
-          <% ans.each do |a| %>
-          <p><%= a %></p>
-          <% end %>
-          <% else %>
-          <p><%= ans %></p>
-          <% end %>
+          <span class="card-title"><%= question %></span>
+            <% ans = @response.response[question] %>
+            <% if ans.is_a?(Array) %>
+              <% ans.each do |a| %>
+                <p><%= a %></p>
+              <% end %>
+            <% else %>
+              <p><%= ans %></p>
+            <% end %>
         </div>
       </div>
       <% end %>

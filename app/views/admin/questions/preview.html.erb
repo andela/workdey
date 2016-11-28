@@ -1,17 +1,9 @@
-<div class="row">
+<div class="container-large col s12">
   <h3 class="center-align">Artisan Questionnaire</h3>
   <h5 class="left-align">To help us get to know you better, please fill out the following questionnaire. </h5>
 
-  <%= form_tag users_responses_path, class: "col s12",
-    method: "post", id: "response_form" do %>
 
-
-    <% if @response.errors.any? %>
-      <div id="error_explanation">
-        <h4><%= pluralize(@response.errors.count, "error") %> found. Please resolve.
-        </h4>
-      </div>
-    <% end %>
+    <div class="col s12">
 
     <% @questions.each do |question| %>
 
@@ -21,62 +13,42 @@
             <%= asterix %>
           </font>
         </h5>
-        <% error_message = @response.errors[question.question].first %>
-        <% if error_message %>
-          <h6 class="row">
-            <font color="red">
-              <%= error_message %>
-            </font>
-          </h6>
-        <% end %>
 
         <% if question.options.empty? %>
-            <% user_input = @response.response[question.question] if @response.response %>
-
             <%= text_area_tag(
                   "response[#{question.question}]",
-                  user_input,
+                  nil,
                   class: "materialize-textarea"
                 )
             %>
-
-
         <% else %>
           <% if question.can_select_multiple? %>
-          <% other_entry = @response.response[question.question].detect {
-               |entry| question.options.exclude? (entry)
-             } if @response.response && @response.response[question.question] %>
           <% question.options.each_with_index do |option, index| %>
-            <% selected = @response.response[question.question].detect {
-              |opt| opt == option
-              } if @response.response && @response.response[question.question] %>
 
               <%= check_box_tag(
                     "response[#{question.question}][]",
-                    option,
-                    selected,
+                    nil,
+                    nil,
                     id: "#{question.id}_#{index}"
                     ) %>
               <%= label_tag("#{question.id}_#{index}", option) %>
-
           <% end %>
 
           <% if question.include_other? %>
             <%= text_field_tag(
                 "response[#{question.question}][]",
-                other_entry,
+                nil,
                 placeholder: "Other"
               )
             %>
           <% end %>
 
           <% else %>
-          <% selected = @response.response[question.question] if @response.response %>
           <% question.options.each_with_index do |option, index| %>
               <%= radio_button_tag(
                     "response[#{question.question}]",
-                    option,
-                    selected == option,
+                    nil,
+                    nil,
                     id: "#{question.id}_#{index}"
                     ) %>
               <%= label_tag("#{question.id}_#{index}", option) %>
@@ -87,10 +59,7 @@
 
     <% end %>
 
-    <div class="input-field row">
-      <button id="responses" class="btn waves-effect waves-light" type="submit">Submit
-        <i class="material-icons right">send</i>
-      </button>
-    </div>
-  <% end %>
+    <%= link_to "Back", admin_questions_path, class: "btn view-btn teal row" %>
+
+  </div>
 </div>

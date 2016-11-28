@@ -6,12 +6,23 @@ RSpec.feature "Review applicant", type: :feature do
     log_in_with(admin.email, admin.password)
   end
   let(:admin) { create(:user, user_type: "admin", confirmed: true) }
-  let!(:applicant) { create(:user, user_type: "artisan") }
+
+  let!(:applicant) do
+    create(
+      :user,
+      user_type: "artisan",
+      status: 0,
+      has_taken_questionnaire: true
+    )
+  end
+  before(:each) do
+    create(:response, user_id: applicant.id)
+  end
 
   scenario "when admin clicks view button" do
     visit "/admin/applicants"
     click_link "View"
-    expect(page).to have_content "Strong No"
+    expect(page).to have_content("Strong No")
     expect(page.current_path).to eql "/admin/applicants/#{applicant.id}/edit"
   end
 
