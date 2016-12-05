@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031130326) do
+ActiveRecord::Schema.define(version: 20161110173545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,18 @@ ActiveRecord::Schema.define(version: 20161031130326) do
   add_index "service_assignments", ["service_id"], name: "index_service_assignments_on_service_id", using: :btree
   add_index "service_assignments", ["user_id"], name: "index_service_assignments_on_user_id", using: :btree
 
+  create_table "service_ratings", force: :cascade do |t|
+    t.decimal  "rating"
+    t.string   "private_feedback"
+    t.string   "public_feedback"
+    t.integer  "category"
+    t.integer  "service_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "service_ratings", ["service_id"], name: "index_service_ratings_on_service_id", using: :btree
+
   create_table "services", force: :cascade do |t|
     t.integer  "tasker_id"
     t.integer  "artisan_id"
@@ -250,6 +262,7 @@ ActiveRecord::Schema.define(version: 20161031130326) do
   add_foreign_key "responses", "users"
   add_foreign_key "service_assignments", "services"
   add_foreign_key "service_assignments", "users"
+  add_foreign_key "service_ratings", "services"
   add_foreign_key "services", "skillsets"
   add_foreign_key "tasks", "skillsets"
 end

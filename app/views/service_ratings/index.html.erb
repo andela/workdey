@@ -1,0 +1,73 @@
+<div class="row container submit-request-row">
+  <% unless @average_service_rating.nil? %>
+  <div class="col s12 l4 offset-l4 rating-column">
+    <div id="average-service-rating" style="margin:auto;"></div>
+    <p class="center" id="average-rating"><%= @average_service_rating.round %></p>
+  </div>
+  <% else %>
+  <div class="col s12 l4 offset-l4">
+    <p class="center">There is no average rating.</p>
+  </div>
+  <% end %>
+  <% unless @service_ratings.nil? %>
+  <div class="col s12 l8 offset-l2 submit-request-column">
+    <table class="bordered responsive-table">
+      <thead>
+        <tr>
+          <th data-field="name">SERVICE DESCRIPTION</th>
+          <% if current_user.tasker? %>
+          <th data-field="name">ARTISAN</th>
+          <% elsif current_user.artisan? %>
+          <th data-field="name">TASKER</th>
+          <% else %>
+          <th data-field="name">TASKER</th>
+          <th data-field="name">ARTISAN</th>
+          <th data-field="name">CATEGORY</th>
+          <% end %>
+          <th data-field="name">SKILLSET INVOLVED</th>
+          <th data-field="name">RATING</th>
+          <th data-field="name">DURATION(Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <div class="row">
+          <% @service_ratings.each do |service_rating| %>
+          <tr>
+            <td><%= service_rating.service.title %></td>
+            <% if current_user.tasker? %>
+            <td>
+              <%= service_rating.service.artisan.firstname %> <%= service_rating.service.artisan.lastname %>
+            </td>
+            <% elsif current_user.artisan? %>
+            <td>
+              <%= service_rating.service.tasker.firstname %> <%= service_rating.service.tasker.lastname %>
+            </td>
+            <% else %>
+            <td>
+              <%= service_rating.service.tasker.firstname %> <%= service_rating.service.tasker.lastname %>
+            </td>
+            <td>
+              <%= service_rating.service.artisan.firstname %> <%= service_rating.service.artisan.lastname %>
+            </td>
+            <td>
+              <%= service_rating.category.capitalize %>
+            </td>
+            <% end %>
+            <td><%= service_rating.service.skillset.name %></td>
+            <td><%= service_rating.rating.round %></td>
+            <td><%= service_rating.service.duration.round %></td>
+            <td>
+              <%= link_to "View", "#{service_rating_path(service_rating)}?view_submitted=true", class: "btn view-btn", id: service_rating.id  %>
+            </td>
+          </tr>
+          <% end %>
+        </div>
+      </tbody>
+    </table>
+  </div>
+  <% else %>
+  <div class="col s12 l7 submit-request-column">
+    <p>There no ratings.</p>
+  </div>
+  <% end %>
+</div>

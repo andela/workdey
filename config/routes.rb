@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   resources :biddings
   resources :tasks
   resources :services, only: [:index, :show, :new, :create]
+  resources :service_ratings
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
 

@@ -1,0 +1,32 @@
+// Place all the styles related to the service_ratings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.service-rating {
+  margin-bottom: auto;
+}
+
+.user-image {
+  display: block;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+  margin-top: 0.46875em;
+  border-radius: 100%;
+}
+
+.service-rating-row {
+  margin-top: 7%;
+}
+
+.btn-submit {
+   border: 1px solid;
+   border-radius: 30px;
+   width: 100%;
+}
+
+.rating-column {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}

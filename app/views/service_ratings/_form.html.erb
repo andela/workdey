@@ -1,0 +1,82 @@
+<%= form_for service_rating, :url => { :action => "create" }, method: "post" do |f| %>
+<% if service_rating.errors.any? %>
+<div class="row margin flash-message">
+  <div class="col s8 offset-s2 l6 offset-l3">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <div id="error_explanation">
+          <h5><%= pluralize(service_rating.errors.count, "error") %>
+            prohibited this rating from being saved:</h5>
+
+          <ul>
+            <% service_rating.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<div class="row">
+  <%= f.hidden_field :service_id %>
+  <% if current_user.tasker? %>
+  <%= fields_for :artisan, service_rating.service.artisan do |artisan_fields| %>
+  <div class="col s2 offset-s5 l2 offset-l5">
+    <%= cl_image_tag service_rating.service.artisan.image_url, class: "user-image" %>
+  </div>
+  <div class="col s6 offset-s3 l6 offset-l3">
+    <p class="center">
+      <%= service_rating.service.artisan.firstname %> <%= service_rating.service.artisan.lastname %>
+    </p>
+  </div>
+  <% end %>
+  <% end %>
+  <% if current_user.artisan? %>
+  <%= fields_for :tasker, service_rating.service.tasker do |tasker_fields| %>
+  <div class="col s6 offset-s3 l6 offset-l3">
+    <%= cl_image_tag service_rating.service.tasker.image_url, class: "user-image" %>
+  </div>
+  <div class="col s6 offset-s3 l6 offset-l3">
+    <p class="center">
+      <%= service_rating.service.tasker.firstname %> <%= service_rating.service.tasker.lastname %>
+    </p>
+  </div>
+  <% end %>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col s8 offset-s2 l8 offset-l2">
+    <div id="service-rating" style="margin:auto;"></div>
+    <div class="field">
+      <%= f.hidden_field :rating %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s6 offset-s3 l6 offset-l3">
+    <div class="field">
+      <%= f.label :private_feedback %>
+      <br/>
+      <%= f.text_area :private_feedback %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s6 offset-s3 l6 offset-l3">
+    <div class="field">
+      <%= f.label :public_feedback %>
+      <br/>
+      <%= f.text_area :public_feedback, class: "validate", required: true %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s4 offset-s4 l4 offset-l4">
+    <div class="actions">
+      <%= f.submit "SUBMIT", id: "submit", class: "btn btn-submit" %>
+    </div>
+  </div>
+</div>
+<% end %>
