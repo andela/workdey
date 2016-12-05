@@ -57,7 +57,7 @@
             <td><%= service_rating.rating.round %></td>
             <td><%= service_rating.service.duration.round %></td>
             <td>
-              <%= link_to "View", view_rating_details_path(service_rating), class: "btn view-btn", id: service_rating.id  %>
+              <%= link_to "View", "#{service_rating_path(service_rating)}?view_submitted=true", class: "btn view-btn", id: service_rating.id  %>
             </td>
           </tr>
           <% end %>

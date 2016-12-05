@@ -7,9 +7,11 @@ class ServiceRatingsController < ApplicationController
   end
 
   def show
-  end
-
-  def view_rating_details
+    @view_submitted = if params[:view_submitted]
+                        true
+                      else
+                        false
+                      end
   end
 
   def new

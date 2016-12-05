@@ -1,5 +1,9 @@
 <div class="row container service-rating">
   <div class="col s10 offset-s1 l8 offset-l2 service-rating-row">
-    <%= render 'form_show', service_rating: @service_rating %>
+    <%if @view_submitted %>
+      <%= render 'form_show', service_rating: @service_rating %>
+    <% else %>
+      <%= render 'view_submitted_details', service_rating: @service_rating %>
+    <% end %>
   </div>
 </div>

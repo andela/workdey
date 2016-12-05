@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   resources :tasks
   resources :services, only: [:index, :show, :new, :create]
   resources :service_ratings
-  get "view_rating_details/:id" => "service_ratings#view_rating_details", as: :view_rating_details
   post "/tasks/search", to: "tasks#search", as: :tasks_search
   resources :users, only: :create
 

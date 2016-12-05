@@ -73,20 +73,30 @@ RSpec.describe ServiceRatingsController, type: :controller do
   describe "#show" do
     subject(:service_rating) { create :service_rating, service: @service }
 
-    before(:each) { get :show, id: service_rating.id }
+    context "with @view_submitted absent" do
+      before(:each) { get :show, id: service_rating.id }
 
-    it "renders the show view" do
-      expect(response).to render_template("show")
+      it "sets @view_submitted to false" do
+        expect(assigns(:view_submitted)).to eq false
+      end
+
+      it "renders the show view" do
+        expect(response).to render_template("show")
+      end
     end
-  end
 
-  describe "#view_rating_details" do
-    subject(:service_rating) { create :service_rating, service: @service }
+    context "with @view_submitted provided" do
+      before(:each) do
+        get :show, id: service_rating.id, view_submitted: true
+      end
 
-    before(:each) { get :view_rating_details, id: service_rating.id }
+      it "sets @view_submitted to true" do
+        expect(assigns(:view_submitted)).to eq true
+      end
 
-    it "renders the show view" do
-      expect(response).to render_template("view_rating_details")
+      it "renders the show view" do
+        expect(response).to render_template("show")
+      end
     end
   end
 
